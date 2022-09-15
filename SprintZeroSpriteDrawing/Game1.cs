@@ -97,6 +97,7 @@ namespace SprintZeroSpriteDrawing
         {
             //Loading the images, and creating the sprites too
             //fix
+            //test
             spriteList["orwell"].Sprite = Content.Load<Texture2D>("orwell");
             spriteList["sawyer"].Sprite = Content.Load<Texture2D>("sawyer");
             spriteList["sawyerA"].SetSprite(Content.Load<Texture2D>("sawyerA"));
