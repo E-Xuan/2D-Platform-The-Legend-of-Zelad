@@ -21,6 +21,10 @@ namespace SprintZeroSpriteDrawing
         private SpriteFont HUDFont;
         //Sprites and their names, could use UUID's if I wanted to, but I like names its unnecessary tho
         private Dictionary<string, ISprite> spriteList = new Dictionary<string, ISprite>();
+        SpriteSNA Orwell;
+        SpriteMNA SawyerMNA;
+        SpriteSA SawyerSA;
+        SpriteMA SawyerMA;
         #endregion
         #region input
         //This should really have a better though-out system for passing fuction params, but for now a int is fine
@@ -47,10 +51,10 @@ namespace SprintZeroSpriteDrawing
             _graphics.ApplyChanges();
 
             #region sprites
-            SpriteSNA Orwell = new SpriteSNA(null, new Vector2(500, 500));
-            SpriteMNA SawyerMNA = new Sawyer(null, new Vector2(1000, 500));
-            SpriteSA SawyerSA = new SpriteSA(null, new Vector2(2, 2), new Vector2(500, 1000));
-            SpriteMA SawyerMA = new SawyerB(null, new Vector2(2, 2), new Vector2(1000, 1000));
+            Orwell = new SpriteSNA(null, new Vector2(500, 500));
+            SawyerMNA = new Sawyer(null, new Vector2(1000, 500));
+            SawyerSA = new SpriteSA(null, new Vector2(2, 2), new Vector2(500, 1000));
+            SawyerMA = new SawyerB(null, new Vector2(2, 2), new Vector2(1000, 1000));
 
             spriteList.Add("orwell", Orwell);
             spriteList.Add("sawyer", SawyerMNA);
@@ -98,10 +102,10 @@ namespace SprintZeroSpriteDrawing
             //Loading the images, and creating the sprites too
             //fix
             //test
-            spriteList["orwell"].Sprite = Content.Load<Texture2D>("orwell");
-            spriteList["sawyer"].Sprite = Content.Load<Texture2D>("sawyer");
-            spriteList["sawyerA"].SetSprite(Content.Load<Texture2D>("sawyerA"));
-            spriteList["sawyerB"].SetSprite(Content.Load<Texture2D>("sawyerA"));
+            Orwell.Sprite = Content.Load<Texture2D>("orwell");
+            SawyerMNA.Sprite = Content.Load<Texture2D>("sawyer");
+            SawyerSA.SetSprite(Content.Load<Texture2D>("sawyerA"));
+            SawyerMA.SetSprite(Content.Load<Texture2D>("sawyerA"));
             //Starting the sprite batch on our new graphics device
             //move init and loading of textures?
 
