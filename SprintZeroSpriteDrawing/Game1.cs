@@ -100,7 +100,6 @@ namespace SprintZeroSpriteDrawing
         protected override void LoadContent()
         {
             //Loading the images, and creating the sprites too
-            //fix
             //test
             Orwell.Sprite = Content.Load<Texture2D>("orwell");
             SawyerMNA.Sprite = Content.Load<Texture2D>("sawyer");
