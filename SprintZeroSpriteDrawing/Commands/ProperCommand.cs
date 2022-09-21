@@ -9,21 +9,11 @@ namespace SprintZeroSpriteDrawing.Commands
 {
     class CmdTogVis : ICommand
     {
-        ISprite Refrence { get; set; }
-        public CmdTogVis(ISprite nRefrence) {
-            Refrence = nRefrence;
-        }
-        public void OnLoop()
-        {
-        }
+        public CmdTogVis(ISprite nRef) : base(nRef) { }
 
-        public void OnStart()
+        public override void Execute()
         {
-            Refrence.TogVis(0);
-        }
-
-        public void OnStop()
-        {
+            ((ISprite)Ref).TogVis(0);
         }
     }
 }

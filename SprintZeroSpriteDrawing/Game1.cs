@@ -14,6 +14,9 @@ namespace SprintZeroSpriteDrawing
     {
         private GraphicsDeviceManager _graphics;
 
+        private IController<Keys> keyboardController;
+        private IController<Buttons> gamepadController;
+
         #region sprites
         //This is the sprite batch that all of my sprites are drawing to, it gets passed around
         private SpriteBatch sBatch;
@@ -26,14 +29,6 @@ namespace SprintZeroSpriteDrawing
         SpriteSA SawyerSA;
         SpriteMA SawyerMA;
         #endregion
-        #region input
-        //This should really have a better though-out system for passing fuction params, but for now a int is fine
-        //also could put these in an array, but why would I bother, theres only two
-        private Dictionary<Keys, ICommand> kCommandList = new Dictionary<Keys, ICommand>();
-        KeyboardController keyboardController;
-        private Dictionary<Buttons, ICommand> gCommandList = new Dictionary<Buttons, ICommand>();
-        GamepadController gamepadController;
-        #endregion
 
         public Game1()
         {
@@ -45,7 +40,6 @@ namespace SprintZeroSpriteDrawing
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here _/(.-.)\_
             _graphics.PreferredBackBufferWidth = 2880;
             _graphics.PreferredBackBufferHeight = 1620;
             _graphics.ApplyChanges();
@@ -67,35 +61,37 @@ namespace SprintZeroSpriteDrawing
             //That would be more condusive to a known list of commands that can be bound, which we use
             //We now have either option, CmdTogVis is an instance of a statically defined command
             #region bindings
-            kCommandList.Add(Keys.Q, new CmdInt(new KeyValuePair<Action<int>, int>(ExitWithCode, 0), true));
-            kCommandList.Add(Keys.W, new CmdTogVis(Orwell));
-            kCommandList.Add(Keys.E, new CmdTogVis(SawyerSA));
-            kCommandList.Add(Keys.R, new CmdTogVis(SawyerMNA));
-            kCommandList.Add(Keys.T, new CmdTogVis(SawyerMA));
 
-            gCommandList.Add(Buttons.Start, new CmdInt(new KeyValuePair<Action<int>, int>(ExitWithCode, 0), true));
-            gCommandList.Add(Buttons.A, new CmdInt(new KeyValuePair<Action<int>, int>(Orwell.TogVis, 0), true));
-            gCommandList.Add(Buttons.B, new CmdInt(new KeyValuePair<Action<int>, int>(SawyerSA.TogVis, 0), true));
-            gCommandList.Add(Buttons.X, new CmdInt(new KeyValuePair<Action<int>, int>(SawyerMNA.TogVis, 0), true));
-            gCommandList.Add(Buttons.Y, new CmdInt(new KeyValuePair<Action<int>, int>(SawyerMA.TogVis, 0), true));
+            keyboardController = new KeyboardController();
+            gamepadController = new GamepadController();
+
+            keyboardController.UpdateBinding(Keys.Q, new IntCmd(new KeyValuePair<Action<int>, int>(ExitWithCode, 0)), BindingType.PRESSED);
+            keyboardController.UpdateBinding(Keys.W, new CmdTogVis(Orwell), BindingType.PRESSED);
+            keyboardController.UpdateBinding(Keys.E, new CmdTogVis(SawyerSA), BindingType.PRESSED);
+            keyboardController.UpdateBinding(Keys.R, new CmdTogVis(SawyerMNA), BindingType.PRESSED);
+            keyboardController.UpdateBinding(Keys.T, new CmdTogVis(SawyerMA), BindingType.PRESSED);
 
             //An example command to implement moving using the arrow keys in case we want to do that in the future
-            kCommandList.Add(Keys.I, new CmdInt(new KeyValuePair<Action<int>, int>(SawyerMA.MoveY, -10), false));
-            kCommandList.Add(Keys.J, new CmdInt(new KeyValuePair<Action<int>, int>(SawyerMA.MoveX, -10), false));
-            kCommandList.Add(Keys.K, new CmdInt(new KeyValuePair<Action<int>, int>(SawyerMA.MoveY, 10), false));
-            kCommandList.Add(Keys.L, new CmdInt(new KeyValuePair<Action<int>, int>(SawyerMA.MoveX, 10), false));
+            keyboardController.UpdateBinding(Keys.I, new IntCmd(new KeyValuePair<Action<int>, int>(SawyerMA.MoveY, -10)), BindingType.HELD);
+            keyboardController.UpdateBinding(Keys.J, new IntCmd(new KeyValuePair<Action<int>, int>(SawyerMA.MoveX, -10)), BindingType.HELD);
+            keyboardController.UpdateBinding(Keys.K, new IntCmd(new KeyValuePair<Action<int>, int>(SawyerMA.MoveY, 10)), BindingType.HELD);
+            keyboardController.UpdateBinding(Keys.L, new IntCmd(new KeyValuePair<Action<int>, int>(SawyerMA.MoveX, 10)), BindingType.HELD);
 
-            kCommandList.Add(Keys.Up, new CmdInt(new KeyValuePair<Action<int>, int>(SawyerMNA.MoveY, -10), false));
-            kCommandList.Add(Keys.Left, new CmdInt(new KeyValuePair<Action<int>, int>(SawyerMNA.MoveX, -10), false));
-            kCommandList.Add(Keys.Down, new CmdInt(new KeyValuePair<Action<int>, int>(SawyerMNA.MoveY, 10), false));
-            kCommandList.Add(Keys.Right, new CmdInt(new KeyValuePair<Action<int>, int>(SawyerMNA.MoveX, 10), false));
+            keyboardController.UpdateBinding(Keys.Up, new IntCmd(new KeyValuePair<Action<int>, int>(SawyerMNA.MoveY, -10)), BindingType.HELD);
+            keyboardController.UpdateBinding(Keys.Left, new IntCmd(new KeyValuePair<Action<int>, int>(SawyerMNA.MoveX, -10)), BindingType.HELD);
+            keyboardController.UpdateBinding(Keys.Down, new IntCmd(new KeyValuePair<Action<int>, int>(SawyerMNA.MoveY, 10)), BindingType.HELD);
+            keyboardController.UpdateBinding(Keys.Right, new IntCmd(new KeyValuePair<Action<int>, int>(SawyerMNA.MoveX, 10)), BindingType.HELD);
+
+            gamepadController.UpdateBinding(Buttons.Start, new IntCmd(new KeyValuePair<Action<int>, int>(ExitWithCode, 0)), BindingType.PRESSED);
+            gamepadController.UpdateBinding(Buttons.A, new CmdTogVis(Orwell), BindingType.PRESSED);
+            gamepadController.UpdateBinding(Buttons.B, new CmdTogVis(SawyerSA), BindingType.PRESSED);
+            gamepadController.UpdateBinding(Buttons.X, new CmdTogVis(SawyerMNA), BindingType.PRESSED);
+            gamepadController.UpdateBinding(Buttons.Y, new CmdTogVis(SawyerMA), BindingType.PRESSED);
+
             #endregion
 
-            keyboardController = new KeyboardController(kCommandList);
-            gamepadController = new GamepadController(gCommandList);
 
             base.Initialize();
-            //Test COmmit........
         }
 
         protected override void LoadContent()

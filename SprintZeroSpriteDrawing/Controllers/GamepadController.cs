@@ -7,58 +7,37 @@ namespace SprintZeroSpriteDrawing.Controllers
 {
     public class GamepadController : IController<Buttons>
     {
-        GamePadState PreviousState;
-        public Dictionary<Buttons, ICommand> CommandList { get; set; }
-        int PlayerIndex = 0;
+        GamePadState previousState;
+        int playerIndex = 0;
         public GamepadController() {
-            CommandList = new Dictionary<Buttons, ICommand>();
-            PreviousState = GamePad.GetState(PlayerIndex);
+            previousState = GamePad.GetState(playerIndex);
         }
-        public GamepadController(Dictionary<Buttons, ICommand> keybindings)
+        public GamepadController(int nPlayerIndex)
         {
-            CommandList = keybindings;
-            PreviousState = GamePad.GetState(PlayerIndex);
-        }
-        public GamepadController(Dictionary<Buttons, ICommand> keybindings, int nPlayerIndex)
-        {
-            CommandList = keybindings;
-            PlayerIndex = nPlayerIndex;
-            PreviousState = GamePad.GetState(PlayerIndex);
+            playerIndex = nPlayerIndex;
+            previousState = GamePad.GetState(playerIndex);
         }
 
-        public void UpdateBinding(Buttons key, ICommand command) {
-            if (!CommandList.TryAdd(key, command)) {
-                CommandList.Remove(key);
-                CommandList.Add(key, command);
-            }
-        }
-
-        public bool RemoveBinding(Buttons key) {
-            if (CommandList.ContainsKey(key))
+        public override void UpdateInput() {
+            GamePadState CurrentState = GamePad.GetState(playerIndex);
+            foreach (KeyValuePair<Buttons, ICommand> command in CommandBindingList[(int)BindingType.PRESSED])
             {
-                CommandList.Remove(key);
-                return true;
+                if (CurrentState.IsButtonDown(command.Key) && !previousState.IsButtonDown(command.Key))
+                    CommandBindingList[(int)BindingType.PRESSED][command.Key].Execute();
             }
-            return false;
-        }
 
-        public void UpdateInput() {
-            GamePadState CurrentState = GamePad.GetState(PlayerIndex);
-            foreach (KeyValuePair<Buttons, ICommand> command in CommandList) {
-                if (CurrentState.IsButtonDown(command.Key) && !PreviousState.IsButtonDown(command.Key))
-                {
-                    command.Value.OnStart();
-                }
-                else if (CurrentState.IsButtonDown(command.Key))
-                {
-                    command.Value.OnLoop();
-                }
-                else if (!CurrentState.IsButtonDown(command.Key) && PreviousState.IsButtonDown(command.Key))
-                {
-                    command.Value.OnStop();
-                }
+            foreach (KeyValuePair<Buttons, ICommand> command in CommandBindingList[(int)BindingType.HELD])
+            {
+                if (CurrentState.IsButtonDown(command.Key) && previousState.IsButtonDown(command.Key))
+                    CommandBindingList[(int)BindingType.HELD][command.Key].Execute();
             }
-            PreviousState = CurrentState;
+
+            foreach (KeyValuePair<Buttons, ICommand> command in CommandBindingList[(int)BindingType.RELEASED])
+            {
+                if (!CurrentState.IsButtonDown(command.Key) && previousState.IsButtonDown(command.Key))
+                    CommandBindingList[(int)BindingType.RELEASED][command.Key].Execute();
+            }
+            previousState = CurrentState;
         }
     }
 }

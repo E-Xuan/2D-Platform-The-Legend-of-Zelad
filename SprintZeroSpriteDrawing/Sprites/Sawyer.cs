@@ -14,7 +14,7 @@ namespace SprintZeroSpriteDrawing.Sprites
         public Sawyer(Texture2D nSprite, Vector2 nPos) : base(nSprite, nPos)
         {
         }
-        override public void Update() {
+        public override void Update() {
             if (Offset - 50 >= 0)
             {
                 base.MoveY(1);

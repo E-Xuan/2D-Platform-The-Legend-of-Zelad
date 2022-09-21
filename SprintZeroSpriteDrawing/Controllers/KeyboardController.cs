@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using Microsoft.Xna.Framework.Input;
 using SprintZeroSpriteDrawing.Interfaces;
 
@@ -16,53 +17,29 @@ namespace SprintZeroSpriteDrawing.Controllers
         /// this given keyboard when the last update was called
         /// </summary>
         KeyboardState PreviousState;
-        public Dictionary<Keys, ICommand> CommandList { get; set; }
 
-        public KeyboardController() {
-            CommandList = new Dictionary<Keys, ICommand>();
-            PreviousState = Keyboard.GetState();
-        }
-        public KeyboardController(Dictionary<Keys, ICommand> keybindings)
-        {
-            CommandList = keybindings;
+        public KeyboardController(){
             PreviousState = Keyboard.GetState();
         }
 
-        public void UpdateBinding(Keys key, ICommand command) {
-            if (!CommandList.TryAdd(key, command)) {
-                CommandList.Remove(key);
-                CommandList.Add(key, command);
-            }
-        }
-
-        public bool RemoveBinding(Keys key) {
-            if (CommandList.ContainsKey(key))
-            {
-                CommandList.Remove(key);
-                return true;
-            }
-            return false;
-        }
-
-        public void UpdateInput() {
+        public override void UpdateInput() {
             KeyboardState CurrentState = Keyboard.GetState();
-            foreach (KeyValuePair<Keys, ICommand> Command in CommandList) {
-                if (CurrentState.IsKeyDown(Command.Key) && !PreviousState.IsKeyDown(Command.Key))
-                {
-                    //On pressed
-                    Command.Value.OnStart();
-                }
-                #region bonusCode
-                else if (CurrentState.IsKeyDown(Command.Key))
-                {
-                    //On held
-                    Command.Value.OnLoop();
-                }
-                else if (!CurrentState.IsKeyDown(Command.Key) && PreviousState.IsKeyDown(Command.Key)) {
-                    //On released
-                    Command.Value.OnStop();
-                }
-                #endregion
+            foreach (KeyValuePair<Keys, ICommand> command in CommandBindingList[(int)BindingType.PRESSED])
+            {
+                if (CurrentState.IsKeyDown(command.Key) && !PreviousState.IsKeyDown(command.Key))
+                    CommandBindingList[(int)BindingType.PRESSED][command.Key].Execute();
+            }
+
+            foreach (KeyValuePair<Keys, ICommand> command in CommandBindingList[(int)BindingType.HELD])
+            {
+                if (CurrentState.IsKeyDown(command.Key) && PreviousState.IsKeyDown(command.Key))
+                    CommandBindingList[(int)BindingType.HELD][command.Key].Execute();
+            }
+
+            foreach (KeyValuePair<Keys, ICommand> command in CommandBindingList[(int)BindingType.RELEASED])
+            {
+                if(!CurrentState.IsKeyDown(command.Key) && PreviousState.IsKeyDown(command.Key))
+                    CommandBindingList[(int)BindingType.RELEASED][command.Key].Execute();
             }
             PreviousState = CurrentState;
         }
