@@ -102,6 +102,11 @@ namespace SprintZeroSpriteDrawing
             SawyerMNA.Sprite = Content.Load<Texture2D>("sawyer");
             SawyerSA.SetSprite(Content.Load<Texture2D>("sawyerA"));
             SawyerMA.SetSprite(Content.Load<Texture2D>("sawyerA"));
+
+
+            //Loading Obstacle Sprites
+
+
             //Starting the sprite batch on our new graphics device
             //move init and loading of textures?
 
