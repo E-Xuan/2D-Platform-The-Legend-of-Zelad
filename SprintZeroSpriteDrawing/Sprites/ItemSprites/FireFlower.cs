@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 
-namespace SprintZeroSpriteDrawing.Sprites
+namespace SprintZeroSpriteDrawing.Sprites.ItemSprites
 {
 
     /// <summary>
@@ -11,7 +11,7 @@ namespace SprintZeroSpriteDrawing.Sprites
     /// used to build the most complicated and visually interesting
     /// sprites, such as the main character and complex enemies
     /// </summary>
-    internal class OneUPMushroom : ISprite
+    internal class FireFlower : ISprite
     {
         public bool IsVis { get; set; }
         public Texture2D Sprite { get; set; }
@@ -23,7 +23,7 @@ namespace SprintZeroSpriteDrawing.Sprites
         private int LastFrame;
         private Vector2 SheetSize;
         private Vector2 FrameSize;
-        public OneUPMushroom(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos)
+        public FireFlower(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos)
         {
             SubframeLimit = 20;
             AutoFrame = true;

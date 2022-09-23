@@ -7,6 +7,7 @@ using SprintZeroSpriteDrawing.Controllers;
 using SprintZeroSpriteDrawing.Commands;
 using System.Collections.Generic;
 using System;
+using SprintZeroSpriteDrawing.Sprites.ItemSprites;
 
 namespace SprintZeroSpriteDrawing
 {
