@@ -27,9 +27,9 @@ namespace SprintZeroSpriteDrawing.Sprites.BlockSprites
 
         public void LoadContent(ContentManager content)
         {
-            UsedBlockSpriteSheet = content.Load<Texture2D>("UsedBlockSpriteSheet");
-            BrickBlockSpriteSheet = content.Load<Texture2D>("BrickBlockSpriteSheet");
-            QuestionBlockSpriteSheet = content.Load<Texture2D>("QuestionBlockSpriteSheet");
+            //UsedBlockSpriteSheet = content.Load<Texture2D>("UsedBlockSpriteSheet");
+            //BrickBlockSpriteSheet = content.Load<Texture2D>("BrickBlockSpriteSheet");
+            //QuestionBlockSpriteSheet = content.Load<Texture2D>("QuestionBlockSpriteSheet");
         }
         public int BrickBlockWidth
         {
