@@ -50,46 +50,7 @@ namespace SprintZeroSpriteDrawing
             SawyerSA = new SpriteSA(null, new Vector2(2, 2), new Vector2(500, 1000));
             SawyerMA = new SawyerB(null, new Vector2(2, 2), new Vector2(1000, 1000));
 
-            spriteList.Add("orwell", Orwell);
-            spriteList.Add("sawyer", SawyerMNA);
-            spriteList.Add("sawyerA", SawyerSA);
-            spriteList.Add("sawyerB", SawyerMA);
             #endregion
-
-            //Load the command list here
-            //Should we statically define commands and then bind them that way?
-            //That would be more condusive to a known list of commands that can be bound, which we use
-            //We now have either option, CmdTogVis is an instance of a statically defined command
-            #region bindings
-
-            keyboardController = new KeyboardController();
-            gamepadController = new GamepadController();
-
-            keyboardController.UpdateBinding(Keys.Q, new IntCmd(new KeyValuePair<Action<int>, int>(ExitWithCode, 0)), BindingType.PRESSED);
-            keyboardController.UpdateBinding(Keys.W, new CmdTogVis(Orwell), BindingType.PRESSED);
-            keyboardController.UpdateBinding(Keys.E, new CmdTogVis(SawyerSA), BindingType.PRESSED);
-            keyboardController.UpdateBinding(Keys.R, new CmdTogVis(SawyerMNA), BindingType.PRESSED);
-            keyboardController.UpdateBinding(Keys.T, new CmdTogVis(SawyerMA), BindingType.PRESSED);
-
-            //An example command to implement moving using the arrow keys in case we want to do that in the future
-            keyboardController.UpdateBinding(Keys.I, new IntCmd(new KeyValuePair<Action<int>, int>(SawyerMA.MoveY, -10)), BindingType.HELD);
-            keyboardController.UpdateBinding(Keys.J, new IntCmd(new KeyValuePair<Action<int>, int>(SawyerMA.MoveX, -10)), BindingType.HELD);
-            keyboardController.UpdateBinding(Keys.K, new IntCmd(new KeyValuePair<Action<int>, int>(SawyerMA.MoveY, 10)), BindingType.HELD);
-            keyboardController.UpdateBinding(Keys.L, new IntCmd(new KeyValuePair<Action<int>, int>(SawyerMA.MoveX, 10)), BindingType.HELD);
-
-            keyboardController.UpdateBinding(Keys.Up, new IntCmd(new KeyValuePair<Action<int>, int>(SawyerMNA.MoveY, -10)), BindingType.HELD);
-            keyboardController.UpdateBinding(Keys.Left, new IntCmd(new KeyValuePair<Action<int>, int>(SawyerMNA.MoveX, -10)), BindingType.HELD);
-            keyboardController.UpdateBinding(Keys.Down, new IntCmd(new KeyValuePair<Action<int>, int>(SawyerMNA.MoveY, 10)), BindingType.HELD);
-            keyboardController.UpdateBinding(Keys.Right, new IntCmd(new KeyValuePair<Action<int>, int>(SawyerMNA.MoveX, 10)), BindingType.HELD);
-
-            gamepadController.UpdateBinding(Buttons.Start, new IntCmd(new KeyValuePair<Action<int>, int>(ExitWithCode, 0)), BindingType.PRESSED);
-            gamepadController.UpdateBinding(Buttons.A, new CmdTogVis(Orwell), BindingType.PRESSED);
-            gamepadController.UpdateBinding(Buttons.B, new CmdTogVis(SawyerSA), BindingType.PRESSED);
-            gamepadController.UpdateBinding(Buttons.X, new CmdTogVis(SawyerMNA), BindingType.PRESSED);
-            gamepadController.UpdateBinding(Buttons.Y, new CmdTogVis(SawyerMA), BindingType.PRESSED);
-
-            #endregion
-
 
             base.Initialize();
         }
@@ -110,7 +71,6 @@ namespace SprintZeroSpriteDrawing
             //Starting the sprite batch on our new graphics device
             //move init and loading of textures?
 
-            sBatch = new SpriteBatch(GraphicsDevice);
             //Loading the fonts
             HUDFont = Content.Load<SpriteFont>("Fonts/Arial");
 
