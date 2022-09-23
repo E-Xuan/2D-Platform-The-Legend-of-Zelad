@@ -33,6 +33,8 @@ namespace SprintZeroSpriteDrawing.Sprites.ItemSprites
             LastFrame = (int)(SheetSize.X * SheetSize.Y);
             if (nSprite != null)
                 FrameSize = new Vector2(nSprite.Width / SheetSize.X, nSprite.Height / SheetSize.Y);
+            IsVis = true;
+            AutoFrame = false;
         }
         public void SetSprite(Texture2D nSprite)
         {
