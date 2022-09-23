@@ -38,7 +38,7 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         {
             //UsedBlockSpriteSheet = content.Load<Texture2D>("UsedBlockSpriteSheet");
             BrickBlockSpriteSheet = content.Load<Texture2D>("Obstacles/BrickBlock(Overworld)");
-            //QuestionBlockSpriteSheet = content.Load<Texture2D>("QuestionBlockSpriteSheet");
+            QuestionBlockSpriteSheet = content.Load<Texture2D>("Obstacles/QuestionBlock(Overworld)");
         }
 
         public ISprite CreateBrickBlock()
