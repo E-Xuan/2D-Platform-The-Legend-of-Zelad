@@ -24,10 +24,13 @@ namespace SprintZeroSpriteDrawing
         private SpriteFont HUDFont;
         //Sprites and their names, could use UUID's if I wanted to, but I like names its unnecessary tho
         private Dictionary<string, ISprite> spriteList = new Dictionary<string, ISprite>();
-        SpriteSNA Orwell;
-        SpriteMNA SawyerMNA;
-        SpriteSA SawyerSA;
+   
         SpriteMA SawyerMA;
+        ISprite SMushroom;
+        ISprite Coin;
+        ISprite FireFlower;
+        ISprite UPMushroom;
+        ISprite Star;
         #endregion
 
         public Game1()
@@ -45,11 +48,19 @@ namespace SprintZeroSpriteDrawing
             _graphics.ApplyChanges();
 
             #region sprites
-            Orwell = new SpriteSNA(null, new Vector2(500, 500));
-            SawyerMNA = new Sawyer(null, new Vector2(1000, 500));
-            SawyerSA = new SpriteSA(null, new Vector2(2, 2), new Vector2(500, 1000));
-            SawyerMA = new SawyerB(null, new Vector2(2, 2), new Vector2(1000, 1000));
+            FireFlower = new FireFlower(null, new Vector2(2, 4), new Vector2(10, 10));
+            Coin = new Coins(null, new Vector2(2, 2), new Vector2(10, 30));
+            SMushroom = new SuperMushroom(null, new Vector2(1, 1), new Vector2(10, 50));
+            UPMushroom = new OneUPMushroom(null, new Vector2(1, 1), new Vector2(10, 70));
+            Star = new Starman(null, new Vector2(2, 2), new Vector2(10, 90));
 
+            spriteList.Add("Coins", Coin);
+            spriteList.Add("FireFlower", FireFlower);
+            spriteList.Add("SuperMushroom", SMushroom);
+            spriteList.Add("1UPMushroom", UPMushroom);
+            spriteList.Add("Starman", Star);
+
+            
             #endregion
 
             base.Initialize();
@@ -58,18 +69,16 @@ namespace SprintZeroSpriteDrawing
         protected override void LoadContent()
         {
             //Loading the images, and creating the sprites too
-            //test
-            Orwell.Sprite = Content.Load<Texture2D>("orwell");
-            SawyerMNA.Sprite = Content.Load<Texture2D>("sawyer");
-            SawyerSA.SetSprite(Content.Load<Texture2D>("sawyerA"));
-            SawyerMA.SetSprite(Content.Load<Texture2D>("sawyerA"));
-
-
-            //Loading Obstacle Sprites
+            Coin.Sprite = Content.Load<Texture2D>("Items/Coins");
+            FireFlower.Sprite = Content.Load<Texture2D>("Items/FireFlower");
+            SMushroom.Sprite = Content.Load<Texture2D>("Items/SuperMushroom");
+            UPMushroom.Sprite = Content.Load<Texture2D>("Items/1UPMushroom");
+            Star.Sprite = Content.Load<Texture2D>("Items/Starman");
 
 
             //Starting the sprite batch on our new graphics device
             //move init and loading of textures?
+            sBatch = new SpriteBatch(GraphicsDevice);
 
             //Loading the fonts
             HUDFont = Content.Load<SpriteFont>("Fonts/Arial");
@@ -79,6 +88,7 @@ namespace SprintZeroSpriteDrawing
         protected override void Update(GameTime gameTime)
         {
             //This could again be moved into a collection and iterated over, but I'm lazy
+
             keyboardController.UpdateInput();
             gamepadController.UpdateInput();
 
