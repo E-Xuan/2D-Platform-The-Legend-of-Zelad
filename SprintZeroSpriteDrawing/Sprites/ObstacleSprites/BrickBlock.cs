@@ -1,5 +1,6 @@
-﻿using Microsoft.Xna.Framework.Content;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SprintZeroSpriteDrawing.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,53 +9,86 @@ using System.Threading.Tasks;
 
 namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
 {
-    public class BrickBlock
+    public class BrickBlock : ISprite
     {
-        public int BrickBlockSpriteSheetCol { get; }
-        public int BrickBlockSpriteSheetRow { get; }
-        public int BrickBlockTotalFrames { get; }
-        public int QuestionBlockSpriteSheetCol { get; }
-        public int QuestionBlockSpriteSheetRow { get; }
-        public int QuestionBlockTotalFrames { get; }
-        public int UsedBlockSpriteSheetCol { get; }
-        public int UsedBlockSpriteSheetRow { get; }
-        public int UsedBlockTotalFrames { get; }
+        public bool IsVis { get; set; }
+        public Texture2D Sprite { get; set; }
+        public Vector2 Pos { get; set; }
+        public int Frame { get; set; }
+        public int Subframe { get; set; }
+        public int SubframeLimit { get; set; }
+        public bool AutoFrame { get; set; }
+        private int LastFrame;
+        private Vector2 SheetSize;
+        private Vector2 FrameSize;
 
+        public int width;
+        public int height;
 
-        private Texture2D BrickBlockSpriteSheet;
-        private Texture2D QuestionBlockSpriteSheet;
-        private Texture2D UsedBlockSpriteSheet;
-
-        public void LoadContent(ContentManager content)
+        public BrickBlock(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos)
         {
-            //UsedBlockSpriteSheet = content.Load<Texture2D>("UsedBlockSpriteSheet");
-            //BrickBlockSpriteSheet = content.Load<Texture2D>("BrickBlockSpriteSheet");
-            //QuestionBlockSpriteSheet = content.Load<Texture2D>("QuestionBlockSpriteSheet");
-        }
-        public int BrickBlockWidth
-        {
-            get { return BrickBlockSpriteSheet.Width / BrickBlockSpriteSheetCol; }
-        }
-        public int BrickBlockHeight
-        {
-            get { return BrickBlockSpriteSheet.Height / BrickBlockSpriteSheetRow; }
-        }
-        public int QuestionBlockWidth
-        {
-            get { return QuestionBlockSpriteSheet.Width / QuestionBlockSpriteSheetCol; }
-        }
-        public int QuestionBlockHeight
-        {
-            get { return QuestionBlockSpriteSheet.Height / QuestionBlockSpriteSheetRow; }
-        }
-        public int UsedBlockWidth
-        {
-            get { return UsedBlockSpriteSheet.Width / UsedBlockSpriteSheetCol; }
-        }
-        public int UsedBlockHeight
-        {
-            get { return UsedBlockSpriteSheet.Height / UsedBlockSpriteSheetRow; }
+            SubframeLimit = 20;
+            AutoFrame = true;
+            Sprite = nSprite;
+            Pos = nPos;
+            SheetSize = nSheetSize;
+            LastFrame = (int)(SheetSize.X * SheetSize.Y);
+            if (nSprite != null)
+                FrameSize = new Vector2(nSprite.Width / SheetSize.X, nSprite.Height / SheetSize.Y);
         }
 
+        public void SetSprite(Texture2D nSprite)
+        {
+            Sprite = nSprite;
+            FrameSize = new Vector2(nSprite.Width / SheetSize.X, nSprite.Height / SheetSize.Y);
+        }
+
+        public int NextFrame()
+        {
+            return Frame++;
+        }
+
+        public int Draw(SpriteBatch batch)
+        {
+            if (IsVis)
+            {
+                Rectangle Rect = new Rectangle((int)(Frame % (int)SheetSize.X * FrameSize.X), (int)(Frame / (int)SheetSize.X * FrameSize.Y),
+                    (int)FrameSize.X, (int)FrameSize.Y);
+                batch.Draw(Sprite, Pos, Rect, Color.White, 0, new Vector2(0, 0), 1, SpriteEffects.None, 0);
+                if (AutoFrame)
+                    Subframe++;
+                if (Subframe == SubframeLimit)
+                {
+                    Subframe = 0;
+                    Frame = (Frame + 1) % LastFrame;
+                }
+                return Frame;
+            }
+            return -2;
+        }
+        virtual public void Update()
+        {
+            //OVERRIDE ME
+        }
+        public void MoveSprite(Vector2 displacement)
+        {
+            Pos = Vector2.Add(Pos, displacement);
+        }
+        public void MoveX(int pixels)
+        {
+            Pos = Vector2.Add(Pos, new Vector2(pixels, 0));
+        }
+        public void MoveY(int pixels)
+        {
+            Pos = Vector2.Add(Pos, new Vector2(0, pixels));
+        }
+        public void SetVis(int nIsVis)
+        {
+            IsVis = nIsVis > 0;
+        }
+        public void TogVis(int nIsVis)
+        {
+            IsVis = !IsVis;
+        }
     }
 }

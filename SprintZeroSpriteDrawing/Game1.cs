@@ -10,6 +10,8 @@ using System;
 using SprintZeroSpriteDrawing.Sprites.ItemSprites;
 using System.Numerics;
 using System.Threading.Tasks.Dataflow;
+using Vector2 = Microsoft.Xna.Framework.Vector2;
+using SprintZeroSpriteDrawing.Sprites.ObstacleSprites;
 
 namespace SprintZeroSpriteDrawing
 {
@@ -34,6 +36,9 @@ namespace SprintZeroSpriteDrawing
         ISprite FireFlower;
         ISprite UPMushroom;
         ISprite Star;
+        ISprite BBlock;
+        ISprite QBlock;
+        ISprite HitQBlock;
         #endregion
 
         public Game1()
@@ -46,8 +51,8 @@ namespace SprintZeroSpriteDrawing
 
         protected override void Initialize()
         {
-            _graphics.PreferredBackBufferWidth = 2880;
-            _graphics.PreferredBackBufferHeight = 1620;
+            _graphics.PreferredBackBufferWidth = 1920;
+            _graphics.PreferredBackBufferHeight = 1080;
             _graphics.ApplyChanges();
 
             #region sprites
@@ -58,7 +63,6 @@ namespace SprintZeroSpriteDrawing
             SMushroom = new SuperMushroom(null, new Vector2(1, 1), new Vector2(10, 50));
             UPMushroom = new OneUPMushroom(null, new Vector2(1, 1), new Vector2(10, 70));
             Star = new Starman(null, new Vector2(2, 2), new Vector2(10, 90));
-
             spriteList.Add("Coins", Coin);
             spriteList.Add("FireFlower", FireFlower);
             spriteList.Add("SuperMushroom", SMushroom);
@@ -67,23 +71,23 @@ namespace SprintZeroSpriteDrawing
             #endregion
 
             #region obstacle sprites
-            BBlock = new BrickBlock(null, new Vector(1,1), new Vector2(30, 10));
-            QBlock = new QuestionBlock(null, new Vector(2,2), new Vector2(30, 30));
-            HitQBlock = new QuestionBlock(null, new Vector(1,1), new Vector2(30,110));
-            SBlock = new StairBlock(null, new Vector(1,1), new Vector2(30,50));
-            IBlock = new InvisibleBlock(null, new Vector(1,1), new Vector2(30,70));
-            GBlock = new GroundBlock(null, new Vector(1,1), new Vector2(30,90));
-           
+
+            BBlock = new BrickBlock(null, new Vector2(1, 1), new Vector2(30, 10));
+            //QBlock = new QuestionBlock(null, new Vector2(2,2), new Vector2(30, 30));
+            //HitQBlock = new QuestionBlock(null, new Vector2(1,1), new Vector2(30,110));
+            //SBlock = new StairBlock(null, new Vecto2r(1,1), new Vector2(30,50));
+            //IBlock = new InvisibleBlock(null, new Vector2(1,1), new Vector2(30,70));
+            //GBlock = new GroundBlock(null, new Vector2(1,1), new Vector2(30,90));
 
             spriteList.Add("BrickBlock(Overworld)", BBlock);
-            spriteList.Add("QuestionBlock(Overworld)", QBlock);
-            spriteList.Add("HitQuestionBlock(Overworld)", HitQBlock);
-            spriteList.Add("StairBlock", SBlock);
-            spriteList.Add("BrickBlock(Overworld)", IBlock);
-            spriteList.Add("GroundBlock(Overworld)", GBlock);
+            //spriteList.Add("QuestionBlock(Overworld)", QBlock);
+            //spriteList.Add("HitQuestionBlock(Overworld)", HitQBlock);
+            //spriteList.Add("StairBlock", SBlock);
+            //spriteList.Add("BrickBlock(Overworld)", IBlock);
+            //spriteList.Add("GroundBlock(Overworld)", GBlock);
             #endregion
 
-            
+
             #endregion
 
             base.Initialize();
@@ -98,9 +102,7 @@ namespace SprintZeroSpriteDrawing
             UPMushroom.Sprite = Content.Load<Texture2D>("Items/1UPMushroom");
             Star.Sprite = Content.Load<Texture2D>("Items/Starman");
 
-            
-
-            
+            BlockSpriteFactory.Sprite.LoadContent(Content);
 
 
             //Starting the sprite batch on our new graphics device
@@ -116,8 +118,8 @@ namespace SprintZeroSpriteDrawing
         {
             //This could again be moved into a collection and iterated over, but I'm lazy
 
-            keyboardController.UpdateInput();
-            gamepadController.UpdateInput();
+            //keyboardController.UpdateInput();
+            //gamepadController.UpdateInput();
 
             //iterate over all of the sprites and run their update methods every iteration
             foreach (KeyValuePair<string, ISprite> spriteEntry in spriteList)
