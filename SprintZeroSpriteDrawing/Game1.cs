@@ -8,6 +8,8 @@ using SprintZeroSpriteDrawing.Commands;
 using System.Collections.Generic;
 using System;
 using SprintZeroSpriteDrawing.Sprites.ItemSprites;
+using System.Numerics;
+using System.Threading.Tasks.Dataflow;
 
 namespace SprintZeroSpriteDrawing
 {
@@ -49,6 +51,8 @@ namespace SprintZeroSpriteDrawing
             _graphics.ApplyChanges();
 
             #region sprites
+
+            #region item sprites
             FireFlower = new FireFlower(null, new Vector2(2, 4), new Vector2(10, 10));
             Coin = new Coins(null, new Vector2(2, 2), new Vector2(10, 30));
             SMushroom = new SuperMushroom(null, new Vector2(1, 1), new Vector2(10, 50));
@@ -60,6 +64,24 @@ namespace SprintZeroSpriteDrawing
             spriteList.Add("SuperMushroom", SMushroom);
             spriteList.Add("1UPMushroom", UPMushroom);
             spriteList.Add("Starman", Star);
+            #endregion
+
+            #region obstacle sprites
+            BBlock = new BrickBlock(null, new Vector(1,1), new Vector2(30, 10));
+            QBlock = new QuestionBlock(null, new Vector(2,2), new Vector2(30, 30));
+            HitQBlock = new QuestionBlock(null, new Vector(1,1), new Vector2(30,110));
+            SBlock = new StairBlock(null, new Vector(1,1), new Vector2(30,50));
+            IBlock = new InvisibleBlock(null, new Vector(1,1), new Vector2(30,70));
+            GBlock = new GroundBlock(null, new Vector(1,1), new Vector2(30,90));
+           
+
+            spriteList.Add("BrickBlock(Overworld)", BBlock);
+            spriteList.Add("QuestionBlock(Overworld)", QBlock);
+            spriteList.Add("HitQuestionBlock(Overworld)", HitQBlock);
+            spriteList.Add("StairBlock", SBlock);
+            spriteList.Add("BrickBlock(Overworld)", IBlock);
+            spriteList.Add("GroundBlock(Overworld)", GBlock);
+            #endregion
 
             
             #endregion
@@ -75,6 +97,10 @@ namespace SprintZeroSpriteDrawing
             SMushroom.Sprite = Content.Load<Texture2D>("Items/SuperMushroom");
             UPMushroom.Sprite = Content.Load<Texture2D>("Items/1UPMushroom");
             Star.Sprite = Content.Load<Texture2D>("Items/Starman");
+
+            
+
+            
 
 
             //Starting the sprite batch on our new graphics device
