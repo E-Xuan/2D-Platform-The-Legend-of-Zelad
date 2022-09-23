@@ -56,30 +56,6 @@
 /processorParam:TextureFormat=Color
 /build:Items/1UPMushroom.png
 
-#begin Items/1UPMushroom.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Items/1UPMushroom.png
-
-#begin Items/Coins.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Items/Coins.png
-
 #begin Items/Coins.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -116,30 +92,6 @@
 /processorParam:TextureFormat=Color
 /build:Items/Starman.png
 
-#begin Items/Starman.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Items/Starman.png
-
-#begin Items/SuperMushroom.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Items/SuperMushroom.png
-
 #begin Items/SuperMushroom.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -164,6 +116,18 @@
 /processorParam:TextureFormat=Color
 /build:Obstacles/BrickBlock(Overworld).png
 
+#begin Obstacles/GroundBlock(Overworld).png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Obstacles/GroundBlock(Overworld).png
+
 #begin Obstacles/HitQuestionBlock(Overworld).png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -176,6 +140,18 @@
 /processorParam:TextureFormat=Color
 /build:Obstacles/HitQuestionBlock(Overworld).png
 
+#begin Obstacles/InvisibleBlock.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Obstacles/InvisibleBlock.png
+
 #begin Obstacles/QuestionBlock(Overworld).png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -187,4 +163,16 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Obstacles/QuestionBlock(Overworld).png
+
+#begin Obstacles/StairBlock.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Obstacles/StairBlock.png
 
