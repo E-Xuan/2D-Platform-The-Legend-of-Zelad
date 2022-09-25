@@ -9,9 +9,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SprintZeroSpriteDrawing.Sprites.MarioActionSprites
-public class Jumping
 {
-	public Jumping()
+	public class Jumping
 	{
+		public Jumping()
+		{
+		}
 	}
 }

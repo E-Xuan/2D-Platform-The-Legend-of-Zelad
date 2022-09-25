@@ -10,9 +10,11 @@ using System.Threading.Tasks;
 
 
 namespace SprintZeroSpriteDrawing.Sprites.MarioActionSprites
-public class Running
 {
-	public Running()
+	public class Running
 	{
+		public Running()
+		{
+		}
 	}
 }

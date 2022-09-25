@@ -9,10 +9,12 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SprintZeroSpriteDrawing.Sprites.MarioActionSprites
-public class Idle
 {
-	public Idle()
+	public class Idle
 	{
+		public Idle()
+		{
 
+		}
 	}
 }

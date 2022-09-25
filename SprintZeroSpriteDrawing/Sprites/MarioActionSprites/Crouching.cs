@@ -10,10 +10,36 @@ using System.Threading.Tasks;
 
 
 namespace SprintZeroSpriteDrawing.Sprites.MarioActionSprites
-public class Crouching : ISprite
 {
-	public Crouching()
+	public class Crouching : ISprite
 	{
+		public Crouching()
+		{
 
+		}
+
+		public Texture2D Sprite { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+		public Microsoft.Xna.Framework.Vector2 Pos { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+		public bool IsVis { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+		public int Draw(SpriteBatch batch)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void SetVis(int nIsVis)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void TogVis(int nIsVis)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void Update()
+		{
+			throw new NotImplementedException();
+		}
 	}
 }

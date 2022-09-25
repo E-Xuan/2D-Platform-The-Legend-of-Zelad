@@ -36,7 +36,7 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
 
         public void LoadContent(ContentManager content)
         {
-            UsedBlockSpriteSheet = content.Load<Texture2D>("HitQuestionBlock(Overworld)");
+            UsedBlockSpriteSheet = content.Load<Texture2D>("Obstacles/HitQuestionBlock(Overworld)");
             BrickBlockSpriteSheet = content.Load<Texture2D>("Obstacles/BrickBlock(Overworld)");
             QuestionBlockSpriteSheet = content.Load<Texture2D>("Obstacles/QuestionBlock(Overworld)");
         }

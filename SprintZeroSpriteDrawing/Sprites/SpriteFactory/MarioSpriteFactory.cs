@@ -42,7 +42,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioActionSprites
 
         public MarioSpriteFactory()
 		{
-            get{ return sprite; }
+            //get{ return sprite; }
 		}
 
 

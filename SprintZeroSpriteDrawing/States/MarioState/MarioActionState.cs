@@ -19,7 +19,7 @@ namespace SprintZeroSpriteDrawing.States.MarioState
 		public MarioActionState()
 		{
 			//Need Mario Sprites in order to implement
-			this.sprite = MarioSpriteFactory.Sprite.CreateMario();
+			//this.sprite = MarioSpriteFactory.Sprite.CreateMario();
 		}
 
 
@@ -31,6 +31,11 @@ namespace SprintZeroSpriteDrawing.States.MarioState
 		public void Draw(SpriteBatch spriteBatch, Vector2 location)
 		{
 			sprite.Draw(spriteBatch);
+		}
+
+		public void Transition()
+		{
+			throw new NotImplementedException();
 		}
 	}
 }
