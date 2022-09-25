@@ -12,6 +12,7 @@ using System.Numerics;
 using System.Threading.Tasks.Dataflow;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
 using SprintZeroSpriteDrawing.Sprites.ObstacleSprites;
+using SprintZeroSpriteDrawing.Sprites.MarioPowerUpSprites;
 
 namespace SprintZeroSpriteDrawing
 {
@@ -19,8 +20,15 @@ namespace SprintZeroSpriteDrawing
     {
         private GraphicsDeviceManager _graphics;
 
+        #region Dictionaries
+        Dictionary<Keys, ICommand> keyBoardCommand;
+        Dictionary<Buttons, ICommand> gamePadCommand;
+        #endregion
+
+        #region Controller
         private IController<Keys> keyboardController;
         private IController<Buttons> gamepadController;
+        #endregion
 
         #region sprites
         //This is the sprite batch that all of my sprites are drawing to, it gets passed around
@@ -31,14 +39,28 @@ namespace SprintZeroSpriteDrawing
         private Dictionary<string, ISprite> spriteList = new Dictionary<string, ISprite>();
    
         SpriteMA SawyerMA;
+
+        #region Items
         ISprite SMushroom;
         ISprite Coin;
         ISprite FireFlower;
         ISprite UPMushroom;
         ISprite Star;
+        #endregion
+
+        #region Blocks
         ISprite BBlock;
         ISprite QBlock;
         ISprite HitQBlock;
+        #endregion
+
+        #region Mario States
+        ISprite DeadMario;
+        ISprite SmallMario;
+        ISprite BigMario;
+        ISprite FireMario;
+        #endregion
+
         #endregion
 
         public Game1()
@@ -63,6 +85,7 @@ namespace SprintZeroSpriteDrawing
             SMushroom = new SuperMushroom(null, new Vector2(1, 1), new Vector2(10, 50));
             UPMushroom = new OneUPMushroom(null, new Vector2(1, 1), new Vector2(10, 70));
             Star = new Starman(null, new Vector2(2, 2), new Vector2(10, 90));
+
             spriteList.Add("Coins", Coin);
             spriteList.Add("FireFlower", FireFlower);
             spriteList.Add("SuperMushroom", SMushroom);
@@ -96,14 +119,27 @@ namespace SprintZeroSpriteDrawing
         protected override void LoadContent()
         {
             //Loading the images, and creating the sprites too
+
+            #region Item Pictures
             Coin.Sprite = Content.Load<Texture2D>("Items/Coins");
             FireFlower.Sprite = Content.Load<Texture2D>("Items/FireFlower");
             SMushroom.Sprite = Content.Load<Texture2D>("Items/SuperMushroom");
             UPMushroom.Sprite = Content.Load<Texture2D>("Items/1UPMushroom");
             Star.Sprite = Content.Load<Texture2D>("Items/Starman");
+            #endregion
 
             BlockSpriteFactory.Sprite.LoadContent(Content);
 
+
+            #region Controllers
+            keyboardController = new KeyboardController();
+            gamepadController = new GamepadController();
+            #endregion
+
+            keyBoardCommand.Add(Keys.Y, new ICommand(SmallMario));
+            keyBoardCommand.Add(Keys.U, new ICommand(BigMario));
+            keyBoardCommand.Add(Keys.I, new ICommand(FireMario));
+            keyBoardCommand.Add(Keys.O, new ICommand(DeadMario));
 
             //Starting the sprite batch on our new graphics device
             //move init and loading of textures?
