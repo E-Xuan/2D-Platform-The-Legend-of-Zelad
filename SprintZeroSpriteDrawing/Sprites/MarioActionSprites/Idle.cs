@@ -8,11 +8,11 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
-
-namespace SprintZeroSpriteDrawing.States.MarioState
-public class Running
+namespace SprintZeroSpriteDrawing.Sprites.MarioActionSprites
+public class Idle
 {
-	public Running()
+	public Idle()
 	{
+
 	}
 }

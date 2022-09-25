@@ -9,11 +9,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace SprintZeroSpriteDrawing.States.MarioState
-public class Crouching : ISprite
+namespace SprintZeroSpriteDrawing.Sprites.MarioActionSprites
+public class Running
 {
-	public Crouching()
+	public Running()
 	{
-
 	}
 }

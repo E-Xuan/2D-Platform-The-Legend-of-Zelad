@@ -8,10 +8,12 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SprintZeroSpriteDrawing.States.MarioState
-public class Jumping
+
+namespace SprintZeroSpriteDrawing.Sprites.MarioActionSprites
+public class Crouching : ISprite
 {
-	public Jumping()
+	public Crouching()
 	{
+
 	}
 }
