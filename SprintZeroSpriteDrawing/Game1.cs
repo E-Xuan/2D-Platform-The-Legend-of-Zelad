@@ -28,8 +28,8 @@ namespace SprintZeroSpriteDrawing
         #endregion
 
         #region Controller
-        private IController<Keys> keyboardController;
-        private IController<Buttons> gamepadController;
+        private KeyboardController keyboardController;
+        private GamepadController gamepadController;
         #endregion
 
         #region sprites
@@ -52,6 +52,9 @@ namespace SprintZeroSpriteDrawing
         ISprite BBlock;
         ISprite QBlock;
         ISprite HitQBlock;
+        ISprite IBlock;
+        ISprite SBlock;
+        ISprite GBlock;
         #endregion
 
         #region Mario States
@@ -78,7 +81,24 @@ namespace SprintZeroSpriteDrawing
 
         protected override void Initialize()
         {
-            
+            /*keyBoardCommand.Add(Keys.Y, new ICommand(SmallMario));
+
+            #region Command Mapping
+            keyBoardCommand.Add(Keys.Y, new ICommand(SmallMario));
+            keyBoardCommand.Add(Keys.U, new ICommand(BigMario));
+            keyBoardCommand.Add(Keys.I, new ICommand(FireMario));
+            KeyBoardCommand.Add(Keys.O, new ICommand(DeadMario));*/
+
+            /*keyBoardCommand.Add(Keys.W, new ICommand(Jumping));
+            keyBoardCommand.Add(Keys.Up, new ICommand(Jumping));
+
+            keyBoardCommand.Add(Keys.S, new ICommand(Crouching));
+            keyBoardCommand.Add(Keys.Down, new ICommand(Crouching));
+
+            keyBoardCommand.Add(Keys.A, new ICommand(Running));
+            keyBoardCommand.Add(Keys.Left, new ICommand(Running));
+            keyBoardCommand.Add(Keys.D, new ICommand(Running));
+            keyBoardCommand.Add(Keys.Right, new ICommand(Running));*/
             _graphics.PreferredBackBufferWidth = 1920;
             _graphics.PreferredBackBufferHeight = 1080;
             _graphics.ApplyChanges();
@@ -101,23 +121,22 @@ namespace SprintZeroSpriteDrawing
             #region obstacle sprites
 
             BBlock = new BrickBlock(null, new Vector2(1, 1), new Vector2(30, 10));
-            //QBlock = new QuestionBlock(null, new Vector2(2,2), new Vector2(30, 30));
-            //HitQBlock = new QuestionBlock(null, new Vector2(1,1), new Vector2(30,110));
-            //SBlock = new StairBlock(null, new Vecto2r(1,1), new Vector2(30,50));
-            //IBlock = new InvisibleBlock(null, new Vector2(1,1), new Vector2(30,70));
-            //GBlock = new GroundBlock(null, new Vector2(1,1), new Vector2(30,90));
+            QBlock = new QuestionBlock(null, new Vector2(2,2), new Vector2(30, 30));
+            HitQBlock = new QuestionBlock(null, new Vector2(1,1), new Vector2(30,110));
+            SBlock = new StairBlock(null, new Vector2(1,1), new Vector2(30,50));
+            IBlock = new InvisibleBlock(null, new Vector2(1,1), new Vector2(30,70));
+            GBlock = new GroundBlock(null, new Vector2(1,1), new Vector2(30,90));
 
-            spriteList.Add("BrickBlock(Overworld)", BBlock);
-            //spriteList.Add("QuestionBlock(Overworld)", QBlock);
-            //spriteList.Add("HitQuestionBlock(Overworld)", HitQBlock);
-            //spriteList.Add("StairBlock", SBlock);
-            //spriteList.Add("BrickBlock(Overworld)", IBlock);
-            //spriteList.Add("GroundBlock(Overworld)", GBlock);
+            spriteList.Add("Obstacles/BrickBlock(Overworld)", BBlock);
+            spriteList.Add("Obstacles/QuestionBlock(Overworld)", QBlock);
+            spriteList.Add("Obstacles/HitQuestionBlock(Overworld)", HitQBlock);
+            spriteList.Add("Obstacles/StairBlock", SBlock);
+            spriteList.Add("Obstacles/BrickBlock(Overworld)", IBlock);
+            spriteList.Add("Obstacles/GroundBlock(Overworld)", GBlock);
             #endregion
 
 
             #endregion
-
             base.Initialize();
         }
 
@@ -137,24 +156,6 @@ namespace SprintZeroSpriteDrawing
                         #region Controllers
 
             #endregion
-            /*keyBoardCommand.Add(Keys.Y, new ICommand(SmallMario));
-
-            #region Command Mapping
-            keyBoardCommand.Add(Keys.Y, new ICommand(SmallMario));
-            keyBoardCommand.Add(Keys.U, new ICommand(BigMario));
-            keyBoardCommand.Add(Keys.I, new ICommand(FireMario));
-            keyBoardCommand.Add(Keys.O, new ICommand(DeadMario));*/
-
-            /*keyBoardCommand.Add(Keys.W, new ICommand(Jumping));
-            keyBoardCommand.Add(Keys.Up, new ICommand(Jumping));
-
-            keyBoardCommand.Add(Keys.S, new ICommand(Crouching));
-            keyBoardCommand.Add(Keys.Down, new ICommand(Crouching));
-
-            keyBoardCommand.Add(Keys.A, new ICommand(Running));
-            keyBoardCommand.Add(Keys.Left, new ICommand(Running));
-            keyBoardCommand.Add(Keys.D, new ICommand(Running));
-            keyBoardCommand.Add(Keys.Right, new ICommand(Running));*/
 
             //Starting the sprite batch on our new graphics device
             //move init and loading of textures?
@@ -169,8 +170,8 @@ namespace SprintZeroSpriteDrawing
         {
             //This could again be moved into a collection and iterated over, but I'm lazy
 
-            keyboardController.UpdateInput();
-            gamepadController.UpdateInput();
+            //keyboardController.UpdateInput();
+            //gamepadController.UpdateInput();
 
             //iterate over all of the sprites and run their update methods every iteration
             foreach (KeyValuePair<string, ISprite> spriteEntry in spriteList)

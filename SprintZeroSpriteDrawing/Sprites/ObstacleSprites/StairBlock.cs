@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
 {
-    public class InvisibleBlock : ISprite
+    public class StairBlock : ISprite
     {
         public bool IsVis { get; set; }
         public Texture2D Sprite { get; set; }
@@ -22,7 +22,7 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         private Vector2 SheetSize;
         private Vector2 FrameSize;
 
-        public InvisibleBlock(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos)
+        public StairBlock(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos)
         {
             SubframeLimit = 20;
             AutoFrame = true;
