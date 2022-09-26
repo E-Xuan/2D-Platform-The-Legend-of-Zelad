@@ -15,6 +15,8 @@ using SprintZeroSpriteDrawing.Sprites.ObstacleSprites;
 using SprintZeroSpriteDrawing.Sprites.MarioPowerUpSprites;
 using System.Reflection.Metadata;
 
+using SprintZeroSpriteDrawing.Sprites.MarioActionSprites;
+
 namespace SprintZeroSpriteDrawing
 {
     public class Game1 : Game
@@ -38,8 +40,6 @@ namespace SprintZeroSpriteDrawing
         //Sprites and their names, could use UUID's if I wanted to, but I like names its unnecessary tho
         private Dictionary<string, ISprite> spriteList = new Dictionary<string, ISprite>();
    
-        SpriteMA SawyerMA;
-
         #region Items
         ISprite SMushroom;
         ISprite Coin;
@@ -59,6 +59,11 @@ namespace SprintZeroSpriteDrawing
         ISprite SmallMario;
         ISprite BigMario;
         ISprite FireMario;
+
+        ISprite Running;
+        ISprite Crouching;
+        ISprite Jumping;
+        ISprite Idle;
         #endregion
 
         #endregion
@@ -73,9 +78,7 @@ namespace SprintZeroSpriteDrawing
 
         protected override void Initialize()
         {
-            keyboardController = new KeyboardController();
-            gamepadController = new GamepadController();
-
+            
             _graphics.PreferredBackBufferWidth = 1920;
             _graphics.PreferredBackBufferHeight = 1080;
             _graphics.ApplyChanges();
@@ -88,7 +91,6 @@ namespace SprintZeroSpriteDrawing
             SMushroom = new SuperMushroom(null, new Vector2(1, 1), new Vector2(10, 50));
             UPMushroom = new OneUPMushroom(null, new Vector2(1, 1), new Vector2(10, 70));
             Star = new Starman(null, new Vector2(2, 2), new Vector2(10, 90));
-
             spriteList.Add("Items/Coins", Coin);
             spriteList.Add("Items/FireFlower", FireFlower);
             spriteList.Add("Items/SuperMushroom", SMushroom);
@@ -105,7 +107,7 @@ namespace SprintZeroSpriteDrawing
             //IBlock = new InvisibleBlock(null, new Vector2(1,1), new Vector2(30,70));
             //GBlock = new GroundBlock(null, new Vector2(1,1), new Vector2(30,90));
 
-            //spriteList.Add("BrickBlock(Overworld)", BBlock);
+            spriteList.Add("BrickBlock(Overworld)", BBlock);
             //spriteList.Add("QuestionBlock(Overworld)", QBlock);
             //spriteList.Add("HitQuestionBlock(Overworld)", HitQBlock);
             //spriteList.Add("StairBlock", SBlock);
@@ -132,16 +134,27 @@ namespace SprintZeroSpriteDrawing
             #endregion
 
             BlockSpriteFactory.Sprite.LoadContent(Content);
-            
-            //test = Content.Load<Texture2D>("SmallMario/smallDying.png");
-            #region Controllers
+                        #region Controllers
 
             #endregion
-
             /*keyBoardCommand.Add(Keys.Y, new ICommand(SmallMario));
+
+            #region Command Mapping
+            keyBoardCommand.Add(Keys.Y, new ICommand(SmallMario));
             keyBoardCommand.Add(Keys.U, new ICommand(BigMario));
             keyBoardCommand.Add(Keys.I, new ICommand(FireMario));
             keyBoardCommand.Add(Keys.O, new ICommand(DeadMario));*/
+
+            /*keyBoardCommand.Add(Keys.W, new ICommand(Jumping));
+            keyBoardCommand.Add(Keys.Up, new ICommand(Jumping));
+
+            keyBoardCommand.Add(Keys.S, new ICommand(Crouching));
+            keyBoardCommand.Add(Keys.Down, new ICommand(Crouching));
+
+            keyBoardCommand.Add(Keys.A, new ICommand(Running));
+            keyBoardCommand.Add(Keys.Left, new ICommand(Running));
+            keyBoardCommand.Add(Keys.D, new ICommand(Running));
+            keyBoardCommand.Add(Keys.Right, new ICommand(Running));*/
 
             //Starting the sprite batch on our new graphics device
             //move init and loading of textures?
