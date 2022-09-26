@@ -89,4 +89,4 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         }
     }
 }
-}
+

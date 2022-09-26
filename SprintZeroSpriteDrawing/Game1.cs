@@ -81,6 +81,8 @@ namespace SprintZeroSpriteDrawing
 
         protected override void Initialize()
         {
+            keyboardController = new KeyboardController();
+            gamepadController = new GamepadController();
             /*keyBoardCommand.Add(Keys.Y, new ICommand(SmallMario));
 
             #region Command Mapping
@@ -131,7 +133,7 @@ namespace SprintZeroSpriteDrawing
             spriteList.Add("Obstacles/QuestionBlock(Overworld)", QBlock);
             spriteList.Add("Obstacles/HitQuestionBlock(Overworld)", HitQBlock);
             spriteList.Add("Obstacles/StairBlock", SBlock);
-            spriteList.Add("Obstacles/BrickBlock(Overworld)", IBlock);
+            spriteList.Add("Obstacles/IBlock(Overworld)", IBlock);
             spriteList.Add("Obstacles/GroundBlock(Overworld)", GBlock);
             #endregion
 
@@ -170,8 +172,8 @@ namespace SprintZeroSpriteDrawing
         {
             //This could again be moved into a collection and iterated over, but I'm lazy
 
-            //keyboardController.UpdateInput();
-            //gamepadController.UpdateInput();
+            keyboardController.UpdateInput();
+            gamepadController.UpdateInput();
 
             //iterate over all of the sprites and run their update methods every iteration
             foreach (KeyValuePair<string, ISprite> spriteEntry in spriteList)
