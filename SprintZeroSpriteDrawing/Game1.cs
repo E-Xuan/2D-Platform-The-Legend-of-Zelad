@@ -23,13 +23,14 @@ namespace SprintZeroSpriteDrawing
     {
         private GraphicsDeviceManager _graphics;
         #region Dictionaries
-        Dictionary<Keys, ICommand> keyBoardCommand;
-        Dictionary<Buttons, ICommand> gamePadCommand;
+        Dictionary<Keys, ICommand> keyBoardCommand = new Dictionary<Keys, ICommand>();
+        Dictionary<Buttons, ICommand> gamePadCommand = new Dictionary<Buttons, ICommand>();
+        private Dictionary<Keys, ICommand> kCommandList = new Dictionary<Keys, ICommand>();
         #endregion
 
         #region Controller
-        private KeyboardController keyboardController;
-        private GamepadController gamepadController;
+        private IController<Keys> keyboardController;
+        private IController<Buttons> gamepadController;
         #endregion
 
         #region sprites
@@ -49,12 +50,12 @@ namespace SprintZeroSpriteDrawing
         #endregion
 
         #region Blocks
-        ISprite BBlock;
-        ISprite QBlock;
-        ISprite HitQBlock;
-        ISprite IBlock;
-        ISprite SBlock;
-        ISprite GBlock;
+        BrickBlock BBlock;
+        QuestionBlock QBlock;
+        QuestionBlock HitQBlock;
+        InvisibleBlock IBlock;
+        StairBlock SBlock;
+        GroundBlock GBlock;
         #endregion
 
         #region Mario States
@@ -83,24 +84,6 @@ namespace SprintZeroSpriteDrawing
         {
             keyboardController = new KeyboardController();
             gamepadController = new GamepadController();
-            /*keyBoardCommand.Add(Keys.Y, new ICommand(SmallMario));
-
-            #region Command Mapping
-            keyBoardCommand.Add(Keys.Y, new ICommand(SmallMario));
-            keyBoardCommand.Add(Keys.U, new ICommand(BigMario));
-            keyBoardCommand.Add(Keys.I, new ICommand(FireMario));
-            KeyBoardCommand.Add(Keys.O, new ICommand(DeadMario));*/
-
-            /*keyBoardCommand.Add(Keys.W, new ICommand(Jumping));
-            keyBoardCommand.Add(Keys.Up, new ICommand(Jumping));
-
-            keyBoardCommand.Add(Keys.S, new ICommand(Crouching));
-            keyBoardCommand.Add(Keys.Down, new ICommand(Crouching));
-
-            keyBoardCommand.Add(Keys.A, new ICommand(Running));
-            keyBoardCommand.Add(Keys.Left, new ICommand(Running));
-            keyBoardCommand.Add(Keys.D, new ICommand(Running));
-            keyBoardCommand.Add(Keys.Right, new ICommand(Running));*/
             _graphics.PreferredBackBufferWidth = 1920;
             _graphics.PreferredBackBufferHeight = 1080;
             _graphics.ApplyChanges();
@@ -137,6 +120,30 @@ namespace SprintZeroSpriteDrawing
             spriteList.Add("Obstacles/GroundBlock(Overworld)", GBlock);
             #endregion
 
+            #endregion
+
+            #region Command Mapping
+            keyboardController.UpdateBinding(Keys.Q, new IntCmd(new KeyValuePair<Action<int>, int>(ExitWithCode, 0)), BindingType.PRESSED);
+            keyBoardCommand.Add(Keys.B, new ICommand(BBlock));
+            keyBoardCommand.Add(Keys.H, new ICommand(IBlock));
+
+            keyBoardCommand.Add(Keys.Y, new ICommand(SmallMario));
+            //keyBoardCommand.Add(Keys.Y, new ICommand(SmallMario));
+            keyBoardCommand.Add(Keys.U, new ICommand(BigMario));
+            keyBoardCommand.Add(Keys.I, new ICommand(FireMario));
+            keyBoardCommand.Add(Keys.O, new ICommand(DeadMario));
+
+            keyBoardCommand.Add(Keys.W, new ICommand(Jumping));
+            keyBoardCommand.Add(Keys.Up, new ICommand(Jumping));
+
+            keyBoardCommand.Add(Keys.S, new ICommand(Crouching));
+            keyBoardCommand.Add(Keys.Down, new ICommand(Crouching));
+
+            keyBoardCommand.Add(Keys.A, new ICommand(Running));
+            keyBoardCommand.Add(Keys.Left, new ICommand(Running));
+            keyBoardCommand.Add(Keys.D, new ICommand(Running));
+            keyBoardCommand.Add(Keys.Right, new ICommand(Running));
+
 
             #endregion
             base.Initialize();
@@ -155,9 +162,8 @@ namespace SprintZeroSpriteDrawing
             #endregion
 
             BlockSpriteFactory.Sprite.LoadContent(Content);
-                        #region Controllers
 
-            #endregion
+
 
             //Starting the sprite batch on our new graphics device
             //move init and loading of textures?
