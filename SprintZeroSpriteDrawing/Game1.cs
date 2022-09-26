@@ -13,13 +13,13 @@ using System.Threading.Tasks.Dataflow;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
 using SprintZeroSpriteDrawing.Sprites.ObstacleSprites;
 using SprintZeroSpriteDrawing.Sprites.MarioPowerUpSprites;
+using System.Reflection.Metadata;
 
 namespace SprintZeroSpriteDrawing
 {
     public class Game1 : Game
     {
         private GraphicsDeviceManager _graphics;
-
         #region Dictionaries
         Dictionary<Keys, ICommand> keyBoardCommand;
         Dictionary<Buttons, ICommand> gamePadCommand;
@@ -73,6 +73,9 @@ namespace SprintZeroSpriteDrawing
 
         protected override void Initialize()
         {
+            keyboardController = new KeyboardController();
+            gamepadController = new GamepadController();
+
             _graphics.PreferredBackBufferWidth = 1920;
             _graphics.PreferredBackBufferHeight = 1080;
             _graphics.ApplyChanges();
@@ -86,11 +89,11 @@ namespace SprintZeroSpriteDrawing
             UPMushroom = new OneUPMushroom(null, new Vector2(1, 1), new Vector2(10, 70));
             Star = new Starman(null, new Vector2(2, 2), new Vector2(10, 90));
 
-            spriteList.Add("Coins", Coin);
-            spriteList.Add("FireFlower", FireFlower);
-            spriteList.Add("SuperMushroom", SMushroom);
-            spriteList.Add("1UPMushroom", UPMushroom);
-            spriteList.Add("Starman", Star);
+            spriteList.Add("Items/Coins", Coin);
+            spriteList.Add("Items/FireFlower", FireFlower);
+            spriteList.Add("Items/SuperMushroom", SMushroom);
+            spriteList.Add("Items/1UPMushroom", UPMushroom);
+            spriteList.Add("Items/Starman", Star);
             #endregion
 
             #region obstacle sprites
@@ -102,7 +105,7 @@ namespace SprintZeroSpriteDrawing
             //IBlock = new InvisibleBlock(null, new Vector2(1,1), new Vector2(30,70));
             //GBlock = new GroundBlock(null, new Vector2(1,1), new Vector2(30,90));
 
-            spriteList.Add("BrickBlock(Overworld)", BBlock);
+            //spriteList.Add("BrickBlock(Overworld)", BBlock);
             //spriteList.Add("QuestionBlock(Overworld)", QBlock);
             //spriteList.Add("HitQuestionBlock(Overworld)", HitQBlock);
             //spriteList.Add("StairBlock", SBlock);
@@ -129,17 +132,16 @@ namespace SprintZeroSpriteDrawing
             #endregion
 
             BlockSpriteFactory.Sprite.LoadContent(Content);
-
-
+            
+            //test = Content.Load<Texture2D>("SmallMario/smallDying.png");
             #region Controllers
-            keyboardController = new KeyboardController();
-            gamepadController = new GamepadController();
+
             #endregion
 
-            keyBoardCommand.Add(Keys.Y, new ICommand(SmallMario));
+            /*keyBoardCommand.Add(Keys.Y, new ICommand(SmallMario));
             keyBoardCommand.Add(Keys.U, new ICommand(BigMario));
             keyBoardCommand.Add(Keys.I, new ICommand(FireMario));
-            keyBoardCommand.Add(Keys.O, new ICommand(DeadMario));
+            keyBoardCommand.Add(Keys.O, new ICommand(DeadMario));*/
 
             //Starting the sprite batch on our new graphics device
             //move init and loading of textures?
@@ -154,12 +156,13 @@ namespace SprintZeroSpriteDrawing
         {
             //This could again be moved into a collection and iterated over, but I'm lazy
 
-            //keyboardController.UpdateInput();
-            //gamepadController.UpdateInput();
+            keyboardController.UpdateInput();
+            gamepadController.UpdateInput();
 
             //iterate over all of the sprites and run their update methods every iteration
             foreach (KeyValuePair<string, ISprite> spriteEntry in spriteList)
             {
+
                 spriteEntry.Value.Update();
             }
 
@@ -169,7 +172,7 @@ namespace SprintZeroSpriteDrawing
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
+ 
             sBatch.Begin(); //Uses AlphaBlend by default, which allows the sprites to easily blend with backgrounds they match with
             //Iterate over the sprite entry list again and draw each sprite
             foreach (KeyValuePair <string, ISprite> spriteEntry in spriteList)
