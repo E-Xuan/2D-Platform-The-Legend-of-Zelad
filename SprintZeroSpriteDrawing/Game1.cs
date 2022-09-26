@@ -13,6 +13,7 @@ using System.Threading.Tasks.Dataflow;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
 using SprintZeroSpriteDrawing.Sprites.ObstacleSprites;
 using SprintZeroSpriteDrawing.Sprites.MarioPowerUpSprites;
+using SprintZeroSpriteDrawing.Sprites.MarioActionSprites;
 
 namespace SprintZeroSpriteDrawing
 {
@@ -59,6 +60,11 @@ namespace SprintZeroSpriteDrawing
         ISprite SmallMario;
         ISprite BigMario;
         ISprite FireMario;
+
+        ISprite Running;
+        ISprite Crouching;
+        ISprite Jumping;
+        ISprite Idle;
         #endregion
 
         #endregion
@@ -136,10 +142,24 @@ namespace SprintZeroSpriteDrawing
             gamepadController = new GamepadController();
             #endregion
 
+
+            #region Command Mapping
             keyBoardCommand.Add(Keys.Y, new ICommand(SmallMario));
             keyBoardCommand.Add(Keys.U, new ICommand(BigMario));
             keyBoardCommand.Add(Keys.I, new ICommand(FireMario));
             keyBoardCommand.Add(Keys.O, new ICommand(DeadMario));
+
+            keyBoardCommand.Add(Keys.W, new ICommand(Jumping));
+            keyBoardCommand.Add(Keys.Up, new ICommand(Jumping));
+
+            keyBoardCommand.Add(Keys.S, new ICommand(Crouching));
+            keyBoardCommand.Add(Keys.Down, new ICommand(Crouching));
+
+            keyBoardCommand.Add(Keys.A, new ICommand(Running));
+            keyBoardCommand.Add(Keys.Left, new ICommand(Running));
+            keyBoardCommand.Add(Keys.D, new ICommand(Running));
+            keyBoardCommand.Add(Keys.Right, new ICommand(Running));
+            #endregion
 
             //Starting the sprite batch on our new graphics device
             //move init and loading of textures?
