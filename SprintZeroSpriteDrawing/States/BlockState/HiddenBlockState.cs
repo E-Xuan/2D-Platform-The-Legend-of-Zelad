@@ -10,23 +10,24 @@ using System.Threading.Tasks;
 
 namespace SprintZeroSpriteDrawing.States.BlockState
 {
-    public class BrickBolckState : IBlockState
+    public class HiddenBlockState : IBlockState
     {
         public ISprite sprite;
         public bool triggered;
         public bool Used { get { return triggered; } }
-        
-        public BrickBolckState()
+
+        public HiddenBlockState()
         {
-            this.sprite = BlockSpriteFactory.Sprite.CreateBrickBlock();
+            this.sprite = BlockSpriteFactory.Sprite.CreateHiddenBlock();
             triggered = false;
         }
 
         public void BeTriggered()
         {
-            if(triggered == false)
+            if (triggered == false)
             {
-                /*Need to a small bump up*/
+                this.sprite = BlockSpriteFactory.Sprite.CreateBrickBlock();
+                /*Needs a bump*/
                 triggered = true;
             }
         }
@@ -40,6 +41,5 @@ namespace SprintZeroSpriteDrawing.States.BlockState
         {
             sprite.Draw(spriteBatch);
         }
-
     }
 }

@@ -144,6 +144,8 @@ namespace SprintZeroSpriteDrawing
             keyBoardCommand.Add(Keys.D, new ICommand(Running));
             keyBoardCommand.Add(Keys.Right, new ICommand(Running));
 
+            gamepadController.UpdateBinding(Buttons.Start, new IntCmd(new KeyValuePair<Action<int>, int>(ExitWithCode, 0)), BindingType.PRESSED);
+
             #endregion
 
             base.Initialize();

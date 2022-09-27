@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using SprintZeroSpriteDrawing.Interfaces;
+using SprintZeroSpriteDrawing.Sprites.ObstacleSprites;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,22 +12,34 @@ namespace SprintZeroSpriteDrawing.States.BlockState
 {
     public class QuestionBlockState : IBlockState
     {
-        private ISprite sprite;
-        private bool triggered;
+        public ISprite sprite;
+        public bool triggered;
         public bool Used { get { return triggered; } }
-        public void BeTriggered()
+
+        public QuestionBlockState()
         {
-            throw new NotImplementedException();
+            this.sprite = BlockSpriteFactory.Sprite.CreateQuestionBlock();
+            triggered = false;
         }
 
-        public void Draw(SpriteBatch spriteBatch, Vector2 location)
+        public void BeTriggered()
         {
-            throw new NotImplementedException();
+            if (triggered == false)
+            {
+                //this.sprite = BlockSpriteFactory.Sprite.CreateBrickBlock();
+                /*Need to a small bump up, and returned to a used state*/
+                triggered = true;
+            }
         }
 
         public void Update()
         {
-            throw new NotImplementedException();
+            sprite.Update();
+        }
+
+        public void Draw(SpriteBatch spriteBatch, Vector2 location)
+        {
+            sprite.Draw(spriteBatch);
         }
 
     }
