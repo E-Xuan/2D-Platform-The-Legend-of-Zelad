@@ -12,7 +12,6 @@ using System.Numerics;
 using System.Threading.Tasks.Dataflow;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
 using SprintZeroSpriteDrawing.Sprites.ObstacleSprites;
-using SprintZeroSpriteDrawing.Sprites.MarioPowerUpSprites;
 using System.Reflection.Metadata;
 
 using SprintZeroSpriteDrawing.Sprites.MarioActionSprites;
