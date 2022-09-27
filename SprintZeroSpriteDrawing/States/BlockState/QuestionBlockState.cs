@@ -25,11 +25,8 @@ namespace SprintZeroSpriteDrawing.States.BlockState
         }
 
         public void Collide()
-        {
-            if (state == State.UNTAPPED)
-            {
-                state = State.TAPPED;
-            }
+        { 
+            state = State.TAPPED;
         }
 
         public void Update()

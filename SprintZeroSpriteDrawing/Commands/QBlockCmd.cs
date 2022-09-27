@@ -5,7 +5,7 @@ using SprintZeroSpriteDrawing.Sprites.ObstacleSprites;
 
 namespace SprintZeroSpriteDrawing.Commands
 {
-    public class QBlockCmd : ICommand
+    internal class QBlockCmd : ICommand
     {
         public QBlockCmd(QuestionBlock nRef) : base(nRef) { }
 
