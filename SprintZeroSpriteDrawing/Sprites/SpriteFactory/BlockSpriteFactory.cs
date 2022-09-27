@@ -38,7 +38,6 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         {
             return new BrickBlock(BrickBlockSpriteSheet, SheetSize, nPos);
         }
-
         public ISprite CreateQuestionBlock()
         {
             return new QuestionBlock(QuestionBlockSpriteSheet, SheetSize, nPos);

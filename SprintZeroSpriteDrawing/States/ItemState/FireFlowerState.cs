@@ -10,21 +10,21 @@ using System.Threading.Tasks;
 
 namespace SprintZeroSpriteDrawing.States.BlockState
 {
-    public class BrickBolckState : IBlockState
+    public class FireFlowerState : IBlockState
     {
         public ISprite sprite;
         public bool triggered;
         public bool Used { get { return triggered; } }
-        
-        public BrickBolckState()
+
+        public FireFlowerState()
         {
-            this.sprite = BlockSpriteFactory.Sprite.CreateBrickBlock();
+            this.sprite = ItemSpriteFactory.Sprite.createFlower();
             triggered = false;
         }
 
         public void BeTriggered()
         {
-            if(triggered == false)
+            if (triggered == false)
             {
                 /*Need to a small bump up*/
                 triggered = true;

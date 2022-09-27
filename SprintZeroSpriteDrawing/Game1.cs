@@ -42,11 +42,11 @@ namespace SprintZeroSpriteDrawing
         private Dictionary<string, ISprite> spriteList = new Dictionary<string, ISprite>();
    
         #region Items
-        ISprite SMushroom;
-        ISprite Coin;
-        ISprite FireFlower;
-        ISprite UPMushroom;
-        ISprite Star;
+        SuperMushroom SMushroom;
+        Coins Coin;
+        FireFlower FireFlower;
+        OneUPMushroom UPMushroom;
+        Starman Star;
         #endregion
 
         #region Blocks
@@ -154,14 +154,7 @@ namespace SprintZeroSpriteDrawing
         protected override void LoadContent()
         {
             //Loading the images, and creating the sprites too
-
-            #region Item Pictures
-            Coin.Sprite = Content.Load<Texture2D>("Items/Coins");
-            FireFlower.Sprite = Content.Load<Texture2D>("Items/FireFlower");
-            SMushroom.Sprite = Content.Load<Texture2D>("Items/SuperMushroom");
-            UPMushroom.Sprite = Content.Load<Texture2D>("Items/1UPMushroom");
-            Star.Sprite = Content.Load<Texture2D>("Items/Starman");
-            #endregion
+            ItemSpriteFactory.Sprite.LoadContent(Content);
 
             BlockSpriteFactory.Sprite.LoadContent(Content);
 
