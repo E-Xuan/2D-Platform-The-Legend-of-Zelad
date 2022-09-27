@@ -23,10 +23,14 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         public Texture2D UPMushroom;
         public Texture2D Star;
 
-        private static ItemSpriteFactory sprite = new ItemSpriteFactory();
-        public static ItemSpriteFactory Sprite
+        private static ItemSpriteFactory sprite;
+        public static ItemSpriteFactory getFactory()
         {
-            get { return sprite; }
+             if (sprite == null)
+             {
+                sprite = new ItemSpriteFactory();
+             }
+            return sprite;
         }
 
         public void LoadContent(ContentManager content)
@@ -38,23 +42,23 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
             Star = content.Load<Texture2D>("Items/Starman");
         }
 
-        public ISprite createCoin()
+        public ISprite createCoin(Vector2 SheetSize, Vector2 nPos)
         {
             return new Coins(Coin, SheetSize, nPos);
         }
-        public ISprite createFlower()
+        public ISprite createFlower(Vector2 SheetSize, Vector2 nPos)
         {
             return new FireFlower(FireFlower, SheetSize, nPos);
         }
-        public ISprite createUPMushroom()
+        public ISprite createUPMushroom(Vector2 SheetSize, Vector2 nPos)
         {
             return new OneUPMushroom(UPMushroom, SheetSize, nPos);
         }
-        public ISprite createSMushroom()
+        public ISprite createSMushroom(Vector2 SheetSize, Vector2 nPos)
         {
             return new SuperMushroom(SMushroom, SheetSize, nPos);
         }
-        public ISprite createStar()
+        public ISprite createStar(Vector2 SheetSize, Vector2 nPos)
         {
             return new Starman(Star, SheetSize, nPos);
         }

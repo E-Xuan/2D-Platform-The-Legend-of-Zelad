@@ -14,11 +14,13 @@ namespace SprintZeroSpriteDrawing.States.BlockState
     {
         public ISprite sprite;
         public bool triggered;
+        public Vector2 nPos;
+        public Vector2 SheetSize;
         public bool Used { get { return triggered; } }
 
         public StarState()
         {
-            this.sprite = ItemSpriteFactory.Sprite.createStar();
+            this.sprite = ItemSpriteFactory.getFactory().createStar(SheetSize, nPos);
             triggered = false;
         }
 

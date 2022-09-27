@@ -25,6 +25,7 @@ namespace SprintZeroSpriteDrawing.Sprites.ItemSprites
         private Vector2 FrameSize;
         public SuperMushroom(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos)
         {
+            IsVis = true;
             SubframeLimit = 20;
             AutoFrame = true;
             Sprite = nSprite;
@@ -32,7 +33,9 @@ namespace SprintZeroSpriteDrawing.Sprites.ItemSprites
             SheetSize = nSheetSize;
             LastFrame = (int)(SheetSize.X * SheetSize.Y);
             if (nSprite != null)
+            {
                 FrameSize = new Vector2(nSprite.Width / SheetSize.X, nSprite.Height / SheetSize.Y);
+            }
         }
         public void SetSprite(Texture2D nSprite)
         {
