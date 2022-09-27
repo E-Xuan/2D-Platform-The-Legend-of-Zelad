@@ -26,7 +26,7 @@ namespace SprintZeroSpriteDrawing.States.BlockState
         {
             if (triggered == false)
             {
-                this.sprite = BlockSpriteFactory.getFactory().CreateBrickBlock();
+                this.sprite = BlockSpriteFactory.getFactory().CreateBrickBlock(new Vector2(300,300));
                 /*Needs a bump*/
                 triggered = true;
             }

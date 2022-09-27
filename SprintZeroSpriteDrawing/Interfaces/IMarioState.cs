@@ -13,7 +13,7 @@ namespace SprintZeroSpriteDrawing.Interfaces
     {
         void Update();
         void Draw(SpriteBatch spriteBatch, Vector2 location);
-        void Transition();
+       
 
         
     }
