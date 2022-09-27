@@ -169,6 +169,7 @@ namespace SprintZeroSpriteDrawing
             Star = (Starman)ItemSpriteFactory.getFactory().createStar(new Vector2(2, 2), new Vector2(500, 100));
             spriteList.Add("Items/Starman", Star);
 
+            #region BlockContent
             BlockSpriteFactory.getFactory().LoadContent(Content);
             BBlock = (BrickBlock)BlockSpriteFactory.getFactory().CreateBrickBlock(new Vector2(300, 500));
             spriteList.Add("Obstacles/BrickBlock(Overworld)", BBlock);
@@ -178,13 +179,18 @@ namespace SprintZeroSpriteDrawing
             spriteList.Add("Obstacles/InvisibleBlock", IBlock);
             UBlock = (UsedBlock)BlockSpriteFactory.getFactory().CreateUsedBlock(new Vector2(500, 500));
             spriteList.Add("Obstacles/UsedBlock", UBlock);
+            #endregion
+
 
             keyboardController.UpdateBinding(Keys.I, new QBlockCmd(QBlock), BindingType.PRESSED); /*NOT WORK*/
-
-
+           
             MarioSpriteFactory.getSpriteFactory().LoadContent(Content);
             Player = (Mario)MarioSpriteFactory.getSpriteFactory().createMario(new Vector2(300, 300));
             spriteList.Add("SmallMario/SmallIdle", Player);
+
+            keyboardController.UpdateBinding(Keys.A, new IntCmd(new KeyValuePair<Action<int>, int>(Player.MoveX, -10)), BindingType.HELD);
+            keyboardController.UpdateBinding(Keys.D, new IntCmd(new KeyValuePair<Action<int>, int>(Player.MoveX, 10)), BindingType.HELD);
+
 
             //Starting the sprite batch on our new graphics device
             //move init and loading of textures?
