@@ -27,13 +27,13 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
 
         public QuestionBlock(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos)
         {
-            //IsVis = true;
+            IsVis = true;
             SubframeLimit = 20;
             AutoFrame = true;
             Sprite = nSprite;
             Pos = nPos;
             SheetSize = nSheetSize;
-            LastFrame = (int)(SheetSize.X * SheetSize.Y);
+            LastFrame = (int)(SheetSize.X * SheetSize.Y) - 1;
             if (nSprite != null)
                 FrameSize = new Vector2(nSprite.Width / SheetSize.X, nSprite.Height / SheetSize.Y);
         }

@@ -108,12 +108,12 @@ namespace SprintZeroSpriteDrawing
             #region obstacle sprites
 
            
-            HitQBlock = new QuestionBlock(null, new Vector2(1,1), new Vector2(30,110));
+           // HitQBlock = new QuestionBlock(null, new Vector2(1,1), new Vector2(30,110));
             SBlock = new StairBlock(null, new Vector2(1,1), new Vector2(30,50));
             GBlock = new GroundBlock(null, new Vector2(1,1), new Vector2(30,90));
 
             
-            spriteList.Add("Obstacles/HitQuestionBlock(Overworld)", HitQBlock);
+           // spriteList.Add("Obstacles/HitQuestionBlock(Overworld)", HitQBlock);
             spriteList.Add("Obstacles/StairBlock", SBlock);
             spriteList.Add("Obstacles/GroundBlock(Overworld)", GBlock);
             #endregion
