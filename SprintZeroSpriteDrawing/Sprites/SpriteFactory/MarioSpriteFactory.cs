@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using SprintZeroSpriteDrawing.Commands;
 using SprintZeroSpriteDrawing.Interfaces;
 using SprintZeroSpriteDrawing.Sprites.MarioSprites;
 using SprintZeroSpriteDrawing.Sprites.ObstacleSprites;
@@ -30,6 +31,10 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioActionSprites
         public int JumpingSpriteSheetRow { get; }
         public int JumpingSpriteSheetCol { get; }
         public int JumpingFrames { get; }
+
+        public Texture2D spriteSheet;
+        public Vector2 sheetSize;
+        public (int powerup, int action) State;
 
         public Vector2 position { get; set; }
 
@@ -91,11 +96,131 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioActionSprites
 
         public ISprite createMario(Vector2 nPos)
         {
-            return new Mario(SmallIdleSpriteSheet, new Vector2(1, 1), nPos);
+            return new Mario(swapSprite(), swapSheetSize(), nPos);
             
         }
 
-        
+        //(int powerup, int action) State
+        public Texture2D swapSprite()
+        {
+
+            State.powerup = 1;
+            State.action = 1;
+            if (State.powerup == 1 && State.action == 1) 
+                {
+                    spriteSheet = SmallRunningSpriteSheet;  
+                }
+            else if(State.powerup == 1 && State.action == 2)
+            {
+                spriteSheet = SmallIdleSpriteSheet;
+            }
+            else if (State.powerup == 1 && State.action == 3)
+            {
+                spriteSheet = SmallJumpingSpriteSheet;
+            }
+            else if (State.powerup == 1 && State.action == 4)
+            {
+                spriteSheet = SmallIdleSpriteSheet;
+            }
+            else if (State.powerup == 2 && State.action == 1)
+            {
+                spriteSheet = BigRunningSpriteSheet;
+            }
+            else if (State.powerup == 2 && State.action == 2)
+            {
+                spriteSheet = BigIdleSpriteSheet;
+            }
+            else if (State.powerup == 2 && State.action == 3)
+            {
+                spriteSheet = BigJumpingSpriteSheet;
+            }
+            else if (State.powerup == 2 && State.action == 4)
+            {
+                spriteSheet = BigCrouchingSpriteSheet;
+            }
+            else if (State.powerup == 3 && State.action == 1)
+            {
+                spriteSheet = FireRunningSpriteSheet;
+            }
+            else if (State.powerup == 3 && State.action == 2)
+            {
+                spriteSheet = FireIdleSpriteSheet;
+            }
+            else if (State.powerup == 3 && State.action == 3)
+            {
+                spriteSheet = FireJumpingSpriteSheet;
+            }
+            else if (State.powerup == 3 && State.action == 4)
+            {
+                spriteSheet = FireCrouchingSpriteSheet;
+            }
+            else if (State.powerup == 4)
+            {
+                spriteSheet = DeadMarioSpriteSheet;
+            }
+
+
+            return spriteSheet;
+        }
+
+        public Vector2 swapSheetSize()
+        {
+            State.powerup = 1;
+            State.action = 1;
+            if (State.powerup == 1 && State.action == 1)
+            {
+                sheetSize = new Vector2(3,1);
+            }
+            else if (State.powerup == 1 && State.action == 2)
+            {
+                sheetSize = new Vector2(1, 1);
+            }
+            else if (State.powerup == 1 && State.action == 3)
+            {
+                sheetSize = new Vector2(1, 1);
+            }
+            else if (State.powerup == 1 && State.action == 4)
+            {
+                sheetSize = new Vector2(1, 1);
+            }
+            else if (State.powerup == 2 && State.action == 1)
+            {
+                sheetSize = new Vector2(1, 1);
+            }
+            else if (State.powerup == 2 && State.action == 2)
+            {
+                sheetSize = new Vector2(1, 1);
+            }
+            else if (State.powerup == 2 && State.action == 3)
+            {
+                sheetSize = new Vector2(1, 1);
+            }
+            else if (State.powerup == 2 && State.action == 4)
+            {
+                sheetSize = new Vector2(1, 1);
+            }
+            else if (State.powerup == 3 && State.action == 1)
+            {
+                sheetSize = new Vector2(3, 1);
+            }
+            else if (State.powerup == 3 && State.action == 2)
+            {
+                sheetSize = new Vector2(1, 1);
+            }
+            else if (State.powerup == 3 && State.action == 3)
+            {
+                sheetSize = new Vector2(1, 1);
+            }
+            else if (State.powerup == 3 && State.action == 4)
+            {
+                sheetSize = new Vector2(1, 1);
+            }
+            else if (State.powerup == 4)
+            {
+                sheetSize = new Vector2(1, 1);
+            }
+            return sheetSize;
+        }
 
 	}
 }

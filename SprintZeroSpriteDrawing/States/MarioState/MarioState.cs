@@ -16,13 +16,13 @@ namespace SprintZeroSpriteDrawing.States.MarioState
 	{
 		public ISprite sprite;
 
-		public Tuple<int,int> state { get; set; }
+		public Tuple<int, int> state { get; set; }
 		public Vector2 nPos;
 
 
-		public  MarioState()
-        {
-			this.sprite =  MarioSpriteFactory.getSpriteFactory().createMario(nPos);
+		public MarioState()
+		{
+			this.sprite = MarioSpriteFactory.getSpriteFactory().createMario(nPos);
 		}
 
 
@@ -36,11 +36,8 @@ namespace SprintZeroSpriteDrawing.States.MarioState
 			sprite.Draw(spriteBatch);
 		}
 
-		public void swapState()
-		{
-			
-		}
-
 		
+
+
 	}
 }
