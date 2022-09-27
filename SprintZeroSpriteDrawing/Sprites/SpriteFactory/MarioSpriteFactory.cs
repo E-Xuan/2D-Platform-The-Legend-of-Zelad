@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using SprintZeroSpriteDrawing.Interfaces;
+using SprintZeroSpriteDrawing.Sprites.ObstacleSprites;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,8 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioActionSprites
 {
 	public class MarioSpriteFactory
 	{
-		public int CrouchingSpriteSheetRow { get; }
+		
+        public int CrouchingSpriteSheetRow { get; }
 		public int CrouchingSpriteSheetCol { get; }
 		public int CrouchingFrames {get;}
 
@@ -30,21 +32,69 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioActionSprites
 
         public Vector2 position { get; set; }
 
-        private Texture2D RunningSpriteSheet;
-        private Texture2D JumpingSpriteSheet;
-        private Texture2D IdleSpriteSheet;
-        private Texture2D CrouchingSpriteSheet;
+        #region Small Mario
+        private Texture2D SmallRunningSpriteSheet;
+        private Texture2D SmallJumpingSpriteSheet;
+        private Texture2D SmallIdleSpriteSheet;
+       
+        #endregion
 
-        private static MarioSpriteFactory sprite = new MarioSpriteFactory();
-        public static MarioSpriteFactory Sprite;
+        #region Big Mario
+        private Texture2D BigRunningSpriteSheet;
+        private Texture2D BigJumpingSpriteSheet;
+        private Texture2D BigIdleSpriteSheet;
+        private Texture2D BigCrouchingSpriteSheet;
+        #endregion
 
-        //Need Mario Sprites to implement further
+        #region Fire Mario
+        private Texture2D FireRunningSpriteSheet;
+        private Texture2D FireJumpingSpriteSheet;
+        private Texture2D FireIdleSpriteSheet;
+        private Texture2D FireCrouchingSpriteSheet;
+        #endregion
 
-        public MarioSpriteFactory()
+        #region Dead Mario
+        private Texture2D DeadMarioSpriteSheet;
+        #endregion
+
+        
+
+        private static MarioSpriteFactory sprite;
+        public MarioSpriteFactory getSpriteFactory()
 		{
-            //get{ return sprite; }
+            if(sprite == null)
+            {
+                sprite = new MarioSpriteFactory();
+            }
+            return sprite;
 		}
 
+        void LoadContent(ContentManager content)
+        {
+            SmallRunningSpriteSheet = content.Load<Texture2D>("SmallMario/smallWalk");
+            SmallJumpingSpriteSheet = content.Load<Texture2D>("SmallMario/smallJump");
+            SmallIdleSpriteSheet = content.Load<Texture2D>("SmallMario/SmallIdle");
+
+            BigCrouchingSpriteSheet = content.Load<Texture2D>("BigMario/bigCrouching");
+            BigIdleSpriteSheet = content.Load<Texture2D>("BigMario/bigIdle");
+            BigJumpingSpriteSheet = content.Load<Texture2D>("BigMario/bigJump");
+            BigRunningSpriteSheet = content.Load<Texture2D>("BigMario/bigWalk");
+
+            FireCrouchingSpriteSheet = content.Load<Texture2D>("FireMario/fireCrouching");
+            FireIdleSpriteSheet = content.Load<Texture2D>("FireMario/fireIdle");
+            FireJumpingSpriteSheet = content.Load<Texture2D>("FireMario/fireJump");
+            FireRunningSpriteSheet = content.Load<Texture2D>("FireMario/fireWalk");
+
+            DeadMarioSpriteSheet = content.Load<Texture2D>("SmallMario/smallDying");
+        }
+
+       /* public ISprite createMario(Vector2 nPos)
+        {
+            //return new Mario(SmallIdleSpriteSheet, new Vector2(1, 1), nPos);
+            
+        }
+
+        */
 
 	}
 }

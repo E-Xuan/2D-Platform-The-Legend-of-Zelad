@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using SprintZeroSpriteDrawing.Interfaces;
+using SprintZeroSpriteDrawing.Sprites.MarioActionSprites;
 using SprintZeroSpriteDrawing.Sprites.ObstacleSprites;
 using System;
 using System.Collections.Generic;
@@ -10,16 +11,17 @@ using System.Threading.Tasks;
 
 namespace SprintZeroSpriteDrawing.States.MarioState
 {
-	public class MarioActionState : IMarioState
+	public class MarioState : IMarioState
 	{
-		private ISprite sprite;
-		public bool transition;
+		public ISprite sprite;
+
+		public Tuple<int,int> state { get; set; }
+		private static MarioState mario;
 
 
-		public MarioActionState()
-		{
-			//Need Mario Sprites in order to implement
-			//this.sprite = MarioSpriteFactory.Sprite.CreateMario();
+		public  MarioState()
+        {
+			//this.sprite = MarioSpriteFactory.getSpriteFactory().CreateMario(new Vector2(300, 300));
 		}
 
 
@@ -33,9 +35,11 @@ namespace SprintZeroSpriteDrawing.States.MarioState
 			sprite.Draw(spriteBatch);
 		}
 
-		public void Transition()
+		public void swapState()
 		{
-			throw new NotImplementedException();
+			
 		}
+
+		
 	}
 }

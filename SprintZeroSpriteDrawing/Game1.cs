@@ -61,6 +61,8 @@ namespace SprintZeroSpriteDrawing
         #endregion
 
         #region Mario States
+
+        //Mario Player;
         ISprite DeadMario;
         ISprite SmallMario;
         ISprite BigMario;
@@ -170,7 +172,9 @@ namespace SprintZeroSpriteDrawing
             keyboardController.UpdateBinding(Keys.I, new QBlockCmd(QBlock), BindingType.PRESSED); /*NOT WORK*/
 
 
-
+            //MarioSpriteFactory.getSpriteFactory().LoadContent(Content);
+            //Player = (Mario)MarioSpriteFactory.getSpriteFactory().createMario(new Vector2(300, 300));
+            //spriteList.Add("SmallMario/SmallIdle", Player);
 
             //Starting the sprite batch on our new graphics device
             //move init and loading of textures?
