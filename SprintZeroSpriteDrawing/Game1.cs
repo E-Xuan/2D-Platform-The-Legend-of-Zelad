@@ -153,21 +153,19 @@ namespace SprintZeroSpriteDrawing
             //Loading the images, and creating the sprites too
             //ItemSpriteFactory.Sprite.LoadContent(Content);
 
+            #region ItemContent
             ItemSpriteFactory.getFactory().LoadContent(Content);
             FireFlower = (FireFlower)ItemSpriteFactory.getFactory().createFlower(new Vector2(4, 2), new Vector2(300, 100));
             spriteList.Add("Items/FireFlower", FireFlower);
-
             Coin = (Coins)ItemSpriteFactory.getFactory().createCoin(new Vector2(2, 2), new Vector2(350, 100));
             spriteList.Add("Items/Coins", Coin);
-
             SMushroom = (SuperMushroom)ItemSpriteFactory.getFactory().createSMushroom(new Vector2(1, 1), new Vector2(400, 100));
             spriteList.Add("Items/SuperMushroom", SMushroom);
-
             UPMushroom = (OneUPMushroom)ItemSpriteFactory.getFactory().createUPMushroom(new Vector2(1, 1), new Vector2(450, 100));
             spriteList.Add("Items/1UPMushroom", UPMushroom);
-
             Star = (Starman)ItemSpriteFactory.getFactory().createStar(new Vector2(2, 2), new Vector2(500, 100));
             spriteList.Add("Items/Starman", Star);
+            #endregion
 
             #region BlockContent
             BlockSpriteFactory.getFactory().LoadContent(Content);
@@ -181,13 +179,14 @@ namespace SprintZeroSpriteDrawing
             spriteList.Add("Obstacles/UsedBlock", UBlock);
             #endregion
 
-
-            keyboardController.UpdateBinding(Keys.I, new QBlockCmd(QBlock), BindingType.PRESSED); /*NOT WORK*/
-           
+            #region MarioContent
             MarioSpriteFactory.getSpriteFactory().LoadContent(Content);
             Player = (Mario)MarioSpriteFactory.getSpriteFactory().createMario(new Vector2(300, 300));
             spriteList.Add("SmallMario/SmallIdle", Player);
+            #endregion
 
+            keyboardController.UpdateBinding(Keys.I, new QBlockCmd(QBlock), BindingType.PRESSED); /*NOT WORK*/
+            /*Could be used after states for Mario has been setted up*/
             keyboardController.UpdateBinding(Keys.A, new IntCmd(new KeyValuePair<Action<int>, int>(Player.MoveX, -10)), BindingType.HELD);
             keyboardController.UpdateBinding(Keys.D, new IntCmd(new KeyValuePair<Action<int>, int>(Player.MoveX, 10)), BindingType.HELD);
 
