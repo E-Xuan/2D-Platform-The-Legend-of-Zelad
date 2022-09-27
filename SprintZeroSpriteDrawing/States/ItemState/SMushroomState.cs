@@ -14,11 +14,13 @@ namespace SprintZeroSpriteDrawing.States.BlockState
     {
         public ISprite sprite;
         public bool triggered;
+        public Vector2 nPos;
+        public Vector2 SheetSize;
         public bool Used { get { return triggered; } }
 
         public SMushroomState()
         {
-            this.sprite = ItemSpriteFactory.Sprite.createSMushroom();
+            this.sprite = ItemSpriteFactory.getFactory().createSMushroom(SheetSize, nPos);
             triggered = false;
         }
 

@@ -14,11 +14,13 @@ namespace SprintZeroSpriteDrawing.States.BlockState
     {
         public ISprite sprite;
         public bool triggered;
+        public Vector2 nPos;
+        public Vector2 SheetSize;
         public bool Used { get { return triggered; } }
 
         public CoinState()
         {
-            this.sprite = ItemSpriteFactory.Sprite.createCoin();
+            this.sprite = ItemSpriteFactory.getFactory().createCoin(SheetSize, nPos);
             triggered = false;
         }
 

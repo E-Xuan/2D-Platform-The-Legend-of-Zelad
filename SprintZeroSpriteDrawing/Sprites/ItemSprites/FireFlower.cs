@@ -25,6 +25,8 @@ namespace SprintZeroSpriteDrawing.Sprites.ItemSprites
         private Vector2 FrameSize;
         public FireFlower(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos)
         {
+            IsVis = true;
+            AutoFrame = true;
             SubframeLimit = 20;
             AutoFrame = true;
             Sprite = nSprite;
@@ -33,8 +35,6 @@ namespace SprintZeroSpriteDrawing.Sprites.ItemSprites
             LastFrame = (int)(SheetSize.X * SheetSize.Y);
             if (nSprite != null)
                 FrameSize = new Vector2(nSprite.Width / SheetSize.X, nSprite.Height / SheetSize.Y);
-            //IsVis = true;
-            AutoFrame = false;
         }
         public void SetSprite(Texture2D nSprite)
         {

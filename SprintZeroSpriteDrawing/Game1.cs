@@ -24,8 +24,8 @@ namespace SprintZeroSpriteDrawing
     {
         private GraphicsDeviceManager _graphics;
         #region Dictionaries
-        Dictionary<Keys, ICommand> keyBoardCommand = new Dictionary<Keys, ICommand>();
-        Dictionary<Buttons, ICommand> gamePadCommand = new Dictionary<Buttons, ICommand>();
+        private Dictionary<Keys, ICommand> keyBoardCommand = new Dictionary<Keys, ICommand>();
+        private Dictionary<Buttons, ICommand> gamePadCommand = new Dictionary<Buttons, ICommand>();
         private Dictionary<Keys, ICommand> kCommandList = new Dictionary<Keys, ICommand>();
         #endregion
 
@@ -92,19 +92,6 @@ namespace SprintZeroSpriteDrawing
 
             #region sprites
 
-            #region item sprites
-            FireFlower = new FireFlower(null, new Vector2(2, 4), new Vector2(10, 10));
-            Coin = new Coins(null, new Vector2(2, 2), new Vector2(10, 30));
-            SMushroom = new SuperMushroom(null, new Vector2(1, 1), new Vector2(10, 50));
-            UPMushroom = new OneUPMushroom(null, new Vector2(1, 1), new Vector2(10, 70));
-            Star = new Starman(null, new Vector2(2, 2), new Vector2(10, 90));
-            spriteList.Add("Items/Coins", Coin);
-            spriteList.Add("Items/FireFlower", FireFlower);
-            spriteList.Add("Items/SuperMushroom", SMushroom);
-            spriteList.Add("Items/1UPMushroom", UPMushroom);
-            spriteList.Add("Items/Starman", Star);
-            #endregion
-
             #region obstacle sprites
 
            
@@ -154,6 +141,22 @@ namespace SprintZeroSpriteDrawing
         {
             //Loading the images, and creating the sprites too
             //ItemSpriteFactory.Sprite.LoadContent(Content);
+
+            ItemSpriteFactory.getFactory().LoadContent(Content);
+            FireFlower = (FireFlower)ItemSpriteFactory.getFactory().createFlower(new Vector2(4, 2), new Vector2(300, 100));
+            spriteList.Add("Items/FireFlower", FireFlower);
+
+            Coin = (Coins)ItemSpriteFactory.getFactory().createCoin(new Vector2(2, 2), new Vector2(350, 100));
+            spriteList.Add("Items/Coins", Coin);
+
+            SMushroom = (SuperMushroom)ItemSpriteFactory.getFactory().createSMushroom(new Vector2(1, 1), new Vector2(400, 100));
+            spriteList.Add("Items/SuperMushroom", SMushroom);
+
+            UPMushroom = (OneUPMushroom)ItemSpriteFactory.getFactory().createUPMushroom(new Vector2(1, 1), new Vector2(450, 100));
+            spriteList.Add("Items/1UPMushroom", UPMushroom);
+
+            Star = (Starman)ItemSpriteFactory.getFactory().createStar(new Vector2(2, 2), new Vector2(500, 100));
+            spriteList.Add("Items/Starman", Star);
 
             BlockSpriteFactory.getFactory().LoadContent(Content);
             BBlock = (BrickBlock)BlockSpriteFactory.getFactory().CreateBrickBlock(new Vector2(300, 500));
