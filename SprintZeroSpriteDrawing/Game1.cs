@@ -155,15 +155,15 @@ namespace SprintZeroSpriteDrawing
 
             #region ItemContent
             ItemSpriteFactory.getFactory().LoadContent(Content);
-            FireFlower = (FireFlower)ItemSpriteFactory.getFactory().createFlower(new Vector2(4, 2), new Vector2(300, 100));
+            FireFlower = (FireFlower)ItemSpriteFactory.getFactory().createFlower(new Vector2(4, 2), new Vector2(250, 200));
             spriteList.Add("Items/FireFlower", FireFlower);
-            Coin = (Coins)ItemSpriteFactory.getFactory().createCoin(new Vector2(2, 2), new Vector2(350, 100));
+            Coin = (Coins)ItemSpriteFactory.getFactory().createCoin(new Vector2(2, 2), new Vector2(350, 200));
             spriteList.Add("Items/Coins", Coin);
-            SMushroom = (SuperMushroom)ItemSpriteFactory.getFactory().createSMushroom(new Vector2(1, 1), new Vector2(400, 100));
+            SMushroom = (SuperMushroom)ItemSpriteFactory.getFactory().createSMushroom(new Vector2(1, 1), new Vector2(450, 200));
             spriteList.Add("Items/SuperMushroom", SMushroom);
-            UPMushroom = (OneUPMushroom)ItemSpriteFactory.getFactory().createUPMushroom(new Vector2(1, 1), new Vector2(450, 100));
+            UPMushroom = (OneUPMushroom)ItemSpriteFactory.getFactory().createUPMushroom(new Vector2(1, 1), new Vector2(550, 200));
             spriteList.Add("Items/1UPMushroom", UPMushroom);
-            Star = (Starman)ItemSpriteFactory.getFactory().createStar(new Vector2(2, 2), new Vector2(500, 100));
+            Star = (Starman)ItemSpriteFactory.getFactory().createStar(new Vector2(2, 2), new Vector2(650, 200));
             spriteList.Add("Items/Starman", Star);
             #endregion
 
