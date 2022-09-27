@@ -62,8 +62,7 @@ namespace SprintZeroSpriteDrawing
         #endregion
 
         #region Mario States
-        ICommand mCommand;
-        (int powerup, int action) State;
+        
         Mario Player;
         ISprite DeadMario;
         ISprite SmallMario;
@@ -74,7 +73,8 @@ namespace SprintZeroSpriteDrawing
         ISprite Crouching;
         ISprite Jumping;
         ISprite Idle;
-        #endregion
+
+       
 
         #endregion
 
@@ -93,7 +93,7 @@ namespace SprintZeroSpriteDrawing
             _graphics.PreferredBackBufferWidth = 1920;
             _graphics.PreferredBackBufferHeight = 1080;
             _graphics.ApplyChanges();
-            mCommand = new MarioCommand(Player);
+            
 
             #region sprites
 
@@ -110,7 +110,7 @@ namespace SprintZeroSpriteDrawing
             #endregion
 
             //MarioSpriteFactory.getSpriteFactory().State
-            Player = new Mario(MarioSpriteFactory.getSpriteFactory().swapSprite(), MarioSpriteFactory.getSpriteFactory().swapSheetSize(), new Vector2(300, 300));
+            Player = (Mario)MarioSpriteFactory.getSpriteFactory().createMario(new Vector2 (300,300));
 
             #endregion
 
@@ -120,25 +120,10 @@ namespace SprintZeroSpriteDrawing
             keyBoardCommand.Add(Keys.B, new ICommand(BBlock));
             keyBoardCommand.Add(Keys.H, new ICommand(IBlock));
 
+            
+            #endregion
 
-          /* 
-            keyboardController.UpdateBinding(Keys.Y, MarioCommand.SetPowerup(1),BindingType.PRESSED);
-            keyboardController.UpdateBinding(Keys.U, mCommand.SetPowerup(2), BindingType.PRESSED);
-            keyboardController.UpdateBinding(Keys.I, MarioCommand.SetPowerup(3), BindingType.PRESSED);
-            keyboardController.UpdateBinding(Keys.O, MarioCommand.SetPowerup(4), BindingType.PRESSED);
 
-            keyBoardCommand.Add(Keys.W, MarioCommand.SetAction(1), BindingType.PRESSED);
-            keyBoardCommand.Add(Keys.Up, MarioCommand.SetAction(1), BindingType.PRESSED);
-
-            keyBoardCommand.Add(Keys.S, MarioCommand.SetAction(1), BindingType.PRESSED);
-            keyBoardCommand.Add(Keys.Down, MarioCommand.SetAction(1), BindingType.PRESSED);
-
-            keyBoardCommand.Add(Keys.A, MarioCommand.SetAction(1), BindingType.PRESSED);
-            keyBoardCommand.Add(Keys.Left, MarioCommand.SetAction(1), BindingType.PRESSED);
-
-            keyBoardCommand.Add(Keys.D, MarioCommand.SetAction(1), BindingType.PRESSED);
-            keyBoardCommand.Add(Keys.Right, MarioCommand.SetAction(1), BindingType.PRESSED);
-          */
 
             gamepadController.UpdateBinding(Buttons.Start, new IntCmd(new KeyValuePair<Action<int>, int>(ExitWithCode, 0)), BindingType.PRESSED);
 
@@ -186,6 +171,23 @@ namespace SprintZeroSpriteDrawing
             Player = (Mario)MarioSpriteFactory.getSpriteFactory().createMario(new Vector2(300, 300));
             spriteList.Add("SmallMario/SmallIdle", Player);
 
+            keyboardController.UpdateBinding(Keys.Y, new IntCmd(new KeyValuePair<Action<int>, int>(Player.SetPowerup, 1)), BindingType.PRESSED);
+            keyboardController.UpdateBinding(Keys.U, new IntCmd(new KeyValuePair<Action<int>, int>(Player.SetPowerup, 2)), BindingType.PRESSED);
+            keyboardController.UpdateBinding(Keys.I, new IntCmd(new KeyValuePair<Action<int>, int>(Player.SetPowerup, 3)), BindingType.PRESSED);
+            keyboardController.UpdateBinding(Keys.O, new IntCmd(new KeyValuePair<Action<int>, int>(Player.SetPowerup, 4)), BindingType.PRESSED);
+
+            keyboardController.UpdateBinding(Keys.W, new IntCmd(new KeyValuePair<Action<int>, int>(Player.SetAction, 3)), BindingType.PRESSED);
+            keyboardController.UpdateBinding(Keys.Up, new IntCmd(new KeyValuePair<Action<int>, int>(Player.SetAction, 3)), BindingType.PRESSED);
+
+            keyboardController.UpdateBinding(Keys.S, new IntCmd(new KeyValuePair<Action<int>, int>(Player.SetAction, 4)), BindingType.PRESSED);
+            keyboardController.UpdateBinding(Keys.Down, new IntCmd(new KeyValuePair<Action<int>, int>(Player.SetAction, 4)), BindingType.PRESSED);
+
+            keyboardController.UpdateBinding(Keys.A, new IntCmd(new KeyValuePair<Action<int>, int>(Player.SetAction, 1)), BindingType.PRESSED);
+            keyboardController.UpdateBinding(Keys.Left, new IntCmd(new KeyValuePair<Action<int>, int>(Player.SetAction, 1)), BindingType.PRESSED);
+
+            keyboardController.UpdateBinding(Keys.D, new IntCmd(new KeyValuePair<Action<int>, int>(Player.SetAction, 1)), BindingType.PRESSED);
+            keyboardController.UpdateBinding(Keys.Right, new IntCmd(new KeyValuePair<Action<int>, int>(Player.SetAction, 1)), BindingType.PRESSED);
+
             //Starting the sprite batch on our new graphics device
             //move init and loading of textures?
             sBatch = new SpriteBatch(GraphicsDevice);
@@ -209,6 +211,8 @@ namespace SprintZeroSpriteDrawing
                 spriteEntry.Value.Update();
             }
 
+            Player.ChangeState();
+
             base.Update(gameTime);
         }
 
@@ -223,7 +227,7 @@ namespace SprintZeroSpriteDrawing
                 spriteEntry.Value.Draw(sBatch);
             }
             //Write text onto the screen in a nice method
-            sBatch.DrawString(HUDFont, "W/A: non-moving, non-animated\n E/B: non-moving, animated\n R/X: moving, non-animated\n T/Y: moving, animated\n Q/Start: quit", new Vector2(50, 0), Color.Black);
+            //sBatch.DrawString(HUDFont, "W/A: non-moving, non-animated\n E/B: non-moving, animated\n R/X: moving, non-animated\n T/Y: moving, animated\n Q/Start: quit", new Vector2(50, 0), Color.Black);
             sBatch.End();
 
             // TODO: Add your drawing code here
