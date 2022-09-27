@@ -37,6 +37,16 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
                 FrameSize = new Vector2(nSprite.Width / SheetSize.X, nSprite.Height / SheetSize.Y);
         }
 
+        public void SetSprite(Texture2D nSprite)
+        {
+            Sprite = nSprite;
+            FrameSize = new Vector2(nSprite.Width / SheetSize.X, nSprite.Height / SheetSize.Y);
+        }
+
+        public int NextFrame()
+        {
+            return Frame++;
+        }
 		
 
 		public int Draw(SpriteBatch batch)
@@ -72,5 +82,20 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
 		{
 			//Stuff and Things
 		}
-	}
+
+        public void MoveSprite(Vector2 displacement)
+        {
+            Pos = Vector2.Add(Pos, displacement);
+        }
+        public void MoveX(int pixels)
+        {
+            Pos = Vector2.Add(Pos, new Vector2(pixels, 0));
+        }
+        public void MoveY(int pixels)
+        {
+            Pos = Vector2.Add(Pos, new Vector2(0, pixels));
+        }
+        
+        public void Trigger() { }
+    }
 }

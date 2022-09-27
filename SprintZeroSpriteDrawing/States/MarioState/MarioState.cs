@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using SprintZeroSpriteDrawing.Interfaces;
 using SprintZeroSpriteDrawing.Sprites.MarioActionSprites;
+using SprintZeroSpriteDrawing.Sprites.MarioSprites;
 using SprintZeroSpriteDrawing.Sprites.ObstacleSprites;
 using System;
 using System.Collections.Generic;
@@ -16,12 +17,12 @@ namespace SprintZeroSpriteDrawing.States.MarioState
 		public ISprite sprite;
 
 		public Tuple<int,int> state { get; set; }
-		private static MarioState mario;
+		public Vector2 nPos;
 
 
 		public  MarioState()
         {
-			//this.sprite = MarioSpriteFactory.getSpriteFactory().CreateMario(new Vector2(300, 300));
+			this.sprite =  MarioSpriteFactory.getSpriteFactory().createMario(nPos);
 		}
 
 
