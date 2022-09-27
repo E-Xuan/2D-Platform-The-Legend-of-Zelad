@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SprintZeroSpriteDrawing.Interfaces;
+using SprintZeroSpriteDrawing.Sprites.MarioActionSprites;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -97,5 +98,17 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
         }
         
         public void Trigger() { }
+
+        public void SetPowerup(int powerup)
+        {
+            MarioSpriteFactory.getSpriteFactory().State.powerup = powerup;
+
+        }
+        public void SetAction(int action)
+        {
+            MarioSpriteFactory.getSpriteFactory().State.action = action;
+        }
     }
+
+   
 }
