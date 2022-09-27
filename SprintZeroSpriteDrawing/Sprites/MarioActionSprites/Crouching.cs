@@ -41,5 +41,16 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioActionSprites
 		{
 			throw new NotImplementedException();
 		}
+        public void Trigger() { }
+
+		public void MoveY(int x)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void MoveX(int x)
+		{
+			throw new NotImplementedException();
+		}
 	}
 }

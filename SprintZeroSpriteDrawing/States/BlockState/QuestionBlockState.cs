@@ -27,7 +27,7 @@ namespace SprintZeroSpriteDrawing.States.BlockState
         {
             if (triggered == false)
             {
-                /*Need to a small bump up*/
+                this.sprite = BlockSpriteFactory.getFactory().CreateUsedBlock(nPos);
                 triggered = true;
             }
         }

@@ -89,5 +89,6 @@ namespace SprintZeroSpriteDrawing.Sprites.ItemSprites
         {
             IsVis = !IsVis;
         }
+        public void Trigger() { }
     }
 }

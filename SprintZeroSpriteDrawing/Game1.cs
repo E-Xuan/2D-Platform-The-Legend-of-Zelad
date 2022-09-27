@@ -122,6 +122,7 @@ namespace SprintZeroSpriteDrawing
 
             #region Command Mapping
             keyboardController.UpdateBinding(Keys.Q, new IntCmd(new KeyValuePair<Action<int>, int>(ExitWithCode, 0)), BindingType.PRESSED);
+            //keyboardController.UpdateBinding(Keys.I, new CmdTogVis(QBlock), BindingType.PRESSED); 
             keyBoardCommand.Add(Keys.B, new ICommand(BBlock));
             keyBoardCommand.Add(Keys.H, new ICommand(IBlock));
 
@@ -155,14 +156,19 @@ namespace SprintZeroSpriteDrawing
             //ItemSpriteFactory.Sprite.LoadContent(Content);
 
             BlockSpriteFactory.getFactory().LoadContent(Content);
-            BBlock = (BrickBlock)BlockSpriteFactory.getFactory().CreateBrickBlock(new Vector2(500, 500));
+            BBlock = (BrickBlock)BlockSpriteFactory.getFactory().CreateBrickBlock(new Vector2(300, 500));
             spriteList.Add("Obstacles/BrickBlock(Overworld)", BBlock);
             QBlock = (QuestionBlock)BlockSpriteFactory.getFactory().CreateQuestionBlock(new Vector2(400, 500));
             spriteList.Add("Obstacles/QuestionBlock(Overworld)", QBlock);
-            IBlock = (InvisibleBlock)BlockSpriteFactory.getFactory().CreateHiddenBlock(new Vector2(400, 600));
+            IBlock = (InvisibleBlock)BlockSpriteFactory.getFactory().CreateHiddenBlock(new Vector2(600, 500));
             spriteList.Add("Obstacles/InvisibleBlock", IBlock);
-            UBlock = (UsedBlock)BlockSpriteFactory.getFactory().CreateUsedBlock(new Vector2(500, 400));
+            UBlock = (UsedBlock)BlockSpriteFactory.getFactory().CreateUsedBlock(new Vector2(500, 500));
             spriteList.Add("Obstacles/UsedBlock", UBlock);
+
+            keyboardController.UpdateBinding(Keys.I, new QBlockCmd(QBlock), BindingType.PRESSED); /*NOT WORK*/
+
+
+
 
             //Starting the sprite batch on our new graphics device
             //move init and loading of textures?
