@@ -106,9 +106,9 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioActionSprites
 
             
             if (State.powerup == 1 && State.action == 1) 
-                {
-                    spriteSheet = SmallRunningSpriteSheet;  
-                }
+            {
+                spriteSheet = SmallRunningSpriteSheet;  
+            }
             else if(State.powerup == 1 && State.action == 2)
             {
                 spriteSheet = SmallIdleSpriteSheet;
