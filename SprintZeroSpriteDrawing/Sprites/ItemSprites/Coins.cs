@@ -25,7 +25,7 @@ namespace SprintZeroSpriteDrawing.Sprites.ItemSprites
         private Vector2 FrameSize;
         public Coins(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos)
         {
-            IsVis = true;
+            //IsVis = true;
             SubframeLimit = 20;
             AutoFrame = true;
             Sprite = nSprite;

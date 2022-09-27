@@ -27,7 +27,7 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
 
         public BrickBlock(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos)
         {
-            //IsVis = true;
+            IsVis = true;
             SubframeLimit = 20;
             AutoFrame = true;
             Sprite = nSprite;

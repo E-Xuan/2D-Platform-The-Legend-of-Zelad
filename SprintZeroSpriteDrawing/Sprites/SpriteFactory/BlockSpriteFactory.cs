@@ -20,10 +20,15 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         public Texture2D UsedBlockSpriteSheet;
         public Texture2D HiddenBlockSpriteSheet;
 
-        private static BlockSpriteFactory sprite = new BlockSpriteFactory();
-        public static BlockSpriteFactory Sprite
+        private static BlockSpriteFactory sprite;
+
+        public static BlockSpriteFactory getFactory() 
         {
-            get { return sprite; }
+            if (sprite == null)
+            {
+                sprite = new BlockSpriteFactory();
+            }
+            return sprite;
         }
 
         public void LoadContent(ContentManager content)
@@ -34,9 +39,9 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
             QuestionBlockSpriteSheet = content.Load<Texture2D>("Obstacles/QuestionBlock(Overworld)");
         }
 
-        public ISprite CreateBrickBlock()
+        public ISprite CreateBrickBlock(Vector2 nPos)
         {
-            return new BrickBlock(BrickBlockSpriteSheet, SheetSize, nPos);
+            return new BrickBlock(BrickBlockSpriteSheet, new Vector2(1,1), nPos);
         }
         public ISprite CreateQuestionBlock()
         {

@@ -18,7 +18,7 @@ namespace SprintZeroSpriteDrawing.States.BlockState
 
         public HiddenBlockState()
         {
-            this.sprite = BlockSpriteFactory.Sprite.CreateHiddenBlock();
+            this.sprite = BlockSpriteFactory.getFactory().CreateHiddenBlock();
             triggered = false;
         }
 
@@ -26,7 +26,7 @@ namespace SprintZeroSpriteDrawing.States.BlockState
         {
             if (triggered == false)
             {
-                this.sprite = BlockSpriteFactory.Sprite.CreateBrickBlock();
+                this.sprite = BlockSpriteFactory.getFactory().CreateBrickBlock();
                 /*Needs a bump*/
                 triggered = true;
             }

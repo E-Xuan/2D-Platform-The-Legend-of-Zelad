@@ -84,8 +84,8 @@ namespace SprintZeroSpriteDrawing
         {
             keyboardController = new KeyboardController();
             gamepadController = new GamepadController();
-            _graphics.PreferredBackBufferWidth = 1920;
-            _graphics.PreferredBackBufferHeight = 1080;
+            _graphics.PreferredBackBufferWidth = 640;
+            _graphics.PreferredBackBufferHeight = 320;
             _graphics.ApplyChanges();
 
             #region sprites
@@ -105,14 +105,12 @@ namespace SprintZeroSpriteDrawing
 
             #region obstacle sprites
 
-            BBlock = new BrickBlock(null, new Vector2(1, 1), new Vector2(30, 10));
             QBlock = new QuestionBlock(null, new Vector2(2,2), new Vector2(30, 30));
             HitQBlock = new QuestionBlock(null, new Vector2(1,1), new Vector2(30,110));
             SBlock = new StairBlock(null, new Vector2(1,1), new Vector2(30,50));
-            IBlock = new InvisibleBlock(null, new Vector2(1,1), new Vector2(30,70));
+            IBlock = new InvisibleBlock(null, new Vector2(1,1), new Vector2(30,70)); 
             GBlock = new GroundBlock(null, new Vector2(1,1), new Vector2(30,90));
 
-            spriteList.Add("Obstacles/BrickBlock(Overworld)", BBlock);
             spriteList.Add("Obstacles/QuestionBlock(Overworld)", QBlock);
             spriteList.Add("Obstacles/HitQuestionBlock(Overworld)", HitQBlock);
             spriteList.Add("Obstacles/StairBlock", SBlock);
@@ -156,7 +154,9 @@ namespace SprintZeroSpriteDrawing
             //Loading the images, and creating the sprites too
             ItemSpriteFactory.Sprite.LoadContent(Content);
 
-            BlockSpriteFactory.Sprite.LoadContent(Content);
+            BlockSpriteFactory.getFactory().LoadContent(Content);
+            BBlock = (BrickBlock)BlockSpriteFactory.getFactory().CreateBrickBlock(new Vector2(500, 500));
+            spriteList.Add("Obstacles/BrickBlock(Overworld)", BBlock);
 
 
 

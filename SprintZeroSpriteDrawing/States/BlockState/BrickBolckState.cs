@@ -18,7 +18,7 @@ namespace SprintZeroSpriteDrawing.States.BlockState
         
         public BrickBolckState()
         {
-            this.sprite = BlockSpriteFactory.Sprite.CreateBrickBlock();
+            this.sprite = BlockSpriteFactory.getFactory().CreateBrickBlock();
             triggered = false;
         }
 
