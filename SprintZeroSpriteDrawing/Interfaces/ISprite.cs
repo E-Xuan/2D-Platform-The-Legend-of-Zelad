@@ -26,7 +26,6 @@ namespace SprintZeroSpriteDrawing.Interfaces
         public void Update();
         public void SetVis(int nIsVis);
         public void TogVis(int nIsVis);
-        public void Trigger();/*Not working, my ideal state would be that all of the isprites could use this method for state transition, but i failed*/
         public void MoveY(int x);
         public void MoveX(int x);
 

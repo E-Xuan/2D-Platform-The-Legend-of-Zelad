@@ -23,7 +23,7 @@ namespace SprintZeroSpriteDrawing.States.BlockState
             triggered = false;
         }
 
-        public void BeTriggered()
+        public void Collide()
         {
             if(triggered == false)
             {

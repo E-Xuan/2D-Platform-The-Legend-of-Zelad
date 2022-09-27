@@ -12,7 +12,7 @@ namespace SprintZeroSpriteDrawing.Commands
         public override void Execute()
         {
             
-            ((QuestionBlock)Ref).Trigger();
+            ((QuestionBlock)Ref).Collide();
         }
        
     }

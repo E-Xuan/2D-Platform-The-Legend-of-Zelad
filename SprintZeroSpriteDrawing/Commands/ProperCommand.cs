@@ -10,11 +10,11 @@ namespace SprintZeroSpriteDrawing.Commands
 {
     class CmdTogVis : ICommand
     {
-        public CmdTogVis(QuestionBolckState nRef) : base(nRef) { }
+        public CmdTogVis(QuestionBlockState nRef) : base(nRef) { }
 
         public override void Execute()
         {
-            ((ISprite)Ref).Trigger();
+            ((ISprite)Ref).TogVis(0);
         }
     }
 }

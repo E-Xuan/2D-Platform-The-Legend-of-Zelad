@@ -8,11 +8,15 @@ using System.Threading.Tasks;
 
 namespace SprintZeroSpriteDrawing.Interfaces
 {
+    public enum State
+    {
+        UNTAPPED,
+        TAPPED
+    }
     public interface IBlockState
     {
-        bool Used { get; }
-        void BeTriggered();
+        void Collide();
         void Update();
-        void Draw(SpriteBatch spriteBatch, Vector2 location);
+        //State GetState();
     }
 }

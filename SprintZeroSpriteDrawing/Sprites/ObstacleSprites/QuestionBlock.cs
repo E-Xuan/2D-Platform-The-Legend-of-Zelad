@@ -25,9 +25,7 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
 
         public int width;
         public int height;
-        public QuestionBolckState QState;
-        public bool Triggered = false;
-            //{ get { return this.QState.Used; } }
+        public QuestionBlockState QState;
 
         public QuestionBlock(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos)
         {
@@ -41,15 +39,13 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
             if (nSprite != null)
                 FrameSize = new Vector2(nSprite.Width / SheetSize.X, nSprite.Height / SheetSize.Y);
         }
-        public void Trigger()
+        public void Collide()
         {
-            if (Triggered)
+            QState.Collide();
+            if (QState.GetState() == State.TAPPED)
             {
-                return; //return nothing if it was already triggered
+                //Sprite.
             }
-
-            QState.BeTriggered();
-
         }
 
         public void SetSprite(Texture2D nSprite)

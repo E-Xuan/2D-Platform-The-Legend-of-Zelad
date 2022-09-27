@@ -50,16 +50,7 @@ namespace SprintZeroSpriteDrawing
         OneUPMushroom UPMushroom;
         Starman Star;
         #endregion
-
-        #region Blocks
-        BrickBlock BBlock;
-        QuestionBlock QBlock;
-        QuestionBlock HitQBlock;
-        InvisibleBlock IBlock;
-        StairBlock SBlock;
-        GroundBlock GBlock;
-        UsedBlock UBlock;
-        #endregion
+        
 
         #region Mario States
         
@@ -98,15 +89,11 @@ namespace SprintZeroSpriteDrawing
             #region sprites
 
             #region obstacle sprites
-         
-           // HitQBlock = new QuestionBlock(null, new Vector2(1,1), new Vector2(30,110));
-            SBlock = new StairBlock(null, new Vector2(1,1), new Vector2(30,50));
-            GBlock = new GroundBlock(null, new Vector2(1,1), new Vector2(30,90));
 
-            
-           // spriteList.Add("Obstacles/HitQuestionBlock(Overworld)", HitQBlock);
-            spriteList.Add("Obstacles/StairBlock", SBlock);
-            spriteList.Add("Obstacles/GroundBlock(Overworld)", GBlock);
+
+            // spriteList.Add("Obstacles/HitQuestionBlock(Overworld)", HitQBlock);
+            spriteList.Add("Obstacles/StairBlock", new StairBlock(null, new Vector2(1, 1), new Vector2(30, 50)));
+            spriteList.Add("Obstacles/GroundBlock(Overworld)", new GroundBlock(null, new Vector2(1, 1), new Vector2(30, 90)));
             #endregion
 
             //MarioSpriteFactory.getSpriteFactory().State
@@ -116,8 +103,8 @@ namespace SprintZeroSpriteDrawing
 
             #region Command Mapping
             keyboardController.UpdateBinding(Keys.Q, new IntCmd(new KeyValuePair<Action<int>, int>(ExitWithCode, 0)), BindingType.PRESSED);
-            keyBoardCommand.Add(Keys.B, new ICommand(BBlock));
-            keyBoardCommand.Add(Keys.H, new ICommand(IBlock));
+            //keyBoardCommand.Add(Keys.B, new ICommand(BBlock));
+            //keyBoardCommand.Add(Keys.H, new ICommand(IBlock));
 
             
             #endregion
@@ -135,32 +122,22 @@ namespace SprintZeroSpriteDrawing
         protected override void LoadContent()
         {
             //Loading the images, and creating the sprites too
-            //ItemSpriteFactory.Sprite.LoadContent(Content);
 
             #region ItemContent
             ItemSpriteFactory.getFactory().LoadContent(Content);
-            FireFlower = (FireFlower)ItemSpriteFactory.getFactory().createFlower(new Vector2(4, 2), new Vector2(250, 200));
-            spriteList.Add("Items/FireFlower", FireFlower);
-            Coin = (Coins)ItemSpriteFactory.getFactory().createCoin(new Vector2(2, 2), new Vector2(350, 200));
-            spriteList.Add("Items/Coins", Coin);
-            SMushroom = (SuperMushroom)ItemSpriteFactory.getFactory().createSMushroom(new Vector2(1, 1), new Vector2(450, 200));
-            spriteList.Add("Items/SuperMushroom", SMushroom);
-            UPMushroom = (OneUPMushroom)ItemSpriteFactory.getFactory().createUPMushroom(new Vector2(1, 1), new Vector2(550, 200));
-            spriteList.Add("Items/1UPMushroom", UPMushroom);
-            Star = (Starman)ItemSpriteFactory.getFactory().createStar(new Vector2(2, 2), new Vector2(650, 200));
-            spriteList.Add("Items/Starman", Star);
+            spriteList.Add("Items/FireFlower", ItemSpriteFactory.getFactory().createFlower(new Vector2(4, 2), new Vector2(250, 200)));
+            spriteList.Add("Items/Coins", ItemSpriteFactory.getFactory().createCoin(new Vector2(2, 2), new Vector2(350, 200)));
+            spriteList.Add("Items/SuperMushroom", ItemSpriteFactory.getFactory().createSMushroom(new Vector2(1, 1), new Vector2(450, 200)));
+            spriteList.Add("Items/1UPMushroom", ItemSpriteFactory.getFactory().createUPMushroom(new Vector2(1, 1), new Vector2(550, 200)));
+            spriteList.Add("Items/Starman", ItemSpriteFactory.getFactory().createStar(new Vector2(2, 2), new Vector2(650, 200)));
             #endregion
 
             #region BlockContent
             BlockSpriteFactory.getFactory().LoadContent(Content);
-            BBlock = (BrickBlock)BlockSpriteFactory.getFactory().CreateBrickBlock(new Vector2(300, 500));
-            spriteList.Add("Obstacles/BrickBlock(Overworld)", BBlock);
-            QBlock = (QuestionBlock)BlockSpriteFactory.getFactory().CreateQuestionBlock(new Vector2(400, 500));
-            spriteList.Add("Obstacles/QuestionBlock(Overworld)", QBlock);
-            IBlock = (InvisibleBlock)BlockSpriteFactory.getFactory().CreateHiddenBlock(new Vector2(600, 500));
-            spriteList.Add("Obstacles/InvisibleBlock", IBlock);
-            UBlock = (UsedBlock)BlockSpriteFactory.getFactory().CreateUsedBlock(new Vector2(500, 500));
-            spriteList.Add("Obstacles/UsedBlock", UBlock);
+            spriteList.Add("Obstacles/BrickBlock(Overworld)", BlockSpriteFactory.getFactory().CreateBrickBlock(new Vector2(300, 500)));
+            spriteList.Add("Obstacles/QuestionBlock(Overworld)", BlockSpriteFactory.getFactory().CreateQuestionBlock(new Vector2(400, 500)));
+            spriteList.Add("Obstacles/InvisibleBlock", BlockSpriteFactory.getFactory().CreateHiddenBlock(new Vector2(600, 500)));
+            spriteList.Add("Obstacles/UsedBlock", BlockSpriteFactory.getFactory().CreateUsedBlock(new Vector2(500, 500)));
             #endregion
 
             #region EnemyContent
@@ -172,11 +149,10 @@ namespace SprintZeroSpriteDrawing
 
             #region MarioContent
             MarioSpriteFactory.getSpriteFactory().LoadContent(Content);
-            Player = (Mario)MarioSpriteFactory.getSpriteFactory().createMario(new Vector2(300, 300));
-            spriteList.Add("SmallMario/SmallIdle", Player);
+            spriteList.Add("SmallMario/SmallIdle", MarioSpriteFactory.getSpriteFactory().createMario(new Vector2(300, 300)));
             #endregion
 
-            keyboardController.UpdateBinding(Keys.I, new QBlockCmd(QBlock), BindingType.PRESSED); /*NOT WORK*/
+            //keyboardController.UpdateBinding(Keys.I, new QBlockCmd(QBlock), BindingType.PRESSED); /*NOT WORK*/
             /*Could be used after states for Mario has been setted up*/
 
             keyboardController.UpdateBinding(Keys.A, new IntCmd(new KeyValuePair<Action<int>, int>(Player.MoveX, -10)), BindingType.HELD);
@@ -201,7 +177,7 @@ namespace SprintZeroSpriteDrawing
             keyboardController.UpdateBinding(Keys.Right,
                 new IntCmd(new KeyValuePair<Action<int>, int>(Player.SetAction, 1)), BindingType.PRESSED);
 
-            keyboardController.UpdateBinding(Keys.K, new QBlockCmd(QBlock), BindingType.PRESSED);
+            //keyboardController.UpdateBinding(Keys.K, new QBlockCmd(QBlock), BindingType.PRESSED);
 
             //Starting the sprite batch on our new graphics device
             //move init and loading of textures?
