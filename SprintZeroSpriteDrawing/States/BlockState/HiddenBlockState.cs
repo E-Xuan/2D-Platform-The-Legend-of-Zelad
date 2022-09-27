@@ -14,11 +14,12 @@ namespace SprintZeroSpriteDrawing.States.BlockState
     {
         public ISprite sprite;
         public bool triggered;
+        public Vector2 nPos;
         public bool Used { get { return triggered; } }
 
         public HiddenBlockState()
         {
-            this.sprite = BlockSpriteFactory.getFactory().CreateHiddenBlock();
+            this.sprite = BlockSpriteFactory.getFactory().CreateHiddenBlock(nPos);
             triggered = false;
         }
 
@@ -26,7 +27,7 @@ namespace SprintZeroSpriteDrawing.States.BlockState
         {
             if (triggered == false)
             {
-                this.sprite = BlockSpriteFactory.getFactory().CreateBrickBlock();
+                this.sprite = BlockSpriteFactory.getFactory().CreateBrickBlock(nPos);
                 /*Needs a bump*/
                 triggered = true;
             }

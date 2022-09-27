@@ -10,16 +10,16 @@ using System.Threading.Tasks;
 
 namespace SprintZeroSpriteDrawing.States.BlockState
 {
-    public class QuestionBolckState : IBlockState
+    public class UsedBolckState : IBlockState
     {
         public ISprite sprite;
         public bool triggered;
         public Vector2 nPos;
         public bool Used { get { return triggered; } }
 
-        public QuestionBolckState()
+        public UsedBolckState()
         {
-            this.sprite = BlockSpriteFactory.getFactory().CreateQuestionBlock(nPos);
+            this.sprite = BlockSpriteFactory.getFactory().CreateUsedBlock(nPos);
             triggered = false;
         }
 

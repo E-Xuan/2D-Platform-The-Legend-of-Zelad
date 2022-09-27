@@ -14,11 +14,12 @@ namespace SprintZeroSpriteDrawing.States.BlockState
     {
         public ISprite sprite;
         public bool triggered;
+        public Vector2 nPos;
         public bool Used { get { return triggered; } }
         
         public BrickBolckState()
         {
-            this.sprite = BlockSpriteFactory.getFactory().CreateBrickBlock();
+            this.sprite = BlockSpriteFactory.getFactory().CreateBrickBlock(nPos);
             triggered = false;
         }
 

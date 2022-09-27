@@ -43,13 +43,17 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         {
             return new BrickBlock(BrickBlockSpriteSheet, new Vector2(1,1), nPos);
         }
-        public ISprite CreateQuestionBlock()
+        public ISprite CreateQuestionBlock(Vector2 nPos)
         {
-            return new QuestionBlock(QuestionBlockSpriteSheet, SheetSize, nPos);
+            return new QuestionBlock(QuestionBlockSpriteSheet, new Vector2(2, 2), nPos);
         }
-        public ISprite CreateHiddenBlock()
+        public ISprite CreateHiddenBlock(Vector2 nPos)
         {
-            return new InvisibleBlock(HiddenBlockSpriteSheet, SheetSize, nPos); 
+            return new InvisibleBlock(HiddenBlockSpriteSheet, new Vector2(1, 1), nPos); 
+        }
+        public ISprite CreateUsedBlock(Vector2 nPos)
+        {
+            return new UsedBlock(UsedBlockSpriteSheet, new Vector2(1, 1), nPos);
         }
     }
 }

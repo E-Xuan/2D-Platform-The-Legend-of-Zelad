@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
 {
-    public class QuestionBlock : ISprite
+    public class UsedBlock : ISprite
     {
         public bool IsVis { get; set; }
         public Texture2D Sprite { get; set; }
@@ -25,9 +25,9 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         public int width;
         public int height;
 
-        public QuestionBlock(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos)
+        public UsedBlock(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos)
         {
-            //IsVis = true;
+            IsVis = true;
             SubframeLimit = 20;
             AutoFrame = true;
             Sprite = nSprite;
