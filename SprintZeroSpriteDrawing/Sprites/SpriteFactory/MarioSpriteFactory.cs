@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using SprintZeroSpriteDrawing.Interfaces;
+using SprintZeroSpriteDrawing.Sprites.MarioSprites;
 using SprintZeroSpriteDrawing.Sprites.ObstacleSprites;
 using System;
 using System.Collections.Generic;
@@ -60,7 +61,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioActionSprites
         
 
         private static MarioSpriteFactory sprite;
-        public MarioSpriteFactory getSpriteFactory()
+        public static MarioSpriteFactory getSpriteFactory()
 		{
             if(sprite == null)
             {
@@ -69,7 +70,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioActionSprites
             return sprite;
 		}
 
-        void LoadContent(ContentManager content)
+         public void LoadContent(ContentManager content)
         {
             SmallRunningSpriteSheet = content.Load<Texture2D>("SmallMario/smallWalk");
             SmallJumpingSpriteSheet = content.Load<Texture2D>("SmallMario/smallJump");
@@ -88,13 +89,13 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioActionSprites
             DeadMarioSpriteSheet = content.Load<Texture2D>("SmallMario/smallDying");
         }
 
-       /* public ISprite createMario(Vector2 nPos)
+        public ISprite createMario(Vector2 nPos)
         {
-            //return new Mario(SmallIdleSpriteSheet, new Vector2(1, 1), nPos);
+            return new Mario(SmallIdleSpriteSheet, new Vector2(1, 1), nPos);
             
         }
 
-        */
+        
 
 	}
 }
