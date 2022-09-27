@@ -24,6 +24,7 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
 
         public InvisibleBlock(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos)
         {
+            IsVis = true;
             SubframeLimit = 20;
             AutoFrame = true;
             Sprite = nSprite;
@@ -87,5 +88,6 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         {
             IsVis = !IsVis;
         }
+        public void Trigger() { }
     }
 }

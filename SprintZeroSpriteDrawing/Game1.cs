@@ -16,6 +16,7 @@ using SprintZeroSpriteDrawing.Sprites.MarioPowerUpSprites;
 using System.Reflection.Metadata;
 
 using SprintZeroSpriteDrawing.Sprites.MarioActionSprites;
+using SprintZeroSpriteDrawing.States.BlockState;
 
 namespace SprintZeroSpriteDrawing
 {
@@ -56,6 +57,7 @@ namespace SprintZeroSpriteDrawing
         InvisibleBlock IBlock;
         StairBlock SBlock;
         GroundBlock GBlock;
+        UsedBlock UBlock;
         #endregion
 
         #region Mario States
@@ -86,8 +88,8 @@ namespace SprintZeroSpriteDrawing
         {
             keyboardController = new KeyboardController();
             gamepadController = new GamepadController();
-            _graphics.PreferredBackBufferWidth = 640;
-            _graphics.PreferredBackBufferHeight = 320;
+            _graphics.PreferredBackBufferWidth = 1920;
+            _graphics.PreferredBackBufferHeight = 1080;
             _graphics.ApplyChanges();
 
             #region sprites
@@ -107,16 +109,14 @@ namespace SprintZeroSpriteDrawing
 
             #region obstacle sprites
 
-            QBlock = new QuestionBlock(null, new Vector2(2,2), new Vector2(30, 30));
-            HitQBlock = new QuestionBlock(null, new Vector2(1,1), new Vector2(30,110));
+           
+           // HitQBlock = new QuestionBlock(null, new Vector2(1,1), new Vector2(30,110));
             SBlock = new StairBlock(null, new Vector2(1,1), new Vector2(30,50));
-            IBlock = new InvisibleBlock(null, new Vector2(1,1), new Vector2(30,70)); 
             GBlock = new GroundBlock(null, new Vector2(1,1), new Vector2(30,90));
 
-            spriteList.Add("Obstacles/QuestionBlock(Overworld)", QBlock);
-            spriteList.Add("Obstacles/HitQuestionBlock(Overworld)", HitQBlock);
+            
+           // spriteList.Add("Obstacles/HitQuestionBlock(Overworld)", HitQBlock);
             spriteList.Add("Obstacles/StairBlock", SBlock);
-            spriteList.Add("Obstacles/IBlock(Overworld)", IBlock);
             spriteList.Add("Obstacles/GroundBlock(Overworld)", GBlock);
             #endregion
 
@@ -124,6 +124,7 @@ namespace SprintZeroSpriteDrawing
 
             #region Command Mapping
             keyboardController.UpdateBinding(Keys.Q, new IntCmd(new KeyValuePair<Action<int>, int>(ExitWithCode, 0)), BindingType.PRESSED);
+            //keyboardController.UpdateBinding(Keys.I, new CmdTogVis(QBlock), BindingType.PRESSED); 
             keyBoardCommand.Add(Keys.B, new ICommand(BBlock));
             keyBoardCommand.Add(Keys.H, new ICommand(IBlock));
 
@@ -154,11 +155,20 @@ namespace SprintZeroSpriteDrawing
         protected override void LoadContent()
         {
             //Loading the images, and creating the sprites too
-            ItemSpriteFactory.Sprite.LoadContent(Content);
+            //ItemSpriteFactory.Sprite.LoadContent(Content);
 
             BlockSpriteFactory.getFactory().LoadContent(Content);
-            BBlock = (BrickBlock)BlockSpriteFactory.getFactory().CreateBrickBlock(new Vector2(500, 500));
+            BBlock = (BrickBlock)BlockSpriteFactory.getFactory().CreateBrickBlock(new Vector2(300, 500));
             spriteList.Add("Obstacles/BrickBlock(Overworld)", BBlock);
+            QBlock = (QuestionBlock)BlockSpriteFactory.getFactory().CreateQuestionBlock(new Vector2(400, 500));
+            spriteList.Add("Obstacles/QuestionBlock(Overworld)", QBlock);
+            IBlock = (InvisibleBlock)BlockSpriteFactory.getFactory().CreateHiddenBlock(new Vector2(600, 500));
+            spriteList.Add("Obstacles/InvisibleBlock", IBlock);
+            UBlock = (UsedBlock)BlockSpriteFactory.getFactory().CreateUsedBlock(new Vector2(500, 500));
+            spriteList.Add("Obstacles/UsedBlock", UBlock);
+
+            keyboardController.UpdateBinding(Keys.I, new QBlockCmd(QBlock), BindingType.PRESSED); /*NOT WORK*/
+
 
             //MarioSpriteFactory.getSpriteFactory().LoadContent(Content);
             //Player = (Mario)MarioSpriteFactory.getSpriteFactory().createMario(new Vector2(300, 300));

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SprintZeroSpriteDrawing.Interfaces;
+using SprintZeroSpriteDrawing.States.BlockState;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,6 @@ using System.Threading.Tasks;
 
 namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
 {
-
     public class QuestionBlock : ISprite
     {
         public bool IsVis { get; set; }
@@ -23,16 +23,33 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         private Vector2 SheetSize;
         private Vector2 FrameSize;
 
+        public int width;
+        public int height;
+        public QuestionBolckState QState;
+        public bool Triggered = false;
+            //{ get { return this.QState.Used; } }
+
         public QuestionBlock(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos)
         {
+            IsVis = true;
             SubframeLimit = 20;
             AutoFrame = true;
             Sprite = nSprite;
             Pos = nPos;
             SheetSize = nSheetSize;
-            LastFrame = (int)(SheetSize.X * SheetSize.Y);
+            LastFrame = (int)(SheetSize.X * SheetSize.Y) - 1;
             if (nSprite != null)
                 FrameSize = new Vector2(nSprite.Width / SheetSize.X, nSprite.Height / SheetSize.Y);
+        }
+        public void Trigger()
+        {
+            /*if (Triggered)
+            {
+                return; return nothing if it was already triggered
+            }
+
+            QState.BeTriggered();*/
+
         }
 
         public void SetSprite(Texture2D nSprite)

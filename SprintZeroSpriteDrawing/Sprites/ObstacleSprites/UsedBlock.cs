@@ -1,17 +1,15 @@
-﻿using SprintZeroSpriteDrawing.Interfaces;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SprintZeroSpriteDrawing.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-
-namespace SprintZeroSpriteDrawing.Sprites.ItemSprites
+namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
 {
-
-    /// <summary>
-    /// This is a moving, animated, sprite class that is
-    /// used to build the most complicated and visually interesting
-    /// sprites, such as the main character and complex enemies
-    /// </summary>
-    internal class FireFlower : ISprite
+    public class UsedBlock : ISprite
     {
         public bool IsVis { get; set; }
         public Texture2D Sprite { get; set; }
@@ -23,8 +21,13 @@ namespace SprintZeroSpriteDrawing.Sprites.ItemSprites
         private int LastFrame;
         private Vector2 SheetSize;
         private Vector2 FrameSize;
-        public FireFlower(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos)
+
+        public int width;
+        public int height;
+
+        public UsedBlock(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos)
         {
+            IsVis = true;
             SubframeLimit = 20;
             AutoFrame = true;
             Sprite = nSprite;
@@ -33,9 +36,8 @@ namespace SprintZeroSpriteDrawing.Sprites.ItemSprites
             LastFrame = (int)(SheetSize.X * SheetSize.Y);
             if (nSprite != null)
                 FrameSize = new Vector2(nSprite.Width / SheetSize.X, nSprite.Height / SheetSize.Y);
-            //IsVis = true;
-            AutoFrame = false;
         }
+
         public void SetSprite(Texture2D nSprite)
         {
             Sprite = nSprite;
