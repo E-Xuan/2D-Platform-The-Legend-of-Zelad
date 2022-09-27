@@ -187,6 +187,7 @@ namespace SprintZeroSpriteDrawing
 
             keyboardController.UpdateBinding(Keys.I, new QBlockCmd(QBlock), BindingType.PRESSED); /*NOT WORK*/
             /*Could be used after states for Mario has been setted up*/
+
             keyboardController.UpdateBinding(Keys.A, new IntCmd(new KeyValuePair<Action<int>, int>(Player.MoveX, -10)), BindingType.HELD);
             keyboardController.UpdateBinding(Keys.D, new IntCmd(new KeyValuePair<Action<int>, int>(Player.MoveX, 10)), BindingType.HELD);
 
@@ -228,7 +229,7 @@ namespace SprintZeroSpriteDrawing
                 spriteEntry.Value.Draw(sBatch);
             }
             //Write text onto the screen in a nice method
-            sBatch.DrawString(HUDFont, "W/A: non-moving, non-animated\n E/B: non-moving, animated\n R/X: moving, non-animated\n T/Y: moving, animated\n Q/Start: quit", new Vector2(50, 0), Color.Black);
+            sBatch.DrawString(HUDFont, "Q/Start: quit", new Vector2(50, 0), Color.Black);
             sBatch.End();
 
             // TODO: Add your drawing code here
