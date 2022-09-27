@@ -128,7 +128,6 @@ namespace SprintZeroSpriteDrawing
             keyBoardCommand.Add(Keys.H, new ICommand(IBlock));
 
             keyBoardCommand.Add(Keys.Y, new ICommand(SmallMario));
-            //keyBoardCommand.Add(Keys.Y, new ICommand(SmallMario));
             keyBoardCommand.Add(Keys.U, new ICommand(BigMario));
             keyBoardCommand.Add(Keys.I, new ICommand(FireMario));
             keyBoardCommand.Add(Keys.O, new ICommand(DeadMario));
@@ -141,11 +140,12 @@ namespace SprintZeroSpriteDrawing
 
             keyBoardCommand.Add(Keys.A, new ICommand(Running));
             keyBoardCommand.Add(Keys.Left, new ICommand(Running));
+
             keyBoardCommand.Add(Keys.D, new ICommand(Running));
             keyBoardCommand.Add(Keys.Right, new ICommand(Running));
 
-
             #endregion
+
             base.Initialize();
         }
 
