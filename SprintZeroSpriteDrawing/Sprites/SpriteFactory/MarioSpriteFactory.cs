@@ -96,13 +96,16 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioActionSprites
 
         public ISprite createMario(Vector2 nPos)
         {
-            return new Mario(swapSprite(MarioCommand.Execute(), swapSheetSize(), nPos);
+            return new Mario(swapSprite(), swapSheetSize(), nPos);
             
         }
 
-        public Texture2D swapSprite((int powerup, int action)State)
+        //(int powerup, int action) State
+        public Texture2D swapSprite()
         {
-            
+
+            State.powerup = 1;
+            State.action = 1;
             if (State.powerup == 1 && State.action == 1) 
                 {
                     spriteSheet = SmallRunningSpriteSheet;  
@@ -162,6 +165,8 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioActionSprites
 
         public Vector2 swapSheetSize()
         {
+            State.powerup = 1;
+            State.action = 1;
             if (State.powerup == 1 && State.action == 1)
             {
                 sheetSize = new Vector2(3,1);

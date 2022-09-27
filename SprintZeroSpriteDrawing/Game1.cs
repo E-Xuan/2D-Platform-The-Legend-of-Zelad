@@ -109,7 +109,8 @@ namespace SprintZeroSpriteDrawing
             spriteList.Add("Obstacles/GroundBlock(Overworld)", GBlock);
             #endregion
 
-            Player = new Mario(MarioSpriteFactory.getSpriteFactory().swapSprite(MarioSpriteFactory.getSpriteFactory().State), MarioSpriteFactory.getSpriteFactory().swapSheetSize(), new Vector2(300, 300));
+            //MarioSpriteFactory.getSpriteFactory().State
+            Player = new Mario(MarioSpriteFactory.getSpriteFactory().swapSprite(), MarioSpriteFactory.getSpriteFactory().swapSheetSize(), new Vector2(300, 300));
 
             #endregion
 
@@ -120,7 +121,7 @@ namespace SprintZeroSpriteDrawing
             keyBoardCommand.Add(Keys.H, new ICommand(IBlock));
 
 
-           
+          /* 
             keyboardController.UpdateBinding(Keys.Y, MarioCommand.SetPowerup(1),BindingType.PRESSED);
             keyboardController.UpdateBinding(Keys.U, mCommand.SetPowerup(2), BindingType.PRESSED);
             keyboardController.UpdateBinding(Keys.I, MarioCommand.SetPowerup(3), BindingType.PRESSED);
@@ -137,6 +138,7 @@ namespace SprintZeroSpriteDrawing
 
             keyBoardCommand.Add(Keys.D, MarioCommand.SetAction(1), BindingType.PRESSED);
             keyBoardCommand.Add(Keys.Right, MarioCommand.SetAction(1), BindingType.PRESSED);
+          */
 
             gamepadController.UpdateBinding(Buttons.Start, new IntCmd(new KeyValuePair<Action<int>, int>(ExitWithCode, 0)), BindingType.PRESSED);
 
@@ -144,6 +146,7 @@ namespace SprintZeroSpriteDrawing
 
             base.Initialize();
         }
+          
 
         protected override void LoadContent()
         {

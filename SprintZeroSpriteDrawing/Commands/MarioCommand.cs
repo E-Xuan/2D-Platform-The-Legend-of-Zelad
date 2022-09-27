@@ -17,8 +17,7 @@ namespace SprintZeroSpriteDrawing.Commands
         public override void Execute()
         {
             
-            ((Mario)Ref).SetPowerup();
-            ((Mario)Ref).SetAction();
+            
         }
 
         
