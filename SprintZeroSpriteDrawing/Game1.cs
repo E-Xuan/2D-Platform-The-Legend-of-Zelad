@@ -116,7 +116,6 @@ namespace SprintZeroSpriteDrawing
 
             #region Command Mapping
             keyboardController.UpdateBinding(Keys.Q, new IntCmd(new KeyValuePair<Action<int>, int>(ExitWithCode, 0)), BindingType.PRESSED);
-            //keyboardController.UpdateBinding(Keys.I, new CmdTogVis(QBlock), BindingType.PRESSED); 
             keyBoardCommand.Add(Keys.B, new ICommand(BBlock));
             keyBoardCommand.Add(Keys.H, new ICommand(IBlock));
 
@@ -164,6 +163,13 @@ namespace SprintZeroSpriteDrawing
             spriteList.Add("Obstacles/UsedBlock", UBlock);
             #endregion
 
+            #region EnemyContent
+            EnemySpriteFactory.getFactory().LoadContent(Content);
+            spriteList.Add("Goomba", EnemySpriteFactory.getFactory().createGoomba(new Vector2(100, 100)));
+            spriteList.Add("GreenKoopa", EnemySpriteFactory.getFactory().createGreenKoopa(new Vector2(200, 100)));
+            spriteList.Add("RedKoopa", EnemySpriteFactory.getFactory().createRedKoopa(new Vector2(300, 100)));
+            #endregion
+
             #region MarioContent
             MarioSpriteFactory.getSpriteFactory().LoadContent(Content);
             Player = (Mario)MarioSpriteFactory.getSpriteFactory().createMario(new Vector2(300, 300));
@@ -192,7 +198,10 @@ namespace SprintZeroSpriteDrawing
             keyboardController.UpdateBinding(Keys.Left, new IntCmd(new KeyValuePair<Action<int>, int>(Player.SetAction, 1)), BindingType.PRESSED);
 
             keyboardController.UpdateBinding(Keys.D, new IntCmd(new KeyValuePair<Action<int>, int>(Player.SetAction, 1)), BindingType.PRESSED);
-            keyboardController.UpdateBinding(Keys.Right, new IntCmd(new KeyValuePair<Action<int>, int>(Player.SetAction, 1)), BindingType.PRESSED);
+            keyboardController.UpdateBinding(Keys.Right,
+                new IntCmd(new KeyValuePair<Action<int>, int>(Player.SetAction, 1)), BindingType.PRESSED);
+
+            keyboardController.UpdateBinding(Keys.K, new QBlockCmd(QBlock), BindingType.PRESSED);
 
             //Starting the sprite batch on our new graphics device
             //move init and loading of textures?

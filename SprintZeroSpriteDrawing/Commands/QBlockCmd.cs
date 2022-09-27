@@ -12,7 +12,7 @@ namespace SprintZeroSpriteDrawing.Commands
         public override void Execute()
         {
             
-            ((QuestionBlock)Ref).TogVis(0);
+            ((QuestionBlock)Ref).Trigger();
         }
        
     }

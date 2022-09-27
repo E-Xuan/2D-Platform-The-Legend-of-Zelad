@@ -43,12 +43,12 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         }
         public void Trigger()
         {
-            /*if (Triggered)
+            if (Triggered)
             {
-                return; return nothing if it was already triggered
+                return; //return nothing if it was already triggered
             }
 
-            QState.BeTriggered();*/
+            QState.BeTriggered();
 
         }
 

@@ -18,26 +18,35 @@ namespace SprintZeroSpriteDrawing.Controllers
             previousState = GamePad.GetState(playerIndex);
         }
 
+        public bool PluggedIn()
+        {
+            return GamePad.GetState(playerIndex).IsConnected;
+        }
+
         public override void UpdateInput() {
-            GamePadState CurrentState = GamePad.GetState(playerIndex);
-            foreach (KeyValuePair<Buttons, ICommand> command in CommandBindingList[(int)BindingType.PRESSED])
+            if (PluggedIn())
             {
-                if (CurrentState.IsButtonDown(command.Key) && !previousState.IsButtonDown(command.Key))
-                    CommandBindingList[(int)BindingType.PRESSED][command.Key].Execute();
-            }
+                GamePadState CurrentState = GamePad.GetState(playerIndex);
+                foreach (KeyValuePair<Buttons, ICommand> command in CommandBindingList[(int)BindingType.PRESSED])
+                {
+                    if (CurrentState.IsButtonDown(command.Key) && !previousState.IsButtonDown(command.Key))
+                        CommandBindingList[(int)BindingType.PRESSED][command.Key].Execute();
+                }
 
-            foreach (KeyValuePair<Buttons, ICommand> command in CommandBindingList[(int)BindingType.HELD])
-            {
-                if (CurrentState.IsButtonDown(command.Key) && previousState.IsButtonDown(command.Key))
-                    CommandBindingList[(int)BindingType.HELD][command.Key].Execute();
-            }
+                foreach (KeyValuePair<Buttons, ICommand> command in CommandBindingList[(int)BindingType.HELD])
+                {
+                    if (CurrentState.IsButtonDown(command.Key) && previousState.IsButtonDown(command.Key))
+                        CommandBindingList[(int)BindingType.HELD][command.Key].Execute();
+                }
 
-            foreach (KeyValuePair<Buttons, ICommand> command in CommandBindingList[(int)BindingType.RELEASED])
-            {
-                if (!CurrentState.IsButtonDown(command.Key) && previousState.IsButtonDown(command.Key))
-                    CommandBindingList[(int)BindingType.RELEASED][command.Key].Execute();
+                foreach (KeyValuePair<Buttons, ICommand> command in CommandBindingList[(int)BindingType.RELEASED])
+                {
+                    if (!CurrentState.IsButtonDown(command.Key) && previousState.IsButtonDown(command.Key))
+                        CommandBindingList[(int)BindingType.RELEASED][command.Key].Execute();
+                }
+
+                previousState = CurrentState;
             }
-            previousState = CurrentState;
         }
     }
 }

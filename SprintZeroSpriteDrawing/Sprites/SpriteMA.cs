@@ -20,7 +20,8 @@ namespace SprintZeroSpriteDrawing.Sprites
         public int Subframe { get; set; }
         public int SubframeLimit { get; set; }
         public bool AutoFrame { get; set; }
-        private int LastFrame;
+        public int StartFrame { get; set; }
+        public int LastFrame { get; set; }
         private Vector2 SheetSize;
         private Vector2 FrameSize;
         public SpriteMA(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos)
@@ -30,6 +31,7 @@ namespace SprintZeroSpriteDrawing.Sprites
             Sprite = nSprite;
             Pos = nPos;
             SheetSize = nSheetSize;
+            StartFrame = 0;
             LastFrame = (int)(SheetSize.X * SheetSize.Y);
             if (nSprite != null)
                 FrameSize = new Vector2(nSprite.Width / SheetSize.X, nSprite.Height / SheetSize.Y);
@@ -54,10 +56,12 @@ namespace SprintZeroSpriteDrawing.Sprites
                 batch.Draw(Sprite, Pos, Rect, Color.White, 0, new Vector2(0, 0), 1, SpriteEffects.None, 0);
                 if (AutoFrame)
                     Subframe++;
-                if (Subframe == SubframeLimit)
+                if (Subframe >= SubframeLimit)
                 {
                     Subframe = 0;
-                    Frame = (Frame + 1) % LastFrame;
+                    Frame++;
+                    if (Frame >= LastFrame)
+                        Frame = StartFrame;
                 }
                 return Frame;
             }
