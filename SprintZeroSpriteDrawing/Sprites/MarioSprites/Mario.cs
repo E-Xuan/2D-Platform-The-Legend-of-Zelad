@@ -137,5 +137,28 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             }
         }
 
+        public void IncreaseAction(int action)
+        {
+            if(State.action == 2)
+            {
+                State.action = 3;
+            }
+            else if(State.action == 4)
+            {
+                State.action = 2;
+            }
+        }
+
+        public void DecreaseAction(int action)
+        {
+            if(State.action == 3)
+            {
+                State.action = 2;
+            }
+            else if(State.action == 2){
+                State.action = 4;
+            }
+        }
+
     }
 }
