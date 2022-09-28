@@ -19,6 +19,8 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         public Texture2D QuestionBlockSpriteSheet;
         public Texture2D UsedBlockSpriteSheet;
         public Texture2D HiddenBlockSpriteSheet;
+        public Texture2D GroundBlockSpriteSheet;
+        public Texture2D StairBlockSpriteSheet;
 
         private static BlockSpriteFactory sprite;
 
@@ -37,11 +39,25 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
             UsedBlockSpriteSheet = content.Load<Texture2D>("Obstacles/HitQuestionBlock(Overworld)");
             BrickBlockSpriteSheet = content.Load<Texture2D>("Obstacles/BrickBlock(Overworld)");
             QuestionBlockSpriteSheet = content.Load<Texture2D>("Obstacles/QuestionBlock(Overworld)");
+            GroundBlockSpriteSheet = content.Load<Texture2D>("Obstacles/GroundBlock(Overworld)");
+            StairBlockSpriteSheet = content.Load<Texture2D>("Obstacles/StairBlock");
         }
         
         public ISprite CreateBrickBlock(Vector2 nPos)
         {
             return new BrickBlock(BrickBlockSpriteSheet, new Vector2(1,1), nPos);
+        }
+        public ISprite CreateBrickBlockShard(Vector2 nPos)
+        {
+            return new BrickBlock(BrickBlockSpriteSheet, new Vector2(2, 2), nPos);
+        }
+        public ISprite CreateGroundBlock(Vector2 nPos)
+        {
+            return new GroundBlock(GroundBlockSpriteSheet, new Vector2(1, 1), nPos);
+        }
+        public ISprite CreateStairBlock(Vector2 nPos)
+        {
+            return new StairBlock(StairBlockSpriteSheet, new Vector2(1, 1), nPos);
         }
         public ISprite CreateQuestionBlock(Vector2 nPos)
         {

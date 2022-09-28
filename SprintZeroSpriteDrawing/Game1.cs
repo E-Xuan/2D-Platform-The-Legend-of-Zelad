@@ -92,8 +92,6 @@ namespace SprintZeroSpriteDrawing
 
 
             // spriteList.Add("Obstacles/HitQuestionBlock(Overworld)", HitQBlock);
-            spriteList.Add("Obstacles/StairBlock", new StairBlock(null, new Vector2(1, 1), new Vector2(30, 50)));
-            spriteList.Add("Obstacles/GroundBlock(Overworld)", new GroundBlock(null, new Vector2(1, 1), new Vector2(30, 90)));
             #endregion
             
 
@@ -128,7 +126,9 @@ namespace SprintZeroSpriteDrawing
 
             #region BlockContent
             BlockSpriteFactory.getFactory().LoadContent(Content);
-            spriteList.Add("Obstacles/BrickBlock(Overworld)", BlockSpriteFactory.getFactory().CreateBrickBlock(new Vector2(300, 500)));
+            spriteList.Add("Obstacles/StairBlock", BlockSpriteFactory.getFactory().CreateStairBlock(new Vector2(700, 500)));
+            spriteList.Add("Obstacles/GroundBlock(Overworld)", BlockSpriteFactory.getFactory().CreateGroundBlock(new Vector2(800, 500)));
+            spriteList.Add("BBlock", BlockSpriteFactory.getFactory().CreateBrickBlock(new Vector2(300, 500)));
             spriteList.Add("QBlock", BlockSpriteFactory.getFactory().CreateQuestionBlock(new Vector2(400, 500)));
             spriteList.Add("InvisibleBlock", BlockSpriteFactory.getFactory().CreateHiddenBlock(new Vector2(600, 500)));
             spriteList.Add("Obstacles/UsedBlock", BlockSpriteFactory.getFactory().CreateUsedBlock(new Vector2(500, 500)));
@@ -146,17 +146,11 @@ namespace SprintZeroSpriteDrawing
             spriteList.Add("Mario", MarioSpriteFactory.getSpriteFactory().createMario(new Vector2(300, 300)));
             #endregion
 
-            //keyboardController.UpdateBinding(Keys.I, new QBlockCmd(QBlock), BindingType.PRESSED); /*NOT WORK*/
-            /*Could be used after states for Mario has been setted up*/
-
             keyboardController.UpdateBinding(Keys.A, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).MoveAction, -1)), BindingType.PRESSED);
-            keyboardController.UpdateBinding(Keys.D, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).MoveAction, 1)), BindingType.PRESSED);
-
             keyboardController.UpdateBinding(Keys.Left, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).MoveAction, -1)), BindingType.PRESSED);
-            
-            
-            keyboardController.UpdateBinding(Keys.Right, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).MoveAction, 1)), BindingType.PRESSED);
 
+            keyboardController.UpdateBinding(Keys.D, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).MoveAction, 1)), BindingType.PRESSED);
+            keyboardController.UpdateBinding(Keys.Right, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).MoveAction, 1)), BindingType.PRESSED);
 
             keyboardController.UpdateBinding(Keys.Y, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).SetPowerup, 1)), BindingType.PRESSED);
             keyboardController.UpdateBinding(Keys.U, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).SetPowerup, 2)), BindingType.PRESSED);
@@ -168,16 +162,10 @@ namespace SprintZeroSpriteDrawing
            
             keyboardController.UpdateBinding(Keys.S, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).DecreaseAction, 4)), BindingType.PRESSED);
             keyboardController.UpdateBinding(Keys.Down, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).DecreaseAction, 4)), BindingType.PRESSED);
-            
-            keyboardController.UpdateBinding(Keys.A, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).SetAction, 1)), BindingType.PRESSED);
-            keyboardController.UpdateBinding(Keys.Left, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).SetAction, 1)), BindingType.PRESSED);         
-            
-            keyboardController.UpdateBinding(Keys.D, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).SetAction, 1)), BindingType.PRESSED);
-            keyboardController.UpdateBinding(Keys.Right, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).SetAction, 1)), BindingType.PRESSED);
-            
-            keyboardController.UpdateBinding(Keys.K, new QBlockCmd((QuestionBlock)spriteList["QBlock"]), BindingType.PRESSED);
-            
-            keyboardController.UpdateBinding(Keys.H, new IntCmd(new KeyValuePair<Action<int>, int>(((InvisibleBlock)spriteList["InvisibleBlock"]).Bump, 1)), BindingType.PRESSED);
+
+            keyboardController.UpdateBinding(Keys.B, new IntCmd(new KeyValuePair<Action<int>, int>(((Block)spriteList["BBlock"]).Bump, 1)), BindingType.PRESSED);
+            keyboardController.UpdateBinding(Keys.OemQuestion, new IntCmd(new KeyValuePair<Action<int>, int>(((Block)spriteList["QBlock"]).Bump, 1)), BindingType.PRESSED);
+            keyboardController.UpdateBinding(Keys.H, new IntCmd(new KeyValuePair<Action<int>, int>(((Block)spriteList["InvisibleBlock"]).Bump, 1)), BindingType.PRESSED);
            
             //Starting the sprite batch on our new graphics device
             //move init and loading of textures?
@@ -225,7 +213,6 @@ namespace SprintZeroSpriteDrawing
 
             base.Draw(gameTime);
         }
-
         private void ExitWithCode(int errCode) {
             Console.WriteLine(errCode);
             Exit();
