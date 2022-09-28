@@ -12,6 +12,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
 {
 	public class Mario : ISprite
 	{
+        public SpriteEffects effects;
         public bool IsVis { get; set; }
         public Texture2D Sprite { get; set; }
         public Vector2 Pos { get; set; }
@@ -31,6 +32,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
         public int height;
         public Mario(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos)
 		{
+            effects = SpriteEffects.None;
 			IsVis = true;
             SubframeLimit = 20;
             AutoFrame = true;
@@ -62,7 +64,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             {
                 Rectangle Rect = new Rectangle((int)(Frame % (int)SheetSize.X * FrameSize.X), (int)(Frame / (int)SheetSize.X * FrameSize.Y),
                     (int)FrameSize.X, (int)FrameSize.Y);
-                batch.Draw(Sprite, Pos, Rect, Color.White, 0, new Vector2(0, 0), 1, SpriteEffects.None, 0);
+                batch.Draw(Sprite, Pos, Rect, Color.White, 0, new Vector2(0, 0), 1, effects, 0);
                 if (AutoFrame)
                     Subframe++;
                 if (Subframe == SubframeLimit)
@@ -73,6 +75,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
                 return Frame;
             }
             return -2;
+
         }
 
 		public void SetVis(int nIsVis)
@@ -114,6 +117,13 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
         {
             State.action = action;
             ChangeState();
+        }
+        public void FlipFacing(int flip) 
+        {
+            if (flip > 0)
+                effects = SpriteEffects.FlipHorizontally;
+            else
+                effects = SpriteEffects.None;
         }
 
         public void ChangeState()

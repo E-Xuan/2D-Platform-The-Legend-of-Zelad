@@ -1,0 +1,9 @@
+Author of the code review: Yifei Zhuang
+Date of the code review: 9/27/2022
+Sprint number: 1
+Name of the .cs file being reviewed: Game1.cs
+Author of the .cs file being reviewed: All
+Specific comments on code quality: 
+
+Number of minutes taken to complete the review
+A hypothetical change to make to the game related to file being reviewed and how the current implementation could or could not easily support that change

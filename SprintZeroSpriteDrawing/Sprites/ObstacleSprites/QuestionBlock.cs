@@ -25,7 +25,8 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
             QState.Collide();
             if (QState.GetState() == State.TAPPED)
             {
-                Frame = 4;
+                LastFrame = 5;
+                Frame = 3;
                 AutoFrame = false;
             }
         }
