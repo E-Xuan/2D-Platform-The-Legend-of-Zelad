@@ -41,7 +41,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             if (nSprite != null)
                 FrameSize = new Vector2(nSprite.Width / SheetSize.X, nSprite.Height / SheetSize.Y);
             State.powerup = 1;
-            State.action = 1;
+            State.action = 2;
         }
 
         public void SetSprite(Texture2D nSprite)
@@ -121,8 +121,22 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
         {
             Sprite = MarioSpriteFactory.getSpriteFactory().swapSprite(State);
             SheetSize = MarioSpriteFactory.getSpriteFactory().swapSheetSize(State);
-        }
-    }
+            FrameSize = MarioSpriteFactory.getSpriteFactory().swapFrameSize(State);
+            LastFrame = (int)(SheetSize.X * SheetSize.Y);
 
-   
+        }
+
+        public void TakeDamage(int powerup)
+        {
+            if (State.powerup > 1 && State.powerup < 4)
+            {
+                State.powerup = 1;
+            }
+            else
+            {
+                State.powerup = 4;
+            }
+        }
+
+    }
 }

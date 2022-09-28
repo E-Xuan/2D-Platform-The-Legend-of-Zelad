@@ -16,24 +16,11 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioActionSprites
 	public class MarioSpriteFactory
 	{
 		
-        public int CrouchingSpriteSheetRow { get; }
-		public int CrouchingSpriteSheetCol { get; }
-		public int CrouchingFrames {get;}
-
-        public int IdleSpriteSheetRow { get; }
-        public int IdleSpriteSheetCol { get; }
-        public int IdleFrames { get; }
-
-        public int RunningSpriteSheetRow { get; }
-        public int RunningSpriteSheetCol { get; }
-        public int RunningFrames { get; }
-
-        public int JumpingSpriteSheetRow { get; }
-        public int JumpingSpriteSheetCol { get; }
-        public int JumpingFrames { get; }
+       
 
         public Texture2D spriteSheet;
         public Vector2 sheetSize;
+        public Vector2 frameSize;
         
 
         public Vector2 position { get; set; }
@@ -100,7 +87,6 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioActionSprites
             
         }
 
-        //
         public Texture2D swapSprite((int powerup, int action) State)
         {
 
@@ -158,7 +144,6 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioActionSprites
                 spriteSheet = DeadMarioSpriteSheet;
             }
 
-
             return spriteSheet;
         }
 
@@ -183,7 +168,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioActionSprites
             }
             else if (State.powerup == 2 && State.action == 1)
             {
-                sheetSize = new Vector2(1, 1);
+                sheetSize = new Vector2(3, 1);
             }
             else if (State.powerup == 2 && State.action == 2)
             {
@@ -218,6 +203,76 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioActionSprites
                 sheetSize = new Vector2(1, 1);
             }
             return sheetSize;
+        }
+
+        public Vector2 swapFrameSize((int powerup, int action) State)
+        {
+            if (State.powerup == 1 && State.action == 1)
+            {
+                frameSize = new Vector2(SmallRunningSpriteSheet.Width / sheetSize.X, SmallRunningSpriteSheet.Height / sheetSize.Y);
+               
+            }
+            else if (State.powerup == 1 && State.action == 2)
+            {
+                frameSize = new Vector2(SmallIdleSpriteSheet.Width / sheetSize.X, SmallIdleSpriteSheet.Height / sheetSize.Y);
+                
+            }
+            else if (State.powerup == 1 && State.action == 3)
+            {
+                frameSize = new Vector2(SmallJumpingSpriteSheet.Width / sheetSize.X, SmallJumpingSpriteSheet.Height / sheetSize.Y);
+                
+            }
+            else if (State.powerup == 1 && State.action == 4)
+            {
+               frameSize = new Vector2(SmallIdleSpriteSheet.Width / sheetSize.X, SmallIdleSpriteSheet.Height / sheetSize.Y);
+                
+            }
+            else if (State.powerup == 2 && State.action == 1)
+            {
+               frameSize= new Vector2(BigRunningSpriteSheet.Width / sheetSize.X, BigRunningSpriteSheet.Height / sheetSize.Y);
+                
+            }
+            else if (State.powerup == 2 && State.action == 2)
+            {
+               frameSize= new Vector2(BigIdleSpriteSheet.Width / sheetSize.X, BigIdleSpriteSheet.Height / sheetSize.Y);
+                
+            }
+            else if (State.powerup == 2 && State.action == 3)
+            {
+                frameSize=new Vector2(BigJumpingSpriteSheet.Width / sheetSize.X, BigJumpingSpriteSheet.Height / sheetSize.Y);
+                
+            }
+            else if (State.powerup == 2 && State.action == 4)
+            {
+                frameSize = new Vector2(BigCrouchingSpriteSheet.Width / sheetSize.X, BigCrouchingSpriteSheet.Height / sheetSize.Y);
+                
+            }
+            else if (State.powerup == 3 && State.action == 1)
+            {
+                frameSize = new Vector2(FireRunningSpriteSheet.Width / sheetSize.X, FireRunningSpriteSheet.Height / sheetSize.Y);
+                
+            }
+            else if (State.powerup == 3 && State.action == 2)
+            {
+                frameSize = new Vector2(FireIdleSpriteSheet.Width / sheetSize.X, FireIdleSpriteSheet.Height / sheetSize.Y);
+                
+            }
+            else if (State.powerup == 3 && State.action == 3)
+            {
+                frameSize = new Vector2(FireJumpingSpriteSheet.Width / sheetSize.X, FireJumpingSpriteSheet.Height / sheetSize.Y);
+                
+            }
+            else if (State.powerup == 3 && State.action == 4)
+            {
+                frameSize = new Vector2(FireCrouchingSpriteSheet.Width / sheetSize.X, FireCrouchingSpriteSheet.Height / sheetSize.Y);
+                
+            }
+            else if (State.powerup == 4)
+            {
+                frameSize = new Vector2(DeadMarioSpriteSheet.Width / sheetSize.X, DeadMarioSpriteSheet.Height / sheetSize.Y);
+                
+            }
+            return frameSize; 
         }
 
 	}

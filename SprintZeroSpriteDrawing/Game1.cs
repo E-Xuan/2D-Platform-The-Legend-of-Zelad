@@ -156,7 +156,7 @@ namespace SprintZeroSpriteDrawing
             keyboardController.UpdateBinding(Keys.Y, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).SetPowerup, 1)), BindingType.PRESSED);
             keyboardController.UpdateBinding(Keys.U, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).SetPowerup, 2)), BindingType.PRESSED);
             keyboardController.UpdateBinding(Keys.I, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).SetPowerup, 3)), BindingType.PRESSED);
-            keyboardController.UpdateBinding(Keys.O, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).SetPowerup, 4)), BindingType.PRESSED);
+            keyboardController.UpdateBinding(Keys.O, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).TakeDamage, -1)), BindingType.PRESSED);
 
             keyboardController.UpdateBinding(Keys.W, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).SetAction, 3)), BindingType.PRESSED);
             keyboardController.UpdateBinding(Keys.Up, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).SetAction, 3)), BindingType.PRESSED);
@@ -179,7 +179,7 @@ namespace SprintZeroSpriteDrawing
 
             //Loading the fonts
             HUDFont = Content.Load<SpriteFont>("Fonts/Arial");
-
+            
         }
 
         protected override void Update(GameTime gameTime)
