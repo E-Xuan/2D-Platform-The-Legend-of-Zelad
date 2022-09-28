@@ -149,11 +149,11 @@ namespace SprintZeroSpriteDrawing
             //keyboardController.UpdateBinding(Keys.I, new QBlockCmd(QBlock), BindingType.PRESSED); /*NOT WORK*/
             /*Could be used after states for Mario has been setted up*/
 
-            keyboardController.UpdateBinding(Keys.A, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).FlipFacing, 1)), BindingType.HELD);
-            keyboardController.UpdateBinding(Keys.D, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).FlipFacing, -1)), BindingType.HELD);
+            keyboardController.UpdateBinding(Keys.A, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).MoveAction, -1)), BindingType.PRESSED);
+            keyboardController.UpdateBinding(Keys.D, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).MoveAction, 1)), BindingType.PRESSED);
 
-            keyboardController.UpdateBinding(Keys.Left, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).FlipFacing, 1)), BindingType.HELD);
-            keyboardController.UpdateBinding(Keys.Right, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).FlipFacing, -1)), BindingType.HELD);
+            keyboardController.UpdateBinding(Keys.Left, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).MoveAction, -1)), BindingType.PRESSED);
+            keyboardController.UpdateBinding(Keys.Right, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).MoveAction, 1)), BindingType.PRESSED);
 
 
             keyboardController.UpdateBinding(Keys.Y, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).SetPowerup, 1)), BindingType.PRESSED);
@@ -167,12 +167,12 @@ namespace SprintZeroSpriteDrawing
             keyboardController.UpdateBinding(Keys.S, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).DecreaseAction, 4)), BindingType.PRESSED);
             keyboardController.UpdateBinding(Keys.Down, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).DecreaseAction, 4)), BindingType.PRESSED);
 
-            keyboardController.UpdateBinding(Keys.A, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).SetAction, 1)), BindingType.PRESSED);
-            keyboardController.UpdateBinding(Keys.Left, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).SetAction, 1)), BindingType.PRESSED);
+            //keyboardController.UpdateBinding(Keys.A, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).SetAction, 1)), BindingType.PRESSED);
+            //keyboardController.UpdateBinding(Keys.Left, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).SetAction, 1)), BindingType.PRESSED);
 
-            keyboardController.UpdateBinding(Keys.D, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).SetAction, 1)), BindingType.PRESSED);
-            keyboardController.UpdateBinding(Keys.Right,
-                new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).SetAction, 1)), BindingType.PRESSED);
+            //keyboardController.UpdateBinding(Keys.D, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).SetAction, 1)), BindingType.PRESSED);
+            //keyboardController.UpdateBinding(Keys.Right,
+                //new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).SetAction, 1)), BindingType.PRESSED);
 
             keyboardController.UpdateBinding(Keys.K, new QBlockCmd((QuestionBlock)spriteList["QBlock"]), BindingType.PRESSED);
 
