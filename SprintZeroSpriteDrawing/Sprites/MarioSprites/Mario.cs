@@ -147,5 +147,66 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             }
         }
 
+        public void IncreaseAction(int action)
+        {
+            if(State.action == 2)
+            {
+                State.action = 3;
+            }
+            else if(State.action == 4)
+            {
+                State.action = 2;
+            }
+            else if(State.action == 1)
+            {
+                State.action = 3;
+            }
+        }
+
+        public void DecreaseAction(int action)
+        {
+            if(State.action == 3)
+            {
+                State.action = 2;
+            }
+            else if(State.action == 2){
+                State.action = 4;
+            }
+            else if (State.action == 1)
+            {
+                State.action = 2;
+            }
+        }
+
+        //action positive is right
+        public void MoveAction(int action)
+        {
+            Frame = 0;
+            if (action < 0)
+            {
+                if (effects == SpriteEffects.None)
+                {
+                    effects = SpriteEffects.FlipHorizontally;
+                    State.action = 2;
+                }
+                else
+                {
+                    State.action = 1;
+                }
+            }
+            else 
+            {
+                if (effects == SpriteEffects.FlipHorizontally)
+                {
+                    effects = SpriteEffects.None;
+                    State.action = 2;
+                }
+                else
+                {
+                    State.action = 1;
+                }
+            }
+        }
+
     }
 }
