@@ -22,9 +22,15 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         private Vector2 SheetSize;
         private Vector2 FrameSize;
 
+        public bool bumped = false;
+        public int bumptime = 0;
+
+        public int width;
+        public int height;
+
         public InvisibleBlock(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos)
         {
-            IsVis = true;
+            IsVis = false;
             SubframeLimit = 20;
             AutoFrame = true;
             Sprite = nSprite;
@@ -66,7 +72,24 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         }
         virtual public void Update()
         {
-            //OVERRIDE ME
+            if (bumped) 
+            {
+                if (bumptime < 50)
+                {
+                    MoveY(-1);
+                }
+                else if (bumptime < 100)
+                {
+                    MoveY(1);
+                }
+                bumptime++;
+            }
+        }
+
+        public void Bump(int bump) {
+            if(IsVis)
+                bumped = true;
+            IsVis = true;
         }
         public void MoveSprite(Vector2 displacement)
         {

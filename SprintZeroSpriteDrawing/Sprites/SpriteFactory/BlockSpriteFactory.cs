@@ -49,7 +49,7 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         }
         public ISprite CreateHiddenBlock(Vector2 nPos)
         {
-            return new InvisibleBlock(HiddenBlockSpriteSheet, new Vector2(1, 1), nPos); 
+            return new InvisibleBlock(BrickBlockSpriteSheet, new Vector2(1, 1), nPos); 
         }
         public ISprite CreateUsedBlock(Vector2 nPos)
         {

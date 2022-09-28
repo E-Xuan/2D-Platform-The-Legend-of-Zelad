@@ -130,7 +130,7 @@ namespace SprintZeroSpriteDrawing
             BlockSpriteFactory.getFactory().LoadContent(Content);
             spriteList.Add("Obstacles/BrickBlock(Overworld)", BlockSpriteFactory.getFactory().CreateBrickBlock(new Vector2(300, 500)));
             spriteList.Add("QBlock", BlockSpriteFactory.getFactory().CreateQuestionBlock(new Vector2(400, 500)));
-            spriteList.Add("Obstacles/InvisibleBlock", BlockSpriteFactory.getFactory().CreateHiddenBlock(new Vector2(600, 500)));
+            spriteList.Add("InvisibleBlock", BlockSpriteFactory.getFactory().CreateHiddenBlock(new Vector2(600, 500)));
             spriteList.Add("Obstacles/UsedBlock", BlockSpriteFactory.getFactory().CreateUsedBlock(new Vector2(500, 500)));
             #endregion
 
@@ -171,10 +171,10 @@ namespace SprintZeroSpriteDrawing
             keyboardController.UpdateBinding(Keys.Left, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).SetAction, 1)), BindingType.PRESSED);
 
             keyboardController.UpdateBinding(Keys.D, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).SetAction, 1)), BindingType.PRESSED);
-            keyboardController.UpdateBinding(Keys.Right,
-                new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).SetAction, 1)), BindingType.PRESSED);
+            keyboardController.UpdateBinding(Keys.Right, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).SetAction, 1)), BindingType.PRESSED);
 
             keyboardController.UpdateBinding(Keys.K, new QBlockCmd((QuestionBlock)spriteList["QBlock"]), BindingType.PRESSED);
+            keyboardController.UpdateBinding(Keys.H, new IntCmd(new KeyValuePair<Action<int>, int>(((InvisibleBlock)spriteList["InvisibleBlock"]).Bump, 1)), BindingType.PRESSED);
 
             //Starting the sprite batch on our new graphics device
             //move init and loading of textures?

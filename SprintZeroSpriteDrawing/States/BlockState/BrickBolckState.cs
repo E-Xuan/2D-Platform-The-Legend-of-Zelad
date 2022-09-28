@@ -10,36 +10,32 @@ using System.Threading.Tasks;
 
 namespace SprintZeroSpriteDrawing.States.BlockState
 {
-    public class BrickBolckState : IBlockState
+
+    public class BrickBlockState : IBlockState
     {
-        public ISprite sprite;
-        public bool triggered;
-        public Vector2 nPos;
-        public bool Used { get { return triggered; } }
-        
-        public BrickBolckState()
+        public State state;
+
+        public BrickBlockState()
         {
-            this.sprite = BlockSpriteFactory.getFactory().CreateBrickBlock(nPos);
-            triggered = false;
+            state = State.UNTAPPED;
+        }
+        public BrickBlockState(State nState)
+        {
+            state = nState;
         }
 
         public void Collide()
         {
-            if(triggered == false)
-            {
-                /*Need to a small bump up*/
-                triggered = true;
-            }
+            state = State.TAPPED;
         }
 
         public void Update()
         {
-            sprite.Update();
         }
 
-        public void Draw(SpriteBatch spriteBatch, Vector2 location)
+        public State GetState()
         {
-            sprite.Draw(spriteBatch);
+            return state;
         }
     }
 }
