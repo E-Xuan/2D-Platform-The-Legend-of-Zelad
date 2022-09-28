@@ -28,7 +28,7 @@ namespace SprintZeroSpriteDrawing
         private Dictionary<Buttons, ICommand> gamePadCommand = new Dictionary<Buttons, ICommand>();
         private Dictionary<Keys, ICommand> kCommandList = new Dictionary<Keys, ICommand>();
         #endregion
-
+        
         #region Controller
         private IController<Keys> keyboardController;
         private IController<Buttons> gamepadController;
@@ -84,7 +84,7 @@ namespace SprintZeroSpriteDrawing
             _graphics.PreferredBackBufferWidth = 1920;
             _graphics.PreferredBackBufferHeight = 1080;
             _graphics.ApplyChanges();
-            
+
 
             #region sprites
 
@@ -151,8 +151,8 @@ namespace SprintZeroSpriteDrawing
 
             keyboardController.UpdateBinding(Keys.A, new IntCmd(new KeyValuePair<Action<int>, int>(spriteList["Mario"].MoveX, -10)), BindingType.HELD);
             keyboardController.UpdateBinding(Keys.D, new IntCmd(new KeyValuePair<Action<int>, int>(spriteList["Mario"].MoveX, 10)), BindingType.HELD);
-
-
+ 
+            
             keyboardController.UpdateBinding(Keys.Y, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).SetPowerup, 1)), BindingType.PRESSED);
             keyboardController.UpdateBinding(Keys.U, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).SetPowerup, 2)), BindingType.PRESSED);
             keyboardController.UpdateBinding(Keys.I, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).SetPowerup, 3)), BindingType.PRESSED);

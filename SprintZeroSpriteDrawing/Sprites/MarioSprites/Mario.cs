@@ -73,6 +73,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
                 return Frame;
             }
             return -2;
+
         }
 
 		public void SetVis(int nIsVis)
