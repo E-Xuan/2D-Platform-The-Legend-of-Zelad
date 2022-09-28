@@ -100,7 +100,6 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioActionSprites
             
         }
 
-        //
         public Texture2D swapSprite((int powerup, int action) State)
         {
 
@@ -157,7 +156,6 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioActionSprites
             {
                 spriteSheet = DeadMarioSpriteSheet;
             }
-
 
             return spriteSheet;
         }

@@ -121,7 +121,18 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             Sprite = MarioSpriteFactory.getSpriteFactory().swapSprite(State);
             SheetSize = MarioSpriteFactory.getSpriteFactory().swapSheetSize(State);
         }
-    }
 
-   
+        public void TakeDamage(int powerup)
+        {
+            if (State.powerup > 1 && State.powerup < 4)
+            {
+                State.powerup = 1;
+            }
+            else
+            {
+                State.powerup = 4;
+            }
+        }
+
+    }
 }
