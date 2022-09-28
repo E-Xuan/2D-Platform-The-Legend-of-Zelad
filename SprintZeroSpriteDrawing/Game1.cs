@@ -41,7 +41,8 @@ namespace SprintZeroSpriteDrawing
         private SpriteFont HUDFont;
         //Sprites and their names, could use UUID's if I wanted to, but I like names its unnecessary tho
         private Dictionary<string, ISprite> spriteList = new Dictionary<string, ISprite>();
-   
+        #endregion
+
         #region Items
         SuperMushroom SMushroom;
         Coins Coin;
@@ -106,11 +107,7 @@ namespace SprintZeroSpriteDrawing
             
             #endregion
 
-
-
             gamepadController.UpdateBinding(Buttons.Start, new IntCmd(new KeyValuePair<Action<int>, int>(ExitWithCode, 0)), BindingType.PRESSED);
-
-            #endregion
 
             base.Initialize();
         }
