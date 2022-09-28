@@ -124,7 +124,18 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             LastFrame = (int)(SheetSize.X * SheetSize.Y);
 
         }
-    }
 
-   
+        public void TakeDamage(int powerup)
+        {
+            if (State.powerup > 1 && State.powerup < 4)
+            {
+                State.powerup = 1;
+            }
+            else
+            {
+                State.powerup = 4;
+            }
+        }
+
+    }
 }
