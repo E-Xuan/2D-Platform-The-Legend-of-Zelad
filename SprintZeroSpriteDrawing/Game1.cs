@@ -166,7 +166,10 @@ namespace SprintZeroSpriteDrawing
             keyboardController.UpdateBinding(Keys.B, new IntCmd(new KeyValuePair<Action<int>, int>(((Block)spriteList["BBlock"]).Bump, 1)), BindingType.PRESSED);
             keyboardController.UpdateBinding(Keys.OemQuestion, new IntCmd(new KeyValuePair<Action<int>, int>(((Block)spriteList["QBlock"]).Bump, 1)), BindingType.PRESSED);
             keyboardController.UpdateBinding(Keys.H, new IntCmd(new KeyValuePair<Action<int>, int>(((Block)spriteList["InvisibleBlock"]).Bump, 1)), BindingType.PRESSED);
-           
+
+            gamepadController.UpdateBinding(Buttons.LeftStick, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).MoveAction, -1)), BindingType.PRESSED);
+            gamepadController.UpdateBinding(Buttons.RightStick, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).MoveAction, 1)), BindingType.PRESSED);
+
             //Starting the sprite batch on our new graphics device
             //move init and loading of textures?
             sBatch = new SpriteBatch(GraphicsDevice);

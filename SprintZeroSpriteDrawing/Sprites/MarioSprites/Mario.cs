@@ -207,7 +207,6 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
                 if(effects == SpriteEffects.None && right == true)
                 {
                     right = false;
-                    effects = SpriteEffects.FlipHorizontally;
                     State.action = 2;
                 }
                 else if (effects == SpriteEffects.None)//right
@@ -226,7 +225,6 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
                 if(effects == SpriteEffects.FlipHorizontally && left == true)
                 {
                     left = false;
-                    effects = SpriteEffects.None;
                     State.action = 2;
                 }
                 else if (effects == SpriteEffects.FlipHorizontally)//left
