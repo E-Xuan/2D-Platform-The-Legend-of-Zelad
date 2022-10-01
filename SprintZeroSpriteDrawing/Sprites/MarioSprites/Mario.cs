@@ -5,6 +5,7 @@ using SprintZeroSpriteDrawing.Sprites.MarioActionSprites;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,7 +24,10 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
         private int LastFrame;
         private Vector2 SheetSize;
         private Vector2 FrameSize;
-
+        private Mario mario;
+        int Speed = 5;
+        bool left = false;
+        bool right = false;
         public (int powerup, int action) State;
         
 
@@ -32,6 +36,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
         public int height;
         public Mario(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos)
 		{
+            mario = this;
             effects = SpriteEffects.None;
 			IsVis = true;
             SubframeLimit = 20;
@@ -90,8 +95,24 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
 
 		virtual public void Update()
 		{
-			//Stuff and Things
-		}
+            if (left && Pos.X != 0)
+            {
+                MoveX(-Speed);
+            }
+            if (Pos.X == 0)
+            {
+                left = false;
+            }
+            if (right == true && Pos.X != 1865)
+            {
+                MoveX(Speed);
+            }
+            if (Pos.X == 1865)
+            {
+                right = false;
+            }
+            //Stuff and Things
+        }
 
         public void MoveSprite(Vector2 displacement)
         {
@@ -99,15 +120,14 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
         }
         public void MoveX(int pixels)
         {
+            AutoFrame = true;
             Pos = Vector2.Add(Pos, new Vector2(pixels, 0));
         }
         public void MoveY(int pixels)
         {
+            AutoFrame = false;
             Pos = Vector2.Add(Pos, new Vector2(0, pixels));
         }
-        
-        public void Trigger() { }
-
         public void SetPowerup(int powerup)
         {
             State.powerup = powerup;
@@ -184,7 +204,13 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             Frame = 0;
             if (action < 0)
             {
-                if (effects == SpriteEffects.None)
+                if(effects == SpriteEffects.None && right == true)
+                {
+                    right = false;
+                    effects = SpriteEffects.FlipHorizontally;
+                    State.action = 2;
+                }
+                else if (effects == SpriteEffects.None)//right
                 {
                     effects = SpriteEffects.FlipHorizontally;
                     State.action = 2;
@@ -192,11 +218,18 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
                 else
                 {
                     State.action = 1;
+                    left = true;
                 }
             }
             else 
             {
-                if (effects == SpriteEffects.FlipHorizontally)
+                if(effects == SpriteEffects.FlipHorizontally && left == true)
+                {
+                    left = false;
+                    effects = SpriteEffects.None;
+                    State.action = 2;
+                }
+                else if (effects == SpriteEffects.FlipHorizontally)//left
                 {
                     effects = SpriteEffects.None;
                     State.action = 2;
@@ -204,9 +237,9 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
                 else
                 {
                     State.action = 1;
+                    right = true;
                 }
             }
         }
-
     }
 }
