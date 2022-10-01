@@ -28,6 +28,8 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
         int Speed = 5;
         bool left = false;
         bool right = false;
+        bool up = false;
+        bool down = false;
         public (int powerup, int action) State;
         
 
@@ -95,6 +97,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
 
 		virtual public void Update()
 		{
+            //Left & Right
             if (left && Pos.X != 0)
             {
                 MoveX(-Speed);
@@ -111,6 +114,28 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             {
                 right = false;
             }
+
+
+            if (up && Pos.Y != 0)
+            {
+                MoveY(-Speed);
+            }
+            if(Pos.Y == 0)
+            {
+                up = false;
+            }
+
+            
+            if (down && Pos.Y != 985)
+            {
+                MoveY(Speed);
+            }
+            if(Pos.Y == 985)
+            {
+                down = false;
+            }
+
+
             //Stuff and Things
         }
 
@@ -171,7 +196,11 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
         {
             if(State.action == 2)
             {
-                State.action = 3;
+                State.action = 3; //jump
+            }
+            else if(State.action == 4 && down == true)
+            {
+                down = false;
             }
             else if(State.action == 4)
             {
@@ -181,20 +210,32 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             {
                 State.action = 3;
             }
+            else if(State.action == 3)
+            {
+                up = true;
+            }
         }
 
         public void DecreaseAction(int action)
         {
-            if(State.action == 3)
+            if(State.action == 3 && up == true) //jump
+            {
+                up = false;
+            }
+            else if (State.action == 3)
             {
                 State.action = 2;
             }
             else if(State.action == 2){
-                State.action = 4;
+                State.action = 4; //crounch
             }
             else if (State.action == 1)
             {
                 State.action = 2;
+            }
+            else
+            {
+                down = true;
             }
         }
 
