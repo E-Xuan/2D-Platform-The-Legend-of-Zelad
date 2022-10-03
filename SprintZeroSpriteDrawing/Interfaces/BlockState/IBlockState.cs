@@ -22,7 +22,6 @@ namespace SprintZeroSpriteDrawing.Interfaces.BlockState
         public List<ICollideable> Inventory { get; set; }
 
         protected Block block;
-        protected IBlockState previousState;
         public State CurrState { get; set; }
 
         public IBlockState(Block nBlock)
@@ -34,12 +33,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.BlockState
 
         public virtual void Update() { }
         public virtual void Enter() { }
-
-        public virtual void Exit()
-        {
-            previousState = this;
-        }
-
+        public virtual void Exit() { }
         public virtual void ChangeState(int state) { }
     }
 }

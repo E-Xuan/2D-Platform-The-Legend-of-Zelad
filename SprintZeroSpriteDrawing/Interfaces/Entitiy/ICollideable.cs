@@ -18,7 +18,9 @@ namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
 
     public enum CType
     {
-        AVATAR,
+        AVATAR_SMALL,
+        AVATAR_LARGE,
+        AVATAR_STAR,
         FRIENDLY,
         NEUTRAL,
         ENEMY

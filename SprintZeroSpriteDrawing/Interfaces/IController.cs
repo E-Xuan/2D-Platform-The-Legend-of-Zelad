@@ -46,6 +46,10 @@ namespace SprintZeroSpriteDrawing.Interfaces
                 CommandBindingList[(int)bindingType].Add(key, command);
             }
         }
+        public void ReplaceBinding(List<Dictionary<T, ICommand>> nCommandBindingList)
+        {
+            CommandBindingList = nCommandBindingList;
+        }
 
         public bool RemoveBinding(T key, BindingType bindingType)
         {

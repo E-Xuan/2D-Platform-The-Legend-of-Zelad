@@ -34,7 +34,7 @@ public class IRBody : ITile
     public override void Update()
     {
         base.Update(); //Framing updates
-        base.Move(Velocity);
+        Move(Velocity);
         Velocity = Vector2.Add(Velocity, Acceleration);
     }
 

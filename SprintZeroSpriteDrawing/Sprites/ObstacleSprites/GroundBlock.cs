@@ -15,10 +15,6 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         public GroundBlock(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos) : base (nSprite, nSheetSize, nPos)
         {
         }
-
-        public override void Update()
-        {
-        }
     }
 }
 

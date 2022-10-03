@@ -10,6 +10,7 @@ using SprintZeroSpriteDrawing.Commands;
 
 namespace SprintZeroSpriteDrawing.Commands
 {
+    /*
     internal class BindingCmd
     {
         private Dictionary<Keys, ICommand> kCommandList = new Dictionary<Keys, ICommand>();
@@ -46,4 +47,5 @@ namespace SprintZeroSpriteDrawing.Commands
         gamepadController.UpdateBinding(Buttons.DPadDown, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario) spriteList["Mario"]).DecreaseAction, 4)), BindingType.PRESSED);
 
     }
+    */
 }
