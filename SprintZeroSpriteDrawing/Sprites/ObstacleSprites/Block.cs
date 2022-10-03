@@ -19,7 +19,6 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         {
             State = new BlockUntapped(this);
         }
-
         public Block(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos, Rectangle nBBox) : base (nSprite, nSheetSize, nPos, nBBox)
         {
             State = new BlockUntapped(this);
@@ -28,12 +27,10 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         {
             State = new BlockUntapped(this);
         }
-
         public void ChangeState(int state)
         {
             this.State.ChangeState(state);
         }
-
         public override void Update()
         {
             State.Update();
