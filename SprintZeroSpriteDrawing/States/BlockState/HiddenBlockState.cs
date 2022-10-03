@@ -1,5 +1,5 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
-using SprintZeroSpriteDrawing.Interfaces;
+using SprintZeroSpriteDrawing.Interfaces.BlockState;
 using SprintZeroSpriteDrawing.Sprites.ObstacleSprites;
 using System;
 using System.Collections.Generic;
@@ -15,27 +15,13 @@ namespace SprintZeroSpriteDrawing.States.BlockState
     {
         public State state;
 
-        public HiddenBlockState()
+        public HiddenBlockState(Block block) : base (block)
         {
             state = State.UNTAPPED;
         }
-        public HiddenBlockState(State nState)
+        public HiddenBlockState(State nState, Block block) : base (block)
         {
             state = nState;
-        }
-
-        public void Collide()
-        {
-            state = State.TAPPED;
-        }
-
-        public void Update()
-        {
-        }
-
-        public State GetState()
-        {
-            return state;
         }
     }
 }

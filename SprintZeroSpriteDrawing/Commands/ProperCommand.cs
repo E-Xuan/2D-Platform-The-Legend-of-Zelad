@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SprintZeroSpriteDrawing.Interfaces;
+using SprintZeroSpriteDrawing.Interfaces.Entitiy;
 using SprintZeroSpriteDrawing.States.BlockState;
 
 namespace SprintZeroSpriteDrawing.Commands
@@ -14,7 +15,7 @@ namespace SprintZeroSpriteDrawing.Commands
 
         public override void Execute()
         {
-            ((ISprite)Ref).TogVis(0);
+            ((ISprite)Ref).IsVis = ((ISprite)Ref).IsVis;
         }
     }
 }

@@ -1,45 +1,43 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SprintZeroSpriteDrawing.Interfaces;
+using SprintZeroSpriteDrawing.Interfaces.Entitiy;
 using SprintZeroSpriteDrawing.States.BlockState;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SprintZeroSpriteDrawing.Interfaces.BlockState;
 
 namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
 {
-    internal class Block : SpriteMA
+    public class Block : ICollideable
     {
-        protected int bumptime = 51;
-
-        public Block(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos) : base (nSprite, nSheetSize, nPos)
+        public IBlockState State { get; set; }
+        public Block(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos) : base(nSprite, nSheetSize, nPos)
         {
-            IsVis = true;
-        }
-        public virtual void Collide()
-        {
+            State = new BlockUntapped(this);
         }
 
-        public virtual void Bump(int marioState)
+        public Block(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos, Rectangle nBBox) : base (nSprite, nSheetSize, nPos, nBBox)
         {
-            if (bumptime >= 50) 
-                bumptime = 0;
+            State = new BlockUntapped(this);
+        }
+        public Block(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos, Vector2 acceleration, Rectangle nBBox) : base(nSprite, nSheetSize, nPos, acceleration, nBBox)
+        {
+            State = new BlockUntapped(this);
+        }
+
+        public void ChangeState(int state)
+        {
+            this.State.ChangeState(state);
         }
 
         public override void Update()
         {
-            if (bumptime < 25)
-            {
-                MoveY(-2);
-                bumptime++;
-            }
-            else if (bumptime < 50)
-            { 
-                MoveY(2); 
-                bumptime++;
-            }
+            State.Update();
+            base.Update();
         }
     }
 }

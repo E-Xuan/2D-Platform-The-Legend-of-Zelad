@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using SprintZeroSpriteDrawing.Interfaces;
+using SprintZeroSpriteDrawing.Interfaces.Entitiy;
 using SprintZeroSpriteDrawing.Sprites.MarioActionSprites;
 using SprintZeroSpriteDrawing.Sprites.MarioSprites;
 using SprintZeroSpriteDrawing.Sprites.ObstacleSprites;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace SprintZeroSpriteDrawing.States.MarioState
 {
-	public class MarioState : IMarioState
+    public class MarioState : IMarioState
 	{
 		public ISprite sprite;
 

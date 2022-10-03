@@ -1,6 +1,7 @@
 ﻿using SprintZeroSpriteDrawing.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SprintZeroSpriteDrawing.Interfaces.BlockState;
 using SprintZeroSpriteDrawing.Sprites.ObstacleSprites;
 
 namespace SprintZeroSpriteDrawing.Commands
@@ -12,7 +13,7 @@ namespace SprintZeroSpriteDrawing.Commands
         public override void Execute()
         {
             
-            ((QuestionBlock)Ref).Collide();
+            ((QuestionBlock)Ref).State.ChangeState((int)State.BUMPING);
         }
        
     }
