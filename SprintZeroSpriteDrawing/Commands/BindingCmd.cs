@@ -13,6 +13,7 @@ namespace SprintZeroSpriteDrawing.Commands
         private Dictionary<Keys, ICommand> kCommandList = new Dictionary<Keys, ICommand>();
         private IController<Keys> keyboardController;
         private IController<Buttons> gamepadController;
+
         keyboardController = new KeyboardController();
         gamepadController = new GamepadController();
         keyboardController.UpdateBinding(Keys.A, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario) spriteList["Mario"]).MoveAction, -1)), BindingType.PRESSED);
