@@ -1,5 +1,5 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
-using SprintZeroSpriteDrawing.Interfaces;
+using SprintZeroSpriteDrawing.Interfaces.BlockState;
 using SprintZeroSpriteDrawing.Sprites.ObstacleSprites;
 using System;
 using System.Collections.Generic;
@@ -15,11 +15,11 @@ namespace SprintZeroSpriteDrawing.States.BlockState
     {
         public State state;
 
-        public BrickBlockState()
+        public BrickBlockState(Block block) : base (block)
         {
             state = State.UNTAPPED;
         }
-        public BrickBlockState(State nState)
+        public BrickBlockState(State nState, Block block) : base (block)
         {
             state = nState;
         }

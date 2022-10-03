@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using SprintZeroSpriteDrawing.Commands;
-using SprintZeroSpriteDrawing.Interfaces;
+using SprintZeroSpriteDrawing.Interfaces.Entitiy;
 using SprintZeroSpriteDrawing.Sprites.MarioSprites;
 using SprintZeroSpriteDrawing.Sprites.ObstacleSprites;
 using System;
@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace SprintZeroSpriteDrawing.Sprites.MarioActionSprites
 {
-	public class MarioSpriteFactory
+    public class MarioSpriteFactory
 	{
 		
        

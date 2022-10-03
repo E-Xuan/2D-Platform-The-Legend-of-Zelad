@@ -15,9 +15,5 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
             public StairBlock(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos) : base(nSprite, nSheetSize, nPos)
             {
             }
-
-            public override void Update()
-            {
-            }
         }
 }

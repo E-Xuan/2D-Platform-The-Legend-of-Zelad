@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace SprintZeroSpriteDrawing.Interfaces
+namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
 {
     /// <summary>
     /// The ISprite interface, which contains all the information
@@ -22,12 +22,13 @@ namespace SprintZeroSpriteDrawing.Interfaces
         /// This determines whether the sprite is drawn or if any of the code in the draw method is fired
         /// </summary>
         bool IsVis { get; set; }
-        public int Draw(SpriteBatch batch);
+
+        public void Draw(SpriteBatch batch);
+        public void Draw(SpriteBatch batch, SpriteEffects effects);
         public void Update();
-        public void SetVis(int nIsVis);
-        public void TogVis(int nIsVis);
-        public void MoveY(int x);
-        public void MoveX(int x);
+        public void MoveY(int delta);
+        public void MoveX(int delta);
+        public void Move(Vector2 delta);
 
     }
 }

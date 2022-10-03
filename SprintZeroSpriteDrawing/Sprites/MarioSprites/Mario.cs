@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using SprintZeroSpriteDrawing.Interfaces;
+using SprintZeroSpriteDrawing.Interfaces.Entitiy;
 using SprintZeroSpriteDrawing.Sprites.MarioActionSprites;
 using System;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
 {
-	public class Mario : ISprite
+    public class Mario : ICollideable
 	{
         public SpriteEffects effects;
         public bool IsVis { get; set; }
@@ -36,7 +36,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
 
         public int width;
         public int height;
-        public Mario(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos)
+        public Mario(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos) : base(nSprite, nSheetSize, nPos)
 		{
             mario = this;
             effects = SpriteEffects.None;

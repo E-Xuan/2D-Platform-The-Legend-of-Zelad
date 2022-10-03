@@ -15,12 +15,5 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         {
             IsVis = false;
         }
-        public override void Bump(int marioState) {
-            if (IsVis)
-            {
-                base.Bump(marioState);
-            }
-            IsVis = true;
-        }
     }
 }
