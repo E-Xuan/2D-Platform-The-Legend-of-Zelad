@@ -13,7 +13,6 @@ using System.Threading.Tasks.Dataflow;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
 using SprintZeroSpriteDrawing.Sprites.ObstacleSprites;
 using System.Reflection.Metadata;
-
 using SprintZeroSpriteDrawing.Sprites.MarioActionSprites;
 using SprintZeroSpriteDrawing.States.BlockState;
 using SprintZeroSpriteDrawing.Sprites.MarioSprites;
@@ -146,6 +145,7 @@ namespace SprintZeroSpriteDrawing
             spriteList.Add("Mario", MarioSpriteFactory.getSpriteFactory().createMario(new Vector2(300, 300)));
             #endregion
 
+            //Initial Commands
             
             //Starting the sprite batch on our new graphics device
             //move init and loading of textures?
