@@ -15,7 +15,6 @@ using SprintZeroSpriteDrawing.Sprites.ObstacleSprites;
 using System.Reflection.Metadata;
 using SprintZeroSpriteDrawing.Interfaces.BlockState;
 using SprintZeroSpriteDrawing.Sprites.MarioActionSprites;
-using SprintZeroSpriteDrawing.States.BlockState;
 using SprintZeroSpriteDrawing.Sprites.MarioSprites;
 using SprintZeroSpriteDrawing.Interfaces.Entitiy;
 
@@ -173,7 +172,7 @@ namespace SprintZeroSpriteDrawing
 
             gamepadController.UpdateBinding(Buttons.DPadUp, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).IncreaseAction, 3)), BindingType.PRESSED);
             gamepadController.UpdateBinding(Buttons.DPadDown, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).DecreaseAction, 4)), BindingType.PRESSED);
-
+            
             //Starting the sprite batch on our new graphics device
             //move init and loading of textures?
             sBatch = new SpriteBatch(GraphicsDevice);

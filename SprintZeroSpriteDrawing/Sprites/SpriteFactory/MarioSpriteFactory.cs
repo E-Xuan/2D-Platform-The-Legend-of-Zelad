@@ -89,8 +89,6 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioActionSprites
 
         public Texture2D swapSprite((int powerup, int action) State)
         {
-
-            
             if (State.powerup == 1 && State.action == 1) 
             {
                 spriteSheet = SmallRunningSpriteSheet;  
