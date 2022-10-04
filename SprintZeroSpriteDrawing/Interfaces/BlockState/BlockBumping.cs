@@ -21,7 +21,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.BlockState
             block.IsVis = true;
             anchor = block.Pos;
             block.Velocity = new Vector2(0,-2);
-            block.Acceleration = new Vector2(0, 0);
+            block.Acceleration = new Vector2(0, (float)0.065);
         }
 
         public override void Exit()
@@ -52,9 +52,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.BlockState
         public override void Update()
         {
             //reminder that (0,0) is top right
-            if (block.Pos.Y < anchor.Y - 20)
-                block.Velocity = new Vector2(0, 2);
-            else if(Inventory.Count == 0 && block.Pos.Y > anchor.Y)
+            if(Inventory.Count == 0 && block.Pos.Y > anchor.Y)
                 ChangeState((int)State.TAPPED);
             else if(block.Pos.Y > anchor.Y)
                 ChangeState((int)State.UNTAPPED);
