@@ -14,6 +14,9 @@ namespace SprintZeroSpriteDrawing.Interfaces.BlockState
         public BlockBumping(Block nBlock) : base(nBlock)
         {
         }
+        public BlockBumping(Block nBlock, List<ICollideable> nInventory) : base(nBlock, nInventory)
+        {
+        }
 
         public override void Enter()
         {
@@ -21,7 +24,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.BlockState
             block.IsVis = true;
             anchor = block.Pos;
             block.Velocity = new Vector2(0,-2);
-            block.Acceleration = new Vector2(0, 0);
+            block.Acceleration = new Vector2(0, (float)0.065);
         }
 
         public override void Exit()
@@ -29,7 +32,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.BlockState
             block.Pos = anchor;
             if (Inventory.Count > 0)
             {
-                //Spawn the inventory item here
+                Game1.SpriteList.Add("Bumped", Inventory[0]);
                 Inventory.RemoveAt(0);
             }
         }
@@ -40,11 +43,11 @@ namespace SprintZeroSpriteDrawing.Interfaces.BlockState
             {
                 case State.TAPPED:
                     Exit();
-                    block.State = new BlockTapped(block);
+                    block.State = new BlockTapped(block, Inventory);
                     break;
                 case State.UNTAPPED:
                     Exit();
-                    block.State = new BlockUntapped(block);
+                    block.State = new BlockUntapped(block, Inventory);
                     break;
             }
         }
@@ -52,9 +55,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.BlockState
         public override void Update()
         {
             //reminder that (0,0) is top right
-            if (block.Pos.Y < anchor.Y - 20)
-                block.Velocity = new Vector2(0, 2);
-            else if(Inventory.Count == 0 && block.Pos.Y > anchor.Y)
+            if(Inventory.Count <= 1 && block.Pos.Y > anchor.Y)
                 ChangeState((int)State.TAPPED);
             else if(block.Pos.Y > anchor.Y)
                 ChangeState((int)State.UNTAPPED);

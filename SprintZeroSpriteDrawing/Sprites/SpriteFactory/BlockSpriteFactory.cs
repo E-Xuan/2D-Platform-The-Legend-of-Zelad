@@ -49,7 +49,7 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         public ISprite CreateBrickBlock(Vector2 nPos)
         {
             var block = new BrickBlock(BrickBlockSpriteSheet, new Vector2(1, 1), nPos, new Rectangle((int)nPos.X, (int)nPos.Y, 32, 32));
-            block.CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(null, Direction.BOTTOM, CType.AVATAR));
+            block.CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(null, Direction.BOTTOM, CType.AVATAR_LARGE));
             return block;
         }
         public ISprite CreateGroundBlock(Vector2 nPos)
@@ -63,6 +63,10 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         public ISprite CreateQuestionBlock(Vector2 nPos)
         {
             return new QuestionBlock(QuestionBlockSpriteSheet, new Vector2(2, 2), nPos);
+        }
+        public ISprite CreateMQuestionBlock(Vector2 nPos)
+        {
+            return new QuestionBlock(QuestionBlockSpriteSheet, new Vector2(2, 2), nPos, new Rectangle((int)nPos.X, (int)nPos.Y, 32, 32), new List<ICollideable>{(ICollideable)ItemSpriteFactory.getFactory().createFlower(new Vector2(4, 2), Vector2.Add(nPos, new Vector2(0, -48)))});
         }
         public ISprite CreateHiddenBlock(Vector2 nPos)
         {

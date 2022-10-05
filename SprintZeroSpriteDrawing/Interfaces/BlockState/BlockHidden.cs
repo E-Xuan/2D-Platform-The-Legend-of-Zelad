@@ -12,7 +12,9 @@ namespace SprintZeroSpriteDrawing.Interfaces.BlockState
         public BlockHidden(Block nBlock) : base(nBlock)
         {
         }
-
+        public BlockHidden(Block nBlock, List<ICollideable> nInventory) : base(nBlock, nInventory)
+        {
+        }
         public override void Enter()
         {
             CurrState = State.HIDDEN;
@@ -27,11 +29,11 @@ namespace SprintZeroSpriteDrawing.Interfaces.BlockState
             {
                 case State.BUMPING:
                     Exit();
-                    block.State = new BlockBumping(this.block);
+                    block.State = new BlockBumping(block, Inventory);
                     break;
                 case State.BROKEN:
                     Exit();
-                    block.State = new BlockBroken(this.block);
+                    block.State = new BlockBroken(block, Inventory);
                     break;
             }
         }

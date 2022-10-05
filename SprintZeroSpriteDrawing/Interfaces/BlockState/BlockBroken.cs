@@ -12,6 +12,9 @@ namespace SprintZeroSpriteDrawing.Interfaces.BlockState
         public BlockBroken(Block nBlock) : base(nBlock)
         {
         }
+        public BlockBroken(Block nBlock, List<ICollideable> nInventory) : base(nBlock, nInventory)
+        {
+        }
 
         public override void Enter()
         {
