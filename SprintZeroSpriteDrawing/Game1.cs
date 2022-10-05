@@ -18,6 +18,7 @@ using SprintZeroSpriteDrawing.Interfaces.BlockState;
 using SprintZeroSpriteDrawing.Sprites.MarioActionSprites;
 using SprintZeroSpriteDrawing.Sprites.MarioSprites;
 using SprintZeroSpriteDrawing.Interfaces.Entitiy;
+using SprintZeroSpriteDrawing.Interfaces.MarioState;
 
 namespace SprintZeroSpriteDrawing
 {
@@ -166,7 +167,7 @@ namespace SprintZeroSpriteDrawing
                 spriteEntry.Value.Update();
             }
 
-            ((Mario)SpriteList["Mario"]).ChangeState();
+            ((Mario)spriteList["Mario"]).ChangeState();
 
             base.Update(gameTime);
         }
