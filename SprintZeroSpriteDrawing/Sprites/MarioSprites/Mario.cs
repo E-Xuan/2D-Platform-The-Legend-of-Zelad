@@ -1,13 +1,17 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SprintZeroSpriteDrawing.Interfaces.Entitiy;
+using SprintZeroSpriteDrawing.Interfaces.MarioState;
 using SprintZeroSpriteDrawing.Sprites.MarioActionSprites;
+using SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction;
+using SprintZeroSpriteDrawing.Interfaces.MarioState.StatePowerup;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
+
 
 namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
 {
@@ -30,7 +34,9 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
         bool right = false;
         bool up = false;
         bool down = false;
-        public (int powerup, int action) State;
+        public IMarioState StateAction;
+        public IMarioState StatePowerup;
+        public int[] currState;
         
 
 
@@ -49,14 +55,41 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             LastFrame = (int)(SheetSize.X * SheetSize.Y);
             if (nSprite != null)
                 FrameSize = new Vector2(nSprite.Width / SheetSize.X, nSprite.Height / SheetSize.Y);
-            State.powerup = 1;
-            State.action = 2;
+            StateAction = new MarioIdle(this);
+            StatePowerup = new SmallMario(this);
+            currState = new int[5];
         }
 
         public void SetSprite(Texture2D nSprite)
         {
             Sprite = nSprite;
-            FrameSize = new Vector2(nSprite.Width / SheetSize.X, nSprite.Height / SheetSize.Y);
+            this.FrameSize = new Vector2(nSprite.Width / SheetSize.X, nSprite.Height / SheetSize.Y);
+        }
+
+        public void UpdateState()
+        {
+            int prevPowerup = (int)StatePowerup.prevPowerupState;
+            int currPowerup = (int)StatePowerup.currPowerupState;
+            currState[prevPowerup] = 0;
+            currState[currPowerup] = (int)StateAction.currActionState;
+
+            switch (currState[currPowerup])
+            {
+                case (int)ActionState.IDLE:
+                    
+                    break;
+                case (int)ActionState.RUNNING:
+                    break;
+                case (int)ActionState.WALKING:
+
+                    break;
+                case (int)ActionState.JUMPING:
+
+                    break;
+                case (int)ActionState.CROUCHING:
+
+                    break;
+            }
         }
 
         public int NextFrame()
@@ -65,25 +98,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
         }
 		
 
-		public int Draw(SpriteBatch batch)
-		{
-            if (IsVis)
-            {
-                Rectangle Rect = new Rectangle((int)(Frame % (int)SheetSize.X * FrameSize.X), (int)(Frame / (int)SheetSize.X * FrameSize.Y),
-                    (int)FrameSize.X, (int)FrameSize.Y);
-                batch.Draw(Sprite, Pos, Rect, Color.White, 0, new Vector2(0, 0), 1, effects, 0);
-                if (AutoFrame)
-                    Subframe++;
-                if (Subframe == SubframeLimit)
-                {
-                    Subframe = 0;
-                    Frame = (Frame + 1) % LastFrame;
-                }
-                return Frame;
-            }
-            return -2;
-
-        }
+		
 
 		public void SetVis(int nIsVis)
 		{
@@ -95,46 +110,12 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
 			IsVis = !IsVis;
 		}
 
-		virtual public void Update()
+		public override void Update()
 		{
-            //Left & Right
-            if (left && Pos.X != 0)
-            {
-                MoveX(-Speed);
-            }
-            if (Pos.X == 0)
-            {
-                left = false;
-            }
-            if (right == true && Pos.X != 1865)
-            {
-                MoveX(Speed);
-            }
-            if (Pos.X == 1865)
-            {
-                right = false;
-            }
-
-
-            if (up && Pos.Y != 0)
-            {
-                MoveY(-Speed);
-            }
-            if(Pos.Y == 0)
-            {
-                up = false;
-            }
-
+            StatePowerup.Update();
+            StateAction.Update();
+            base.Update();
             
-            if (down && Pos.Y != 985)
-            {
-                MoveY(Speed);
-            }
-            if(Pos.Y == 985)
-            {
-                down = false;
-            }
-
 
             //Stuff and Things
         }
@@ -153,15 +134,13 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             AutoFrame = false;
             Pos = Vector2.Add(Pos, new Vector2(0, pixels));
         }
-        public void SetPowerup(int powerup)
+        public void ChangePowerup(int powerup)
         {
-            State.powerup = powerup;
-            ChangeState();
+            this.StatePowerup.ChangePowerupState(powerup);
         }
-        public void SetAction(int action)
+        public void ChangeAction(int action)
         {
-            State.action = action;
-            ChangeState();
+            this.StateAction.ChangeActionState(action);
         }
         public void FlipFacing(int flip) 
         {
@@ -171,7 +150,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
                 effects = SpriteEffects.None;
         }
 
-        public void ChangeState()
+        /*public void ChangeState()
         {
             Sprite = MarioSpriteFactory.getSpriteFactory().swapSprite(State);
             SheetSize = MarioSpriteFactory.getSpriteFactory().swapSheetSize(State);
@@ -179,8 +158,9 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             LastFrame = (int)(SheetSize.X * SheetSize.Y);
 
         }
+        */
 
-        public void TakeDamage(int powerup)
+       /* public void TakeDamage(int powerup)
         {
             if (State.powerup > 1 && State.powerup < 4)
             {
@@ -191,8 +171,8 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
                 State.powerup = 4;
             }
         }
-
-        public void IncreaseAction(int action)
+       */
+        /*public void IncreaseAction(int action)
         {
             if(State.action == 2)
             {
@@ -214,9 +194,9 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             {
                 up = true;
             }
-        }
+        }*/
 
-        public void DecreaseAction(int action)
+        /*public void DecreaseAction(int action)
         {
             if(State.action == 3 && up == true) //jump
             {
@@ -237,10 +217,10 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             {
                 down = true;
             }
-        }
+        } */
 
         //action positive is right
-        public void MoveAction(int action)
+       /* public void MoveAction(int action)
         {
             Frame = 0;
             if (action < 0)
@@ -278,7 +258,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
                     State.action = 1;
                     right = true;
                 }
-            }
+            }*/
         }
     }
-}
+
