@@ -5,11 +5,11 @@ using SprintZeroSpriteDrawing.Interfaces.Entitiy;
 
 namespace SprintZeroSpriteDrawing.Sprites.ItemSprites
 {
-    internal class Coins : ITile
+    internal class Coins : ICollideable
     {
         public Coins(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos) : base(nSprite, nSheetSize, nPos)
         {
-            IsVis = true;
+
         }
     }
 }

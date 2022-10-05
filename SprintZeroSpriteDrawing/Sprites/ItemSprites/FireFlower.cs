@@ -9,7 +9,7 @@ namespace SprintZeroSpriteDrawing.Sprites.ItemSprites
     {
         public FireFlower(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos) : base(nSprite, nSheetSize, nPos)
         {
-            IsVis = true;
+
         }
     }
 }
