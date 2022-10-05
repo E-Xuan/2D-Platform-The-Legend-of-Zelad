@@ -30,6 +30,12 @@ namespace SprintZeroSpriteDrawing.Interfaces.BlockState
             Inventory = new List<ICollideable>();
             Enter();
         }
+        public IBlockState(Block nBlock, List<ICollideable> nInventory)
+        {
+            block = nBlock;
+            Inventory = nInventory;
+            Enter();
+        }
 
         public virtual void Update() { }
         public virtual void Enter() { }

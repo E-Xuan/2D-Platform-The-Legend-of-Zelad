@@ -64,6 +64,10 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         {
             return new QuestionBlock(QuestionBlockSpriteSheet, new Vector2(2, 2), nPos);
         }
+        public ISprite CreateMQuestionBlock(Vector2 nPos)
+        {
+            return new QuestionBlock(QuestionBlockSpriteSheet, new Vector2(2, 2), nPos, new Rectangle((int)nPos.X, (int)nPos.Y, 32, 32), new List<ICollideable>{(ICollideable)ItemSpriteFactory.getFactory().createFlower(new Vector2(4, 2), Vector2.Add(nPos, new Vector2(0, -48)))});
+        }
         public ISprite CreateHiddenBlock(Vector2 nPos)
         {
             return new InvisibleBlock(QuestionBlockSpriteSheet, new Vector2(2, 2), nPos); 

@@ -23,6 +23,10 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         {
             State = new BlockUntapped(this);
         }
+        public Block(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos, Rectangle nBBox, List<ICollideable> Inventory) : base(nSprite, nSheetSize, nPos, nBBox)
+        {
+            State = new BlockUntapped(this, Inventory);
+        }
         public Block(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos, Vector2 acceleration, Rectangle nBBox) : base(nSprite, nSheetSize, nPos, acceleration, nBBox)
         {
             State = new BlockUntapped(this);

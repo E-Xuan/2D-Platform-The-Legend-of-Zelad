@@ -12,6 +12,9 @@ namespace SprintZeroSpriteDrawing.Interfaces.BlockState
         public BlockTapped(Block nBlock) : base(nBlock)
         {
         }
+        public BlockTapped(Block nBlock, List<ICollideable> nInventory) : base(nBlock, nInventory)
+        {
+        }
 
         public override void Enter()
         {
@@ -30,7 +33,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.BlockState
             {
                 case State.UNTAPPED:
                     Exit();
-                    block.State = new BlockUntapped(block);
+                    block.State = new BlockUntapped(block, Inventory);
                     break;
             }
         }

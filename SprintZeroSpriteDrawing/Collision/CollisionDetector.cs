@@ -6,11 +6,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
+
 namespace SprintZeroSpriteDrawing.Collision
 {
+    /// <summary>
+    /// General idea of a collision manager
+    /// </summary>
     public class CollisionDetector
     {
+        private static CollisionDetector CD;
         int velocity = 5;
+
+        public static CollisionDetector getCD()
+        {
+            return CD;
+        }
+
         public bool IsTouchingLeft(Rectangle firstObject, Rectangle secondObject)
         {
             
