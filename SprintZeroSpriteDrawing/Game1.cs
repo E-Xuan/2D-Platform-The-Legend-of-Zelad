@@ -2,18 +2,15 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using SprintZeroSpriteDrawing.Interfaces;
-using SprintZeroSpriteDrawing.Sprites;
+using SprintZeroSpriteDrawing.LevelLoader;
 using SprintZeroSpriteDrawing.Controllers;
 using SprintZeroSpriteDrawing.Commands;
 using System.Collections.Generic;
 using System;
 using System.Collections.Immutable;
 using SprintZeroSpriteDrawing.Sprites.ItemSprites;
-using System.Numerics;
-using System.Threading.Tasks.Dataflow;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
 using SprintZeroSpriteDrawing.Sprites.ObstacleSprites;
-using System.Reflection.Metadata;
 using SprintZeroSpriteDrawing.Interfaces.BlockState;
 using SprintZeroSpriteDrawing.Sprites.MarioActionSprites;
 using SprintZeroSpriteDrawing.Sprites.MarioSprites;
@@ -180,6 +177,8 @@ namespace SprintZeroSpriteDrawing
 
             //Loading the fonts
             HUDFont = Content.Load<SpriteFont>("Fonts/Arial");
+
+            //LevelLoader.LevelLoader.GetLevelLoader().LoadLevel("Content/Level/test.txt");
             
         }
 
