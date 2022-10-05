@@ -131,7 +131,7 @@ namespace SprintZeroSpriteDrawing
             SpriteList.Add("Obstacles/StairBlock", BlockSpriteFactory.getFactory().CreateStairBlock(new Vector2(700, 500)));
             SpriteList.Add("Obstacles/GroundBlock(Overworld)", BlockSpriteFactory.getFactory().CreateGroundBlock(new Vector2(800, 500)));
             SpriteList.Add("BBlock", BlockSpriteFactory.getFactory().CreateBrickBlock(new Vector2(300, 500)));
-            SpriteList.Add("QBlock", BlockSpriteFactory.getFactory().CreateMQuestionBlock(new Vector2(400, 500)));
+            SpriteList.Add("QBlock", BlockSpriteFactory.getFactory().CreateQuestionBlock(new Vector2(400, 500)));
             SpriteList.Add("IBlock", BlockSpriteFactory.getFactory().CreateHiddenBlock(new Vector2(600, 500)));
             SpriteList.Add("Obstacles/UsedBlock", BlockSpriteFactory.getFactory().CreateUsedBlock(new Vector2(500, 500)));
             #endregion
@@ -148,32 +148,32 @@ namespace SprintZeroSpriteDrawing
             SpriteList.Add("Mario", MarioSpriteFactory.getSpriteFactory().createMario(new Vector2(300, 300)));
             #endregion
 
-            keyboardController.UpdateBinding(Keys.A, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).ChangeAction, (int)ActionState.WALKING)), BindingType.PRESSED);
-            keyboardController.UpdateBinding(Keys.Left, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).ChangeAction, (int)ActionState.WALKING)), BindingType.PRESSED);
+            keyboardController.UpdateBinding(Keys.A, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)SpriteList["Mario"]).ChangeAction, (int)ActionState.WALKING)), BindingType.PRESSED);
+            keyboardController.UpdateBinding(Keys.Left, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)SpriteList["Mario"]).ChangeAction, (int)ActionState.WALKING)), BindingType.PRESSED);
 
-            keyboardController.UpdateBinding(Keys.D, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).MoveAction, 1)), BindingType.PRESSED);
-            keyboardController.UpdateBinding(Keys.Right, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).MoveAction, 1)), BindingType.PRESSED);
+            keyboardController.UpdateBinding(Keys.D, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)SpriteList["Mario"]).ChangeAction, 1)), BindingType.PRESSED);
+            keyboardController.UpdateBinding(Keys.Right, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)SpriteList["Mario"]).ChangeAction, 1)), BindingType.PRESSED);
 
-            keyboardController.UpdateBinding(Keys.Y, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).SetPowerup, 1)), BindingType.PRESSED);
-            keyboardController.UpdateBinding(Keys.U, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).SetPowerup, 2)), BindingType.PRESSED);
-            keyboardController.UpdateBinding(Keys.I, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).SetPowerup, 3)), BindingType.PRESSED);
-            keyboardController.UpdateBinding(Keys.O, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).TakeDamage, -1)), BindingType.PRESSED);
+            keyboardController.UpdateBinding(Keys.Y, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)SpriteList["Mario"]).ChangePowerup, 1)), BindingType.PRESSED);
+            keyboardController.UpdateBinding(Keys.U, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)SpriteList["Mario"]).ChangePowerup, 2)), BindingType.PRESSED);
+            keyboardController.UpdateBinding(Keys.I, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)SpriteList["Mario"]).ChangePowerup, 3)), BindingType.PRESSED);
+            keyboardController.UpdateBinding(Keys.O, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)SpriteList["Mario"]).ChangePowerup, -1)), BindingType.PRESSED);
 
-            keyboardController.UpdateBinding(Keys.W, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).IncreaseAction, 3)), BindingType.PRESSED);
-            keyboardController.UpdateBinding(Keys.Up, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).IncreaseAction, 3)), BindingType.PRESSED);
+            keyboardController.UpdateBinding(Keys.W, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)SpriteList["Mario"]).ChangeAction, 3)), BindingType.PRESSED);
+            keyboardController.UpdateBinding(Keys.Up, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)SpriteList["Mario"]).ChangeAction, 3)), BindingType.PRESSED);
            
-            keyboardController.UpdateBinding(Keys.S, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).DecreaseAction, 4)), BindingType.PRESSED);
-            keyboardController.UpdateBinding(Keys.Down, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).DecreaseAction, 4)), BindingType.PRESSED);
+            keyboardController.UpdateBinding(Keys.S, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)SpriteList["Mario"]).ChangeAction, 4)), BindingType.PRESSED);
+            keyboardController.UpdateBinding(Keys.Down, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)SpriteList["Mario"]).ChangeAction, 4)), BindingType.PRESSED);
 
             keyboardController.UpdateBinding(Keys.B, new IntCmd(new KeyValuePair<Action<int>, int>(((Block)SpriteList["BBlock"]).ChangeState, (int)State.BUMPING)), BindingType.PRESSED);
             keyboardController.UpdateBinding(Keys.OemQuestion, new IntCmd(new KeyValuePair<Action<int>, int>(((Block)SpriteList["QBlock"]).ChangeState, (int)State.BUMPING)),  BindingType.PRESSED);
             keyboardController.UpdateBinding(Keys.H, new IntCmd(new KeyValuePair<Action<int>, int>(((Block)SpriteList["IBlock"]).ChangeState, (int)State.BUMPING)), BindingType.PRESSED);
 
-            gamepadController.UpdateBinding(Buttons.LeftStick, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).MoveAction, -1)), BindingType.PRESSED);
-            gamepadController.UpdateBinding(Buttons.RightStick, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).MoveAction, 1)), BindingType.PRESSED);
+            gamepadController.UpdateBinding(Buttons.LeftStick, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)SpriteList["Mario"]).ChangeAction, -1)), BindingType.PRESSED);
+            gamepadController.UpdateBinding(Buttons.RightStick, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)SpriteList["Mario"]).ChangeAction, 1)), BindingType.PRESSED);
 
-            gamepadController.UpdateBinding(Buttons.DPadUp, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).IncreaseAction, 3)), BindingType.PRESSED);
-            gamepadController.UpdateBinding(Buttons.DPadDown, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)spriteList["Mario"]).DecreaseAction, 4)), BindingType.PRESSED);
+            gamepadController.UpdateBinding(Buttons.DPadUp, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)SpriteList["Mario"]).ChangeAction, 3)), BindingType.PRESSED);
+            gamepadController.UpdateBinding(Buttons.DPadDown, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)SpriteList["Mario"]).ChangeAction, 4)), BindingType.PRESSED);
             
             //Starting the sprite batch on our new graphics device
             //move init and loading of textures?
@@ -197,7 +197,7 @@ namespace SprintZeroSpriteDrawing
                 spriteEntry.Value.Update();
             }
 
-            ((Mario)spriteList["Mario"]).ChangeState();
+            ((Mario)SpriteList["Mario"]).UpdateState();
 
             base.Update(gameTime);
         }

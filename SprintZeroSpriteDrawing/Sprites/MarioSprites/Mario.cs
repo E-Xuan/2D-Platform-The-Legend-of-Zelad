@@ -81,10 +81,13 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
                 case (int)ActionState.RUNNING:
                     break;
                 case (int)ActionState.WALKING:
+
                     break;
                 case (int)ActionState.JUMPING:
+
                     break;
                 case (int)ActionState.CROUCHING:
+
                     break;
             }
         }

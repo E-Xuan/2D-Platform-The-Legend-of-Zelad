@@ -63,24 +63,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioActionSprites
             return sprite;
 		}
 
-         public void LoadContent(ContentManager content)
-        {
-            SmallRunningSpriteSheet = content.Load<Texture2D>("SmallMario/smallWalk");
-            SmallJumpingSpriteSheet = content.Load<Texture2D>("SmallMario/smallJump");
-            SmallIdleSpriteSheet = content.Load<Texture2D>("SmallMario/SmallIdle");
-
-            BigCrouchingSpriteSheet = content.Load<Texture2D>("BigMario/bigCrouching");
-            BigIdleSpriteSheet = content.Load<Texture2D>("BigMario/bigIdle");
-            BigJumpingSpriteSheet = content.Load<Texture2D>("BigMario/bigJump");
-            BigRunningSpriteSheet = content.Load<Texture2D>("BigMario/bigWalk");
-
-            FireCrouchingSpriteSheet = content.Load<Texture2D>("FireMario/fireCrouching");
-            FireIdleSpriteSheet = content.Load<Texture2D>("FireMario/fireIdle");
-            FireJumpingSpriteSheet = content.Load<Texture2D>("FireMario/fireJump");
-            FireRunningSpriteSheet = content.Load<Texture2D>("FireMario/fireWalk");
-
-            DeadMarioSpriteSheet = content.Load<Texture2D>("SmallMario/smallDying");
-        }
+         
 
         public ISprite createMario(Vector2 nPos)
         {
