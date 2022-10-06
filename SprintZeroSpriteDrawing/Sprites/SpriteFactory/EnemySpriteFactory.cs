@@ -39,15 +39,15 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
             RedKoopa = content.Load<Texture2D>("Enemy/KoopaTroopa");
         }
 
-        public ISprite createGoomba(Vector2 nPos)
+        public ISprite CreateGoomba(Vector2 nPos)
         {
             return new Goomba(Goomba, new Vector2(2, 1), nPos);
         }
-        public ISprite createGreenKoopa(Vector2 nPos)
+        public ISprite CreateGreenKoopa(Vector2 nPos)
         {
             return new GreenKoopa(GreenKoopa, new Vector2(2, 2), nPos);
         }
-        public ISprite createRedKoopa(Vector2 nPos)
+        public ISprite CreateRedKoopa(Vector2 nPos)
         {
             return new RedKoopa(GreenKoopa, new Vector2(2, 2), nPos);
         }

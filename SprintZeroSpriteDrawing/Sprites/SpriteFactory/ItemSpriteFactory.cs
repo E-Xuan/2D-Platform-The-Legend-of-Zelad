@@ -42,25 +42,25 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
             Star = content.Load<Texture2D>("Items/Starman");
         }
 
-        public ISprite createCoin(Vector2 SheetSize, Vector2 nPos)
+        public ISprite createCoin(Vector2 nPos)
         {
-            return new Coins(Coin, SheetSize, nPos);
+            return new Coins(Coin, new Vector2(2, 2), nPos);
         }
-        public ISprite createFlower(Vector2 SheetSize, Vector2 nPos)
+        public ISprite createFlower(Vector2 nPos)
         {
-            return new FireFlower(FireFlower, SheetSize, nPos);
+            return new FireFlower(FireFlower, new Vector2(4, 2), nPos);
         }
-        public ISprite createUPMushroom(Vector2 SheetSize, Vector2 nPos)
+        public ISprite createUPMushroom(Vector2 nPos)
         {
-            return new OneUPMushroom(UPMushroom, SheetSize, nPos);
+            return new OneUPMushroom(UPMushroom, new Vector2(1, 1), nPos);
         }
-        public ISprite createSMushroom(Vector2 SheetSize, Vector2 nPos)
+        public ISprite createSMushroom(Vector2 nPos)
         {
-            return new SuperMushroom(SMushroom, SheetSize, nPos);
+            return new SuperMushroom(SMushroom, new Vector2(1, 1), nPos);
         }
-        public ISprite createStar(Vector2 SheetSize, Vector2 nPos)
+        public ISprite createStar(Vector2 nPos)
         {
-            return new Starman(Star, SheetSize, nPos);
+            return new Starman(Star, new Vector2(2, 2), nPos);
         }
     }
 }

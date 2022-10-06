@@ -21,7 +21,7 @@ namespace SprintZeroSpriteDrawing.States.BlockState
 
         public FireFlowerState()
         {
-            this.sprite = ItemSpriteFactory.getFactory().createFlower(SheetSize, nPos);
+            this.sprite = ItemSpriteFactory.getFactory().createFlower(nPos);
             triggered = false;
         }
 

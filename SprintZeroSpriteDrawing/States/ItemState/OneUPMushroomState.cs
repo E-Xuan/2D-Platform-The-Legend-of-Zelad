@@ -21,7 +21,7 @@ namespace SprintZeroSpriteDrawing.States.BlockState
 
         public OneUPMushroomState()
         {
-            this.sprite = ItemSpriteFactory.getFactory().createUPMushroom(SheetSize, nPos);
+            this.sprite = ItemSpriteFactory.getFactory().createUPMushroom(nPos);
             triggered = false;
         }
 
