@@ -28,8 +28,8 @@ namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
 
     public class ICollideable : IRBody
     {
-        public List<Tuple<ICommand, Direction, CType>> CollisionResponse { get; }
-        public Rectangle BBox { get; }
+        public List<Tuple<ICommand, Direction, CType>> CollisionResponse { get; set; }
+        public Rectangle BBox { get; set; }
 
         public ICollideable(Texture2D nSprite, Vector2 nPos, Rectangle nBBox) : base(nSprite, nPos)
         {

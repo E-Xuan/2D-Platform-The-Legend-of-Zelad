@@ -22,7 +22,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
         public bool AutoFrame { get; set; }
         public int StartFrame { get; set; }
         public int LastFrame { get; set; }
-        public Vector2 SheetSize { get; }
+        public Vector2 SheetSize { get; set; }
         private Vector2 FrameSize;
         #endregion
         public ITile(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos)
@@ -59,7 +59,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
         {
             return Frame++;
         }
-        public void Draw(SpriteBatch batch)
+        public virtual void Draw(SpriteBatch batch)
         {
             if (IsVis)
             {
@@ -68,7 +68,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
                 batch.Draw(Sprite, Vector2.Add(Pos, -FrameSize), Rect, Color.White, 0, new Vector2(0, 0), 1, SpriteEffects.None, 0);
             }
         }
-        public void Draw(SpriteBatch batch, SpriteEffects effects)
+        public virtual void Draw(SpriteBatch batch, SpriteEffects effects)
         {
             if (IsVis)
             {

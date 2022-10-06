@@ -13,29 +13,26 @@ using System.Threading.Tasks;
 
 namespace SprintZeroSpriteDrawing.States.MarioState
 {
-    public class MarioActionState : IMarioState
-	{
-		public ActionState state;
-		public MarioActionState(Mario mario) : base(mario)
-		{
-			state = ActionState.IDLE;
-		}
+    public class MarioPowerupState : IMarioState
+    {
+        public PowerupState state;
+        public MarioPowerupState(Mario mario) : base(mario)
+        {
+            state = PowerupState.SMALL;
+        }
 
-		public MarioActionState (ActionState nstate, Mario mario): base(mario)
-		{
-			state = nstate;
-		}
+        public MarioPowerupState(PowerupState nstate, Mario mario) : base(mario)
+        {
+            state = nstate;
+        }
 
-		public void Dammage()
-		{
-			state = ActionState.DAMMAGED;
-		}
+        
 
         public void Update()
         {
         }
 
-        public ActionState GetState()
+        public PowerupState GetState()
         {
             return state;
         }

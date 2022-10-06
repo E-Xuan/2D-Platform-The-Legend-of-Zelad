@@ -21,8 +21,14 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
         {
             currActionState = ActionState.CROUCHING;
             mario.IsVis = true;
-            mario.Velocity = new Vector2(0, 0);
+            mario.Velocity = new Vector2(0, 1);
             mario.Acceleration = new Vector2(0, 0);
+            if(mario.StatePowerup.currPowerupState != PowerupState.SMALL)
+            {
+                mario.Frame = 6;
+                mario.AutoFrame = false;
+            }
+             
         }
 
         public override void ChangeActionState(int state)

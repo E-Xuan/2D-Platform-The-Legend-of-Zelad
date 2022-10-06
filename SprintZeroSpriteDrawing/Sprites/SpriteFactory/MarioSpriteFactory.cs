@@ -15,14 +15,18 @@ using System.Threading.Tasks;
 namespace SprintZeroSpriteDrawing.Sprites.MarioActionSprites
 {
     public class MarioSpriteFactory
-	{
-		
-       
+    {
+
+
 
         public Texture2D spriteSheet;
         public Vector2 sheetSize;
         public Vector2 frameSize;
-        
+        #region Mario Sprite Sheets
+        public Texture2D SmallMarioSpriteSheet;
+        public Texture2D BigMarioSpriteSheet;
+        public Texture2D FireMarioSpriteSheet;
+        #endregion
 
         public Vector2 position { get; set; }
 
@@ -30,7 +34,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioActionSprites
         private Texture2D SmallRunningSpriteSheet;
         private Texture2D SmallJumpingSpriteSheet;
         private Texture2D SmallIdleSpriteSheet;
-       
+
         #endregion
 
         #region Big Mario
@@ -51,27 +55,32 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioActionSprites
         private Texture2D DeadMarioSpriteSheet;
         #endregion
 
-        
+
 
         private static MarioSpriteFactory sprite;
         public static MarioSpriteFactory getSpriteFactory()
-		{
-            if(sprite == null)
+        {
+            if (sprite == null)
             {
                 sprite = new MarioSpriteFactory();
             }
             return sprite;
-		}
-
-         
-
+        }
+        public void LoadContent(ContentManager content)
+        {
+            SmallMarioSpriteSheet = content.Load<Texture2D>("SmallMario/SmallMarioSpriteSheet");
+            BigMarioSpriteSheet = content.Load<Texture2D>("BigMario/BigMarioSpriteSheet");
+            FireMarioSpriteSheet = content.Load<Texture2D>("FireMario/FireMarioSpriteSheet");
+        }
         public ISprite createMario(Vector2 nPos)
         {
-            return new Mario(SmallIdleSpriteSheet, new Vector2(1,1), nPos);
-            
-        }
-        
-       
+            return Mario.GetMario();
 
-	}
+        }
+
+
+
+
+
+    }
 }

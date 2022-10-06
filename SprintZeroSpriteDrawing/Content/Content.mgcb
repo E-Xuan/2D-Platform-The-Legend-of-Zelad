@@ -49,6 +49,18 @@
 /processorParam:TextureFormat=Color
 /build:BigMario/bigJump.png
 
+#begin BigMario/BigMarioSpriteSheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:BigMario/BigMarioSpriteSheet.png
+
 #begin BigMario/bigToSmall.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -156,6 +168,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:FireMario/fireJump.png
+
+#begin FireMario/FireMarioSpriteSheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:FireMario/FireMarioSpriteSheet.png
 
 #begin FireMario/fireToSmall.png
 /importer:TextureImporter
@@ -379,6 +403,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:SmallMario/smallJump.png
+
+#begin SmallMario/SmallMarioSpriteSheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:SmallMario/SmallMarioSpriteSheet.png
 
 #begin SmallMario/smallTurning.png
 /importer:TextureImporter

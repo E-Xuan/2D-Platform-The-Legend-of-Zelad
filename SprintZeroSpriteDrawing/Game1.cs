@@ -112,9 +112,12 @@ namespace SprintZeroSpriteDrawing
             ItemSpriteFactory.getFactory().LoadContent(Content);
             BlockSpriteFactory.getFactory().LoadContent(Content);
             EnemySpriteFactory.getFactory().LoadContent(Content);
+            Mario.LoadContent(Content);
 
             #region MarioContent
-            //SpriteList.Add("Mario", MarioSpriteFactory.getSpriteFactory().createMario(new Vector2(300, 300)));
+            MarioSpriteFactory.getSpriteFactory().LoadContent(Content);
+            
+            SpriteList.Add("Mario", MarioSpriteFactory.getSpriteFactory().createMario(new Vector2(300, 300)));
             #endregion
             // set game binding
             BindingCmd.SetGameBinding(SpriteList, keyboardController, gamepadController);
