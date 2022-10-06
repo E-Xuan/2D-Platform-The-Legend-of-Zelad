@@ -2,18 +2,15 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using SprintZeroSpriteDrawing.Interfaces;
-using SprintZeroSpriteDrawing.Sprites;
+using SprintZeroSpriteDrawing.LevelLoader;
 using SprintZeroSpriteDrawing.Controllers;
 using SprintZeroSpriteDrawing.Commands;
 using System.Collections.Generic;
 using System;
 using System.Collections.Immutable;
 using SprintZeroSpriteDrawing.Sprites.ItemSprites;
-using System.Numerics;
-using System.Threading.Tasks.Dataflow;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
 using SprintZeroSpriteDrawing.Sprites.ObstacleSprites;
-using System.Reflection.Metadata;
 using SprintZeroSpriteDrawing.Interfaces.BlockState;
 using SprintZeroSpriteDrawing.Sprites.MarioActionSprites;
 using SprintZeroSpriteDrawing.Sprites.MarioSprites;
@@ -111,32 +108,10 @@ namespace SprintZeroSpriteDrawing
         protected override void LoadContent()
         {
             //Loading the images, and creating the sprites too
-
-            #region ItemContent
+            
             ItemSpriteFactory.getFactory().LoadContent(Content);
-            SpriteList.Add("Items/FireFlower", ItemSpriteFactory.getFactory().createFlower(new Vector2(4, 2), new Vector2(250, 200)));
-            SpriteList.Add("Items/Coins", ItemSpriteFactory.getFactory().createCoin(new Vector2(2, 2), new Vector2(350, 200)));
-            SpriteList.Add("Items/SuperMushroom", ItemSpriteFactory.getFactory().createSMushroom(new Vector2(1, 1), new Vector2(450, 200)));
-            SpriteList.Add("Items/1UPMushroom", ItemSpriteFactory.getFactory().createUPMushroom(new Vector2(1, 1), new Vector2(550, 200)));
-            SpriteList.Add("Items/Starman", ItemSpriteFactory.getFactory().createStar(new Vector2(2, 2), new Vector2(650, 200)));
-            #endregion
-
-            #region BlockContent
             BlockSpriteFactory.getFactory().LoadContent(Content);
-            SpriteList.Add("Obstacles/StairBlock", BlockSpriteFactory.getFactory().CreateStairBlock(new Vector2(700, 500)));
-            SpriteList.Add("Obstacles/GroundBlock(Overworld)", BlockSpriteFactory.getFactory().CreateGroundBlock(new Vector2(800, 500)));
-            SpriteList.Add("BBlock", BlockSpriteFactory.getFactory().CreateBrickBlock(new Vector2(300, 500)));
-            SpriteList.Add("QBlock", BlockSpriteFactory.getFactory().CreateQuestionBlock(new Vector2(400, 500)));
-            SpriteList.Add("IBlock", BlockSpriteFactory.getFactory().CreateHiddenBlock(new Vector2(600, 500)));
-            SpriteList.Add("Obstacles/UsedBlock", BlockSpriteFactory.getFactory().CreateUsedBlock(new Vector2(500, 500)));
-            #endregion
-
-            #region EnemyContent
             EnemySpriteFactory.getFactory().LoadContent(Content);
-            SpriteList.Add("Goomba", EnemySpriteFactory.getFactory().createGoomba(new Vector2(100, 100)));
-            SpriteList.Add("GreenKoopa", EnemySpriteFactory.getFactory().createGreenKoopa(new Vector2(200, 100)));
-            SpriteList.Add("RedKoopa", EnemySpriteFactory.getFactory().createRedKoopa(new Vector2(300, 100)));
-            #endregion
 
             #region MarioContent
             MarioSpriteFactory.getSpriteFactory().LoadContent(Content);
@@ -152,6 +127,8 @@ namespace SprintZeroSpriteDrawing
 
             //Loading the fonts
             HUDFont = Content.Load<SpriteFont>("Fonts/Arial");
+
+            LevelLoader.LevelLoader.GetLevelLoader().LoadLevel("Level/test.txt");
             
         }
 
@@ -168,7 +145,7 @@ namespace SprintZeroSpriteDrawing
                 spriteEntry.Value.Update();
             }
 
-            ((Mario)SpriteList["Mario"]).Update();
+            //((Mario)SpriteList["Mario"]).UpdateState();
 
             base.Update(gameTime);
         }

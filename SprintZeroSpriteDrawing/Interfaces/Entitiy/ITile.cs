@@ -65,7 +65,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
             {
                 Rectangle Rect = new Rectangle((int)(Frame % (int)SheetSize.X * FrameSize.X), (int)(Frame / (int)SheetSize.X * FrameSize.Y),
                     (int)FrameSize.X, (int)FrameSize.Y);
-                batch.Draw(Sprite, Pos, Rect, Color.White, 0, new Vector2(0, 0), 1, SpriteEffects.None, 0);
+                batch.Draw(Sprite, Vector2.Add(Pos, -FrameSize), Rect, Color.White, 0, new Vector2(0, 0), 1, SpriteEffects.None, 0);
             }
         }
         public void Draw(SpriteBatch batch, SpriteEffects effects)
@@ -74,7 +74,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
             {
                 Rectangle Rect = new Rectangle((int)(Frame % (int)SheetSize.X * FrameSize.X), (int)(Frame / (int)SheetSize.X * FrameSize.Y),
                     (int)FrameSize.X, (int)FrameSize.Y);
-                batch.Draw(Sprite, Pos, Rect, Color.White, 0, new Vector2(0, 0), 1, effects, 0);
+                batch.Draw(Sprite, Vector2.Add(Pos, -FrameSize), Rect, Color.White, 0, new Vector2(0, 0), 1, effects, 0);
             }
         }
         virtual public void Update()

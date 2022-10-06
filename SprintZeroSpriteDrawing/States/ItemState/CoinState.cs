@@ -21,7 +21,7 @@ namespace SprintZeroSpriteDrawing.States.BlockState
 
         public CoinState()
         {
-            this.sprite = ItemSpriteFactory.getFactory().createCoin(SheetSize, nPos);
+            this.sprite = ItemSpriteFactory.getFactory().createCoin(nPos);
             triggered = false;
         }
 

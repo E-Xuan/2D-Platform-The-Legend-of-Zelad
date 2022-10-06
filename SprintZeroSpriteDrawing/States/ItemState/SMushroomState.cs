@@ -21,7 +21,7 @@ namespace SprintZeroSpriteDrawing.States.BlockState
 
         public SMushroomState()
         {
-            this.sprite = ItemSpriteFactory.getFactory().createSMushroom(SheetSize, nPos);
+            this.sprite = ItemSpriteFactory.getFactory().createSMushroom(nPos);
             triggered = false;
         }
 

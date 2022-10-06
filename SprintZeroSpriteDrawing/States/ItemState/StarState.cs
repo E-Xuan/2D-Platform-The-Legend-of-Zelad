@@ -21,7 +21,7 @@ namespace SprintZeroSpriteDrawing.States.BlockState
 
         public StarState()
         {
-            this.sprite = ItemSpriteFactory.getFactory().createStar(SheetSize, nPos);
+            this.sprite = ItemSpriteFactory.getFactory().createStar(nPos);
             triggered = false;
         }
 
