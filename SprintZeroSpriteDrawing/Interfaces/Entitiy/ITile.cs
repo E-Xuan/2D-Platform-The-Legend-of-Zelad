@@ -22,7 +22,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
         public bool AutoFrame { get; set; }
         public int StartFrame { get; set; }
         public int LastFrame { get; set; }
-        public Vector2 SheetSize { get; }
+        public Vector2 SheetSize { get; set; }
         private Vector2 FrameSize;
         #endregion
         public ITile(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos)

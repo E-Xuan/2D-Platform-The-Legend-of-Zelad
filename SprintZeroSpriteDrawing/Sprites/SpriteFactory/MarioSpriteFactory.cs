@@ -74,7 +74,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioActionSprites
         }
         public ISprite createMario(Vector2 nPos)
         {
-            return new Mario(SmallMarioSpriteSheet, new Vector2(3, 3), nPos);
+            return Mario.GetMario();
 
         }
 

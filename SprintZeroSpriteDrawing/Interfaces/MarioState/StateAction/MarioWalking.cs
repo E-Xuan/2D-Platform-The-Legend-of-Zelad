@@ -19,11 +19,17 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
 
         public override void Enter()
         {
+            int direction = 1;
             currActionState = ActionState.WALKING;
             mario.IsVis = true;
-            mario.Velocity = new Vector2(0, 0);
+            if (mario.effects == SpriteEffects.FlipHorizontally)
+            {
+                direction *= -1;
+            }
+            mario.Velocity = new Vector2((float)(direction), 0);
             mario.Acceleration = new Vector2(0, 0);
             mario.AutoFrame = true;
+            mario.Frame = 3;
             mario.StartFrame = 3;
             mario.LastFrame = 6;
            

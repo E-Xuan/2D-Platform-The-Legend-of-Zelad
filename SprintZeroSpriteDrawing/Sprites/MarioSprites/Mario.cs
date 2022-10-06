@@ -16,86 +16,46 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
 {
     public class Mario : ICollideable
     {
-        public Texture2D spriteSheet;
-        public Vector2 sheetSize;
-        public Vector2 frameSize;
-
-
-        public Vector2 position { get; set; }
 
         #region Mario Sprite Sheets
-        public Texture2D SmallMarioSpriteSheet;
-        public Texture2D BigMarioSpriteSheet;
-        public Texture2D FireMarioSpriteSheet;
+        public static Texture2D SmallMarioSpriteSheet;
+        public static Texture2D BigMarioSpriteSheet;
+        public static Texture2D FireMarioSpriteSheet;
         #endregion
 
 
 
 
         public SpriteEffects effects;
-        public bool IsVis { get; set; }
-        public Texture2D Sprite { get; set; }
-        public Vector2 Pos { get; set; }
-        public int Frame { get; set; }
-        public int Subframe { get; set; }
-        public int SubframeLimit { get; set; }
-        public bool AutoFrame { get; set; }
-        private int LastFrame;
-        private Vector2 SheetSize;
-        private Vector2 FrameSize;
-        private Mario mario;
+        private static Mario _mario;
         int Speed = 5;
         bool left = false;
         bool right = false;
         bool up = false;
         bool down = false;
+
         public IMarioState StatePowerup;
         public IMarioState StateAction;
-
         public int[] currState;
-        public int width;
-        public int height;
 
-        /* private static Mario _mario;
-         public static Mario mario
-         {
-             get
+         public static Mario GetMario() {
+             if(_mario == null)
              {
-                 if(_mario == null)
-                 {
-                     _mario = new Mario();
-                 }
-                 return _mario;
+                _mario = new Mario(SmallMarioSpriteSheet, new Vector2(3, 3), new Vector2(700, 700));
              }
+             return _mario;
          }
-        */
 
-        public Mario(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos) : base(nSprite, nSheetSize, nPos)
-        {
-            mario = this;
+         public Mario(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos) : base(nSprite, nSheetSize, nPos)
+         {
             effects = SpriteEffects.None;
-            IsVis = true;
-            SubframeLimit = 20;
-            AutoFrame = false;
-            Sprite = nSprite;
-            Pos = nPos;
-            SheetSize = nSheetSize;
             LastFrame = 1;
             StartFrame = 0;
             StatePowerup = new SmallMario(this);
             StateAction = new MarioIdle(this);
             currState = new int[5];
-            if (nSprite != null)
-                FrameSize = new Vector2(nSprite.Width / SheetSize.X, nSprite.Height / SheetSize.Y);
             
-        }
-
-
-        public void SetSprite(Texture2D nSprite)
-        {
-            this.Sprite = nSprite;
-            this.FrameSize = new Vector2(nSprite.Width / SheetSize.X, nSprite.Height / SheetSize.Y);
-        }
+         }
 
         public void UpdateState()
         {
@@ -103,26 +63,6 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             int currPowerup = (int)StatePowerup.currPowerupState;
             currState[prevPowerup] = 0;
             currState[currPowerup] = (int)StateAction.currActionState;
-        }
-
-
-
-        public int NextFrame()
-        {
-            return Frame++;
-        }
-
-
-
-
-        public void SetVis(int nIsVis)
-        {
-            IsVis = nIsVis > 0;
-        }
-
-        public void TogVis(int nIsVis)
-        {
-            IsVis = !IsVis;
         }
 
         public override void Update()
@@ -137,26 +77,11 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             base.Draw(batch, effects);
         }
 
-        public void LoadContent(ContentManager content)
+        public static void LoadContent(ContentManager content)
         {
             SmallMarioSpriteSheet = content.Load<Texture2D>("SmallMario/SmallMarioSpriteSheet");
             BigMarioSpriteSheet = content.Load<Texture2D>("BigMario/BigMarioSpriteSheet");
             FireMarioSpriteSheet = content.Load<Texture2D>("FireMario/FireMarioSpriteSheet");
-        }
-
-        public void MoveSprite(Vector2 displacement)
-        {
-            Pos = Vector2.Add(Pos, displacement);
-        }
-        public void MoveX(int pixels)
-        {
-            AutoFrame = true;
-            Pos = Vector2.Add(Pos, new Vector2(pixels, 0));
-        }
-        public void MoveY(int pixels)
-        {
-            AutoFrame = false;
-            Pos = Vector2.Add(Pos, new Vector2(0, pixels));
         }
         public void ChangePowerup(int powerup)
         {
@@ -166,23 +91,6 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
         {
             StateAction.ChangeActionState(action);
         }
-        public void FlipFacing(int flip)
-        {
-            if (flip > 0)
-                effects = SpriteEffects.FlipHorizontally;
-            else
-                effects = SpriteEffects.None;
-        }
-
-        /*public void ChangeState()
-        {
-            Sprite = MarioSpriteFactory.getSpriteFactory().swapSprite(State);
-            SheetSize = MarioSpriteFactory.getSpriteFactory().swapSheetSize(State);
-            FrameSize = MarioSpriteFactory.getSpriteFactory().swapFrameSize(State);
-            LastFrame = (int)(SheetSize.X * SheetSize.Y);
-
-        }
-        */
 
         public void TakeDamage(int powerup)
         {

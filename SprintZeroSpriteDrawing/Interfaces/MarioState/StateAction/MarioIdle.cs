@@ -22,6 +22,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
             mario.Velocity = new Vector2(0, 0);
             mario.Acceleration = new Vector2(0, 0);
             mario.StartFrame = 0;
+            mario.Frame = 0;
             mario.LastFrame = 1;
             mario.AutoFrame = false;
         }

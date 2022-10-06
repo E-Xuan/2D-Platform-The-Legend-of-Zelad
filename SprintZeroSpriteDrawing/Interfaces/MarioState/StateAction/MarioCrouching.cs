@@ -21,11 +21,11 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
         {
             currActionState = ActionState.CROUCHING;
             mario.IsVis = true;
-            mario.Velocity = new Vector2(0, 0);
+            mario.Velocity = new Vector2(0, 1);
             mario.Acceleration = new Vector2(0, 0);
-            if(currPowerupState != PowerupState.SMALL)
+            if(mario.StatePowerup.currPowerupState != PowerupState.SMALL)
             {
-                mario.StartFrame = 7;
+                mario.Frame = 6;
                 mario.AutoFrame = false;
             }
              

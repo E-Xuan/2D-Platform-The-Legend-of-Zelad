@@ -21,8 +21,8 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StatePowerup
         {
             prevPowerupState = currPowerupState;
             currPowerupState = PowerupState.FIRE;
-            mario.IsVis = false;
-            mario.sheetSize = new Vector2(2, 4);
+            mario.IsVis = true;
+            mario.SheetSize = new Vector2(4, 2);
             mario.SetSprite(MarioSpriteFactory.getSpriteFactory().FireMarioSpriteSheet);
         }
 
@@ -33,6 +33,10 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StatePowerup
                 case PowerupState.SMALL:
                     Exit();
                     mario.StatePowerup = new SmallMario(mario);
+                    break;
+                case PowerupState.BIG:
+                    Exit();
+                    mario.StatePowerup = new BigMario(mario);
                     break;
                 case PowerupState.STAR:
                     Exit();

@@ -112,6 +112,7 @@ namespace SprintZeroSpriteDrawing
             ItemSpriteFactory.getFactory().LoadContent(Content);
             BlockSpriteFactory.getFactory().LoadContent(Content);
             EnemySpriteFactory.getFactory().LoadContent(Content);
+            Mario.LoadContent(Content);
 
             #region MarioContent
             MarioSpriteFactory.getSpriteFactory().LoadContent(Content);
@@ -128,7 +129,7 @@ namespace SprintZeroSpriteDrawing
             //Loading the fonts
             HUDFont = Content.Load<SpriteFont>("Fonts/Arial");
 
-            //LevelLoader.LevelLoader.GetLevelLoader().LoadLevel("Level/test.txt");
+            LevelLoader.LevelLoader.GetLevelLoader().LoadLevel("Level/test.txt");
             
         }
 

@@ -16,7 +16,7 @@ namespace SprintZeroSpriteDrawing.States.MarioState
     public class MarioActionState : IMarioState
 	{
 		public ActionState state;
-		public MarioActionState(Mario mario): base(mario)
+		public MarioActionState(Mario mario) : base(mario)
 		{
 			state = ActionState.IDLE;
 		}
