@@ -160,11 +160,11 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
         }
         public void ChangePowerup(int powerup)
         {
-            this.StatePowerup.ChangePowerupState(powerup);
+            StatePowerup.ChangePowerupState(powerup);
         }
         public void ChangeAction(int action)
         {
-            this.StateAction.ChangeActionState(action);
+            StateAction.ChangeActionState(action);
         }
         public void FlipFacing(int flip)
         {

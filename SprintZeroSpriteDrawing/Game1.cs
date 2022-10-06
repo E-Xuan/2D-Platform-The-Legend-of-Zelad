@@ -128,7 +128,7 @@ namespace SprintZeroSpriteDrawing
             //Loading the fonts
             HUDFont = Content.Load<SpriteFont>("Fonts/Arial");
 
-            LevelLoader.LevelLoader.GetLevelLoader().LoadLevel("Level/test.txt");
+            //LevelLoader.LevelLoader.GetLevelLoader().LoadLevel("Level/test.txt");
             
         }
 

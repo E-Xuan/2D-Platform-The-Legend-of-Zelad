@@ -21,7 +21,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StatePowerup
         {
             prevPowerupState = currPowerupState;
             currPowerupState = PowerupState.FIRE;
-            mario.IsVis = true;
+            mario.IsVis = false;
             mario.sheetSize = new Vector2(2, 4);
             mario.SetSprite(MarioSpriteFactory.getSpriteFactory().FireMarioSpriteSheet);
         }
