@@ -37,10 +37,6 @@ namespace SprintZeroSpriteDrawing.Commands
             keyboardController.UpdateBinding(Keys.S, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)SpriteList["Mario"]).DecreaseAction, (int)ActionState.CROUCHING)), BindingType.PRESSED);
             keyboardController.UpdateBinding(Keys.Down, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)SpriteList["Mario"]).DecreaseAction, (int)ActionState.CROUCHING)), BindingType.PRESSED);
 
-            keyboardController.UpdateBinding(Keys.B, new IntCmd(new KeyValuePair<Action<int>, int>(((Block)SpriteList["BBlock"]).ChangeState, (int)State.BUMPING)), BindingType.PRESSED);
-            keyboardController.UpdateBinding(Keys.OemQuestion, new IntCmd(new KeyValuePair<Action<int>, int>(((Block)SpriteList["QBlock"]).ChangeState, (int)State.BUMPING)), BindingType.PRESSED);
-            keyboardController.UpdateBinding(Keys.H, new IntCmd(new KeyValuePair<Action<int>, int>(((Block)SpriteList["IBlock"]).ChangeState, (int)State.BUMPING)), BindingType.PRESSED);
-
             gamepadController.UpdateBinding(Buttons.LeftStick, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)SpriteList["Mario"]).ChangeAction, -1)), BindingType.PRESSED);
             gamepadController.UpdateBinding(Buttons.RightStick, new IntCmd(new KeyValuePair<Action<int>, int>(((Mario)SpriteList["Mario"]).ChangeAction, 1)), BindingType.PRESSED);
 
