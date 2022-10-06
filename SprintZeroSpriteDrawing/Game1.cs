@@ -140,6 +140,7 @@ namespace SprintZeroSpriteDrawing
 
             #region MarioContent
             MarioSpriteFactory.getSpriteFactory().LoadContent(Content);
+            
             SpriteList.Add("Mario", MarioSpriteFactory.getSpriteFactory().createMario(new Vector2(300, 300)));
             #endregion
             // set game binding
@@ -167,7 +168,7 @@ namespace SprintZeroSpriteDrawing
                 spriteEntry.Value.Update();
             }
 
-            ((Mario)SpriteList["Mario"]).UpdateState();
+            ((Mario)SpriteList["Mario"]).Update();
 
             base.Update(gameTime);
         }

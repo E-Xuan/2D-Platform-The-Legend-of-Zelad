@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework.Graphics;
 using SprintZeroSpriteDrawing.Interfaces.Entitiy;
 using SprintZeroSpriteDrawing.Interfaces.MarioState;
-using SprintZeroSpriteDrawing.Sprites.MarioActionSprites;
 using SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction;
 using SprintZeroSpriteDrawing.Interfaces.MarioState.StatePowerup;
 using System;
@@ -11,12 +10,28 @@ using System.Linq;
 using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
-
+using Microsoft.Xna.Framework.Content;
 
 namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
 {
     public class Mario : ICollideable
-	{
+    {
+        public Texture2D spriteSheet;
+        public Vector2 sheetSize;
+        public Vector2 frameSize;
+
+
+        public Vector2 position { get; set; }
+
+        #region Mario Sprite Sheets
+        public Texture2D SmallMarioSpriteSheet;
+        public Texture2D BigMarioSpriteSheet;
+        public Texture2D FireMarioSpriteSheet;
+        #endregion
+
+
+
+
         public SpriteEffects effects;
         public bool IsVis { get; set; }
         public Texture2D Sprite { get; set; }
@@ -34,35 +49,51 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
         bool right = false;
         bool up = false;
         bool down = false;
-        public IMarioState StateAction;
         public IMarioState StatePowerup;
+        public IMarioState StateAction;
+
         public int[] currState;
-        
-
-
         public int width;
         public int height;
+
+        /* private static Mario _mario;
+         public static Mario mario
+         {
+             get
+             {
+                 if(_mario == null)
+                 {
+                     _mario = new Mario();
+                 }
+                 return _mario;
+             }
+         }
+        */
+
         public Mario(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos) : base(nSprite, nSheetSize, nPos)
-		{
+        {
             mario = this;
             effects = SpriteEffects.None;
-			IsVis = true;
+            IsVis = true;
             SubframeLimit = 20;
-            AutoFrame = true;
+            AutoFrame = false;
             Sprite = nSprite;
             Pos = nPos;
             SheetSize = nSheetSize;
-            LastFrame = (int)(SheetSize.X * SheetSize.Y);
+            LastFrame = 1;
+            StartFrame = 0;
+            StatePowerup = new SmallMario(this);
+            StateAction = new MarioIdle(this);
+            currState = new int[5];
             if (nSprite != null)
                 FrameSize = new Vector2(nSprite.Width / SheetSize.X, nSprite.Height / SheetSize.Y);
-            StateAction = new MarioIdle(this);
-            StatePowerup = new SmallMario(this);
-            currState = new int[5];
+            
         }
+
 
         public void SetSprite(Texture2D nSprite)
         {
-            Sprite = nSprite;
+            this.Sprite = nSprite;
             this.FrameSize = new Vector2(nSprite.Width / SheetSize.X, nSprite.Height / SheetSize.Y);
         }
 
@@ -72,52 +103,45 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             int currPowerup = (int)StatePowerup.currPowerupState;
             currState[prevPowerup] = 0;
             currState[currPowerup] = (int)StateAction.currActionState;
-
-            switch (currState[currPowerup])
-            {
-                case (int)ActionState.IDLE:
-                    
-                    break;
-                case (int)ActionState.RUNNING:
-                    break;
-                case (int)ActionState.WALKING:
-
-                    break;
-                case (int)ActionState.JUMPING:
-
-                    break;
-                case (int)ActionState.CROUCHING:
-
-                    break;
-            }
         }
+
+
 
         public int NextFrame()
         {
             return Frame++;
         }
-		
 
-		
 
-		public void SetVis(int nIsVis)
-		{
+
+
+        public void SetVis(int nIsVis)
+        {
             IsVis = nIsVis > 0;
         }
 
-		public void TogVis(int nIsVis)
-		{
-			IsVis = !IsVis;
-		}
+        public void TogVis(int nIsVis)
+        {
+            IsVis = !IsVis;
+        }
 
-		public override void Update()
-		{
+        public override void Update()
+        {
             StatePowerup.Update();
             StateAction.Update();
             base.Update();
-            
+        }
 
-            //Stuff and Things
+        public override void Draw(SpriteBatch batch)
+        {
+            base.Draw(batch, effects);
+        }
+
+        public void LoadContent(ContentManager content)
+        {
+            SmallMarioSpriteSheet = content.Load<Texture2D>("SmallMario/SmallMarioSpriteSheet");
+            BigMarioSpriteSheet = content.Load<Texture2D>("BigMario/BigMarioSpriteSheet");
+            FireMarioSpriteSheet = content.Load<Texture2D>("FireMario/FireMarioSpriteSheet");
         }
 
         public void MoveSprite(Vector2 displacement)
@@ -142,7 +166,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
         {
             this.StateAction.ChangeActionState(action);
         }
-        public void FlipFacing(int flip) 
+        public void FlipFacing(int flip)
         {
             if (flip > 0)
                 effects = SpriteEffects.FlipHorizontally;
@@ -160,105 +184,109 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
         }
         */
 
-       /* public void TakeDamage(int powerup)
+        public void TakeDamage(int powerup)
         {
-            if (State.powerup > 1 && State.powerup < 4)
+            if (StatePowerup.currPowerupState != PowerupState.DEAD)
             {
-                State.powerup = 1;
+                ChangePowerup((int)PowerupState.SMALL);
             }
             else
             {
-                State.powerup = 4;
+                ChangePowerup((int)PowerupState.DEAD);
             }
         }
-       */
-        /*public void IncreaseAction(int action)
+       
+        public void IncreaseAction(int action)
         {
-            if(State.action == 2)
+            if(StateAction.currActionState == ActionState.IDLE)
             {
-                State.action = 3; //jump
+                ChangeAction((int)ActionState.JUMPING); //jump
             }
-            else if(State.action == 4 && down == true)
+            else if(StateAction.currActionState == ActionState.CROUCHING && down == true)
             {
                 down = false;
             }
-            else if(State.action == 4)
+            else if(StateAction.currActionState == ActionState.CROUCHING)
             {
-                State.action = 2;
+                ChangeAction((int)ActionState.IDLE);
             }
-            else if(State.action == 1)
+            else if(StateAction.currActionState == ActionState.WALKING)
             {
-                State.action = 3;
+                ChangeAction((int)ActionState.JUMPING);
             }
-            else if(State.action == 3)
+            else if(StateAction.currActionState == ActionState.JUMPING)
             {
                 up = true;
             }
-        }*/
+        }
 
-        /*public void DecreaseAction(int action)
+        public void DecreaseAction(int action)
         {
-            if(State.action == 3 && up == true) //jump
+            if(StateAction.currActionState == ActionState.JUMPING && up == true) //jump
             {
                 up = false;
             }
-            else if (State.action == 3)
+            else if (StateAction.currActionState == ActionState.JUMPING)
             {
-                State.action = 2;
+               ChangeAction((int)ActionState.IDLE);
             }
-            else if(State.action == 2){
-                State.action = 4; //crounch
+            else if(StateAction.currActionState == ActionState.IDLE){
+                ChangeAction((int)ActionState.CROUCHING); //crounch
             }
-            else if (State.action == 1)
+            else if (StateAction.currActionState == ActionState.WALKING)
             {
-                State.action = 2;
+                ChangeAction((int)ActionState.IDLE);
             }
             else
             {
                 down = true;
             }
-        } */
+        }
+       
 
         //action positive is right
-       /* public void MoveAction(int action)
+       public void MoveAction(int action)
         {
             Frame = 0;
             if (action < 0)
             {
-                if(effects == SpriteEffects.None && right == true)
+                if (effects == SpriteEffects.None && right == true)
                 {
                     right = false;
-                    State.action = 2;
+                    ChangeAction((int)ActionState.IDLE);
+                    
                 }
                 else if (effects == SpriteEffects.None)//right
                 {
-                    effects = SpriteEffects.FlipHorizontally;
-                    State.action = 2;
+                    this.effects = SpriteEffects.FlipHorizontally;
+                    ChangeAction((int)ActionState.IDLE);
+                    
                 }
                 else
                 {
-                    State.action = 1;
+                    ChangeAction((int)ActionState.WALKING);
                     left = true;
                 }
             }
-            else 
+            else
             {
-                if(effects == SpriteEffects.FlipHorizontally && left == true)
+                if (effects == SpriteEffects.FlipHorizontally && left == true)
                 {
                     left = false;
-                    State.action = 2;
+                    ChangeAction((int)ActionState.IDLE);
                 }
                 else if (effects == SpriteEffects.FlipHorizontally)//left
                 {
-                    effects = SpriteEffects.None;
-                    State.action = 2;
+                    this.effects = SpriteEffects.None;
+                    ChangeAction((int)ActionState.IDLE);
                 }
                 else
                 {
-                    State.action = 1;
+                    ChangeAction((int)ActionState.WALKING);
                     right = true;
                 }
-            }*/
+            }
         }
     }
+}
 

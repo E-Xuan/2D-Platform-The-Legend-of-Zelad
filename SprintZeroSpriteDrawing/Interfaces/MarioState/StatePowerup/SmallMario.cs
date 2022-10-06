@@ -6,7 +6,6 @@ using SprintZeroSpriteDrawing.Sprites.ObstacleSprites;
 using SprintZeroSpriteDrawing.Interfaces.Entitiy;
 using SprintZeroSpriteDrawing.Sprites.MarioSprites;
 using System.Runtime.CompilerServices;
-using SprintZeroSpriteDrawing.Sprites.MarioActionSprites;
 
 namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StatePowerup
 {
@@ -21,8 +20,9 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StatePowerup
         {
             prevPowerupState = currPowerupState;
             currPowerupState = PowerupState.SMALL;
-            
             mario.IsVis = true;
+            mario.Sprite = mario.SmallMarioSpriteSheet;
+            mario.sheetSize = new Vector2(3, 3);
         }
 
         public override void ChangePowerupState(int state)

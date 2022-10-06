@@ -23,6 +23,9 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
             mario.IsVis = true;
             mario.Velocity = new Vector2(0, 0);
             mario.Acceleration = new Vector2(0, 0);
+            mario.StartFrame = 1;
+            mario.LastFrame = 2;
+            mario.AutoFrame = false;
         }
 
         public override void ChangeActionState(int state)

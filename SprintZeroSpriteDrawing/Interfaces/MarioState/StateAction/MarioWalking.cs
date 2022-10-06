@@ -6,6 +6,7 @@ using SprintZeroSpriteDrawing.Sprites.ObstacleSprites;
 using SprintZeroSpriteDrawing.Interfaces.Entitiy;
 using SprintZeroSpriteDrawing.Sprites.MarioSprites;
 using System.Runtime.CompilerServices;
+using System.Linq.Expressions;
 
 namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
 {
@@ -20,8 +21,12 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
         {
             currActionState = ActionState.WALKING;
             mario.IsVis = true;
-            mario.Velocity = new Vector2(5, 0);
-            mario.Acceleration = new Vector2(1, 0);
+            mario.Velocity = new Vector2(0, 0);
+            mario.Acceleration = new Vector2(0, 0);
+            mario.AutoFrame = true;
+            mario.StartFrame = 3;
+            mario.LastFrame = 6;
+           
         }
 
         public override void ChangeActionState(int state)
