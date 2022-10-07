@@ -94,7 +94,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
 
         public void TakeDamage(int powerup)
         {
-            if (StatePowerup.currPowerupState != PowerupState.DEAD)
+            if (StatePowerup.currPowerupState != PowerupState.SMALL)
             {
                 ChangePowerup((int)PowerupState.SMALL);
             }
