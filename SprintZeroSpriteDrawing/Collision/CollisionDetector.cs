@@ -17,7 +17,6 @@ namespace SprintZeroSpriteDrawing.Collision
     public class CollisionDetector
     {
         private static CollisionDetector CD;
-        int velocity = 5;
 
         List<ICollideable>[,] list = new List<ICollideable>[(int)(Game1.SCREENSIZE.X / 48), (int)(Game1.SCREENSIZE.Y/48)];
 
@@ -34,35 +33,29 @@ namespace SprintZeroSpriteDrawing.Collision
         {
             return CD;
         }
-
-        public bool IsTouchingLeft(Rectangle firstObject, Rectangle secondObject)
+        public Direction DetectColDirection(ICollideable FirstObject, ICollideable SecondObject)
         {
-            
-            return firstObject.Right + velocity > secondObject.Left && 
-                firstObject.Left < secondObject.Left &&
-                firstObject.Bottom > secondObject.Top &&
-                firstObject.Top < secondObject.Bottom;
-        }
-        public bool IsTouchingRight(Rectangle firstObject, Rectangle secondObject)
-        {
-            return firstObject.Left + velocity > secondObject.Right &&
-                firstObject.Right < secondObject.Right &&
-                firstObject.Bottom > secondObject.Top &&
-                firstObject.Top < secondObject.Bottom;
-        }
-        public bool ISTouchingTop(Rectangle firstObject, Rectangle secondObject)
-        {
-            return firstObject.Bottom + velocity > secondObject.Top &&
-                firstObject.Top < secondObject.Top &&
-                firstObject.Right > secondObject.Left &&
-                firstObject.Left < secondObject.Right;
-        }
-        public bool ISTouchingDown(Rectangle firstObject, Rectangle secondObject)
-        {
-            return firstObject.Top + velocity > secondObject.Bottom &&
-                firstObject.Bottom < secondObject.Bottom &&
-                firstObject.Right > secondObject.Left &&
-                firstObject.Left < secondObject.Right;
+            Rectangle Intersection = Rectangle.Intersect(FirstObject.BBox, SecondObject.BBox);
+            if (!Intersection.IsEmpty)
+            {
+                if(Intersection.Height > Intersection.Width && FirstObject.BBox.X < SecondObject.BBox.X)
+                {
+                    return Direction.LEFT;
+                }
+                if(Intersection.Height > Intersection.Width && FirstObject.BBox.X > SecondObject.BBox.X)
+                {
+                    return Direction.RIGHT;
+                }
+                if(Intersection.Width > Intersection.Height && FirstObject.BBox.Y < SecondObject.BBox.Y)
+                {
+                    return Direction.TOP;
+                }
+                if(Intersection.Width > Intersection.Height && FirstObject.BBox.Y > SecondObject.BBox.Y)
+                {
+                    return Direction.BOTTOM;
+                }
+            }
+            return Direction.NULL;
         }
     }
 }

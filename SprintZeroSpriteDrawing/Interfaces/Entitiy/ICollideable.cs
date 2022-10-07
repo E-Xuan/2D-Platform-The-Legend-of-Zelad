@@ -13,7 +13,8 @@ namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
         TOP,
         BOTTOM,
         LEFT,
-        RIGHT
+        RIGHT,
+        NULL
     }
 
     public enum CType
