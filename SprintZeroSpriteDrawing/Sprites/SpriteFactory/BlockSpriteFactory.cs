@@ -83,7 +83,7 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
             //fix the vector
             //need to also give accelaraiton and velocity at exploding brickblock?
             //how to get the brick block and set visibility to false?
-            return new ExplodingBrickBlock(ExplodingBrickBlockSpriteSheet, new Vector2(0, 0), nPos);
+            return new FourExplodingBrick(ExplodingBrickBlockSpriteSheet, new Vector2(2, 2), nPos);
         }
     }
 }

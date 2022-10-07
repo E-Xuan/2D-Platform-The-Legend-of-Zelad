@@ -16,6 +16,13 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
             
         }
 
+
+        public ExplodingBrickBlock(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos, Vector2 velocity, Vector2 acceleration) : base(nSprite, nSheetSize, nPos)
+        {
+            Velocity = velocity;
+            Acceleration = acceleration;
+        }
+
         public override void Update()
         {
             base.Update();
