@@ -19,6 +19,7 @@ using SprintZeroSpriteDrawing.Interfaces.MarioState;
 
 namespace SprintZeroSpriteDrawing
 {
+    
     public class Game1 : Game
     {
         private GraphicsDeviceManager _graphics;
@@ -59,9 +60,11 @@ namespace SprintZeroSpriteDrawing
         ISprite Jumping;
         ISprite Idle;
 
-       
+
 
         #endregion
+
+        public static Vector2 SCREENSIZE = new Vector2(100,960);
 
         public Game1()
         {
