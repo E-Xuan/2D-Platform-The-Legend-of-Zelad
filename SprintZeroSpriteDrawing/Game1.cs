@@ -34,7 +34,7 @@ namespace SprintZeroSpriteDrawing
         //Glorified Arial font for the control list
         private SpriteFont HUDFont;
         //Sprites and their names, could use UUID's if I wanted to, but I like names its unnecessary tho
-        public static Dictionary<string, ISprite> SpriteList = new Dictionary<string, ISprite>();
+        public static List<ISprite> SpriteList = new List<ISprite>();
         #endregion
 
         #region Items
@@ -113,15 +113,15 @@ namespace SprintZeroSpriteDrawing
             BlockSpriteFactory.getFactory().LoadContent(Content);
             EnemySpriteFactory.getFactory().LoadContent(Content);
             Mario.LoadContent(Content);
-            SpriteList.Add("broken", BlockSpriteFactory.getFactory().CreateBrokenBlock(new Vector2(400, 400)));
+            SpriteList.Add(BlockSpriteFactory.getFactory().CreateBrokenBlock(new Vector2(400, 400)));
 
             #region MarioContent
             MarioSpriteFactory.getSpriteFactory().LoadContent(Content);
             
-            SpriteList.Add("Mario", MarioSpriteFactory.getSpriteFactory().createMario(new Vector2(300, 300)));
+            SpriteList.Add(MarioSpriteFactory.getSpriteFactory().createMario(new Vector2(300, 300)));
             #endregion
             // set game binding
-            BindingCmd.SetGameBinding(SpriteList, keyboardController, gamepadController);
+            BindingCmd.SetGameBinding(keyboardController, gamepadController);
 
             //Starting the sprite batch on our new graphics device
             //move init and loading of textures?
@@ -142,9 +142,9 @@ namespace SprintZeroSpriteDrawing
             gamepadController.UpdateInput();
 
             //iterate over all of the sprites and run their update methods every iteration
-            foreach (KeyValuePair<string, ISprite> spriteEntry in SpriteList.ToImmutableSortedDictionary())
+            foreach (ISprite spriteEntry in SpriteList.ToImmutableList())
             {
-                spriteEntry.Value.Update();
+                spriteEntry.Update();
             }
 
             //((Mario)SpriteList["Mario"]).UpdateState();
@@ -158,9 +158,9 @@ namespace SprintZeroSpriteDrawing
  
             sBatch.Begin(); //Uses AlphaBlend by default, which allows the sprites to easily blend with backgrounds they match with
             //Iterate over the sprite entry list again and draw each sprite
-            foreach (KeyValuePair <string, ISprite> spriteEntry in SpriteList)
+            foreach (ISprite spriteEntry in SpriteList)
             {
-                spriteEntry.Value.Draw(sBatch);
+                spriteEntry.Draw(sBatch);
             }
             //Write text onto the screen in a nice method
             //sBatch.DrawString(HUDFont, "W/A: non-moving, non-animated\n E/B: non-moving, animated\n R/X: moving, non-animated\n T/Y: moving, animated\n Q/Start: quit", new Vector2(50, 0), Color.Black);

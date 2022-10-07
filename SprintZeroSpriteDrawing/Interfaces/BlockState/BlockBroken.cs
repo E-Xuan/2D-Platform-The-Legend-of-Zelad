@@ -18,7 +18,6 @@ namespace SprintZeroSpriteDrawing.Interfaces.BlockState
 
         public override void Enter()
         {
-            //hide block
             
             CurrState = State.BROKEN;
             block.IsVis = false;
@@ -27,9 +26,6 @@ namespace SprintZeroSpriteDrawing.Interfaces.BlockState
 
         public override void Exit()
         {
-            // use the factory to create four broken brick
-            block.Velocity = new Vector2(0, -2);
-            block.Acceleration = new Vector2(0, (float)0.065);
 
             base.Exit();
         }

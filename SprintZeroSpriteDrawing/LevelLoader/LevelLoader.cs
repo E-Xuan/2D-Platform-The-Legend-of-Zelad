@@ -48,7 +48,6 @@ namespace SprintZeroSpriteDrawing.LevelLoader
         {
             
             char err = (char)((fileStream.ReadByte() + 256) % 256);
-            Random UUIDGen = new Random();
             ISprite entity = null;
             if (err == '<')
                 return -1;
@@ -106,7 +105,7 @@ namespace SprintZeroSpriteDrawing.LevelLoader
                 default:
                     return err;
             }
-            Game1.SpriteList.Add(UUIDGen.Next().ToString(), entity);
+            Game1.SpriteList.Add(entity);
             return err;
         }
        

@@ -32,7 +32,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.BlockState
             block.Pos = anchor;
             if (Inventory.Count > 0)
             {
-                Game1.SpriteList.Add("Bumped", Inventory[0]);
+                Game1.SpriteList.Add(Inventory[0]);
                 Inventory.RemoveAt(0);
             }
         }
