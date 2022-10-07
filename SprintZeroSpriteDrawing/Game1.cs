@@ -117,7 +117,8 @@ namespace SprintZeroSpriteDrawing
             BlockSpriteFactory.getFactory().LoadContent(Content);
             EnemySpriteFactory.getFactory().LoadContent(Content);
             Mario.LoadContent(Content);
-            SpriteList.Add(BlockSpriteFactory.getFactory().CreateBrokenBlock(new Vector2(400, 400)));
+            SpriteList.Add(BlockSpriteFactory.getFactory().CreateBrickBlock(new Vector2(400, 400)));
+            keyboardController.UpdateBinding(Keys.K, new IntCmd(new KeyValuePair<Action<int>, int>(((BrickBlock)SpriteList[0]).ChangeState, (int)State.BROKEN)), BindingType.PRESSED);
 
             #region MarioContent
             MarioSpriteFactory.getSpriteFactory().LoadContent(Content);

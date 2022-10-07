@@ -23,7 +23,13 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
             foreach (var block in blocks)
             {
                 block.Update();
+                
             }
+            if (blocks[2].Pos.Y > 1080)
+            {
+                Game1.SpriteList.Remove(this);
+            }
+
 
         }
         public override void Draw(SpriteBatch batch)

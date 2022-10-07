@@ -20,13 +20,13 @@ namespace SprintZeroSpriteDrawing.Interfaces.BlockState
         {
             
             CurrState = State.BROKEN;
-            block.IsVis = false;
-            
+            Game1.SpriteList.Remove(block);
+            Game1.SpriteList.Add((Block)(BlockSpriteFactory.getFactory().CreateBrokenBlock(new Vector2(400, 400))));
         }
+
 
         public override void Exit()
         {
-
             base.Exit();
         }
     }
