@@ -19,7 +19,7 @@ namespace SprintZeroSpriteDrawing.Collision
         private static CollisionDetector CD;
         int velocity = 5;
 
-        List<ICollideable>[,] list = new List<ICollideable>[(1080 / 48), (960/48)];
+        List<ICollideable>[,] list = new List<ICollideable>[(int)(Game1.SCREENSIZE.X / 48), (int)(Game1.SCREENSIZE.Y/48)];
 
 
         public CollisionDetector(List<ICollideable> spriteList)
