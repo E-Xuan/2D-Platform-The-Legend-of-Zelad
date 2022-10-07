@@ -24,6 +24,7 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         public Texture2D HiddenBlockSpriteSheet;
         public Texture2D GroundBlockSpriteSheet;
         public Texture2D StairBlockSpriteSheet;
+        public Texture2D ExplodingBrickBlockSpriteSheet;
 
         private static BlockSpriteFactory sprite;
 
@@ -44,6 +45,7 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
             QuestionBlockSpriteSheet = content.Load<Texture2D>("Obstacles/QuestionBlock(Overworld)");
             GroundBlockSpriteSheet = content.Load<Texture2D>("Obstacles/GroundBlock(Overworld)");
             StairBlockSpriteSheet = content.Load<Texture2D>("Obstacles/StairBlock");
+            ExplodingBrickBlockSpriteSheet = content.Load<Texture2D>("ExplodingBlock");
         }
         
         public ISprite CreateBrickBlock(Vector2 nPos)
@@ -75,6 +77,13 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         public ISprite CreateUsedBlock(Vector2 nPos)
         {
             return new UsedBlock(UsedBlockSpriteSheet, new Vector2(1, 1), nPos);
+        }
+        public ISprite CreateBrokenBlock(Vector2 nPos)
+        {
+            //fix the vector
+            //need to also give accelaraiton and velocity at exploding brickblock?
+            //how to get the brick block and set visibility to false?
+            return new FourExplodingBrick(ExplodingBrickBlockSpriteSheet, new Vector2(2, 2), nPos);
         }
     }
 }

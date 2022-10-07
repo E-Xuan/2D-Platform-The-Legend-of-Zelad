@@ -116,6 +116,7 @@ namespace SprintZeroSpriteDrawing
             BlockSpriteFactory.getFactory().LoadContent(Content);
             EnemySpriteFactory.getFactory().LoadContent(Content);
             Mario.LoadContent(Content);
+            SpriteList.Add("broken", BlockSpriteFactory.getFactory().CreateBrokenBlock(new Vector2(400, 400)));
 
             #region MarioContent
             MarioSpriteFactory.getSpriteFactory().LoadContent(Content);
