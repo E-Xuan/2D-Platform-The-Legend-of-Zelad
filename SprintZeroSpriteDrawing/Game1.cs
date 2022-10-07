@@ -64,7 +64,7 @@ namespace SprintZeroSpriteDrawing
 
         #endregion
 
-        public static Vector2 SCREENSIZE = new Vector2(100,960);
+        public static Vector2 SCREENSIZE = new Vector2(1920,1080);
 
         public Game1()
         {
@@ -78,9 +78,10 @@ namespace SprintZeroSpriteDrawing
         {
             keyboardController = new KeyboardController();
             gamepadController = new GamepadController();
-            _graphics.PreferredBackBufferWidth = 1920;
-            _graphics.PreferredBackBufferHeight = 1080;
+            _graphics.PreferredBackBufferWidth = (int)SCREENSIZE.X;
+            _graphics.PreferredBackBufferHeight = (int)SCREENSIZE.Y;
             _graphics.ApplyChanges();
+            
 
 
             #region sprites
