@@ -11,7 +11,7 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
 {
     internal class BrickBlock : Block
     {
-        public BrickBlock(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos, Rectangle nBBox) : base(nSprite, nSheetSize, nPos, nBBox)
+        public BrickBlock(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos) : base(nSprite, nSheetSize, nPos)
         {
         }
 

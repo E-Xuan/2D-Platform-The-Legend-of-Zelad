@@ -41,7 +41,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
          public static Mario GetMario() {
              if(_mario == null)
              {
-                _mario = new Mario(SmallMarioSpriteSheet, new Vector2(3, 3), new Vector2(700, 700));
+                _mario = new Mario(SmallMarioSpriteSheet, new Vector2(3, 3), new Vector2(192, 1008));
              }
              return _mario;
          }

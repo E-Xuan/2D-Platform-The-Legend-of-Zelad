@@ -21,8 +21,8 @@ namespace SprintZeroSpriteDrawing
 {
     public class Game1 : Game
     {
-        private GraphicsDeviceManager _graphics;
-        
+        public static GraphicsDeviceManager Graphics { get; set; }
+
         #region Controller
         private IController<Keys> keyboardController;
         private IController<Buttons> gamepadController;
@@ -66,7 +66,7 @@ namespace SprintZeroSpriteDrawing
         public Game1()
         {
             //starting the graphics device for monogame
-            _graphics = new GraphicsDeviceManager(this);
+            Graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
@@ -75,9 +75,9 @@ namespace SprintZeroSpriteDrawing
         {
             keyboardController = new KeyboardController();
             gamepadController = new GamepadController();
-            _graphics.PreferredBackBufferWidth = 1920;
-            _graphics.PreferredBackBufferHeight = 1080;
-            _graphics.ApplyChanges();
+            Graphics.PreferredBackBufferWidth = 1920;
+            Graphics.PreferredBackBufferHeight = 1080;
+            Graphics.ApplyChanges();
 
 
             #region sprites
