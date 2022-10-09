@@ -65,6 +65,7 @@ namespace SprintZeroSpriteDrawing
         #endregion
 
         public static Vector2 SCREENSIZE = new Vector2(1920,1080);
+        public static bool DEBUGBBOX = true;
 
         public Game1()
         {
@@ -151,8 +152,6 @@ namespace SprintZeroSpriteDrawing
                 spriteEntry.Update();
             }
 
-            //((Mario)SpriteList["Mario"]).UpdateState();
-
             base.Update(gameTime);
         }
 
@@ -169,9 +168,6 @@ namespace SprintZeroSpriteDrawing
             //Write text onto the screen in a nice method
             //sBatch.DrawString(HUDFont, "W/A: non-moving, non-animated\n E/B: non-moving, animated\n R/X: moving, non-animated\n T/Y: moving, animated\n Q/Start: quit", new Vector2(50, 0), Color.Black);
             sBatch.End();
-
-            // TODO: Add your drawing code here
-
             base.Draw(gameTime);
         }
         private void ExitWithCode(int errCode) {
