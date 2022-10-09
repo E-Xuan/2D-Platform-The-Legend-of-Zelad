@@ -24,6 +24,7 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
         public StairBlock SBlock { get; set; }  
         public BlockCollisionManager(Block _block)
         {
+            /*
             block = _block;
             block.CollisionResponse.Add(CType.QBLOCK, new Dictionary<Direction, ICommand>());
             block.CollisionResponse.Add(CType.BBLOCK, new Dictionary<Direction, ICommand>());
@@ -60,9 +61,10 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
             block.CollisionResponse[CType.SBLOCK].Add(Direction.TOP, new StairBlockCollision(this));
             block.CollisionResponse[CType.SBLOCK].Add(Direction.BOTTOM, new StairBlockCollision(this));
             block.CollisionResponse[CType.SBLOCK].Add(Direction.LEFT, new StairBlockCollision(this));
-            block.CollisionResponse[CType.SBLOCK].Add(Direction.RIGHT, new StairBlockCollision(this));
+            block.CollisionResponse[CType.SBLOCK].Add(Direction.RIGHT, new StairBlockCollision(this)); */
 
         }
+        /*
         public void ManageQBlockCollision(QuestionBlock _QBlock)
         {
             QBlocK = _QBlock;
@@ -117,5 +119,6 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
                 block.CollisionResponse[CType.SBLOCK][CollisionSide].Execute();
             }
         }
+        */
     }
 }

@@ -20,6 +20,7 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
         public MarioCollisionManager(Mario Mario)
         {
             mario = Mario;
+            /*
             mario.CollisionResponse.Add(CType.GROUND_BLOCK, new Dictionary<Direction, ICommand>());
             mario.CollisionResponse.Add(CType.QUESTION_BLOCK, new Dictionary<Direction, ICommand>());
 

@@ -10,11 +10,10 @@ using SprintZeroSpriteDrawing.Interfaces.Entitiy;
 
 namespace SprintZeroSpriteDrawing.Sprites.EnemySprites
 {
-    internal class Goomba : ITile
+    internal class Goomba : ICollideable
     {
         public Goomba(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos) : base(nSprite, nSheetSize, nPos)
         {
-            IsVis = true;
         }
     }
 }

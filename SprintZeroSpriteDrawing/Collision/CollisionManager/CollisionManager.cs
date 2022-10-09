@@ -31,6 +31,7 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
         }*/
         public void ManageBlockCollision(BlockCollisionManager blockCollisionManager, QuestionBlock QBlock, BrickBlock BBlock, UsedBlock UBlock, StairBlock SBlock, InvisibleBlock HBlock, GroundBlock GBlock)
         {
+            /*
             blockCollisionManager.ManageQBlockCollision(QBlock);
             blockCollisionManager.ManageBBlockCollision(BBlock);
             blockCollisionManager.ManageHBlockCollision(HBlock);
