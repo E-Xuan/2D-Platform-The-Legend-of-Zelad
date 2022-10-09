@@ -51,7 +51,7 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         public ISprite CreateBrickBlock(Vector2 nPos)
         {
             var block = new BrickBlock(BrickBlockSpriteSheet, new Vector2(1, 1), nPos, new Rectangle((int)nPos.X, (int)nPos.Y, 32, 32));
-            block.CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(null, Direction.BOTTOM, CType.AVATAR_LARGE));
+            //block.CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(null, Direction.BOTTOM, CType.AVATAR_LARGE));
             return block;
         }
         public ISprite CreateGroundBlock(Vector2 nPos)
