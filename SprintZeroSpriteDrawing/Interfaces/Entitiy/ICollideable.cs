@@ -75,7 +75,8 @@ namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
         public override void Update()
         {
             base.Update(); 
-            BBox = new Rectangle((int)(Pos.X - Sprite.Width / SheetSize.X), (int)(Pos.Y - Sprite.Height / SheetSize.Y), (int)(Sprite.Width / SheetSize.X), (int)(Sprite.Height / SheetSize.Y));
+            if(Velocity.X != 0 || Velocity.Y != 0)
+                BBox = new Rectangle((int)(Pos.X - Sprite.Width / SheetSize.X), (int)(Pos.Y - Sprite.Height / SheetSize.Y), (int)(Sprite.Width / SheetSize.X), (int)(Sprite.Height / SheetSize.Y));
         }
 
         public override void Draw(SpriteBatch batch, SpriteEffects effects)
