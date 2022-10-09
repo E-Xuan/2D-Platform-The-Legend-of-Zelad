@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
 {
-        internal class StairBlock : Block
+        public class StairBlock : Block
         {
 
             public StairBlock(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos) : base(nSprite, nSheetSize, nPos)

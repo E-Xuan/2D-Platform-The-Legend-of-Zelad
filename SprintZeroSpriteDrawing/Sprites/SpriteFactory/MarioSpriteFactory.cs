@@ -52,25 +52,26 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioActionSprites
         #endregion
 
         #region Dead Mario
-        private Texture2D DeadMarioSpriteSheet;
+        public Texture2D DeadMarioSpriteSheet;
         #endregion
 
 
 
-        private static MarioSpriteFactory sprite;
+        private static MarioSpriteFactory factory;
         public static MarioSpriteFactory getSpriteFactory()
         {
-            if (sprite == null)
+            if (factory == null)
             {
-                sprite = new MarioSpriteFactory();
+                factory = new MarioSpriteFactory();
             }
-            return sprite;
+            return factory;
         }
         public void LoadContent(ContentManager content)
         {
             SmallMarioSpriteSheet = content.Load<Texture2D>("SmallMario/SmallMarioSpriteSheet");
             BigMarioSpriteSheet = content.Load<Texture2D>("BigMario/BigMarioSpriteSheet");
             FireMarioSpriteSheet = content.Load<Texture2D>("FireMario/FireMarioSpriteSheet");
+            DeadMarioSpriteSheet = content.Load<Texture2D>("SmallMario/smallDying");
         }
         public ISprite createMario(Vector2 nPos)
         {

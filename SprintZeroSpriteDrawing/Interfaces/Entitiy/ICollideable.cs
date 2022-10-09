@@ -13,7 +13,8 @@ namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
         TOP,
         BOTTOM,
         LEFT,
-        RIGHT
+        RIGHT,
+        NULL
     }
 
     public enum CType
@@ -30,6 +31,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
     {
         //make this into a switch case later with method
         public List<Tuple<ICommand, Direction, CType>> CollisionResponse { get; set; }
+        //public Dictionary<CType, Dictionary<Direction, ICommand>> CollisionResponse { get; set; }
         public Rectangle BBox { get; set; }
         public bool DrawBBox { get; set; }
 
@@ -63,12 +65,6 @@ namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
         {
             BBox = nBBox;
             CollisionResponse = new List<Tuple<ICommand, Direction, CType>>();
-            DrawBBox = true;
-        }
-        public ICollideable(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos, Vector2 acceleration, Rectangle nBBox, List<Tuple<ICommand, Direction, CType>> nCollisionResponse) : base(nSprite, nSheetSize, nPos, acceleration)
-        {
-            BBox = nBBox;
-            CollisionResponse = nCollisionResponse;
             DrawBBox = true;
         }
         public override void Draw(SpriteBatch batch)

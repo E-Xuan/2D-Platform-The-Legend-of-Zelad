@@ -19,6 +19,7 @@ using SprintZeroSpriteDrawing.Interfaces.MarioState;
 
 namespace SprintZeroSpriteDrawing
 {
+    
     public class Game1 : Game
     {
         public static GraphicsDeviceManager Graphics { get; set; }
@@ -34,7 +35,7 @@ namespace SprintZeroSpriteDrawing
         //Glorified Arial font for the control list
         private SpriteFont HUDFont;
         //Sprites and their names, could use UUID's if I wanted to, but I like names its unnecessary tho
-        public static Dictionary<string, ISprite> SpriteList = new Dictionary<string, ISprite>();
+        public static List<ISprite> SpriteList = new List<ISprite>();
         #endregion
 
         #region Items
@@ -59,9 +60,11 @@ namespace SprintZeroSpriteDrawing
         ISprite Jumping;
         ISprite Idle;
 
-       
+
 
         #endregion
+
+        public static Vector2 SCREENSIZE = new Vector2(1920,1080);
 
         public Game1()
         {
@@ -75,8 +78,8 @@ namespace SprintZeroSpriteDrawing
         {
             keyboardController = new KeyboardController();
             gamepadController = new GamepadController();
-            Graphics.PreferredBackBufferWidth = 1920;
-            Graphics.PreferredBackBufferHeight = 1080;
+            Graphics.PreferredBackBufferWidth = (int)SCREENSIZE.X;
+            Graphics.PreferredBackBufferHeight = (int)SCREENSIZE.Y;
             Graphics.ApplyChanges();
 
 
@@ -113,14 +116,16 @@ namespace SprintZeroSpriteDrawing
             BlockSpriteFactory.getFactory().LoadContent(Content);
             EnemySpriteFactory.getFactory().LoadContent(Content);
             Mario.LoadContent(Content);
+            SpriteList.Add(BlockSpriteFactory.getFactory().CreateBrickBlock(new Vector2(400, 400)));
+            keyboardController.UpdateBinding(Keys.K, new IntCmd(new KeyValuePair<Action<int>, int>(((BrickBlock)SpriteList[0]).ChangeState, (int)State.BROKEN)), BindingType.PRESSED);
 
             #region MarioContent
             MarioSpriteFactory.getSpriteFactory().LoadContent(Content);
             
-            SpriteList.Add("Mario", MarioSpriteFactory.getSpriteFactory().createMario(new Vector2(300, 300)));
+            SpriteList.Add(MarioSpriteFactory.getSpriteFactory().createMario(new Vector2(300, 300)));
             #endregion
             // set game binding
-            BindingCmd.SetGameBinding(SpriteList, keyboardController, gamepadController);
+            BindingCmd.SetGameBinding(keyboardController, gamepadController);
 
             //Starting the sprite batch on our new graphics device
             //move init and loading of textures?
@@ -141,9 +146,9 @@ namespace SprintZeroSpriteDrawing
             gamepadController.UpdateInput();
 
             //iterate over all of the sprites and run their update methods every iteration
-            foreach (KeyValuePair<string, ISprite> spriteEntry in SpriteList.ToImmutableSortedDictionary())
+            foreach (ISprite spriteEntry in SpriteList.ToImmutableList())
             {
-                spriteEntry.Value.Update();
+                spriteEntry.Update();
             }
 
             //((Mario)SpriteList["Mario"]).UpdateState();
@@ -157,9 +162,9 @@ namespace SprintZeroSpriteDrawing
  
             sBatch.Begin(); //Uses AlphaBlend by default, which allows the sprites to easily blend with backgrounds they match with
             //Iterate over the sprite entry list again and draw each sprite
-            foreach (KeyValuePair <string, ISprite> spriteEntry in SpriteList)
+            foreach (ISprite spriteEntry in SpriteList)
             {
-                spriteEntry.Value.Draw(sBatch);
+                spriteEntry.Draw(sBatch);
             }
             //Write text onto the screen in a nice method
             //sBatch.DrawString(HUDFont, "W/A: non-moving, non-animated\n E/B: non-moving, animated\n R/X: moving, non-animated\n T/Y: moving, animated\n Q/Start: quit", new Vector2(50, 0), Color.Black);

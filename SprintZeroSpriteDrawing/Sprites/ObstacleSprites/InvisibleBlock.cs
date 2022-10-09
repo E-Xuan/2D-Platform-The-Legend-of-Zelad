@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
 {
-    internal class InvisibleBlock : Block
+    public class InvisibleBlock : Block
     {
         public InvisibleBlock(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos) : base(nSprite, nSheetSize, nPos)
         {

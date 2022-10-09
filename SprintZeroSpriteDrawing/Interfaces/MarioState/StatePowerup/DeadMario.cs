@@ -6,6 +6,7 @@ using SprintZeroSpriteDrawing.Sprites.ObstacleSprites;
 using SprintZeroSpriteDrawing.Interfaces.Entitiy;
 using SprintZeroSpriteDrawing.Sprites.MarioSprites;
 using System.Runtime.CompilerServices;
+using SprintZeroSpriteDrawing.Sprites.MarioActionSprites;
 
 
 namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StatePowerup
@@ -24,6 +25,8 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StatePowerup
             mario.IsVis = true;
             mario.Velocity = new Vector2(0, 0);
             mario.Acceleration = new Vector2(0, 0);
+            mario.SheetSize = new Vector2(1, 1);
+            mario.SetSprite(MarioSpriteFactory.getSpriteFactory().DeadMarioSpriteSheet);
         }
 
         public override void ChangePowerupState(int state)

@@ -22,7 +22,7 @@ namespace SprintZeroSpriteDrawing.LevelLoader
         {
             int x = 48;
             int y = 48;
-            FileStream fileStream = File.Open(levelName, FileMode.Open, FileAccess.Read);
+            FileStream fileStream = File.Open(levelName, FileMode.OpenOrCreate, FileAccess.Read);
             while (FindStartLine(fileStream) != 255)
             {
                 while (GenerateEntity(x, y, fileStream) != -1)
@@ -48,7 +48,6 @@ namespace SprintZeroSpriteDrawing.LevelLoader
         {
             
             char err = (char)((fileStream.ReadByte() + 256) % 256);
-            Random UUIDGen = new Random();
             ISprite entity = null;
             if (err == '<')
                 return -1;
@@ -106,7 +105,7 @@ namespace SprintZeroSpriteDrawing.LevelLoader
                 default:
                     return err;
             }
-            Game1.SpriteList.Add(UUIDGen.Next().ToString(), entity);
+            Game1.SpriteList.Add(entity);
             return err;
         }
        

@@ -18,10 +18,16 @@ namespace SprintZeroSpriteDrawing.Interfaces.BlockState
 
         public override void Enter()
         {
+            
             CurrState = State.BROKEN;
-            block.IsVis = true;
-            block.Velocity = new Vector2(0,0);
-            block.Acceleration = new Vector2(0, 2);
+            Game1.SpriteList.Remove(block);
+            Game1.SpriteList.Add((Block)(BlockSpriteFactory.getFactory().CreateBrokenBlock(new Vector2(400, 400))));
+        }
+
+
+        public override void Exit()
+        {
+            base.Exit();
         }
     }
 }
