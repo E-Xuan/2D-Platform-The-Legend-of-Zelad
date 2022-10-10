@@ -6,12 +6,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SprintZeroSpriteDrawing.Interfaces.Entitiy;
 
 namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
 {
     public class InvisibleBlock : Block
     {
         public InvisibleBlock(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos) : base(nSprite, nSheetSize, nPos)
+        {
+            IsVis = false;
+            LastFrame = 3;
+        }
+        public InvisibleBlock(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos, List<ICollideable> inventory) : base(nSprite, nSheetSize, nPos, inventory)
         {
             IsVis = false;
             LastFrame = 3;

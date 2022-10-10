@@ -78,6 +78,11 @@ namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
             Draw(batch, SpriteEffects.None);
         }
 
+        public void UpdateBBox()
+        {
+            BBox = new Rectangle((int)(Pos.X - Sprite.Width / SheetSize.X), (int)(Pos.Y - Sprite.Height / SheetSize.Y), (int)(Sprite.Width / SheetSize.X), (int)(Sprite.Height / SheetSize.Y));
+        }
+
         public override void Update()
         {
             base.Update(); 

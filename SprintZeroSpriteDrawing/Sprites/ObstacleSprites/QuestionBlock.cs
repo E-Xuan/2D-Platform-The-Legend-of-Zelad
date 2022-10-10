@@ -17,7 +17,7 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         {
             LastFrame = 3;
         }
-        public QuestionBlock(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos, Rectangle boundingBox, List<ICollideable> Inventory) : base(nSprite, nSheetSize, nPos, boundingBox, Inventory)
+        public QuestionBlock(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos, List<ICollideable> Inventory) : base(nSprite, nSheetSize, nPos, Inventory)
         {
             LastFrame = 3;
         }

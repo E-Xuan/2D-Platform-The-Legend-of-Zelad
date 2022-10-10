@@ -22,6 +22,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StatePowerup
             prevPowerupState = currPowerupState;
             currPowerupState = PowerupState.STAR;
             mario.IsVis = true;
+            mario.UpdateBBox();
         }
 
         public override void ChangePowerupState(int state)
