@@ -14,22 +14,22 @@ using SprintZeroSpriteDrawing.Interfaces.MarioState;
 
 namespace SprintZeroSpriteDrawing.Collision.EnemyCollision
 {
-    public class GoombaCollision : ICommand
+    public class RedKoopaCollision : ICommand
     {
         Direction CollisionSide;
         public EnemyCollisionManager EnemyCollisionManager;
-        public GoombaCollision(object nRef) : base(nRef)
+        public RedKoopaCollision(object nRef) : base(nRef)
         {
             CollisionSide = (Direction)nRef;
         }
         public override void Execute()
         {
-            CollisionSide = CollisionDetector.getCD().DetectColDirection(EnemyCollisionManager.gommba, EnemyCollisionManager.mario);
-            if(EnemyCollisionManager.mario.GetType() == typeof(SmallMario))
+            CollisionSide = CollisionDetector.getCD().DetectColDirection(EnemyCollisionManager.redKoopa, EnemyCollisionManager.mario);
+            if (EnemyCollisionManager.mario.GetType() == typeof(SmallMario))
             {
                 if (CollisionSide == Direction.TOP)
                 {
-                    //Goomba Die
+                    //RedKoopa change to a strange state... probably will be in future sprints
                     EnemyCollisionManager.mario.Velocity = new Vector2(EnemyCollisionManager.mario.Velocity.X, 0);
                 }
                 if (CollisionSide == Direction.BOTTOM)
@@ -49,7 +49,7 @@ namespace SprintZeroSpriteDrawing.Collision.EnemyCollision
             {
                 if (CollisionSide == Direction.TOP)
                 {
-                    //Goomba Die
+                    //RedKoopa change to a strange state... probably will be in future sprints
                     EnemyCollisionManager.mario.Velocity = new Vector2(EnemyCollisionManager.mario.Velocity.X, 0);
                 }
                 if (CollisionSide == Direction.BOTTOM)
@@ -57,7 +57,7 @@ namespace SprintZeroSpriteDrawing.Collision.EnemyCollision
                     //Mario damage to small mario
                 }
                 if (CollisionSide == Direction.LEFT)
-                {                    
+                {
                     //Mario damage to small mario
                 }
                 if (CollisionSide == Direction.RIGHT)
@@ -66,23 +66,23 @@ namespace SprintZeroSpriteDrawing.Collision.EnemyCollision
                 }
             }
 
-            if(EnemyCollisionManager.mario.GetType() == typeof(StarMario))
+            if (EnemyCollisionManager.mario.GetType() == typeof(StarMario))
             {
                 if (CollisionSide == Direction.TOP)
                 {
-                    //Goomba Die
+                    //RedKoopa Die
                 }
                 if (CollisionSide == Direction.BOTTOM)
                 {
-                    //Goomba Die
+                    //RedKoopa Die
                 }
                 if (CollisionSide == Direction.LEFT)
                 {
-                    //Goomba Die
+                    //RedKoopa Die
                 }
                 if (CollisionSide == Direction.RIGHT)
                 {
-                    //Goomba Die
+                    //RedKoopa Die
                 }
             }
 

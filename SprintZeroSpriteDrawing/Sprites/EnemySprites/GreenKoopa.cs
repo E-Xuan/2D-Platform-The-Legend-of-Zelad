@@ -10,7 +10,7 @@ using SprintZeroSpriteDrawing.Interfaces.Entitiy;
 
 namespace SprintZeroSpriteDrawing.Sprites.EnemySprites
 {
-    internal class GreenKoopa : ICollideable
+    public class GreenKoopa : ICollideable
     {
         public GreenKoopa(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos) : base(nSprite, nSheetSize, nPos)
         {

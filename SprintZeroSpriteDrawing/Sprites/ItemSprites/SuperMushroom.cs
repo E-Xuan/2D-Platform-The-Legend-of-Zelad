@@ -5,7 +5,7 @@ using SprintZeroSpriteDrawing.Interfaces.Entitiy;
 
 namespace SprintZeroSpriteDrawing.Sprites.ItemSprites
 {
-    internal class SuperMushroom : ICollideable
+    public class SuperMushroom : ICollideable
     {
         public SuperMushroom(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos) : base(nSprite, nSheetSize, nPos)
         {
