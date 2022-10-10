@@ -30,9 +30,12 @@ namespace SprintZeroSpriteDrawing.LevelLoader
                 {
                     x += 48;
                 }
+                if (x > Game1.SCREENSIZE.X)
+                    Game1.SCREENSIZE.X = x;
                 x = 48;
                 y += 48;
             }
+            Game1.SCREENSIZE.Y = y;
         }
 
         private int FindStartLine(FileStream fileStream)
@@ -73,29 +76,47 @@ namespace SprintZeroSpriteDrawing.LevelLoader
                     break;
                 #endregion
                 #region blocks
+                #region question blocks
                 case '?':
                     entity = BlockSpriteFactory.getFactory().CreateQuestionBlock(new Vector2(x, y), true);
                     break;
-                case '!':
+                case '1':
                     entity = BlockSpriteFactory.getFactory().CreateMQuestionBlock(new Vector2(x, y), true);
                     break;
-                case '@':
+                case '2':
                     entity = BlockSpriteFactory.getFactory().CreateFQuestionBlock(new Vector2(x, y), true);
                     break;
-                case '#':
+                case '3':
                     entity = BlockSpriteFactory.getFactory().CreateSQuestionBlock(new Vector2(x, y), true);
                     break;
-                case '$':
+                case '4':
                     entity = BlockSpriteFactory.getFactory().Create5CQuestionBlock(new Vector2(x, y), true);
                     break;
-                case '%':
+                case '5':
                     entity = BlockSpriteFactory.getFactory().CreateUQuestionBlock(new Vector2(x, y), true);
                     break;
-
-
+                #endregion
+                #region hidden blocks
                 case 'h':
                     entity = BlockSpriteFactory.getFactory().CreateQuestionBlock(new Vector2(x, y), false);
                     break;
+                case '!':
+                    entity = BlockSpriteFactory.getFactory().CreateMQuestionBlock(new Vector2(x, y), false);
+                    break;
+                case '@':
+                    entity = BlockSpriteFactory.getFactory().CreateFQuestionBlock(new Vector2(x, y), false);
+                    break;
+                case '#':
+                    entity = BlockSpriteFactory.getFactory().CreateSQuestionBlock(new Vector2(x, y), false);
+                    break;
+                case '$':
+                    entity = BlockSpriteFactory.getFactory().Create5CQuestionBlock(new Vector2(x, y), false);
+                    break;
+                case '%':
+                    entity = BlockSpriteFactory.getFactory().CreateUQuestionBlock(new Vector2(x, y), false);
+                    break;
+                #endregion
+                #region other blocks
                 case 'b':
                     entity = BlockSpriteFactory.getFactory().CreateBrickBlock(new Vector2(x, y));
                     break;
@@ -108,6 +129,7 @@ namespace SprintZeroSpriteDrawing.LevelLoader
                 case 'u':
                     entity = BlockSpriteFactory.getFactory().CreateUsedBlock(new Vector2(x, y));
                     break;
+                #endregion
                 #endregion
                 #region items
                 case 'm':

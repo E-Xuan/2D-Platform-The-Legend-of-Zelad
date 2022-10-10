@@ -8,6 +8,7 @@ using SprintZeroSpriteDrawing.Commands;
 using System.Collections.Generic;
 using System;
 using System.Collections.Immutable;
+using SprintZeroSpriteDrawing.Collision.CollisionManager;
 using SprintZeroSpriteDrawing.Sprites.ItemSprites;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
 using SprintZeroSpriteDrawing.Sprites.ObstacleSprites;
@@ -131,6 +132,7 @@ namespace SprintZeroSpriteDrawing
             HUDFont = Content.Load<SpriteFont>("Fonts/Arial");
 
             LevelLoader.LevelLoader.GetLevelLoader().LoadLevel("Level/test.txt");
+            CollisionManager.getCM().Init();
             
         }
 
@@ -146,7 +148,7 @@ namespace SprintZeroSpriteDrawing
             {
                 spriteEntry.Update();
             }
-
+            CollisionManager.getCM().Update();
             base.Update(gameTime);
         }
 
