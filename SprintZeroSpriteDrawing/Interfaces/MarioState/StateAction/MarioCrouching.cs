@@ -6,6 +6,7 @@ using SprintZeroSpriteDrawing.Sprites.ObstacleSprites;
 using SprintZeroSpriteDrawing.Interfaces.Entitiy;
 using SprintZeroSpriteDrawing.Sprites.MarioSprites;
 using System.Runtime.CompilerServices;
+using SprintZeroSpriteDrawing.Collision.CollisionManager;
 
 
 namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
@@ -19,10 +20,11 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
 
         public override void Enter()
         {
+            CollisionManager.getCM().RegMoving(mario);
             currActionState = ActionState.CROUCHING;
             mario.IsVis = true;
-            mario.Velocity = new Vector2(0, 0);
-            mario.Acceleration = new Vector2(0, (float)0.1);
+            mario.Velocity = new Vector2(0, 2);
+            mario.Acceleration = new Vector2(0, 0);
             if(mario.StatePowerup.currPowerupState != PowerupState.SMALL)
             {
                 mario.Frame = 6;

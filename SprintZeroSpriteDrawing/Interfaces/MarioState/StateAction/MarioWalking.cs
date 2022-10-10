@@ -7,6 +7,7 @@ using SprintZeroSpriteDrawing.Interfaces.Entitiy;
 using SprintZeroSpriteDrawing.Sprites.MarioSprites;
 using System.Runtime.CompilerServices;
 using System.Linq.Expressions;
+using SprintZeroSpriteDrawing.Collision.CollisionManager;
 
 namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
 {
@@ -19,6 +20,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
 
         public override void Enter()
         {
+            CollisionManager.getCM().RegMoving(mario);
             int direction = 1;
             currActionState = ActionState.WALKING;
             mario.IsVis = true;

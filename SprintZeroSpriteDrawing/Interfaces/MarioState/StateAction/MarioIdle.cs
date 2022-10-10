@@ -6,6 +6,7 @@ using SprintZeroSpriteDrawing.Sprites.ObstacleSprites;
 using SprintZeroSpriteDrawing.Interfaces.Entitiy;
 using SprintZeroSpriteDrawing.Sprites.MarioSprites;
 using System.Runtime.CompilerServices;
+using SprintZeroSpriteDrawing.Collision.CollisionManager;
 
 namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
 {
@@ -17,6 +18,8 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
         }
         public override void Enter()
         {
+
+            //CollisionManager.getCM().DeRegMoving(mario);
             currActionState = ActionState.IDLE;
             mario.IsVis = true;
             mario.Velocity = new Vector2(0, 0);

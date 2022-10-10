@@ -7,38 +7,93 @@ using SprintZeroSpriteDrawing.Sprites.ObstacleSprites;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 
 namespace SprintZeroSpriteDrawing.Collision.CollisionManager
 {
     public class CollisionManager
     {
         private static CollisionManager CM;
-        private static CollisionManager getCM()
+        public static CollisionManager getCM()
         {
+            if (CM == null)
+                CM = new CollisionManager();
             return CM;
         }
-        List<ICollideable>[,] list = new List<ICollideable>[(int)(Game1.SCREENSIZE.X / 48), (int)(Game1.SCREENSIZE.Y / 48)];
-     
-        /*public void ManageMarioCollision(Mario mario, List<ICollideable> Blocks)
+        private List<ICollideable>[,] entityList;
+        private List<ICollideable> movingEntities;
+        private CollisionManager()
         {
-            MarioCollisionManager MarioManager = new MarioCollisionManager(mario);
-            foreach(Block block in Blocks)
+            entityList = new List<ICollideable>[(int)(Game1.SCREENSIZE.X / 96) + 1, (int)(Game1.SCREENSIZE.Y / 96) + 1];
+            movingEntities = new List<ICollideable>();
+            for (int i = 0; i < entityList.Length; i++)
             {
-                MarioManager.ManageBlockCollision(block);
+                entityList[i/((int)(Game1.SCREENSIZE.Y / 96) + 1), i%((int)(Game1.SCREENSIZE.Y / 96) + 1)] = new List<ICollideable>();
             }
-        }*/
-        public void ManageBlockCollision(BlockCollisionManager blockCollisionManager, QuestionBlock QBlock, BrickBlock BBlock, UsedBlock UBlock, StairBlock SBlock, InvisibleBlock HBlock, GroundBlock GBlock)
+        }
+        public void Init()
         {
-            /*
-            blockCollisionManager.ManageQBlockCollision(QBlock);
-            blockCollisionManager.ManageBBlockCollision(BBlock);
-            blockCollisionManager.ManageHBlockCollision(HBlock);
-            blockCollisionManager.ManageSBlockCollision(SBlock);
-            blockCollisionManager.ManageGBlockCollision(GBlock);
-            blockCollisionManager.ManageUBlockCollision(UBlock);
-            /* Looks like I make it complicated. Idk */
+            foreach (ISprite entity in Game1.SpriteList)
+            {
+                try {
+                    entityList[(int)(entity.Pos.X/96), (int)(entity.Pos.Y/96)].Add((ICollideable)entity);
+                } catch (InvalidCastException e) { }
+            }
+        }
+        public void RegEntity(ICollideable entity)
+        {
+            entityList[(int)(entity.Pos.X / 96), (int)(entity.Pos.Y / 96)].Add((ICollideable)entity);
+        }
+        public void RegMoving(ICollideable entity)
+        {
+            if(/*entityList[(int)(entity.Pos.X / 96), (int)(entity.Pos.Y / 96)].Contains((ICollideable)entity) && */!movingEntities.Contains(entity))
+                movingEntities.Add(entity);
+        }
+        public void DeRegMoving(ICollideable entity)
+        {
+            if (movingEntities.Contains(entity))
+                movingEntities.Remove(entity);
+
+        }
+        public void Update()
+        {
+            int boinks = 0;
+            foreach (ICollideable entity in movingEntities)
+            {
+                Vector2 dirVel = new Vector2(Math.Sign(entity.Velocity.X), Math.Sign(entity.Velocity.Y));
+                /*foreach (ICollideable entity2 in entityList[(int)(entity.Pos.X / 96), (int)(entity.Pos.Y / 96)])
+                {
+                    if ((entity != entity2) && entity.BBox.Intersects(entity2.BBox))
+                    {
+                        boinks++;
+                        continue;
+                    }
+                }*/
+
+                try
+                {
+                    for (int x = -1; x < 2; x++)
+                    {
+                        for (int y = -1; y < 2; y++)
+                        {
+                            foreach (ICollideable entity2 in entityList[(int)(entity.Pos.X / 96) + x,
+                                         (int)(entity.Pos.Y / 96) + y])
+                            {
+                                if ((entity != entity2) && entity.BBox.Intersects(entity2.BBox))
+                                {
+                                    boinks++;
+                                    continue;
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (IndexOutOfRangeException)
+                { }
+            }
         }
     }
 } 

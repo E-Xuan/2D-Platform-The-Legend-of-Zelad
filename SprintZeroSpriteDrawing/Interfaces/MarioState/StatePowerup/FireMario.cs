@@ -24,6 +24,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StatePowerup
             mario.IsVis = true;
             mario.SheetSize = new Vector2(4, 2);
             mario.SetSprite(MarioSpriteFactory.getSpriteFactory().FireMarioSpriteSheet);
+            mario.UpdateBBox();
         }
 
         public override void ChangePowerupState(int state)

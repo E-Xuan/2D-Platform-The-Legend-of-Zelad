@@ -8,6 +8,7 @@ using SprintZeroSpriteDrawing.Commands;
 using System.Collections.Generic;
 using System;
 using System.Collections.Immutable;
+using SprintZeroSpriteDrawing.Collision.CollisionManager;
 using SprintZeroSpriteDrawing.Sprites.ItemSprites;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
 using SprintZeroSpriteDrawing.Sprites.ObstacleSprites;
@@ -116,15 +117,10 @@ namespace SprintZeroSpriteDrawing
             ItemSpriteFactory.getFactory().LoadContent(Content);
             BlockSpriteFactory.getFactory().LoadContent(Content);
             EnemySpriteFactory.getFactory().LoadContent(Content);
+            MarioSpriteFactory.getSpriteFactory().LoadContent(Content);
             Mario.LoadContent(Content);
             SpriteList.Add(BlockSpriteFactory.getFactory().CreateBrickBlock(new Vector2(400, 400)));
             keyboardController.UpdateBinding(Keys.K, new IntCmd(new KeyValuePair<Action<int>, int>(((BrickBlock)SpriteList[0]).ChangeState, (int)State.BROKEN)), BindingType.PRESSED);
-
-            #region MarioContent
-            MarioSpriteFactory.getSpriteFactory().LoadContent(Content);
-            
-            SpriteList.Add(MarioSpriteFactory.getSpriteFactory().createMario(new Vector2(300, 300)));
-            #endregion
             // set game binding
             BindingCmd.SetGameBinding(keyboardController, gamepadController);
 
@@ -136,6 +132,7 @@ namespace SprintZeroSpriteDrawing
             HUDFont = Content.Load<SpriteFont>("Fonts/Arial");
 
             LevelLoader.LevelLoader.GetLevelLoader().LoadLevel("Level/test.txt");
+            CollisionManager.getCM().Init();
             
         }
 
@@ -151,7 +148,7 @@ namespace SprintZeroSpriteDrawing
             {
                 spriteEntry.Update();
             }
-
+            CollisionManager.getCM().Update();
             base.Update(gameTime);
         }
 

@@ -41,12 +41,12 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
          public static Mario GetMario() {
              if(_mario == null)
              {
-                _mario = new Mario(SmallMarioSpriteSheet, new Vector2(3, 3), new Vector2(192, 1008));
+                _mario = new Mario(SmallMarioSpriteSheet, new Vector2(3, 3), new Vector2(0, 0));
              }
              return _mario;
          }
 
-         public Mario(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos) : base(nSprite, nSheetSize, nPos)
+         private Mario(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos) : base(nSprite, nSheetSize, nPos)
          {
             effects = SpriteEffects.None;
             LastFrame = 1;
@@ -110,10 +110,10 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             {
                 ChangeAction((int)ActionState.JUMPING); //jump
             }
-            else if(StateAction.currActionState == ActionState.CROUCHING && down == true)
+            /* else if(StateAction.currActionState == ActionState.CROUCHING && down == true)
             {
                 down = false;
-            }
+            } */
             else if(StateAction.currActionState == ActionState.CROUCHING)
             {
                 ChangeAction((int)ActionState.IDLE);
@@ -122,19 +122,19 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             {
                 ChangeAction((int)ActionState.JUMPING);
             }
-            else if(StateAction.currActionState == ActionState.JUMPING)
+            /* else if(StateAction.currActionState == ActionState.JUMPING)
             {
                 up = true;
-            }
+            } */
         }
 
         public void DecreaseAction(int action)
         {
-            if(StateAction.currActionState == ActionState.JUMPING && up == true) //jump
+            /*if(StateAction.currActionState == ActionState.JUMPING && up == true) //jump
             {
                 up = false;
             }
-            else if (StateAction.currActionState == ActionState.JUMPING)
+            else */if (StateAction.currActionState == ActionState.JUMPING)
             {
                ChangeAction((int)ActionState.IDLE);
             }
@@ -145,10 +145,10 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             {
                 ChangeAction((int)ActionState.IDLE);
             }
-            else
+            /* else
             {
                 down = true;
-            }
+            } */
         }
        
 

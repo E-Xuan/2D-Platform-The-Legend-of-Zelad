@@ -13,10 +13,10 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         List<Block> blocks = new List<Block>();
         public FourExplodingBrick(Texture2D SpriteSheet, Vector2 nSheetSize, Vector2 nPos) : base(SpriteSheet, nSheetSize, nPos)
         {
-            blocks.Add(new ExplodingBrickBlock(SpriteSheet, new Vector2(2, 2), nPos, new Vector2(2, 2), new Vector2(0, (float)0.05)));
-            blocks.Add(new ExplodingBrickBlock(SpriteSheet, new Vector2(2, 2), nPos, new Vector2(-2, 2), new Vector2(0, (float)0.05)));
-            blocks.Add(new ExplodingBrickBlock(SpriteSheet, new Vector2(2, 2), nPos, new Vector2(2, 1), new Vector2(0, (float)0.05)));
-            blocks.Add(new ExplodingBrickBlock(SpriteSheet, new Vector2(2, 2), nPos, new Vector2(-2, 1), new Vector2(0, (float)0.05)));
+            blocks.Add(new ExplodingBrickBlock(SpriteSheet, new Vector2(2, 2), nPos, new Vector2(1, -4), new Vector2(0, (float)0.05)));
+            blocks.Add(new ExplodingBrickBlock(SpriteSheet, new Vector2(2, 2), nPos, new Vector2(-1, -4), new Vector2(0, (float)0.05)));
+            blocks.Add(new ExplodingBrickBlock(SpriteSheet, new Vector2(2, 2), nPos, new Vector2(1, -2), new Vector2(0, (float)0.05)));
+            blocks.Add(new ExplodingBrickBlock(SpriteSheet, new Vector2(2, 2), nPos, new Vector2(-1, -2), new Vector2(0, (float)0.05)));
         }
         public override void Update()
         {
@@ -25,7 +25,7 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
                 block.Update();
                 
             }
-            if (blocks[2].Pos.Y > 1080)
+            if (blocks[1].Pos.Y > 1080)
             {
                 Game1.SpriteList.Remove(this);
             }
