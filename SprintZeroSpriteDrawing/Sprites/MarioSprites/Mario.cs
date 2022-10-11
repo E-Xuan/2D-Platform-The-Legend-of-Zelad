@@ -1,16 +1,14 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using System.Collections.Generic;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using SprintZeroSpriteDrawing.Commands;
+using SprintZeroSpriteDrawing.Interfaces;
 using SprintZeroSpriteDrawing.Interfaces.Entitiy;
 using SprintZeroSpriteDrawing.Interfaces.MarioState;
 using SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction;
 using SprintZeroSpriteDrawing.Interfaces.MarioState.StatePowerup;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.AccessControl;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework.Content;
 
 namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
 {
@@ -54,6 +52,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             StatePowerup = new SmallMario(this);
             StateAction = new MarioIdle(this);
             currState = new int[5];
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeAction, (int)ActionState.IDLE)), Direction.LEFT, CType.NEUTRAL));
             
          }
 
