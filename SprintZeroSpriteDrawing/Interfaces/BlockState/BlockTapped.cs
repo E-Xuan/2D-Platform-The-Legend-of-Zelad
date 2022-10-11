@@ -19,6 +19,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.BlockState
         public override void Enter()
         {
             CurrState = State.TAPPED;
+            block.CollideableType = CType.NEUTRAL;
             block.LastFrame = (int)block.SheetSize.X * (int)block.SheetSize.Y;
             block.Frame = block.LastFrame - 1;
             block.AutoFrame = false;

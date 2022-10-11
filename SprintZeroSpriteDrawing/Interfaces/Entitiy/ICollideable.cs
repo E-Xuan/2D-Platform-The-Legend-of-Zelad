@@ -21,6 +21,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
         AVATAR_SMALL,
         AVATAR_LARGE,
         AVATAR_STAR,
+        INVISIBLE,
         FRIENDLY,
         NEUTRAL,
         ENEMY
@@ -30,12 +31,8 @@ namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
     {
         //make this into a switch case later with method
         public List<Tuple<ICommand, Direction, CType>> CollisionResponse { get; set; }
-
         public CType CollideableType { get; set; }
-
-        //public Dictionary<CType, Dictionary<Direction, ICommand>> CollisionResponse { get; set; }
         public Rectangle BBox { get; set; }
-
         private Texture2D _texture;
 
         public ICollideable(Texture2D nSprite, Vector2 nPos, Rectangle nBBox) : base(nSprite, nPos)
