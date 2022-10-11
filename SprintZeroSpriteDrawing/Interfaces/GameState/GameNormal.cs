@@ -16,18 +16,18 @@ namespace SprintZeroSpriteDrawing.Interfaces.GameState
 
         public override void Enter()
         {
-            CurrState = State.NORMAL;
+            CurrState = GameModes.NORMAL;
         }
 
         public override void ChangeState(int state)
         {
-            switch ((State)state)
+            switch ((GameModes)state)
             {
-                case State.COLLISIONS:
+                case GameModes.COLLISIONS:
                     Exit();
                     mode.State = new GameCollisions(mode);
                     break;
-                case State.DEBUG:
+                case GameModes.DEBUG:
                     Exit();
                     mode.State = new GameDebug(mode);
                     break;

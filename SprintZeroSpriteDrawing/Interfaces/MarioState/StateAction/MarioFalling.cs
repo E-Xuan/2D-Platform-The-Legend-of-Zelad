@@ -11,9 +11,9 @@ using SprintZeroSpriteDrawing.Collision.CollisionManager;
 
 namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
 {
-    public class MarioJumping : IMarioState
+    public class MarioFalling : IMarioState
     {
-        public MarioJumping(Mario nMario): base(nMario)
+        public MarioFalling(Mario nMario): base(nMario)
         {
 
         }
@@ -21,9 +21,9 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
         public override void Enter()
         {
             CollisionManager.getCM().RegMoving(mario);
-            currActionState = ActionState.JUMPING;
+            currActionState = ActionState.FALLING;
             mario.IsVis = true;
-            mario.Velocity = new Vector2(mario.Velocity.X, -5);
+            mario.Velocity = new Vector2(mario.Velocity.X, 5);
             mario.Acceleration = new Vector2(0, (float)0.05);
             mario.Frame = 1;
             mario.AutoFrame = false;
@@ -44,10 +44,6 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
                 case ActionState.IDLE:
                     Exit();
                     mario.StateAction = new MarioIdle(mario);
-                    break;
-                case ActionState.FALLING:
-                    Exit();
-                    mario.StateAction=new MarioFalling(mario);
                     break;
             }
         }

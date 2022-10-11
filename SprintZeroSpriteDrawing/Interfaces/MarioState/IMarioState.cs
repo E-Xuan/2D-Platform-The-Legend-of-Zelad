@@ -22,6 +22,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState
     public enum ActionState
     {
         JUMPING,
+        FALLING,
         WALKING,
         RUNNING,
         CROUCHING,
