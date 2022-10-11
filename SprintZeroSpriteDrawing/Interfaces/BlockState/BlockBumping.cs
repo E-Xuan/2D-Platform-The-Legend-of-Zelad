@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using SprintZeroSpriteDrawing.Collision.CollisionManager;
 using SprintZeroSpriteDrawing.Sprites.ObstacleSprites;
 using SprintZeroSpriteDrawing.Interfaces.Entitiy;
 
@@ -33,6 +34,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.BlockState
             if (Inventory.Count > 0)
             {
                 Game1.SpriteList.Add(Inventory[0]);
+                CollisionManager.getCM().RegEntity(Inventory[0]);
                 Inventory.RemoveAt(0);
             }
         }

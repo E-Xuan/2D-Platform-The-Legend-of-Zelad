@@ -5,7 +5,7 @@ using SprintZeroSpriteDrawing.Interfaces.Entitiy;
 
 namespace SprintZeroSpriteDrawing.Sprites.ItemSprites
 {
-    public class OneUPMushroom : ICollideable
+    public class OneUPMushroom : Item
     {    
         public OneUPMushroom(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos) : base(nSprite, nSheetSize, nPos)
         {

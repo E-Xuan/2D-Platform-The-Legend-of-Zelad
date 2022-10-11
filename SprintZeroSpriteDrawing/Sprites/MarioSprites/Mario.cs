@@ -53,13 +53,32 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             StatePowerup = new SmallMario(this);
             StateAction = new MarioIdle(this);
             currState = new int[5];
+<<<<<<< HEAD
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeAction, (int)ActionState.IDLE)), Direction.TOP, CType.ENEMY));
+=======
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(TakeDamage, (int)PowerupState.DEAD)), Direction.SIDE, CType.ENEMY));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeAction, (int)ActionState.IDLE)), Direction.SIDE, CType.ENEMY));
+
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(TakeDamage, (int)PowerupState.DEAD)), Direction.SIDE, CType.ENEMY));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeAction, (int)ActionState.IDLE)), Direction.SIDE, CType.ENEMY));
+
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeAction, (int)ActionState.FALLING)), Direction.TOP, CType.INVISIBLE));
+
+>>>>>>> eddfc7ebe3a05c6dee68191b2b4519a06073c26c
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeAction, (int)ActionState.IDLE)), Direction.BOTTOM, CType.NEUTRAL));
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeAction, (int)ActionState.FALLING)), Direction.TOP, CType.NEUTRAL));
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeAction, (int)ActionState.IDLE)), Direction.SIDE, CType.NEUTRAL));
 
+<<<<<<< HEAD
             
          }
+=======
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(TakeItem, (int)PowerupState.BIG)), Direction.TOP, CType.FRIENDLY));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(TakeItem, (int)PowerupState.BIG)), Direction.SIDE, CType.FRIENDLY));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(TakeItem, (int)PowerupState.BIG)), Direction.BOTTOM, CType.FRIENDLY));
+
+        }
+>>>>>>> eddfc7ebe3a05c6dee68191b2b4519a06073c26c
 
         public void UpdateState()
         {
@@ -95,7 +114,10 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
         {
             StateAction.ChangeActionState(action);
         }
-
+        public void TakeItem(int powerup)
+        {
+            ChangePowerup((int)StatePowerup.currPowerupState+1);
+        }
         public void TakeDamage(int powerup)
         {
             if (StatePowerup.currPowerupState != PowerupState.SMALL)

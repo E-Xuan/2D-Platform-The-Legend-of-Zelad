@@ -83,7 +83,7 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
                                 if (entity.BBox.Intersects(entity2.BBox) && entity != entity2)
                                 {
                                     Direction CollisionDirection;
-                                    CollisionDirection = CollisionDetector.getCD().DetectColDirection(entity2, entity);
+                                    CollisionDirection = CollisionDetector.getCD().DetectColDirection(entity, entity2);
                                     foreach (var response in entity.CollisionResponse)
                                     {
                                         if (response.Item3 == entity2.CollideableType &&
@@ -106,11 +106,14 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
                                         }
 
                                     }
-                                    Vector2 tempWB = CollisionDetector.getCD().BuildWalkback(entity2, entity);
-                                    if (Math.Abs(tempWB.X) > Math.Abs(walkBack.X))
-                                        walkBack.X = tempWB.X; 
-                                    if (Math.Abs(tempWB.Y) > Math.Abs(walkBack.Y))
-                                        walkBack.Y = tempWB.Y;
+                                    if (entity2.CollideableType != CType.INVISIBLE)
+                                    {
+                                        Vector2 tempWB = CollisionDetector.getCD().BuildWalkback(entity, entity2);
+                                        if (Math.Abs(tempWB.X) > Math.Abs(walkBack.X))
+                                            walkBack.X = tempWB.X;
+                                        if (Math.Abs(tempWB.Y) > Math.Abs(walkBack.Y))
+                                            walkBack.Y = tempWB.Y;
+                                    }
                                 }
                             }
                             entity.Pos = Vector2.Add(entity.Pos, walkBack);

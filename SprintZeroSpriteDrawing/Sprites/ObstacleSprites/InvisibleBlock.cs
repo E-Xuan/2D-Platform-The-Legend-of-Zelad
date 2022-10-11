@@ -17,6 +17,7 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         {
             IsVis = false;
             LastFrame = 3;
+            CollideableType = CType.INVISIBLE;
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeState, (int)Interfaces.BlockState.State.BUMPING)), Direction.BOTTOM, CType.AVATAR_LARGE));
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeState, (int)Interfaces.BlockState.State.BUMPING)), Direction.BOTTOM, CType.AVATAR_SMALL));
 
@@ -25,6 +26,7 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         {
             IsVis = false;
             LastFrame = 3;
+            CollideableType = CType.INVISIBLE;
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeState, (int)Interfaces.BlockState.State.BUMPING)), Direction.BOTTOM, CType.AVATAR_LARGE));
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeState, (int)Interfaces.BlockState.State.BUMPING)), Direction.BOTTOM, CType.AVATAR_SMALL));
 

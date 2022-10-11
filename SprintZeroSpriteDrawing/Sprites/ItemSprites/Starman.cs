@@ -5,7 +5,7 @@ using SprintZeroSpriteDrawing.Interfaces.Entitiy;
 
 namespace SprintZeroSpriteDrawing.Sprites.ItemSprites
 {
-    public class Starman : ICollideable
+    public class Starman : Item
     { 
         public Starman(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos) : base(nSprite, nSheetSize, nPos)
         {

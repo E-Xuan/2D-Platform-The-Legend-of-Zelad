@@ -21,7 +21,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
         public override void Enter()
         {
             CollisionManager.getCM().RegMoving(mario);
-            int direction = 1;
+            int direction = 2;
             currActionState = ActionState.WALKING;
             mario.IsVis = true;
             if (mario.effects == SpriteEffects.FlipHorizontally)

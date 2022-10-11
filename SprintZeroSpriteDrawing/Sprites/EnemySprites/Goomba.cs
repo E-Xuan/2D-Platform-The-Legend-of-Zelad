@@ -10,7 +10,7 @@ using SprintZeroSpriteDrawing.Interfaces.Entitiy;
 
 namespace SprintZeroSpriteDrawing.Sprites.EnemySprites
 {
-    public class Goomba : ICollideable
+    public class Goomba : Enemy
     {
         public Goomba(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos) : base(nSprite, nSheetSize, nPos)
         {
