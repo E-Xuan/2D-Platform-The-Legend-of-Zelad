@@ -18,6 +18,7 @@ using SprintZeroSpriteDrawing.Sprites.MarioSprites;
 using SprintZeroSpriteDrawing.Interfaces.Entitiy;
 using SprintZeroSpriteDrawing.Interfaces.MarioState;
 using SprintZeroSpriteDrawing.GameMode;
+using SprintZeroSpriteDrawing.Collision;
 
 namespace SprintZeroSpriteDrawing
 {
