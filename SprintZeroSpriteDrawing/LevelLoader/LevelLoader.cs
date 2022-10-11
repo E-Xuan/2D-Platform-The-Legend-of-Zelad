@@ -30,12 +30,12 @@ namespace SprintZeroSpriteDrawing.LevelLoader
                 {
                     x += 48;
                 }
-                if (x > Game1.SCREENSIZE.X)
-                    Game1.SCREENSIZE.X = x;
+                if (x > Game1.LEVELSIZE.X)
+                    Game1.LEVELSIZE.X = x;
                 x = 48;
                 y += 48;
             }
-            Game1.SCREENSIZE.Y = y;
+            Game1.LEVELSIZE.Y = y;
         }
 
         private int FindStartLine(FileStream fileStream)

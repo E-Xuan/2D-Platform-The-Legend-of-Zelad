@@ -54,12 +54,15 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             StateAction = new MarioIdle(this);
             currState = new int[5];
 <<<<<<< HEAD
+<<<<<<< HEAD
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeAction, (int)ActionState.IDLE)), Direction.TOP, CType.ENEMY));
 =======
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(TakeDamage, (int)PowerupState.DEAD)), Direction.SIDE, CType.ENEMY));
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeAction, (int)ActionState.IDLE)), Direction.SIDE, CType.ENEMY));
+=======
+>>>>>>> f31692d09c1689fd3ba1cccc709e9fb166c443af
 
-            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(TakeDamage, (int)PowerupState.DEAD)), Direction.SIDE, CType.ENEMY));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(TakeDamage, 0)), Direction.SIDE, CType.ENEMY));
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeAction, (int)ActionState.IDLE)), Direction.SIDE, CType.ENEMY));
 
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeAction, (int)ActionState.FALLING)), Direction.TOP, CType.INVISIBLE));
@@ -92,6 +95,15 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
         {
             StatePowerup.Update();
             StateAction.Update();
+            //THIS WAS ADDED TO DO THE PBI, WE HAVE CODE FOR SPRINT 3
+            if (StateAction.currActionState == ActionState.IDLE)
+                up = down = false;
+            if (!up && !down)
+                Velocity = new Vector2(Velocity.X, 0);
+            if (down)
+                Velocity = new Vector2(Velocity.X, 5);
+            if (up)
+                Velocity = new Vector2(Velocity.X, -5);
             base.Update();
         }
 
@@ -116,7 +128,8 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
         }
         public void TakeItem(int powerup)
         {
-            ChangePowerup((int)StatePowerup.currPowerupState+1);
+            if((int)StatePowerup.currPowerupState + 1 < 3)
+                ChangePowerup((int)StatePowerup.currPowerupState + 1);
         }
         public void TakeDamage(int powerup)
         {
@@ -136,10 +149,10 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             {
                 ChangeAction((int)ActionState.JUMPING); //jump
             }
-            /* else if(StateAction.currActionState == ActionState.CROUCHING && down == true)
+            else if(StateAction.currActionState == ActionState.CROUCHING && down == true)
             {
                 down = false;
-            } */
+            }
             else if(StateAction.currActionState == ActionState.CROUCHING)
             {
                 ChangeAction((int)ActionState.IDLE);
@@ -148,19 +161,19 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             {
                 ChangeAction((int)ActionState.JUMPING);
             }
-            /* else if(StateAction.currActionState == ActionState.JUMPING)
+            else if(StateAction.currActionState == ActionState.JUMPING)
             {
                 up = true;
-            } */
+            }
         }
 
         public void DecreaseAction(int action)
         {
-            /*if(StateAction.currActionState == ActionState.JUMPING && up == true) //jump
+            if(StateAction.currActionState == ActionState.JUMPING && up == true) //jump
             {
                 up = false;
             }
-            else */if (StateAction.currActionState == ActionState.JUMPING)
+            else if (StateAction.currActionState == ActionState.JUMPING)
             {
                ChangeAction((int)ActionState.IDLE);
             }
@@ -171,10 +184,10 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             {
                 ChangeAction((int)ActionState.IDLE);
             }
-            /* else
+            else
             {
                 down = true;
-            } */
+            }
         }
        
 
