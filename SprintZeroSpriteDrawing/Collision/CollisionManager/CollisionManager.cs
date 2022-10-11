@@ -6,6 +6,7 @@ using SprintZeroSpriteDrawing.Sprites.MarioSprites;
 using SprintZeroSpriteDrawing.Sprites.ObstacleSprites;
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -45,11 +46,16 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
         }
         public void RegEntity(ICollideable entity)
         {
-            entityList[(int)(entity.Pos.X / 96), (int)(entity.Pos.Y / 96)].Add((ICollideable)entity);
+            entityList[(int)(entity.Pos.X / 96), (int)(entity.Pos.Y / 96)].Add(entity);
+        }
+        public void DeRegEntity(ICollideable entity)
+        {
+            if (entityList[(int)(entity.Pos.X / 96), (int)(entity.Pos.Y / 96)].Contains(entity))
+                entityList[(int)(entity.Pos.X / 96), (int)(entity.Pos.Y / 96)].Remove(entity);
         }
         public void RegMoving(ICollideable entity)
         {
-            if(/*entityList[(int)(entity.Pos.X / 96), (int)(entity.Pos.Y / 96)].Contains((ICollideable)entity) && */!movingEntities.Contains(entity))
+            if(!movingEntities.Contains(entity))
                 movingEntities.Add(entity);
         }
         public void DeRegMoving(ICollideable entity)
@@ -61,7 +67,7 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
         public void Update()
         {
             bool isLegal = true;
-            foreach (ICollideable entity in movingEntities)
+            foreach (ICollideable entity in movingEntities.ToImmutableList())
             {
                 Vector2 dirVel = new Vector2(Math.Sign(entity.Velocity.X), Math.Sign(entity.Velocity.Y));
 
@@ -69,15 +75,16 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
                 {
                     for (int y = -1; y < 2; y++)
                     {
-                        isLegal = (int)(entity.Pos.X / 96) + x > 0 && (int)(entity.Pos.X / 96) + x < (int)(Game1.SCREENSIZE.X / 96) + 1 && (int)(entity.Pos.Y / 96) + y > 0 && (int)(entity.Pos.Y / 96) + y < (int)(Game1.SCREENSIZE.Y / 96) + 1;
+                        isLegal = (int)(entity.Pos.X / 96) + x >= 0 && (int)(entity.Pos.X / 96) + x < (int)(Game1.SCREENSIZE.X / 96) + 1 && (int)(entity.Pos.Y / 96) + y >= 0 && (int)(entity.Pos.Y / 96) + y < (int)(Game1.SCREENSIZE.Y / 96) + 1;
                         if (isLegal)
                         {
                             foreach (ICollideable entity2 in entityList[(int)(entity.Pos.X / 96) + x,
-                                         (int)(entity.Pos.Y / 96) + y])
+                                         (int)(entity.Pos.Y / 96) + y].ToImmutableList())
                             {
                                 if ((entity != entity2) && entity.BBox.Intersects(entity2.BBox))
                                 {
                                     entity2.CollisionResponse[0].Item1.Execute();
+                                    entity.CollisionResponse[0].Item1.Execute();
                                 }
                             }
                         }

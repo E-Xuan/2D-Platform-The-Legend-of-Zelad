@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using SprintZeroSpriteDrawing.Collision.CollisionManager;
 using SprintZeroSpriteDrawing.Sprites.ObstacleSprites;
 using SprintZeroSpriteDrawing.Interfaces.Entitiy;
 
@@ -21,6 +22,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.BlockState
             
             CurrState = State.BROKEN;
             Game1.SpriteList.Remove(block);
+            CollisionManager.getCM().DeRegEntity(block);
             Game1.SpriteList.Add((Block)(BlockSpriteFactory.getFactory().CreateBrokenBlock(block.Pos)));
         }
 
