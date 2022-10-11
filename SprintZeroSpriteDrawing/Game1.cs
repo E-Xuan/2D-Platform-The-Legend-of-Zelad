@@ -17,6 +17,7 @@ using SprintZeroSpriteDrawing.Sprites.MarioActionSprites;
 using SprintZeroSpriteDrawing.Sprites.MarioSprites;
 using SprintZeroSpriteDrawing.Interfaces.Entitiy;
 using SprintZeroSpriteDrawing.Interfaces.MarioState;
+using SprintZeroSpriteDrawing.GameMode;
 
 namespace SprintZeroSpriteDrawing
 {
@@ -142,6 +143,7 @@ namespace SprintZeroSpriteDrawing
 
             keyboardController.UpdateInput();
             gamepadController.UpdateInput();
+            Mode.GetMode().Update();
 
             //iterate over all of the sprites and run their update methods every iteration
             foreach (ISprite spriteEntry in SpriteList.ToImmutableList())

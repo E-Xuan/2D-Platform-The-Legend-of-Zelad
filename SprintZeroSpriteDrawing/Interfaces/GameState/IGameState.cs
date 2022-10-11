@@ -11,7 +11,7 @@ using SprintZeroSpriteDrawing.GameMode;
 
 namespace SprintZeroSpriteDrawing.Interfaces.GameState
 {
-    public enum State
+    public enum GameModes
     {
         NORMAL,
         DEBUG,
@@ -22,7 +22,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.GameState
     public class IGameState
     {
         protected Mode mode;
-        public State CurrState { get; set; }
+        public GameModes CurrState { get; set; }
         
 
         public IGameState(Mode nMode)

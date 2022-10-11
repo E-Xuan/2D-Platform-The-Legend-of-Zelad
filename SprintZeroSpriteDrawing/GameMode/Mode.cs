@@ -9,7 +9,15 @@ namespace SprintZeroSpriteDrawing.GameMode
 {
     public class Mode
     {
+
+        private static Mode _mode;
         public IGameState State { get; set; }
+
+        public static Mode GetMode()
+        {
+            if(_mode == null) _mode = new Mode();
+            return _mode;
+        }
         public Mode()
         {
             State = new GameNormal(this);
@@ -18,6 +26,11 @@ namespace SprintZeroSpriteDrawing.GameMode
         public void ChangeState(int state)
         {
             this.State.ChangeState(state);
+        }
+
+        public void ToggleDebugBoxes(bool toggle)
+        {
+            toggle = !toggle;
         }
 
         public void Update()
