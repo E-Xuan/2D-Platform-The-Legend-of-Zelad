@@ -98,20 +98,42 @@ namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
         public override void Draw(SpriteBatch batch, SpriteEffects effects)
         {
             base.Draw(batch, effects);
+            
+
+            Color color = Color.Aqua;
+            switch (CollideableType)
+            {
+                case CType.FRIENDLY:
+                case CType.ITEM:
+                    color = Color.Green;
+                    break;
+                case CType.ENEMY:
+                    color = Color.Red;
+                    break;
+                case CType.NEUTRAL:
+                case CType.INVISIBLE:
+                    color = Color.Blue;
+                    break;
+                case CType.AVATAR_LARGE:
+                case CType.AVATAR_STAR:
+                case CType.AVATAR_SMALL:
+                    color = Color.Yellow;
+                    break;
+            }
             if (Game1.DEBUGBBOX)
             {
-                batch.Draw(_texture, new Rectangle(BBox.Left, BBox.Top, BBox.Width, 1), Color.White);
-                batch.Draw(_texture, new Rectangle(BBox.Right, BBox.Top, 1, BBox.Height), Color.White);
-                batch.Draw(_texture, new Rectangle(BBox.Left, BBox.Bottom, BBox.Width, 1), Color.White);
-                batch.Draw(_texture, new Rectangle(BBox.Left, BBox.Top, 1, BBox.Height), Color.White);
+                batch.Draw(_texture, new Rectangle(BBox.Left, BBox.Top, BBox.Width, 1), color);
+                batch.Draw(_texture, new Rectangle(BBox.Right, BBox.Top, 1, BBox.Height), color);
+                batch.Draw(_texture, new Rectangle(BBox.Left, BBox.Bottom, BBox.Width, 1), color);
+                batch.Draw(_texture, new Rectangle(BBox.Left, BBox.Top, 1, BBox.Height), color);
             }
 
             if (CollideMaybe)
             {
-                batch.Draw(_texture, new Rectangle(BBox.Left, BBox.Top, BBox.Width, 3), Color.Red);
-                batch.Draw(_texture, new Rectangle(BBox.Right, BBox.Top, 3, BBox.Height), Color.Red);
-                batch.Draw(_texture, new Rectangle(BBox.Left, BBox.Bottom, BBox.Width, 3), Color.Red);
-                batch.Draw(_texture, new Rectangle(BBox.Left, BBox.Top, 3, BBox.Height), Color.Red);
+                batch.Draw(_texture, new Rectangle(BBox.Left, BBox.Top, BBox.Width, 5), color);
+                batch.Draw(_texture, new Rectangle(BBox.Right, BBox.Top, 5, BBox.Height), color);
+                batch.Draw(_texture, new Rectangle(BBox.Left, BBox.Bottom, BBox.Width, 5), color);
+                batch.Draw(_texture, new Rectangle(BBox.Left, BBox.Top, 5, BBox.Height), color);
             }
 
         }
