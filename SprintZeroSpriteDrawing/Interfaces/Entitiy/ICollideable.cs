@@ -37,6 +37,8 @@ namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
         public Rectangle BBox { get; set; }
         private Texture2D _texture;
 
+        public bool CollideMaybe { get; set; }
+
         public ICollideable(Texture2D nSprite, Vector2 nPos, Rectangle nBBox) : base(nSprite, nPos)
         {
             BBox = nBBox;
@@ -86,7 +88,8 @@ namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
 
         public override void Update()
         {
-            base.Update(); 
+            base.Update();
+            CollideMaybe = false;
             if(Velocity.X != 0 || Velocity.Y != 0)
                 BBox = new Rectangle((int)(Pos.X - Sprite.Width / SheetSize.X), (int)(Pos.Y - Sprite.Height / SheetSize.Y), (int)(Sprite.Width / SheetSize.X), (int)(Sprite.Height / SheetSize.Y));
         }
@@ -101,6 +104,15 @@ namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
                 batch.Draw(_texture, new Rectangle(BBox.Left, BBox.Bottom, BBox.Width, 1), Color.White);
                 batch.Draw(_texture, new Rectangle(BBox.Left, BBox.Top, 1, BBox.Height), Color.White);
             }
+
+            if (CollideMaybe)
+            {
+                batch.Draw(_texture, new Rectangle(BBox.Left, BBox.Top, BBox.Width, 3), Color.Red);
+                batch.Draw(_texture, new Rectangle(BBox.Right, BBox.Top, 3, BBox.Height), Color.Red);
+                batch.Draw(_texture, new Rectangle(BBox.Left, BBox.Bottom, BBox.Width, 3), Color.Red);
+                batch.Draw(_texture, new Rectangle(BBox.Left, BBox.Top, 3, BBox.Height), Color.Red);
+            }
+
         }
     }
 }

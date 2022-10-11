@@ -2,15 +2,8 @@
 using SprintZeroSpriteDrawing.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SprintZeroSpriteDrawing.Controllers;
-using SprintZeroSpriteDrawing.Commands;
 using SprintZeroSpriteDrawing.Sprites.MarioSprites;
-using SprintZeroSpriteDrawing.Sprites.ObstacleSprites;
-using SprintZeroSpriteDrawing.Interfaces.Entitiy;
-using SprintZeroSpriteDrawing.Interfaces.BlockState;
+using SprintZeroSpriteDrawing;
 using SprintZeroSpriteDrawing.Interfaces.MarioState;
 using SprintZeroSpriteDrawing.GameMode;
 using SprintZeroSpriteDrawing.Interfaces.GameState;
@@ -21,6 +14,7 @@ namespace SprintZeroSpriteDrawing.Commands
     {
         public static void SetGameBinding(IController<Keys> keyboardController, IController<Buttons> gamepadController)
         {
+            keyboardController.UpdateBinding(Keys.C, new IntCmd(new KeyValuePair<Action<int>, int>(Game1.DebugBBox, -1)), BindingType.PRESSED);
 
             keyboardController.UpdateBinding(Keys.A, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().MoveAction, -1)), BindingType.PRESSED);
             keyboardController.UpdateBinding(Keys.Left, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().MoveAction, -1)), BindingType.PRESSED);
@@ -46,8 +40,6 @@ namespace SprintZeroSpriteDrawing.Commands
 
             gamepadController.UpdateBinding(Buttons.DPadUp, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().ChangeAction, 3)), BindingType.PRESSED);
             gamepadController.UpdateBinding(Buttons.DPadDown, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().ChangeAction, 4)), BindingType.PRESSED);
-
-            keyboardController.UpdateBinding(Keys.C, new IntCmd(new KeyValuePair<Action<int>, int>(Mode.GetMode().ChangeState, (int)GameModes.DEBUG)), BindingType.PRESSED);
         }
     }
 }

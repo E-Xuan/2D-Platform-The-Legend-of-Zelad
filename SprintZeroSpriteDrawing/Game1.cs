@@ -67,7 +67,7 @@ namespace SprintZeroSpriteDrawing
 
         #endregion
 
-        public static Vector2 SCREENSIZE = new Vector2(1920,1080);
+        public static Vector2 LEVELSIZE = new Vector2(1920,1080);
         public static bool DEBUGBBOX = true;
         public Game1()
         {
@@ -81,8 +81,8 @@ namespace SprintZeroSpriteDrawing
         {
             keyboardController = new KeyboardController();
             gamepadController = new GamepadController();
-            Graphics.PreferredBackBufferWidth = (int)SCREENSIZE.X;
-            Graphics.PreferredBackBufferHeight = (int)SCREENSIZE.Y;
+            Graphics.PreferredBackBufferWidth = (int)LEVELSIZE.X;
+            Graphics.PreferredBackBufferHeight = (int)LEVELSIZE.Y;
             Graphics.ApplyChanges();
 
 
@@ -172,6 +172,10 @@ namespace SprintZeroSpriteDrawing
         private void ExitWithCode(int errCode) {
             Console.WriteLine(errCode);
             Exit();
+        }
+        public static void DebugBBox(int errCode)
+        {
+            DEBUGBBOX = !DEBUGBBOX;
         }
     }
 }

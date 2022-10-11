@@ -28,11 +28,11 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
         private List<ICollideable> movingEntities;
         private CollisionManager()
         {
-            entityList = new List<ICollideable>[(int)(Game1.SCREENSIZE.X / 96) + 1, (int)(Game1.SCREENSIZE.Y / 96) + 1];
+            entityList = new List<ICollideable>[(int)(Game1.LEVELSIZE.X / 96) + 1, (int)(Game1.LEVELSIZE.Y / 96) + 1];
             movingEntities = new List<ICollideable>();
             for (int i = 0; i < entityList.Length; i++)
             {
-                entityList[i/((int)(Game1.SCREENSIZE.Y / 96) + 1), i%((int)(Game1.SCREENSIZE.Y / 96) + 1)] = new List<ICollideable>();
+                entityList[i/((int)(Game1.LEVELSIZE.Y / 96) + 1), i%((int)(Game1.LEVELSIZE.Y / 96) + 1)] = new List<ICollideable>();
             }
         }
         public void Init()
@@ -73,13 +73,14 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
                 {
                     for (int y = -1; y < 2; y++)
                     {
-                        bool isLegal = (int)(entity.Pos.X / 96) + x >= 0 && (int)(entity.Pos.X / 96) + x < (int)(Game1.SCREENSIZE.X / 96) + 1 && (int)(entity.Pos.Y / 96) + y >= 0 && (int)(entity.Pos.Y / 96) + y < (int)(Game1.SCREENSIZE.Y / 96) + 1;
+                        bool isLegal = (int)(entity.Pos.X / 96) + x >= 0 && (int)(entity.Pos.X / 96) + x < (int)(Game1.LEVELSIZE.X / 96) + 1 && (int)(entity.Pos.Y / 96) + y >= 0 && (int)(entity.Pos.Y / 96) + y < (int)(Game1.LEVELSIZE.Y / 96) + 1;
                         if (isLegal)
                         {
                             Vector2 walkBack = new Vector2(0, 0);
                             foreach (ICollideable entity2 in entityList[(int)(entity.Pos.X / 96) + x,
                                          (int)(entity.Pos.Y / 96) + y].ToImmutableList())
                             {
+                                entity2.CollideMaybe = true;
                                 if (entity.BBox.Intersects(entity2.BBox) && entity != entity2)
                                 {
                                     Direction CollisionDirection;
