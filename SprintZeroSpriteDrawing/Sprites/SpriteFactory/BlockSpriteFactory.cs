@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using SprintZeroSpriteDrawing.Commands;
 using SprintZeroSpriteDrawing.Interfaces;
 using SprintZeroSpriteDrawing.Interfaces.BlockState;
+using SprintZeroSpriteDrawing.Collision.BlockCollision;
 
 namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
 {
@@ -28,6 +29,7 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         public Texture2D ExplodingBrickBlockSpriteSheet;
 
         private static BlockSpriteFactory sprite;
+        private BrickBlockCollision BBCommand;
 
         public static BlockSpriteFactory getFactory() 
         {

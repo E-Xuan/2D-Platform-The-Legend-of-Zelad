@@ -18,11 +18,13 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         public QuestionBlock(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos) : base (nSprite, nSheetSize, nPos)
         {
             LastFrame = 3;
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeState, (int)Interfaces.BlockState.State.BUMPING)), Direction.BOTTOM, CType.AVATAR_LARGE));
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeState, (int)Interfaces.BlockState.State.BUMPING)), Direction.BOTTOM, CType.AVATAR_SMALL));
         }
         public QuestionBlock(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos, List<ICollideable> Inventory) : base(nSprite, nSheetSize, nPos, Inventory)
         {
             LastFrame = 3;
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeState, (int)Interfaces.BlockState.State.BUMPING)), Direction.BOTTOM, CType.AVATAR_LARGE));
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeState, (int)Interfaces.BlockState.State.BUMPING)), Direction.BOTTOM, CType.AVATAR_SMALL));
         }
     }

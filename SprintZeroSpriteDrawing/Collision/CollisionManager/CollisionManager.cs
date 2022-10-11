@@ -12,6 +12,8 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using SprintZeroSpriteDrawing.Interfaces.MarioState.StatePowerup;
+using SprintZeroSpriteDrawing.Interfaces.BlockState;
 
 namespace SprintZeroSpriteDrawing.Collision.CollisionManager
 {
@@ -27,12 +29,10 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
         private List<ICollideable>[,] entityList;
         private List<ICollideable> movingEntities;
         private Direction CollisionDirection;
-        private CollisionDetector collisionDetector;
         private CollisionManager()
         {
             entityList = new List<ICollideable>[(int)(Game1.SCREENSIZE.X / 96) + 1, (int)(Game1.SCREENSIZE.Y / 96) + 1];
             CollisionDirection = new Direction();
-            //collisionDetector = new CollisionDetector();
             movingEntities = new List<ICollideable>();
             for (int i = 0; i < entityList.Length; i++)
             {
@@ -68,10 +68,10 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
                 movingEntities.Remove(entity);
 
         }
-        public void Update(CollisionDetector CD)
+        public void Update(CollisionDetector CD, CType CT)
         {
             bool isLegal = true;
-            foreach (ICollideable entity in movingEntities.ToImmutableList())
+            foreach (Mario entity in movingEntities.ToImmutableList())
             {
                 Vector2 dirVel = new Vector2(Math.Sign(entity.Velocity.X), Math.Sign(entity.Velocity.Y));
 
@@ -86,10 +86,43 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
                                          (int)(entity.Pos.Y / 96) + y].ToImmutableList())
                             {
                                 CollisionDirection = CD.DetectColDirection(entity, entity2);
-                                if (/*(entity != entity2) && entity.BBox.Intersects(entity2.BBox)*/ CollisionDirection == Direction.BOTTOM)
+                                if (entity.StatePowerup.currPowerupState == Interfaces.MarioState.PowerupState.BIG)
                                 {
-                                    entity2.CollisionResponse[0].Item1.Execute();
-                                    entity.CollisionResponse[0].Item1.Execute();
+                                    switch (CollisionDirection)
+                                    {
+                                        case Direction.TOP:
+                                            entity.CollisionResponse[0].Item1.Execute();
+                                            break;
+                                        case Direction.BOTTOM:
+                                            entity.CollisionResponse[1].Item1.Execute();
+                                            entity2.CollisionResponse[0].Item1.Execute();
+                                            break;
+                                        case Direction.LEFT:
+                                            break;
+                                        case Direction.RIGHT:
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                                }
+                                if(entity.StatePowerup.currPowerupState == Interfaces.MarioState.PowerupState.SMALL)
+                                {
+                                    switch (CollisionDirection)
+                                    {
+                                        case Direction.TOP:
+                                            entity.CollisionResponse[0].Item1.Execute();
+                                            break;
+                                        case Direction.BOTTOM:
+                                            entity.CollisionResponse[1].Item1.Execute();
+                                            entity2.CollisionResponse[1].Item1.Execute();
+                                            break;
+                                        case Direction.LEFT:
+                                            break;
+                                        case Direction.RIGHT:
+                                            break;
+                                        default:
+                                            break;
+                                    }
                                 }
                             }
                         }
