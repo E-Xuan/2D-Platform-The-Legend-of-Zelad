@@ -19,6 +19,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StatePowerup
 
         public override void Enter()
         {
+            mario.CollideableType = CType.AVATAR_LARGE;
             prevPowerupState = currPowerupState;
             currPowerupState = PowerupState.FIRE;
             mario.IsVis = true;

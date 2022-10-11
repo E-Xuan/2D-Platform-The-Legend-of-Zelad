@@ -11,9 +11,8 @@ namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
     public enum Direction
     {
         TOP,
+        SIDE,
         BOTTOM,
-        LEFT,
-        RIGHT,
         NULL
     }
 
@@ -31,6 +30,9 @@ namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
     {
         //make this into a switch case later with method
         public List<Tuple<ICommand, Direction, CType>> CollisionResponse { get; set; }
+
+        public CType CollideableType { get; set; }
+
         //public Dictionary<CType, Dictionary<Direction, ICommand>> CollisionResponse { get; set; }
         public Rectangle BBox { get; set; }
 

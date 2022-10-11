@@ -1,6 +1,4 @@
-﻿using SprintZeroSpriteDrawing.Collision.BlockCollision;
-using SprintZeroSpriteDrawing.Collision.MarioCollision;
-using SprintZeroSpriteDrawing.Interfaces;
+﻿using SprintZeroSpriteDrawing.Interfaces;
 using SprintZeroSpriteDrawing.Interfaces.Entitiy;
 using SprintZeroSpriteDrawing.Sprites.MarioSprites;
 using SprintZeroSpriteDrawing.Sprites.ObstacleSprites;
@@ -28,11 +26,9 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
         }
         private List<ICollideable>[,] entityList;
         private List<ICollideable> movingEntities;
-        private Direction CollisionDirection;
         private CollisionManager()
         {
             entityList = new List<ICollideable>[(int)(Game1.SCREENSIZE.X / 96) + 1, (int)(Game1.SCREENSIZE.Y / 96) + 1];
-            CollisionDirection = new Direction();
             movingEntities = new List<ICollideable>();
             for (int i = 0; i < entityList.Length; i++)
             {
@@ -68,67 +64,57 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
                 movingEntities.Remove(entity);
 
         }
-        public void Update(CollisionDetector CD, CType CT)
+        public void Update()
         {
-            bool isLegal = true;
-            foreach (Mario entity in movingEntities.ToImmutableList())
+            foreach (ICollideable entity in movingEntities.ToImmutableList())
             {
-                Vector2 dirVel = new Vector2(Math.Sign(entity.Velocity.X), Math.Sign(entity.Velocity.Y));
 
                 for (int x = -1; x < 2; x++)
                 {
                     for (int y = -1; y < 2; y++)
                     {
-                        isLegal = (int)(entity.Pos.X / 96) + x >= 0 && (int)(entity.Pos.X / 96) + x < (int)(Game1.SCREENSIZE.X / 96) + 1 && (int)(entity.Pos.Y / 96) + y >= 0 && (int)(entity.Pos.Y / 96) + y < (int)(Game1.SCREENSIZE.Y / 96) + 1;
+                        bool isLegal = (int)(entity.Pos.X / 96) + x >= 0 && (int)(entity.Pos.X / 96) + x < (int)(Game1.SCREENSIZE.X / 96) + 1 && (int)(entity.Pos.Y / 96) + y >= 0 && (int)(entity.Pos.Y / 96) + y < (int)(Game1.SCREENSIZE.Y / 96) + 1;
                         if (isLegal)
                         {
+                            Vector2 walkBack = new Vector2(0, 0);
                             foreach (ICollideable entity2 in entityList[(int)(entity.Pos.X / 96) + x,
                                          (int)(entity.Pos.Y / 96) + y].ToImmutableList())
                             {
-                                CollisionDirection = CD.DetectColDirection(entity, entity2);
-                                if (entity.StatePowerup.currPowerupState == Interfaces.MarioState.PowerupState.BIG)
+                                if (entity.BBox.Intersects(entity2.BBox) && entity != entity2)
                                 {
-                                    switch (CollisionDirection)
+                                    Direction CollisionDirection;
+                                    CollisionDirection = CollisionDetector.getCD().DetectColDirection(entity2, entity);
+                                    foreach (var response in entity.CollisionResponse)
                                     {
-                                        case Direction.TOP:
-                                            entity.CollisionResponse[0].Item1.Execute();
-                                            break;
-                                        case Direction.BOTTOM:
-                                            entity.CollisionResponse[1].Item1.Execute();
-                                            entity2.CollisionResponse[0].Item1.Execute();
-                                            break;
-                                        case Direction.LEFT:
-                                            entity.CollisionResponse[2].Item1.Execute();
-                                            break;
-                                        case Direction.RIGHT:
-                                            entity.CollisionResponse[2].Item1.Execute();
-                                            break;
-                                        default:
-                                            break;
+                                        if (response.Item3 == entity2.CollideableType &&
+                                            response.Item2 == CollisionDirection)
+                                        {
+                                            response.Item1.Execute();
+                                        }
                                     }
-                                }
-                                if(entity.StatePowerup.currPowerupState == Interfaces.MarioState.PowerupState.SMALL)
-                                {
-                                    switch (CollisionDirection)
+                                    if ((int)CollisionDirection % 2 == 0)
                                     {
-                                        case Direction.TOP:
-                                            entity.CollisionResponse[0].Item1.Execute();
-                                            break;
-                                        case Direction.BOTTOM:
-                                            entity.CollisionResponse[1].Item1.Execute();
-                                            entity2.CollisionResponse[1].Item1.Execute();
-                                            break;
-                                        case Direction.LEFT:
-                                            entity.CollisionResponse[2].Item1.Execute();
-                                            break;
-                                        case Direction.RIGHT:
-                                            entity.CollisionResponse[2].Item1.Execute();
-                                            break;
-                                        default:
-                                            break;
+                                        CollisionDirection += 2;
+                                        CollisionDirection = (Direction)((int)CollisionDirection % 4);
                                     }
+                                    foreach (var response in entity2.CollisionResponse)
+                                    {
+                                        if (response.Item3 == entity.CollideableType &&
+                                            response.Item2 == CollisionDirection)
+                                        {
+                                            response.Item1.Execute();
+                                        }
+
+                                    }
+                                    Vector2 tempWB = CollisionDetector.getCD().BuildWalkback(entity2, entity);
+                                    if (Math.Abs(tempWB.X) > Math.Abs(walkBack.X))
+                                        walkBack.X = tempWB.X; 
+                                    if (Math.Abs(tempWB.Y) > Math.Abs(walkBack.Y))
+                                        walkBack.Y = tempWB.Y;
                                 }
                             }
+                            entity.Pos = Vector2.Add(entity.Pos, walkBack);
+                            entity.UpdateBBox();
                         }
                     }
                 }

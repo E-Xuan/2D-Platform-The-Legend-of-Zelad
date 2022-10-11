@@ -20,6 +20,8 @@ namespace SprintZeroSpriteDrawing.Collision
 
         public static CollisionDetector getCD()
         {
+            if (CD == null)
+                CD = new CollisionDetector();
             return CD;
         }
         public Direction DetectColDirection(ICollideable FirstObject, ICollideable SecondObject)
@@ -27,14 +29,12 @@ namespace SprintZeroSpriteDrawing.Collision
             Rectangle Intersection = Rectangle.Intersect(FirstObject.BBox, SecondObject.BBox);
             if (!Intersection.IsEmpty)
             {
-                if(Intersection.Height > Intersection.Width && FirstObject.BBox.X < SecondObject.BBox.X)
+                if (Intersection.Height > Intersection.Width && FirstObject.BBox.X < SecondObject.BBox.X ||
+                    Intersection.Height > Intersection.Width && FirstObject.BBox.X > SecondObject.BBox.X)
                 {
-                    return Direction.LEFT;
+                    return Direction.SIDE;
                 }
-                if(Intersection.Height > Intersection.Width && FirstObject.BBox.X > SecondObject.BBox.X)
-                {
-                    return Direction.RIGHT;
-                }
+
                 if(Intersection.Width > Intersection.Height && FirstObject.BBox.Y < SecondObject.BBox.Y)
                 {
                     return Direction.TOP;
@@ -45,6 +45,30 @@ namespace SprintZeroSpriteDrawing.Collision
                 }
             }
             return Direction.NULL;
+        }
+
+        public Vector2 BuildWalkback(ICollideable FirstObject, ICollideable SecondObject)
+        {
+            Rectangle Intersection = Rectangle.Intersect(FirstObject.BBox, SecondObject.BBox);
+            Vector2 walkback = new Vector2();
+
+            if (Intersection.Height > Intersection.Width && FirstObject.BBox.X < SecondObject.BBox.X)
+            {
+                walkback.X = Intersection.Width;
+            }
+            else if (Intersection.Height > Intersection.Width)
+            {
+                walkback.X = -Intersection.Width;
+            }
+            else if (FirstObject.BBox.Y < SecondObject.BBox.Y)
+            {
+                walkback.Y = Intersection.Height;
+            }
+            else
+            {
+                walkback.Y = -Intersection.Height;
+            }
+            return walkback;
         }
     }
 }

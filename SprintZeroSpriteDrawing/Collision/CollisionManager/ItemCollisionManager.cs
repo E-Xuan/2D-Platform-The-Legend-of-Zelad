@@ -1,6 +1,4 @@
-﻿using SprintZeroSpriteDrawing.Collision.BlockCollision;
-using SprintZeroSpriteDrawing.Collision.MarioCollision;
-using SprintZeroSpriteDrawing.Interfaces;
+﻿using SprintZeroSpriteDrawing.Interfaces;
 using SprintZeroSpriteDrawing.Interfaces.Entitiy;
 using SprintZeroSpriteDrawing.Sprites.EnemySprites;
 using SprintZeroSpriteDrawing.Sprites.ItemSprites;

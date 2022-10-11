@@ -69,8 +69,6 @@ namespace SprintZeroSpriteDrawing
 
         public static Vector2 SCREENSIZE = new Vector2(1920,1080);
         public static bool DEBUGBBOX = true;
-        public CollisionDetector CD;
-        public CType CT;
         public Game1()
         {
             //starting the graphics device for monogame
@@ -83,8 +81,6 @@ namespace SprintZeroSpriteDrawing
         {
             keyboardController = new KeyboardController();
             gamepadController = new GamepadController();
-            CD = new CollisionDetector();
-            CT = new CType();
             Graphics.PreferredBackBufferWidth = (int)SCREENSIZE.X;
             Graphics.PreferredBackBufferHeight = (int)SCREENSIZE.Y;
             Graphics.ApplyChanges();
@@ -154,7 +150,7 @@ namespace SprintZeroSpriteDrawing
             {
                 spriteEntry.Update();
             }
-            CollisionManager.getCM().Update(CD, CT);
+            CollisionManager.getCM().Update();
             base.Update(gameTime);
         }
 

@@ -18,26 +18,31 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         public Block(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos) : base(nSprite, nSheetSize, nPos)
         {
             State = new BlockUntapped(this);
+            CollideableType = CType.NEUTRAL;
         }
         public Block(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos, Rectangle nBBox) : base (nSprite, nSheetSize, nPos, nBBox)
         {
             State = new BlockUntapped(this);
+            CollideableType = CType.NEUTRAL;
         }
         public Block(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos, List<ICollideable> Inventory) : base(nSprite, nSheetSize, nPos)
         {
             State = new BlockUntapped(this, Inventory);
+            CollideableType = CType.NEUTRAL;
         }
         public Block(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos, Rectangle nBBox, List<ICollideable> Inventory) : base(nSprite, nSheetSize, nPos, nBBox)
         {
             State = new BlockUntapped(this, Inventory);
+            CollideableType = CType.NEUTRAL;
         }
         public Block(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos, Vector2 acceleration, Rectangle nBBox) : base(nSprite, nSheetSize, nPos, acceleration, nBBox)
         {
             State = new BlockUntapped(this);
+            CollideableType = CType.NEUTRAL;
         }
         public void ChangeState(int state)
         {
-            this.State.ChangeState(state);
+            State.ChangeState(state);
         }
         public override void Update()
         {
