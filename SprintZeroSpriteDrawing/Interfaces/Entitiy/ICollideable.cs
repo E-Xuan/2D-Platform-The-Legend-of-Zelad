@@ -25,7 +25,8 @@ namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
         AVATAR_STAR,
         FRIENDLY,
         NEUTRAL,
-        ENEMY
+        ENEMY,
+        ITEM
     }
 
     public class ICollideable : IRBody
