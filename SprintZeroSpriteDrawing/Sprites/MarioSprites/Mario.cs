@@ -53,21 +53,35 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             StatePowerup = new SmallMario(this);
             StateAction = new MarioIdle(this);
             currState = new int[5];
+<<<<<<< HEAD
+<<<<<<< HEAD
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeAction, (int)ActionState.IDLE)), Direction.TOP, CType.ENEMY));
+=======
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(TakeDamage, (int)PowerupState.DEAD)), Direction.SIDE, CType.ENEMY));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeAction, (int)ActionState.IDLE)), Direction.SIDE, CType.ENEMY));
+=======
+>>>>>>> f31692d09c1689fd3ba1cccc709e9fb166c443af
 
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(TakeDamage, 0)), Direction.SIDE, CType.ENEMY));
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeAction, (int)ActionState.IDLE)), Direction.SIDE, CType.ENEMY));
 
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeAction, (int)ActionState.FALLING)), Direction.TOP, CType.INVISIBLE));
 
+>>>>>>> eddfc7ebe3a05c6dee68191b2b4519a06073c26c
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeAction, (int)ActionState.IDLE)), Direction.BOTTOM, CType.NEUTRAL));
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeAction, (int)ActionState.FALLING)), Direction.TOP, CType.NEUTRAL));
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeAction, (int)ActionState.IDLE)), Direction.SIDE, CType.NEUTRAL));
 
+<<<<<<< HEAD
+            
+         }
+=======
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(TakeItem, (int)PowerupState.BIG)), Direction.TOP, CType.FRIENDLY));
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(TakeItem, (int)PowerupState.BIG)), Direction.SIDE, CType.FRIENDLY));
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(TakeItem, (int)PowerupState.BIG)), Direction.BOTTOM, CType.FRIENDLY));
 
         }
+>>>>>>> eddfc7ebe3a05c6dee68191b2b4519a06073c26c
 
         public void UpdateState()
         {
