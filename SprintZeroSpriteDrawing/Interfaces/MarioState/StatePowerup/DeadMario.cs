@@ -30,8 +30,32 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StatePowerup
             mario.UpdateBBox();
         }
 
+        public override void Update()
+        {
+            mario.ChangeAction((int)MarioState.ActionState.IDLE);
+        }
+
         public override void ChangePowerupState(int state)
         {
+            switch ((PowerupState)state)
+            {
+                case PowerupState.BIG:
+                    Exit();
+                    mario.StatePowerup = new BigMario(mario);
+                    break;
+                case PowerupState.FIRE:
+                    Exit();
+                    mario.StatePowerup = new FireMario(mario);
+                    break;
+                case PowerupState.DEAD:
+                    Exit();
+                    mario.StatePowerup = new DeadMario(mario);
+                    break;
+                case PowerupState.STAR:
+                    Exit();
+                    mario.StatePowerup = new StarMario(mario);
+                    break;
+            }
         }
     }
 }
