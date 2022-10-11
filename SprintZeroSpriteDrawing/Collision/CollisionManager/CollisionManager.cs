@@ -98,8 +98,10 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
                                             entity2.CollisionResponse[0].Item1.Execute();
                                             break;
                                         case Direction.LEFT:
+                                            entity.CollisionResponse[2].Item1.Execute();
                                             break;
                                         case Direction.RIGHT:
+                                            entity.CollisionResponse[2].Item1.Execute();
                                             break;
                                         default:
                                             break;
@@ -117,8 +119,10 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
                                             entity2.CollisionResponse[1].Item1.Execute();
                                             break;
                                         case Direction.LEFT:
+                                            entity.CollisionResponse[2].Item1.Execute();
                                             break;
                                         case Direction.RIGHT:
+                                            entity.CollisionResponse[2].Item1.Execute();
                                             break;
                                         default:
                                             break;
