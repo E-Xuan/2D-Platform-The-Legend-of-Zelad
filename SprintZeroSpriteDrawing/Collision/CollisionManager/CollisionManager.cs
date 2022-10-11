@@ -60,24 +60,17 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
         }
         public void Update()
         {
-            int boinks = 0;
+            bool isLegal = true;
             foreach (ICollideable entity in movingEntities)
             {
                 Vector2 dirVel = new Vector2(Math.Sign(entity.Velocity.X), Math.Sign(entity.Velocity.Y));
-                /*foreach (ICollideable entity2 in entityList[(int)(entity.Pos.X / 96), (int)(entity.Pos.Y / 96)])
-                {
-                    if ((entity != entity2) && entity.BBox.Intersects(entity2.BBox))
-                    {
-                        boinks++;
-                        continue;
-                    }
-                }*/
 
-                    for (int x = -1; x < 2; x++)
+                for (int x = -1; x < 2; x++)
+                {
+                    for (int y = -1; y < 2; y++)
                     {
-                        for (int y = -1; y < 2; y++)
-                    {
-                        try
+                        isLegal = (int)(entity.Pos.X / 96) + x > 0 && (int)(entity.Pos.X / 96) + x < (int)(Game1.SCREENSIZE.X / 96) + 1 && (int)(entity.Pos.Y / 96) + y > 0 && (int)(entity.Pos.Y / 96) + y < (int)(Game1.SCREENSIZE.Y / 96) + 1;
+                        if (isLegal)
                         {
                             foreach (ICollideable entity2 in entityList[(int)(entity.Pos.X / 96) + x,
                                          (int)(entity.Pos.Y / 96) + y])
@@ -85,20 +78,11 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
                                 if ((entity != entity2) && entity.BBox.Intersects(entity2.BBox))
                                 {
                                     entity2.CollisionResponse[0].Item1.Execute();
-                                    boinks++;
-                                    continue;
                                 }
                             }
-                            
-                        }
-                        catch (IndexOutOfRangeException)
-                        {
-                            y++;
-                            break;
                         }
                     }
-                    }
-                
+                }
             }
         }
     }

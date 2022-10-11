@@ -21,7 +21,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.BlockState
             
             CurrState = State.BROKEN;
             Game1.SpriteList.Remove(block);
-            Game1.SpriteList.Add((Block)(BlockSpriteFactory.getFactory().CreateBrokenBlock(new Vector2(400, 400))));
+            Game1.SpriteList.Add((Block)(BlockSpriteFactory.getFactory().CreateBrokenBlock(block.Pos)));
         }
 
 
