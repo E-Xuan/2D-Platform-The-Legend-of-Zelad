@@ -18,17 +18,6 @@ namespace SprintZeroSpriteDrawing.Collision
     {
         private static CollisionDetector CD;
 
-        List<ICollideable>[,] list = new List<ICollideable>[(int)(Game1.SCREENSIZE.X / 48), (int)(Game1.SCREENSIZE.Y/48)];
-
-
-        public CollisionDetector(List<ICollideable> spriteList)
-        {
-            foreach(ICollideable sprite in spriteList)
-            {
-                list[(int)(sprite.Pos.X / 48), (int)(sprite.Pos.Y / 48)].Add(sprite);
-            }
-        }
-
         public static CollisionDetector getCD()
         {
             return CD;

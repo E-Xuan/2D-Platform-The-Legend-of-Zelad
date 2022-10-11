@@ -26,9 +26,13 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
         }
         private List<ICollideable>[,] entityList;
         private List<ICollideable> movingEntities;
+        private Direction CollisionDirection;
+        private CollisionDetector collisionDetector;
         private CollisionManager()
         {
             entityList = new List<ICollideable>[(int)(Game1.SCREENSIZE.X / 96) + 1, (int)(Game1.SCREENSIZE.Y / 96) + 1];
+            CollisionDirection = new Direction();
+            //collisionDetector = new CollisionDetector();
             movingEntities = new List<ICollideable>();
             for (int i = 0; i < entityList.Length; i++)
             {
@@ -64,7 +68,7 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
                 movingEntities.Remove(entity);
 
         }
-        public void Update()
+        public void Update(CollisionDetector CD)
         {
             bool isLegal = true;
             foreach (ICollideable entity in movingEntities.ToImmutableList())
@@ -81,7 +85,8 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
                             foreach (ICollideable entity2 in entityList[(int)(entity.Pos.X / 96) + x,
                                          (int)(entity.Pos.Y / 96) + y].ToImmutableList())
                             {
-                                if ((entity != entity2) && entity.BBox.Intersects(entity2.BBox))
+                                CollisionDirection = CD.DetectColDirection(entity, entity2);
+                                if (/*(entity != entity2) && entity.BBox.Intersects(entity2.BBox)*/ CollisionDirection == Direction.BOTTOM)
                                 {
                                     entity2.CollisionResponse[0].Item1.Execute();
                                     entity.CollisionResponse[0].Item1.Execute();

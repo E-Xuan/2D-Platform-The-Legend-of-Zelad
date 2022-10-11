@@ -17,6 +17,7 @@ using SprintZeroSpriteDrawing.Sprites.MarioActionSprites;
 using SprintZeroSpriteDrawing.Sprites.MarioSprites;
 using SprintZeroSpriteDrawing.Interfaces.Entitiy;
 using SprintZeroSpriteDrawing.Interfaces.MarioState;
+using SprintZeroSpriteDrawing.Collision;
 
 namespace SprintZeroSpriteDrawing
 {
@@ -67,7 +68,7 @@ namespace SprintZeroSpriteDrawing
 
         public static Vector2 SCREENSIZE = new Vector2(1920,1080);
         public static bool DEBUGBBOX = true;
-
+        public CollisionDetector CD;
         public Game1()
         {
             //starting the graphics device for monogame
@@ -80,6 +81,7 @@ namespace SprintZeroSpriteDrawing
         {
             keyboardController = new KeyboardController();
             gamepadController = new GamepadController();
+            CD = new CollisionDetector();
             Graphics.PreferredBackBufferWidth = (int)SCREENSIZE.X;
             Graphics.PreferredBackBufferHeight = (int)SCREENSIZE.Y;
             Graphics.ApplyChanges();
@@ -148,7 +150,7 @@ namespace SprintZeroSpriteDrawing
             {
                 spriteEntry.Update();
             }
-            CollisionManager.getCM().Update();
+            CollisionManager.getCM().Update(CD);
             base.Update(gameTime);
         }
 
