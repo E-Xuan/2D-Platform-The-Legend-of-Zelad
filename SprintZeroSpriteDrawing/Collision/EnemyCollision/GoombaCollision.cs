@@ -35,17 +35,26 @@ namespace SprintZeroSpriteDrawing.Collision.EnemyCollision
                 if (CollisionSide == Direction.BOTTOM)
                 {
                     //Mario Die
+                    EnemyCollisionManager.mario.Velocity = new Vector2(0, 0);
+                    EnemyCollisionManager.mario.TakeDamage(-1);
+
                 }
                 if (CollisionSide == Direction.LEFT)
                 {
                     //Mario Die
+                    EnemyCollisionManager.mario.Velocity = new Vector2(0, 0);
+                    EnemyCollisionManager.mario.TakeDamage(-1);
                 }
                 if (CollisionSide == Direction.RIGHT)
                 {
                     //Mario Die
+                    EnemyCollisionManager.mario.Velocity = new Vector2(0, 0);
+                    EnemyCollisionManager.mario.TakeDamage(-1);
                 }
             }
-            if (EnemyCollisionManager.mario.GetType() == typeof(BigMario) || EnemyCollisionManager.mario.GetType() == typeof(FireMario))
+
+            //We don't need this Mario keeps track of his powerup already you just have to call take damage
+           /* if (EnemyCollisionManager.mario.GetType() == typeof(BigMario) || EnemyCollisionManager.mario.GetType() == typeof(FireMario))
             {
                 if (CollisionSide == Direction.TOP)
                 {
@@ -64,8 +73,9 @@ namespace SprintZeroSpriteDrawing.Collision.EnemyCollision
                 {
                     //Mario damage to small mario
                 }
-            }
+            }*/
 
+            
             if(EnemyCollisionManager.mario.GetType() == typeof(StarMario))
             {
                 if (CollisionSide == Direction.TOP)

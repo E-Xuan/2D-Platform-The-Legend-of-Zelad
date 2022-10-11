@@ -13,6 +13,8 @@ namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
         TOP,
         SIDE,
         BOTTOM,
+        LEFT,
+        RIGHT,
         NULL
     }
 
