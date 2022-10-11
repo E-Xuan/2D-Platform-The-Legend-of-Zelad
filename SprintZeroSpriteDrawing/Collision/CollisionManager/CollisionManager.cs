@@ -73,26 +73,32 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
                     }
                 }*/
 
-                try
-                {
                     for (int x = -1; x < 2; x++)
                     {
                         for (int y = -1; y < 2; y++)
+                    {
+                        try
                         {
                             foreach (ICollideable entity2 in entityList[(int)(entity.Pos.X / 96) + x,
                                          (int)(entity.Pos.Y / 96) + y])
                             {
                                 if ((entity != entity2) && entity.BBox.Intersects(entity2.BBox))
                                 {
+                                    entity2.CollisionResponse[0].Item1.Execute();
                                     boinks++;
                                     continue;
                                 }
                             }
+                            
+                        }
+                        catch (IndexOutOfRangeException)
+                        {
+                            y++;
+                            break;
                         }
                     }
-                }
-                catch (IndexOutOfRangeException)
-                { }
+                    }
+                
             }
         }
     }

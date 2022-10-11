@@ -10,6 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using SprintZeroSpriteDrawing.Commands;
 using SprintZeroSpriteDrawing.Interfaces;
+using SprintZeroSpriteDrawing.Interfaces.BlockState;
 
 namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
 {
@@ -51,12 +52,14 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         public ISprite CreateBrickBlock(Vector2 nPos)
         {
             var block = new BrickBlock(BrickBlockSpriteSheet, new Vector2(1, 1), nPos);
-            block.CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(null, Direction.BOTTOM, CType.AVATAR_LARGE));
+            block.CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(block.ChangeState, (int)State.BROKEN)), Direction.BOTTOM, CType.AVATAR_LARGE));
+            block.CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(block.ChangeState, (int)State.BUMPING)), Direction.BOTTOM, CType.AVATAR_SMALL));
             return block;
         }
         public ISprite CreateGroundBlock(Vector2 nPos)
         {
-            return new GroundBlock(GroundBlockSpriteSheet, new Vector2(1, 1), nPos);
+            var block = new GroundBlock(GroundBlockSpriteSheet, new Vector2(1, 1), nPos);
+            return block;
         }
         public ISprite CreateStairBlock(Vector2 nPos)
         {
