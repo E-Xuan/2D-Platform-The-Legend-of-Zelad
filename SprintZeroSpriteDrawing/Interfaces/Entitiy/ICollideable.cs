@@ -27,7 +27,8 @@ namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
         FRIENDLY,
         NEUTRAL,
         ENEMY,
-        ITEM
+        LEVELUP,
+        FLOWER
     }
 
     public class ICollideable : IRBody
@@ -104,7 +105,8 @@ namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
             switch (CollideableType)
             {
                 case CType.FRIENDLY:
-                case CType.ITEM:
+                case CType.FLOWER:
+                case CType.LEVELUP:
                     color = Color.Green;
                     break;
                 case CType.ENEMY:

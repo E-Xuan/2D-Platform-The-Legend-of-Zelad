@@ -1,11 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using Microsoft.Xna.Framework;
-using SprintZeroSpriteDrawing.Sprites.ObstacleSprites;
-using SprintZeroSpriteDrawing.Interfaces.Entitiy;
+﻿using Microsoft.Xna.Framework;
 using SprintZeroSpriteDrawing.Sprites.MarioSprites;
-using System.Runtime.CompilerServices;
 using SprintZeroSpriteDrawing.Sprites.MarioActionSprites;
 
 

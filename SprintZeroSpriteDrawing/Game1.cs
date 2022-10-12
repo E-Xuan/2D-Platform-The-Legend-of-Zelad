@@ -41,33 +41,9 @@ namespace SprintZeroSpriteDrawing
         public static List<ISprite> SpriteList = new List<ISprite>();
         #endregion
 
-        #region Items
-        SuperMushroom SMushroom;
-        Coins Coin;
-        FireFlower FireFlower;
-        OneUPMushroom UPMushroom;
-        Starman Star;
-        #endregion
-        
-
-        #region Mario States
-        
-        Mario Player;
-        ISprite DeadMario;
-        ISprite SmallMario;
-        ISprite BigMario;
-        ISprite FireMario;
-
-        ISprite Running;
-        ISprite Crouching;
-        ISprite Jumping;
-        ISprite Idle;
-
-
-
-        #endregion
-
         public static Vector2 LEVELSIZE = new Vector2(1920,1080);
+        public static Vector2 WINDOWSIZE = new Vector2(1920, 1080);
+
         public static bool DEBUGBBOX = true;
         public Game1()
         {
