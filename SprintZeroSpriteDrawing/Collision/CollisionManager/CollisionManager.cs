@@ -26,16 +26,38 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
         }
         private List<ICollideable>[,] entityList;
         private List<ICollideable> movingEntities;
+
         private CollisionManager()
         {
             entityList = new List<ICollideable>[(int)(Game1.LEVELSIZE.X / 96) + 1, (int)(Game1.LEVELSIZE.Y / 96) + 1];
             movingEntities = new List<ICollideable>();
             for (int i = 0; i < entityList.Length; i++)
             {
-                entityList[i/((int)(Game1.LEVELSIZE.Y / 96) + 1), i%((int)(Game1.LEVELSIZE.Y / 96) + 1)] = new List<ICollideable>();
+                entityList[i / ((int)(Game1.LEVELSIZE.Y / 96) + 1), i % ((int)(Game1.LEVELSIZE.Y / 96) + 1)] =
+                    new List<ICollideable>();
+            }
+            //Make the screen boundries
+            for (int i = 0; i < (int)Game1.WINDOWSIZE.X; i += 48)
+            {
+                var screenEdgeTop = BlockSpriteFactory.getFactory().CreateGroundBlock(new Vector2(i, 0));
+                screenEdgeTop.IsVis = false;
+                RegEntity((ICollideable)screenEdgeTop);
+                var screenEdgeBottom = BlockSpriteFactory.getFactory().CreateGroundBlock(new Vector2(i, Game1.WINDOWSIZE.Y));
+                screenEdgeBottom.IsVis = false;
+                RegEntity((ICollideable)screenEdgeBottom);
+            }
+            for (int i = 0; i < (int)Game1.WINDOWSIZE.Y; i += 48)
+            {
+                var screenEdgeTop = BlockSpriteFactory.getFactory().CreateGroundBlock(new Vector2(0, i));
+                screenEdgeTop.IsVis = false;
+                RegEntity((ICollideable)screenEdgeTop);
+                var screenEdgeBottom = BlockSpriteFactory.getFactory().CreateGroundBlock(new Vector2(Game1.WINDOWSIZE.X + 48, i));
+                screenEdgeBottom.IsVis = false;
+                RegEntity((ICollideable)screenEdgeBottom);
             }
 
         }
+
         public void Init()
         {
             foreach (ISprite entity in Game1.SpriteList)
@@ -82,6 +104,7 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
                             foreach (ICollideable entity2 in entityList[(int)(entity.Pos.X / 96) + x,
                                          (int)(entity.Pos.Y / 96) + y].ToImmutableList())
                             {
+                                entity.CollideMaybe = true;
                                 entity2.CollideMaybe = true;
                                 if (entity.BBox.Intersects(entity2.BBox) && entity != entity2)
                                 {
