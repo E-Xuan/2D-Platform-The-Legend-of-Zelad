@@ -34,6 +34,7 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
             {
                 entityList[i/((int)(Game1.LEVELSIZE.Y / 96) + 1), i%((int)(Game1.LEVELSIZE.Y / 96) + 1)] = new List<ICollideable>();
             }
+
         }
         public void Init()
         {
@@ -43,6 +44,7 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
                     entityList[(int)(entity.Pos.X/96), (int)(entity.Pos.Y/96)].Add((ICollideable)entity);
                 } catch (InvalidCastException e) { }
             }
+
         }
         public void RegEntity(ICollideable entity)
         {
