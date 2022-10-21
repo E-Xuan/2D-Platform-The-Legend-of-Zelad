@@ -8,9 +8,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace SprintZeroSpriteDrawing
 {
-    public class Camera
+    public class Camera2D
     {
-        public Camera(Viewport viewport)
+        public Camera2D(Viewport viewport)
         {
             _viewport = viewport;
             Origin = new Vector2(_viewport.Width / 2.0f, _viewport.Height / 2.0f);

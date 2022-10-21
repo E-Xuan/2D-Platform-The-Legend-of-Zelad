@@ -43,7 +43,7 @@ namespace SprintZeroSpriteDrawing
 
         public static Vector2 LEVELSIZE = new Vector2(1920,1080);
         public static Vector2 WINDOWSIZE = new Vector2(1920, 1080);
-
+        public static Camera2D _Camera2D;
         public static bool DEBUGBBOX = true;
         public Game1()
         {
@@ -61,27 +61,14 @@ namespace SprintZeroSpriteDrawing
             Graphics.PreferredBackBufferHeight = (int)LEVELSIZE.Y;
             Graphics.ApplyChanges();
 
-
-            #region sprites
-
-            #region obstacle sprites
-
-
-            // SpriteList.Add("Obstacles/HitQuestionBlock(Overworld)", HitQBlock);
-            #endregion
-            
-
-            #endregion
+            _Camera2D = new Camera2D(GraphicsDevice.Viewport);
 
             #region Command Mapping
+
             keyboardController.UpdateBinding(Keys.Q, new IntCmd(new KeyValuePair<Action<int>, int>(ExitWithCode, 0)), BindingType.PRESSED);
-            //keyBoardCommand.Add(Keys.B, new ICommand(BBlock));
-            //keyBoardCommand.Add(Keys.H, new ICommand(IBlock));
-
-            
-            #endregion
-
             gamepadController.UpdateBinding(Buttons.Start, new IntCmd(new KeyValuePair<Action<int>, int>(ExitWithCode, 0)), BindingType.PRESSED);
+
+            #endregion
 
             base.Initialize();
         }
@@ -133,15 +120,19 @@ namespace SprintZeroSpriteDrawing
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
- 
-            sBatch.Begin(); //Uses AlphaBlend by default, which allows the sprites to easily blend with backgrounds they match with
+            Vector2 parallax = new Vector2(0.5f);
+            sBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, _Camera2D.GetViewMatrix(parallax)); 
+            // half velocity
+            sBatch.End();
+            //Uses AlphaBlend by default, which allows the sprites to easily blend with backgrounds they match with
             //Iterate over the sprite entry list again and draw each sprite
+            sBatch.Begin();
             foreach (ISprite spriteEntry in SpriteList)
             {
                 spriteEntry.Draw(sBatch);
             }
+            
             //Write text onto the screen in a nice method
-            //sBatch.DrawString(HUDFont, "W/A: non-moving, non-animated\n E/B: non-moving, animated\n R/X: moving, non-animated\n T/Y: moving, animated\n Q/Start: quit", new Vector2(50, 0), Color.Black);
             sBatch.End();
             base.Draw(gameTime);
         }
