@@ -35,9 +35,9 @@ namespace SprintZeroSpriteDrawing.Sprites.SpriteFactory
             fireBallSpriteSheet = content.Load<Texture2D>("FireMario/FireballProjectile");     
         }
 
-        public ISprite CreateFireball(Vector2 nPos)
+        /*public ISprite CreateFireball(Vector2 nPos)
         {
-            var projectile
-        }
+            //var projectile;
+        }*/
     }
 }
