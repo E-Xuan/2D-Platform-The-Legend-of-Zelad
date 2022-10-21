@@ -112,31 +112,31 @@ namespace SprintZeroSpriteDrawing
             CollisionManager.getCM().Update();
             base.Update(gameTime);
             _Camera2D.LookAt(Mario.GetMario().Pos);
-            _Camera2D.Limits = new Rectangle(-800, 465, 6000, 1080);
+            _Camera2D.Limits = new Rectangle(0, 0, 6000, 1080);
 
         }
 
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            Vector2 parallax = new Vector2(0.5f);
-            sBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, _Camera2D.GetViewMatrix(parallax));
-            sBatch.Draw(BackgroundSpriteFactory.getFactory().BackgroundSpriteSheet, new Vector2(1,710), Color.White);
+
+
+            sBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, _Camera2D.GetViewMatrix(new Vector2(0.5f)));
+            sBatch.Draw(BackgroundSpriteFactory.getFactory().BackgroundSpriteSheet, new Vector2(300, 478), Color.White);
+            sBatch.End();
+
+            sBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, _Camera2D.GetViewMatrix(new Vector2(1f)));
+            foreach (ISprite spriteEntry in SpriteList)
+            {
+                spriteEntry.Draw(sBatch);
+            }
+
+            //Write text onto the screen in a nice method
             sBatch.End();
 
             //Uses AlphaBlend by default, which allows the sprites to easily blend with backgrounds they match with
             //Iterate over the sprite entry list again and draw each sprite
 
-
-
-            sBatch.Begin();
-            foreach (ISprite spriteEntry in SpriteList)
-            {
-                spriteEntry.Draw(sBatch);
-            }
-            
-            //Write text onto the screen in a nice method
-            sBatch.End();
             base.Draw(gameTime);
             
         }
