@@ -15,16 +15,16 @@ namespace SprintZeroSpriteDrawing.Background
         {
             _Camera2D = camera2D;
             Parallax = Vector2.One;
-            Sprites = new List<ICollideable>();
+            Sprites = new List<ISprite>();
         }
 
         public Vector2 Parallax { get; set; }
-        public List<ICollideable> Sprites { get; private set; }
+        public List<ISprite> Sprites { get; private set; }
 
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, _Camera2D.GetViewMatrix(Parallax));
-            foreach (ICollideable sprite in Sprites)
+            foreach (ISprite sprite in Sprites)
                 sprite.Draw(spriteBatch);
             spriteBatch.End();
         }
