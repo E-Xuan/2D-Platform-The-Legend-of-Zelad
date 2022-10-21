@@ -26,7 +26,6 @@ namespace SprintZeroSpriteDrawing
     public class Game1 : Game
     {
         public static GraphicsDeviceManager Graphics { get; set; }
-
         #region Controller
         private IController<Keys> keyboardController;
         private IController<Buttons> gamepadController;
@@ -40,7 +39,6 @@ namespace SprintZeroSpriteDrawing
         //Sprites and their names, could use UUID's if I wanted to, but I like names its unnecessary tho
         public static List<ISprite> SpriteList = new List<ISprite>();
         #endregion
-
         public static Vector2 LEVELSIZE = new Vector2(1920,1080);
         public static Vector2 WINDOWSIZE = new Vector2(1920, 1080);
         public static Camera2D _Camera2D;
@@ -62,7 +60,6 @@ namespace SprintZeroSpriteDrawing
             Graphics.ApplyChanges();
 
             _Camera2D = new Camera2D(GraphicsDevice.Viewport);
-
             #region Command Mapping
 
             keyboardController.UpdateBinding(Keys.Q, new IntCmd(new KeyValuePair<Action<int>, int>(ExitWithCode, 0)), BindingType.PRESSED);
@@ -77,14 +74,13 @@ namespace SprintZeroSpriteDrawing
         protected override void LoadContent()
         {
             //Loading the images, and creating the sprites too
-            
+            BackgroundSpriteFactory.getFactory().LoadContent(Content);
             ItemSpriteFactory.getFactory().LoadContent(Content);
             BlockSpriteFactory.getFactory().LoadContent(Content);
             EnemySpriteFactory.getFactory().LoadContent(Content);
             MarioSpriteFactory.getSpriteFactory().LoadContent(Content);
             Mario.LoadContent(Content);
             SpriteList.Add(BlockSpriteFactory.getFactory().CreateBrickBlock(new Vector2(400, 400)));
-            keyboardController.UpdateBinding(Keys.K, new IntCmd(new KeyValuePair<Action<int>, int>(((BrickBlock)SpriteList[0]).ChangeState, (int)State.BROKEN)), BindingType.PRESSED);
             // set game binding
             BindingCmd.SetGameBinding(keyboardController, gamepadController);
 
@@ -115,17 +111,24 @@ namespace SprintZeroSpriteDrawing
             }
             CollisionManager.getCM().Update();
             base.Update(gameTime);
+            _Camera2D.LookAt(Mario.GetMario().Pos);
+            _Camera2D.Limits = new Rectangle(-800, 465, 6000, 1080);
+
         }
 
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             Vector2 parallax = new Vector2(0.5f);
-            sBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, _Camera2D.GetViewMatrix(parallax)); 
-            // half velocity
+            sBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, _Camera2D.GetViewMatrix(parallax));
+            sBatch.Draw(BackgroundSpriteFactory.getFactory().BackgroundSpriteSheet, new Vector2(1,710), Color.White);
             sBatch.End();
+
             //Uses AlphaBlend by default, which allows the sprites to easily blend with backgrounds they match with
             //Iterate over the sprite entry list again and draw each sprite
+
+
+
             sBatch.Begin();
             foreach (ISprite spriteEntry in SpriteList)
             {
@@ -135,6 +138,7 @@ namespace SprintZeroSpriteDrawing
             //Write text onto the screen in a nice method
             sBatch.End();
             base.Draw(gameTime);
+            
         }
         private void ExitWithCode(int errCode) {
             Console.WriteLine(errCode);
