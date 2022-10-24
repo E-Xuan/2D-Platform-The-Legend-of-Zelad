@@ -100,6 +100,7 @@ namespace SprintZeroSpriteDrawing
 
             LevelLoader.LevelLoader.GetLevelLoader().LoadLevel("Level/test.txt");
             CollisionManager.getCM().Init();
+            CollisionManager.getCM().RegMoving(Mario.GetMario());
         }
 
         protected override void Update(GameTime gameTime)
