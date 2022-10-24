@@ -148,6 +148,27 @@ namespace SprintZeroSpriteDrawing.LevelLoader
                     entity = ItemSpriteFactory.getFactory().createUPMushroom(new Vector2(x, y));
                     break;
                 #endregion
+                #region obstacles
+                case 'T':
+                    entity = BlockSpriteFactory.getFactory().CreatePipeTop(new Vector2(x, y));
+                    break;
+                case 'B':
+                    entity = BlockSpriteFactory.getFactory().CreatePipeBottom(new Vector2(x, y));
+                    break;
+                case 'C':
+                    entity = BlockSpriteFactory.getFactory().CreateCastle(new Vector2(x, y));
+                    break;
+                case '[':
+                    entity = BlockSpriteFactory.getFactory().CreatePoleBot(new Vector2(x, y));
+                    break;
+                case ']':
+                    entity = BlockSpriteFactory.getFactory().CreatePoleTop(new Vector2(x, y));
+                    break;
+                case 'F':
+                    entity = BlockSpriteFactory.getFactory().CreateFlag(new Vector2(x, y));
+                    break;
+                #endregion
+
 
                 default:
                     return err;
