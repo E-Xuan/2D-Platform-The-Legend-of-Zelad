@@ -139,7 +139,9 @@ namespace SprintZeroSpriteDrawing
 
             //Write text onto the screen in a nice method
             sBatch.End();
-
+            sBatch.Begin();
+            sBatch.Draw(BackgroundSpriteFactory.getFactory().TitleImage, new Vector2(100, 100), Color.White);
+            sBatch.End();
             //Uses AlphaBlend by default, which allows the sprites to easily blend with backgrounds they match with
             //Iterate over the sprite entry list again and draw each sprite
 

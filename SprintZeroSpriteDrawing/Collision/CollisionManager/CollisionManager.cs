@@ -37,7 +37,7 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
                     new List<ICollideable>();
             }
             //Make the screen boundries
-            for (int i = 0; i < (int)Game1.WINDOWSIZE.X; i += 48)
+            /*for (int i = 0; i < (int)Game1.WINDOWSIZE.X; i += 48)
             {
                 var screenEdgeTop = BlockSpriteFactory.getFactory().CreateGroundBlock(new Vector2(i, 0));
                 screenEdgeTop.IsVis = false;
@@ -46,6 +46,7 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
                 screenEdgeBottom.IsVis = false;
                 RegEntity((ICollideable)screenEdgeBottom);
             }
+         
             for (int i = 0; i < (int)Game1.WINDOWSIZE.Y; i += 48)
             {
                 var screenEdgeTop = BlockSpriteFactory.getFactory().CreateGroundBlock(new Vector2(0, i));
@@ -54,7 +55,7 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
                 var screenEdgeBottom = BlockSpriteFactory.getFactory().CreateGroundBlock(new Vector2(Game1.WINDOWSIZE.X + 48, i));
                 screenEdgeBottom.IsVis = false;
                 RegEntity((ICollideable)screenEdgeBottom);
-            }
+            }*/
 
         }
 
