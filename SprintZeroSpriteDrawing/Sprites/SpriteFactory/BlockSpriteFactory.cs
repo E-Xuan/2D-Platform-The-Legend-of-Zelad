@@ -74,6 +74,11 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
             var block = new GroundBlock(GroundBlockSpriteSheet, new Vector2(1, 1), nPos);
             return block;
         }
+        public ISprite CreateBoundryBlock(Vector2 nPos)
+        {
+            var block = new BounderyBlock(GroundBlockSpriteSheet, new Vector2(1, 1), nPos);
+            return block;
+        }
         public ISprite CreateStairBlock(Vector2 nPos)
         {
             return new StairBlock(StairBlockSpriteSheet, new Vector2(1, 1), nPos);
