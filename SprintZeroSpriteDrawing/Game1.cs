@@ -127,7 +127,7 @@ namespace SprintZeroSpriteDrawing
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
 
-            sBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, _Camera2D.GetViewMatrix(new Vector2(0.5f)));
+            sBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, _Camera2D.GetViewMatrix(new Vector2(0.4f)));
             sBatch.Draw(BackgroundSpriteFactory.getFactory().BackgroundSpriteSheet, new Vector2(300, 478), Color.White);
             sBatch.End();
 
