@@ -23,7 +23,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
 
 
 
-
+        public int LIVES = 5;
         public SpriteEffects effects;
         private static Mario _mario;
         int Speed = 5;
