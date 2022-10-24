@@ -31,6 +31,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
         bool right = false;
         bool up = false;
         bool down = false;
+        public bool fireBall { get; set; }
 
         public IMarioState StatePowerup;
         public IMarioState StateAction;

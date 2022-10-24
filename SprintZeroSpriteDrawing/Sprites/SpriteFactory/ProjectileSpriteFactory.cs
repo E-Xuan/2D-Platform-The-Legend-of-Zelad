@@ -21,7 +21,7 @@ namespace SprintZeroSpriteDrawing.Sprites.SpriteFactory
         public Texture2D fireBallSpriteSheet;
         private static ProjectileSpriteFactory _spriteFactory;
 
-        public static ProjectileSpriteFactory GetProjectileSpriteFactory()
+        public static ProjectileSpriteFactory getSpriteFactory()
         {
             if (_spriteFactory == null)
             {

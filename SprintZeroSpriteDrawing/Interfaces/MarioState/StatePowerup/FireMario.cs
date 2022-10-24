@@ -26,6 +26,12 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StatePowerup
             mario.SheetSize = new Vector2(4, 2);
             mario.SetSprite(MarioSpriteFactory.getSpriteFactory().FireMarioSpriteSheet);
             mario.UpdateBBox();
+            mario.fireBall = true;
+        }
+
+        public override void Exit()
+        {
+            mario.fireBall = false;
         }
 
         public override void ChangePowerupState(int state)
