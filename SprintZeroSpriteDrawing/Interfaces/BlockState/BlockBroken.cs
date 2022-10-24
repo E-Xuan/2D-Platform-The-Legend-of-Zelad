@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using SprintZeroSpriteDrawing.Collision.CollisionManager;
 using SprintZeroSpriteDrawing.Sprites.ObstacleSprites;
 using SprintZeroSpriteDrawing.Interfaces.Entitiy;
+using SprintZeroSpriteDrawing.Sprites.ItemSprites;
 
 namespace SprintZeroSpriteDrawing.Interfaces.BlockState
 {
@@ -13,7 +14,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.BlockState
         public BlockBroken(Block nBlock) : base(nBlock)
         {
         }
-        public BlockBroken(Block nBlock, List<ICollideable> nInventory) : base(nBlock, nInventory)
+        public BlockBroken(Block nBlock, List<Item> nInventory) : base(nBlock, nInventory)
         {
         }
 

@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using SprintZeroSpriteDrawing.Commands;
 using SprintZeroSpriteDrawing.Interfaces;
 using SprintZeroSpriteDrawing.Interfaces.BlockState;
+using SprintZeroSpriteDrawing.Sprites.ItemSprites;
 
 namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
 {
@@ -26,6 +27,12 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         public Texture2D GroundBlockSpriteSheet;
         public Texture2D StairBlockSpriteSheet;
         public Texture2D ExplodingBrickBlockSpriteSheet;
+        public Texture2D PipeBottomSpriteSheet;
+        public Texture2D PipeTopSpriteSheet;
+        public Texture2D CastleSpriteSheet;
+        public Texture2D PoleBottomSpriteSheet;
+        public Texture2D PoleTopSpriteSheet;
+        public Texture2D FlagSpriteSheet;
 
         private static BlockSpriteFactory sprite;
 
@@ -47,6 +54,12 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
             GroundBlockSpriteSheet = content.Load<Texture2D>("Obstacles/GroundBlock(Overworld)");
             StairBlockSpriteSheet = content.Load<Texture2D>("Obstacles/StairBlock");
             ExplodingBrickBlockSpriteSheet = content.Load<Texture2D>("ExplodingBlock");
+            PipeBottomSpriteSheet = content.Load<Texture2D>("Obstacles/pipe_bot");
+            PipeTopSpriteSheet = content.Load<Texture2D>("Obstacles/pipe_top");
+            CastleSpriteSheet = content.Load<Texture2D>("Obstacles/castle");
+            PoleBottomSpriteSheet = content.Load<Texture2D>("Obstacles/pole_bot");
+            PoleTopSpriteSheet = content.Load<Texture2D>("Obstacles/pole_top");
+            FlagSpriteSheet = content.Load<Texture2D>("Obstacles/flag");
         }
         
         public ISprite CreateBrickBlock(Vector2 nPos)
@@ -61,6 +74,11 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
             var block = new GroundBlock(GroundBlockSpriteSheet, new Vector2(1, 1), nPos);
             return block;
         }
+        public ISprite CreateBoundryBlock(Vector2 nPos)
+        {
+            var block = new BounderyBlock(GroundBlockSpriteSheet, new Vector2(1, 1), nPos);
+            return block;
+        }
         public ISprite CreateStairBlock(Vector2 nPos)
         {
             return new StairBlock(StairBlockSpriteSheet, new Vector2(1, 1), nPos);
@@ -71,32 +89,32 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         }
         public ISprite CreateMQuestionBlock(Vector2 nPos, bool vis)
         {
-            return vis ? new QuestionBlock(QuestionBlockSpriteSheet, new Vector2(2, 2), nPos, new List<ICollideable>{(ICollideable)ItemSpriteFactory.getFactory().createSMushroom(Vector2.Add(nPos, new Vector2(0, -48)))}) :
-                    new InvisibleBlock(QuestionBlockSpriteSheet, new Vector2(2, 2), nPos, new List<ICollideable> { (ICollideable)ItemSpriteFactory.getFactory().createSMushroom(Vector2.Add(nPos, new Vector2(0, -48))) });
+            return vis ? new QuestionBlock(QuestionBlockSpriteSheet, new Vector2(2, 2), nPos, new List<Item>{(Item)ItemSpriteFactory.getFactory().createSMushroom(Vector2.Add(nPos, new Vector2(0, -48)))}) :
+                    new InvisibleBlock(QuestionBlockSpriteSheet, new Vector2(2, 2), nPos, new List<Item> {(Item)ItemSpriteFactory.getFactory().createSMushroom(Vector2.Add(nPos, new Vector2(0, -48))) });
         }
         public ISprite CreateFQuestionBlock(Vector2 nPos, bool vis)
         {
-            return vis ? new QuestionBlock(QuestionBlockSpriteSheet, new Vector2(2, 2), nPos, new List<ICollideable> { (ICollideable)ItemSpriteFactory.getFactory().createFlower(Vector2.Add(nPos, new Vector2(0, -48))) }) :
-                new InvisibleBlock(QuestionBlockSpriteSheet, new Vector2(2, 2), nPos, new List<ICollideable> { (ICollideable)ItemSpriteFactory.getFactory().createFlower(Vector2.Add(nPos, new Vector2(0, -48))) });
+            return vis ? new QuestionBlock(QuestionBlockSpriteSheet, new Vector2(2, 2), nPos, new List<Item> { (Item)ItemSpriteFactory.getFactory().createFlower(Vector2.Add(nPos, new Vector2(0, -48))) }) :
+                new InvisibleBlock(QuestionBlockSpriteSheet, new Vector2(2, 2), nPos, new List<Item> { (Item)ItemSpriteFactory.getFactory().createFlower(Vector2.Add(nPos, new Vector2(0, -48))) });
         }
         public ISprite CreateSQuestionBlock(Vector2 nPos, bool vis)
         {
-            return vis ? new QuestionBlock(QuestionBlockSpriteSheet, new Vector2(2, 2), nPos, new List<ICollideable> { (ICollideable)ItemSpriteFactory.getFactory().createStar(Vector2.Add(nPos, new Vector2(0, -48))) }) :
-                new InvisibleBlock(QuestionBlockSpriteSheet, new Vector2(2, 2), nPos, new List<ICollideable> { (ICollideable)ItemSpriteFactory.getFactory().createStar(Vector2.Add(nPos, new Vector2(0, -48))) });
+            return vis ? new QuestionBlock(QuestionBlockSpriteSheet, new Vector2(2, 2), nPos, new List<Item> { (Item)ItemSpriteFactory.getFactory().createStar(Vector2.Add(nPos, new Vector2(0, -48))) }) :
+                new InvisibleBlock(QuestionBlockSpriteSheet, new Vector2(2, 2), nPos, new List<Item> { (Item)ItemSpriteFactory.getFactory().createStar(Vector2.Add(nPos, new Vector2(0, -48))) });
         }
         public ISprite CreateUQuestionBlock(Vector2 nPos, bool vis)
         {
-            return vis ? new QuestionBlock(QuestionBlockSpriteSheet, new Vector2(2, 2), nPos, new List<ICollideable> { (ICollideable)ItemSpriteFactory.getFactory().createUPMushroom(Vector2.Add(nPos, new Vector2(0, -48))) })
-                    : new InvisibleBlock(QuestionBlockSpriteSheet, new Vector2(2, 2), nPos, new List<ICollideable> { (ICollideable)ItemSpriteFactory.getFactory().createUPMushroom(Vector2.Add(nPos, new Vector2(0, -48))) });
+            return vis ? new QuestionBlock(QuestionBlockSpriteSheet, new Vector2(2, 2), nPos, new List<Item> { (Item)ItemSpriteFactory.getFactory().createUPMushroom(Vector2.Add(nPos, new Vector2(0, -48))) })
+                    : new InvisibleBlock(QuestionBlockSpriteSheet, new Vector2(2, 2), nPos, new List<Item> { (Item)ItemSpriteFactory.getFactory().createUPMushroom(Vector2.Add(nPos, new Vector2(0, -48))) });
         } 
         public ISprite Create5CQuestionBlock(Vector2 nPos, bool vis)
         {
-            return vis ? new QuestionBlock(QuestionBlockSpriteSheet, new Vector2(2, 2), nPos, new List<ICollideable> { (ICollideable)ItemSpriteFactory.getFactory().createCoin(Vector2.Add(nPos, new Vector2(0, -48))), 
-                (ICollideable)ItemSpriteFactory.getFactory().createCoin(Vector2.Add(nPos, new Vector2(0, -48))), (ICollideable)ItemSpriteFactory.getFactory().createCoin(Vector2.Add(nPos, new Vector2(0, -48))),
-                (ICollideable)ItemSpriteFactory.getFactory().createCoin(Vector2.Add(nPos, new Vector2(0, -48))), (ICollideable)ItemSpriteFactory.getFactory().createCoin(Vector2.Add(nPos, new Vector2(0, -48)))
-            }) : new InvisibleBlock(QuestionBlockSpriteSheet, new Vector2(2, 2), nPos, new List<ICollideable> { (ICollideable)ItemSpriteFactory.getFactory().createCoin(Vector2.Add(nPos, new Vector2(0, -48))),
-                    (ICollideable)ItemSpriteFactory.getFactory().createCoin(Vector2.Add(nPos, new Vector2(0, -48))), (ICollideable)ItemSpriteFactory.getFactory().createCoin(Vector2.Add(nPos, new Vector2(0, -48))),
-                    (ICollideable)ItemSpriteFactory.getFactory().createCoin(Vector2.Add(nPos, new Vector2(0, -48))), (ICollideable)ItemSpriteFactory.getFactory().createCoin(Vector2.Add(nPos, new Vector2(0, -48)))
+            return vis ? new QuestionBlock(QuestionBlockSpriteSheet, new Vector2(2, 2), nPos, new List<Item> { (Item)ItemSpriteFactory.getFactory().createCoin(Vector2.Add(nPos, new Vector2(0, -48))), 
+                (Item)ItemSpriteFactory.getFactory().createCoin(Vector2.Add(nPos, new Vector2(0, -48))), (Item)ItemSpriteFactory.getFactory().createCoin(Vector2.Add(nPos, new Vector2(0, -48))),
+                (Item)ItemSpriteFactory.getFactory().createCoin(Vector2.Add(nPos, new Vector2(0, -48))), (Item)ItemSpriteFactory.getFactory().createCoin(Vector2.Add(nPos, new Vector2(0, -48)))
+            }) : new InvisibleBlock(QuestionBlockSpriteSheet, new Vector2(2, 2), nPos, new List<Item> { (Item)ItemSpriteFactory.getFactory().createCoin(Vector2.Add(nPos, new Vector2(0, -48))),
+                    (Item)ItemSpriteFactory.getFactory().createCoin(Vector2.Add(nPos, new Vector2(0, -48))), (Item)ItemSpriteFactory.getFactory().createCoin(Vector2.Add(nPos, new Vector2(0, -48))),
+                    (Item)ItemSpriteFactory.getFactory().createCoin(Vector2.Add(nPos, new Vector2(0, -48))), (Item)ItemSpriteFactory.getFactory().createCoin(Vector2.Add(nPos, new Vector2(0, -48)))
                 });
         }
         public ISprite CreateUsedBlock(Vector2 nPos)
@@ -109,6 +127,30 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
             //need to also give accelaraiton and velocity at exploding brickblock?
             //how to get the brick block and set visibility to false?
             return new FourExplodingBrick(ExplodingBrickBlockSpriteSheet, new Vector2(2, 2), nPos);
+        }
+        public ISprite CreatePipeBottom(Vector2 nPos)
+        {
+            return new Pipe_Bot(PipeBottomSpriteSheet, new Vector2(1, 1), nPos);
+        }
+        public ISprite CreatePipeTop(Vector2 nPos)
+        {
+            return new Pipe_Top(PipeTopSpriteSheet, new Vector2(1, 1), nPos);
+        }
+        public ISprite CreateCastle(Vector2 nPos)
+        {
+            return new Castle(CastleSpriteSheet, new Vector2(1, 1), nPos);  
+        }
+        public ISprite CreatePoleTop(Vector2 nPos)
+        {
+            return new Pole_Top(PoleTopSpriteSheet, new Vector2(1, 1), nPos);
+        }
+        public ISprite CreatePoleBot(Vector2 nPos)
+        {
+            return new Pole_Bot(PoleBottomSpriteSheet, new Vector2(1, 1), nPos);
+        }
+        public ISprite CreateFlag(Vector2 nPos)
+        {
+            return new Flag(FlagSpriteSheet, new Vector2(1, 1), nPos);
         }
     }
 }

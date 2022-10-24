@@ -65,6 +65,7 @@ namespace SprintZeroSpriteDrawing
             #region Command Mapping
 
             keyboardController.UpdateBinding(Keys.Q, new IntCmd(new KeyValuePair<Action<int>, int>(ExitWithCode, 0)), BindingType.PRESSED);
+            keyboardController.UpdateBinding(Keys.R, new LevelReset(this), BindingType.PRESSED);
             gamepadController.UpdateBinding(Buttons.Start, new IntCmd(new KeyValuePair<Action<int>, int>(ExitWithCode, 0)), BindingType.PRESSED);
 
             #endregion
@@ -75,6 +76,12 @@ namespace SprintZeroSpriteDrawing
 
         protected override void LoadContent()
         {
+            Restart();
+        }
+
+        public void Restart()
+        {
+            SpriteList = new List<ISprite>();
             //Loading the images, and creating the sprites too
             BackgroundSpriteFactory.getFactory().LoadContent(Content);
             ItemSpriteFactory.getFactory().LoadContent(Content);
@@ -96,7 +103,7 @@ namespace SprintZeroSpriteDrawing
 
             LevelLoader.LevelLoader.GetLevelLoader().LoadLevel("Level/test.txt");
             CollisionManager.getCM().Init();
-            
+            CollisionManager.getCM().RegMoving(Mario.GetMario());
         }
 
         protected override void Update(GameTime gameTime)

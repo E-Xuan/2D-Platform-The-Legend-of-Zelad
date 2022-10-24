@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SprintZeroSpriteDrawing.Commands;
 using SprintZeroSpriteDrawing.Interfaces.Entitiy;
+using SprintZeroSpriteDrawing.Sprites.ItemSprites;
 
 namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
 {
@@ -22,7 +23,7 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeState, (int)Interfaces.BlockState.State.BUMPING)), Direction.BOTTOM, CType.AVATAR_SMALL));
 
         }
-        public InvisibleBlock(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos, List<ICollideable> inventory) : base(nSprite, nSheetSize, nPos, inventory)
+        public InvisibleBlock(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos, List<Item> inventory) : base(nSprite, nSheetSize, nPos, inventory)
         {
             IsVis = false;
             LastFrame = 3;

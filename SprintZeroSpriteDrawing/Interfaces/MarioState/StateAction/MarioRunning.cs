@@ -23,7 +23,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
             CollisionManager.getCM().RegMoving(mario);
             currActionState = ActionState.RUNNING;
             mario.IsVis = true;
-            mario.Velocity = new Vector2(0, 0);
+            mario.Velocity = new Vector2(0, (float).1);
             mario.Acceleration = new Vector2(0, 0);
             mario.StartFrame = 4;
             mario.AutoFrame = true;

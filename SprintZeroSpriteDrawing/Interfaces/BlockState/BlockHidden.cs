@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using SprintZeroSpriteDrawing.Sprites.ObstacleSprites;
 using SprintZeroSpriteDrawing.Interfaces.Entitiy;
+using SprintZeroSpriteDrawing.Sprites.ItemSprites;
 
 namespace SprintZeroSpriteDrawing.Interfaces.BlockState
 {
@@ -12,7 +13,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.BlockState
         public BlockHidden(Block nBlock) : base(nBlock)
         {
         }
-        public BlockHidden(Block nBlock, List<ICollideable> nInventory) : base(nBlock, nInventory)
+        public BlockHidden(Block nBlock, List<Item> nInventory) : base(nBlock, nInventory)
         {
         }
         public override void Enter()

@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using SprintZeroSpriteDrawing.Collision.CollisionManager;
 using SprintZeroSpriteDrawing.Sprites.ObstacleSprites;
 using SprintZeroSpriteDrawing.Interfaces.Entitiy;
+using SprintZeroSpriteDrawing.Sprites.ItemSprites;
 
 namespace SprintZeroSpriteDrawing.Interfaces.BlockState
 {
@@ -15,7 +16,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.BlockState
         public BlockBumping(Block nBlock) : base(nBlock)
         {
         }
-        public BlockBumping(Block nBlock, List<ICollideable> nInventory) : base(nBlock, nInventory)
+        public BlockBumping(Block nBlock, List<Item> nInventory) : base(nBlock, nInventory)
         {
         }
 
@@ -26,17 +27,18 @@ namespace SprintZeroSpriteDrawing.Interfaces.BlockState
             anchor = block.Pos;
             block.Velocity = new Vector2(0,-2);
             block.Acceleration = new Vector2(0, (float)0.065);
+            if (Inventory.Count > 0)
+            {
+                Game1.SpriteList.Add(Inventory[0]);
+                Inventory[0].ChangeState((int)ItemState.State.EMERGING);
+                CollisionManager.getCM().RegEntity(Inventory[0]);
+                Inventory.RemoveAt(0);
+            }
         }
 
         public override void Exit()
         {
             block.Pos = anchor;
-            if (Inventory.Count > 0)
-            {
-                Game1.SpriteList.Add(Inventory[0]);
-                CollisionManager.getCM().RegEntity(Inventory[0]);
-                Inventory.RemoveAt(0);
-            }
         }
 
         public override void ChangeState(int state)

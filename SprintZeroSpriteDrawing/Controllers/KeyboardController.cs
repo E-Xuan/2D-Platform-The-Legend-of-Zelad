@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.ComponentModel.Design;
 using Microsoft.Xna.Framework.Input;
 using SprintZeroSpriteDrawing.Interfaces;
@@ -24,7 +25,7 @@ namespace SprintZeroSpriteDrawing.Controllers
 
         public override void UpdateInput() {
             KeyboardState CurrentState = Keyboard.GetState();
-            foreach (KeyValuePair<Keys, ICommand> command in CommandBindingList[(int)BindingType.PRESSED])
+            foreach (KeyValuePair<Keys, ICommand> command in CommandBindingList[(int)BindingType.PRESSED].ToImmutableList())
             {
                 if (CurrentState.IsKeyDown(command.Key) && !PreviousState.IsKeyDown(command.Key))
                     CommandBindingList[(int)BindingType.PRESSED][command.Key].Execute();

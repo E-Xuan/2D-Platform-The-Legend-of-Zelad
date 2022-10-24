@@ -37,21 +37,21 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
                     new List<ICollideable>();
             }
             //Make the screen boundries
-            for (int i = 0; i < (int)Game1.WINDOWSIZE.X; i += 48)
+            for (int i = 0; i < (int)Game1.LEVELSIZE.X; i += 48)
             {
-                var screenEdgeTop = BlockSpriteFactory.getFactory().CreateGroundBlock(new Vector2(i, 0));
+                var screenEdgeTop = BlockSpriteFactory.getFactory().CreateBoundryBlock(new Vector2(i, 0));
                 screenEdgeTop.IsVis = false;
                 RegEntity((ICollideable)screenEdgeTop);
-                var screenEdgeBottom = BlockSpriteFactory.getFactory().CreateGroundBlock(new Vector2(i, Game1.WINDOWSIZE.Y));
+                var screenEdgeBottom = BlockSpriteFactory.getFactory().CreateBoundryBlock(new Vector2(i, Game1.LEVELSIZE.Y));
                 screenEdgeBottom.IsVis = false;
                 RegEntity((ICollideable)screenEdgeBottom);
             }
-            for (int i = 0; i < (int)Game1.WINDOWSIZE.Y; i += 48)
+            for (int i = 0; i < (int)Game1.LEVELSIZE.Y; i += 48)
             {
-                var screenEdgeTop = BlockSpriteFactory.getFactory().CreateGroundBlock(new Vector2(0, i));
+                var screenEdgeTop = BlockSpriteFactory.getFactory().CreateBoundryBlock(new Vector2(0, i));
                 screenEdgeTop.IsVis = false;
                 RegEntity((ICollideable)screenEdgeTop);
-                var screenEdgeBottom = BlockSpriteFactory.getFactory().CreateGroundBlock(new Vector2(Game1.WINDOWSIZE.X + 48, i));
+                var screenEdgeBottom = BlockSpriteFactory.getFactory().CreateBoundryBlock(new Vector2(Game1.LEVELSIZE.X, i));
                 screenEdgeBottom.IsVis = false;
                 RegEntity((ICollideable)screenEdgeBottom);
             }
@@ -64,7 +64,7 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
             {
                 try {
                     entityList[(int)(entity.Pos.X/96), (int)(entity.Pos.Y/96)].Add((ICollideable)entity);
-                } catch (InvalidCastException e) { }
+                } catch (InvalidCastException) { }
             }
 
         }

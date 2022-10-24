@@ -41,6 +41,10 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
                     Exit();
                     mario.StateAction = new MarioIdle(mario);
                     break;
+                case ActionState.WALKING:
+                    Exit();
+                    mario.StateAction = new MarioWalking(mario);
+                    break;
             }
         }
     }

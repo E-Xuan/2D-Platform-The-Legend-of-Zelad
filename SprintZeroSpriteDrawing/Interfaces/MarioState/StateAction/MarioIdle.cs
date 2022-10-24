@@ -23,7 +23,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
             currActionState = ActionState.IDLE;
             mario.IsVis = true;
             mario.Velocity = new Vector2(0, 0);
-            mario.Acceleration = new Vector2(0, 0);
+            mario.Acceleration = new Vector2(0, (float) .1);
             mario.StartFrame = 0;
             mario.Frame = 0;
             mario.LastFrame = 1;

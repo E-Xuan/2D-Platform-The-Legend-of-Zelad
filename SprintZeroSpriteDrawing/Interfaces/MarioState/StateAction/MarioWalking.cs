@@ -29,7 +29,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
                 direction *= -1;
             }
             mario.Velocity = new Vector2((float)(direction), 0);
-            mario.Acceleration = new Vector2(0, 0);
+            mario.Acceleration = new Vector2(0, (float)0.1);
             mario.AutoFrame = true;
             mario.Frame = 3;
             mario.StartFrame = 3;

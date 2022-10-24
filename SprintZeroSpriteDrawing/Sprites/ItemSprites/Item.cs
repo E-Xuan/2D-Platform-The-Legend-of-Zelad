@@ -10,14 +10,18 @@ using SprintZeroSpriteDrawing.Collision.CollisionManager;
 using SprintZeroSpriteDrawing.Commands;
 using SprintZeroSpriteDrawing.Interfaces;
 using SprintZeroSpriteDrawing.Interfaces.Entitiy;
+using SprintZeroSpriteDrawing.Interfaces.ItemState;
 
 namespace SprintZeroSpriteDrawing.Sprites.ItemSprites
 {
     public class Item : ICollideable
     {
+        public IItemState State { get; set; }
+
         public Item(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos) : base(nSprite, nSheetSize, nPos)
         {
             CollideableType = CType.FRIENDLY;
+            State = new Idle(this);
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Collect, 1)), Direction.BOTTOM, CType.AVATAR_SMALL));
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Collect, 1)), Direction.SIDE, CType.AVATAR_SMALL));
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Collect, 1)), Direction.TOP, CType.AVATAR_SMALL));
@@ -28,11 +32,24 @@ namespace SprintZeroSpriteDrawing.Sprites.ItemSprites
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Collect, 1)), Direction.SIDE, CType.AVATAR_STAR));
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Collect, 1)), Direction.TOP, CType.AVATAR_STAR));
         }
-
         public void Collect(int collect)
         {
             CollisionManager.getCM().DeRegEntity(this);
-            Game1.SpriteList.Remove(this);
+            State.ChangeState((int)Interfaces.ItemState.State.COLLECTING);
+        }
+        public void ChangeState(int state)
+        {
+            State.ChangeState(state);
+        }
+        public override void Update()
+        {
+            base.Update();
+            State.Update();
+            if (State.CurrState == Interfaces.ItemState.State.COLLECTING)
+            {
+                Game1.SpriteList.Remove(this);
+                CollisionManager.getCM().DeRegEntity(this);
+            }
         }
     }
 }

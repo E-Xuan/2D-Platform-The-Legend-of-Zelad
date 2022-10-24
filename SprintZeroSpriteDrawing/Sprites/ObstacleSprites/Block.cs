@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SprintZeroSpriteDrawing.Interfaces.BlockState;
+using SprintZeroSpriteDrawing.Sprites.ItemSprites;
 
 namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
 {
@@ -25,12 +26,12 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
             State = new BlockUntapped(this);
             CollideableType = CType.NEUTRAL;
         }
-        public Block(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos, List<ICollideable> Inventory) : base(nSprite, nSheetSize, nPos)
+        public Block(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos, List<Item> Inventory) : base(nSprite, nSheetSize, nPos)
         {
             State = new BlockUntapped(this, Inventory);
             CollideableType = CType.NEUTRAL;
         }
-        public Block(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos, Rectangle nBBox, List<ICollideable> Inventory) : base(nSprite, nSheetSize, nPos, nBBox)
+        public Block(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos, Rectangle nBBox, List<Item> Inventory) : base(nSprite, nSheetSize, nPos, nBBox)
         {
             State = new BlockUntapped(this, Inventory);
             CollideableType = CType.NEUTRAL;

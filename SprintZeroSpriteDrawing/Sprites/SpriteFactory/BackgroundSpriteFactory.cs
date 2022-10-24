@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using SprintZeroSpriteDrawing.Commands;
 using SprintZeroSpriteDrawing.Interfaces;
 using SprintZeroSpriteDrawing.Interfaces.BlockState;
+using SprintZeroSpriteDrawing.Sprites.BackGroundSprites;
 
 namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
 {
@@ -20,6 +21,7 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         public Vector2 SheetSize;
 
         public Texture2D BackgroundSpriteSheet;
+        public Texture2D TitleImage;
 
         private static BackgroundSpriteFactory sprite;
 
@@ -35,11 +37,16 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         public void LoadContent(ContentManager content)
         {
             BackgroundSpriteSheet = content.Load<Texture2D>("Background/bg_Cloud_Mt");
+            TitleImage = content.Load<Texture2D>("Background/TitleImage");
         }
         public ISprite CreateBackground(Vector2 nPos)
         {
-            var background = new GroundBlock(BackgroundSpriteSheet, new Vector2(1, 1), nPos);
+            var background = new BackGround(BackgroundSpriteSheet, new Vector2(1, 1), nPos);
             return background;
+        }
+        public ISprite CreateTitleImage(Vector2 nPos)
+        {
+            return new TitleImage(TitleImage, new Vector2(1, 1), nPos);
         }
     }
 }
