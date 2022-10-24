@@ -23,10 +23,15 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
             CollisionManager.getCM().RegMoving(mario);
             currActionState = ActionState.JUMPING;
             mario.IsVis = true;
-            mario.Velocity = new Vector2(mario.Velocity.X, -5);
-            mario.Acceleration = new Vector2(0, (float)0);
+            mario.Velocity = new Vector2(mario.Velocity.X, -8);
+            mario.Acceleration = new Vector2(0, (float)0.07);
             mario.Frame = 1;
             mario.AutoFrame = false;
+        }
+        public override void Update()
+        {
+            if (mario.Velocity.Y >= 0)
+                ChangeActionState((int)ActionState.FALLING);
         }
 
         public override void ChangeActionState(int state)

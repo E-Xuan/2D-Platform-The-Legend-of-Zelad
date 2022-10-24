@@ -59,13 +59,9 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
 
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeAction, (int)ActionState.FALLING)), Direction.TOP, CType.INVISIBLE));
             
-            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeAction, (int)ActionState.IDLE)), Direction.BOTTOM, CType.NEUTRAL));
-            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeAction, (int)ActionState.IDLE)), Direction.TOP, CType.NEUTRAL));
-            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeAction, (int)ActionState.IDLE)), Direction.SIDE, CType.NEUTRAL));
-
-            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(TakeItem, 0)), Direction.BOTTOM, CType.FRIENDLY));
-            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(TakeItem, 0)), Direction.TOP, CType.FRIENDLY));
-            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(TakeItem, 0)), Direction.SIDE, CType.FRIENDLY));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Drag, 90)), Direction.BOTTOM, CType.NEUTRAL));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeAction, (int)ActionState.FALLING)), Direction.TOP, CType.NEUTRAL));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeAction, (int)ActionState.FALLING)), Direction.SIDE, CType.NEUTRAL));
 
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangePowerup, (int)PowerupState.BIG)), Direction.BOTTOM, CType.LEVELUP));
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangePowerup, (int)PowerupState.BIG)), Direction.TOP, CType.LEVELUP));
@@ -88,15 +84,6 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
         {
             StatePowerup.Update();
             StateAction.Update();
-            //THIS WAS ADDED TO DO THE PBI, WE HAVE CODE FOR SPRINT 3
-            if (StateAction.currActionState == ActionState.IDLE)
-                up = down = false;
-            if (!up && !down)
-                Velocity = new Vector2(Velocity.X, 0);
-            if (down)
-                Velocity = new Vector2(Velocity.X, 5);
-            if (up)
-                Velocity = new Vector2(Velocity.X, -5);
             base.Update();
         }
 
@@ -119,10 +106,9 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
         {
             StateAction.ChangeActionState(action);
         }
-        public void TakeItem(int powerup)
+        public void Drag(int coeff)
         {
-            if((int)StatePowerup.currPowerupState + 1 < 3)
-                ChangePowerup((int)StatePowerup.currPowerupState + 1);
+            Velocity = Vector2.Multiply(Velocity, new Vector2((float)(coeff/100.0), 0));
         }
         public void TakeDamage(int powerup)
         {
@@ -142,10 +128,6 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             {
                 ChangeAction((int)ActionState.JUMPING); //jump
             }
-            else if(StateAction.currActionState == ActionState.CROUCHING && down == true)
-            {
-                down = false;
-            }
             else if(StateAction.currActionState == ActionState.CROUCHING)
             {
                 ChangeAction((int)ActionState.IDLE);
@@ -154,19 +136,11 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             {
                 ChangeAction((int)ActionState.JUMPING);
             }
-            else if(StateAction.currActionState == ActionState.JUMPING)
-            {
-                up = true;
-            }
         }
 
         public void DecreaseAction(int action)
         {
-            if(StateAction.currActionState == ActionState.JUMPING && up == true) //jump
-            {
-                up = false;
-            }
-            else if (StateAction.currActionState == ActionState.JUMPING)
+            if (StateAction.currActionState == ActionState.JUMPING)
             {
                ChangeAction((int)ActionState.IDLE);
             }
@@ -176,10 +150,6 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             else if (StateAction.currActionState == ActionState.WALKING)
             {
                 ChangeAction((int)ActionState.IDLE);
-            }
-            else
-            {
-                down = true;
             }
         }
        
@@ -208,7 +178,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
                     left = true;
                 }
             }
-            else
+            else if (action > 0)
             {
                 if (effects == SpriteEffects.FlipHorizontally && left == true)
                 {
@@ -225,6 +195,12 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
                     ChangeAction((int)ActionState.WALKING);
                     right = true;
                 }
+            }
+            else
+            {
+                ChangeAction((int)ActionState.IDLE);
+                right = false;
+                left = false;
             }
         }
     }

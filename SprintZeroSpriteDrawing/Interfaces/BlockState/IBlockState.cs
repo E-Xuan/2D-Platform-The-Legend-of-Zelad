@@ -6,6 +6,7 @@ using System.Numerics;
 using System.Text;
 using SprintZeroSpriteDrawing.Sprites.ObstacleSprites;
 using SprintZeroSpriteDrawing.Interfaces.Entitiy;
+using SprintZeroSpriteDrawing.Sprites.ItemSprites;
 
 namespace SprintZeroSpriteDrawing.Interfaces.BlockState
 {
@@ -19,7 +20,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.BlockState
     }
     public class IBlockState
     {
-        public List<ICollideable> Inventory { get; set; }
+        public List<Item> Inventory { get; set; }
 
         protected Block block;
         public State CurrState { get; set; }
@@ -27,10 +28,10 @@ namespace SprintZeroSpriteDrawing.Interfaces.BlockState
         public IBlockState(Block nBlock)
         {
             block = nBlock;
-            Inventory = new List<ICollideable>();
+            Inventory = new List<Item>();
             Enter();
         }
-        public IBlockState(Block nBlock, List<ICollideable> nInventory)
+        public IBlockState(Block nBlock, List<Item> nInventory)
         {
             block = nBlock;
             Inventory = nInventory;
