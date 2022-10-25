@@ -85,7 +85,9 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         }
         public ISprite CreateQuestionBlock(Vector2 nPos, bool vis)
         {
-            return vis ? new QuestionBlock(QuestionBlockSpriteSheet, new Vector2(2, 2), nPos) : new InvisibleBlock(QuestionBlockSpriteSheet, new Vector2(2, 2), nPos);
+            return vis ? new QuestionBlock(QuestionBlockSpriteSheet, new Vector2(2, 2), nPos, new List<Item> { (Item)ItemSpriteFactory.getFactory().createCoin(Vector2.Add(nPos, new Vector2(0, -48)))
+            }) : new InvisibleBlock(QuestionBlockSpriteSheet, new Vector2(2, 2), nPos, new List<Item> { (Item)ItemSpriteFactory.getFactory().createCoin(Vector2.Add(nPos, new Vector2(0, -48)))
+            });
         }
         public ISprite CreateMQuestionBlock(Vector2 nPos, bool vis)
         {
