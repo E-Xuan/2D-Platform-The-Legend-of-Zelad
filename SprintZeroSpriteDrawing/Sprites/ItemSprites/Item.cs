@@ -47,8 +47,8 @@ namespace SprintZeroSpriteDrawing.Sprites.ItemSprites
             State.Update();
             if (State.CurrState == Interfaces.ItemState.State.COLLECTING)
             {
-                Game1.SpriteList.Remove(this);
-                CollisionManager.getCM().DeRegEntity(this);
+                if (CollisionManager.getCM().DeRegEntity(this)) 
+                    Game1.SpriteList.Remove(this);
             }
         }
     }

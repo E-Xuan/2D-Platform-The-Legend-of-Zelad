@@ -24,8 +24,8 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
 
         public override void Enter()
         {
+            int direction = 2; 
             CollisionManager.getCM().RegMoving(mario);
-            int direction = 2;
             currActionState = ActionState.WALKING;
             mario.IsVis = true;
             if (mario.effects == SpriteEffects.FlipHorizontally)
@@ -40,7 +40,6 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
             mario.LastFrame = 6;
            
         }
-
         public override void ChangeActionState(int state)
         {
             switch ((ActionState)state)

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using SprintZeroSpriteDrawing.Collision.CollisionManager;
 using SprintZeroSpriteDrawing.Sprites.ItemSprites;
 
 namespace SprintZeroSpriteDrawing.Interfaces.ItemState
@@ -18,6 +19,11 @@ namespace SprintZeroSpriteDrawing.Interfaces.ItemState
         {
             item.Velocity = new Vector2(0, (float)-2.1);
             item.Acceleration = new Vector2(0, (float)0.065);
+            CollisionManager.getCM().RegMoving(item);
+        }
+        public override void Exit()
+        {
+            CollisionManager.getCM().DeRegMoving(item);
         }
         public override void Update()
         {

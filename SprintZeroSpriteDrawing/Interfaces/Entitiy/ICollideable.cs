@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SprintZeroSpriteDrawing.Collision.CollisionManager;
 
 namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
 {
@@ -91,7 +92,10 @@ namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
 
         public override void Update()
         {
+
+            CollisionManager.getCM().DeRegEntity(this);
             base.Update();
+            CollisionManager.getCM().RegEntity(this);
             CollideMaybe = false;
             if(Velocity.X != 0 || Velocity.Y != 0)
                 BBox = new Rectangle((int)(Pos.X - Sprite.Width / SheetSize.X), (int)(Pos.Y - Sprite.Height / SheetSize.Y), (int)(Sprite.Width / SheetSize.X), (int)(Sprite.Height / SheetSize.Y));
