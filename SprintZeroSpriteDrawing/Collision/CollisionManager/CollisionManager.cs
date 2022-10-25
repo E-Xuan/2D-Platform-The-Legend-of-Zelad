@@ -33,11 +33,11 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
 
         private CollisionManager()
         {
-            entityList = new List<ICollideable>[(int)(Game1.LEVELSIZE.X / 96) + 1, (int)(Game1.LEVELSIZE.Y / 96) + 1];
+            entityList = new List<ICollideable>[(int)(Game1.LEVELSIZE.X / 96) + 1, (int)(Game1.LEVELSIZE.Y / 96) + 2];
             movingEntities = new List<ICollideable>();
             for (int i = 0; i < entityList.Length; i++)
             {
-                entityList[i / ((int)(Game1.LEVELSIZE.Y / 96) + 1), i % ((int)(Game1.LEVELSIZE.Y / 96) + 1)] =
+                entityList[i / ((int)(Game1.LEVELSIZE.Y / 96) + 2), i % ((int)(Game1.LEVELSIZE.Y / 96) + 2)] =
                     new List<ICollideable>();
             }
             //Make the screen boundries
@@ -66,7 +66,8 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
         {
             foreach (ISprite entity in Game1.SpriteList)
             {
-                try {
+                try 
+                {
                     entityList[(int)(entity.Pos.X/96), (int)(entity.Pos.Y/96)].Add((ICollideable)entity);
                 } catch (InvalidCastException) { }
             }
@@ -74,7 +75,7 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
         }
         public void RegEntity(ICollideable entity)
         {
-            entityList[(int)(entity.Pos.X / 96), (int)(entity.Pos.Y / 96)].Add(entity);
+           entityList[(int)(entity.Pos.X / 96), (int)(entity.Pos.Y / 96)].Add(entity);
         }
         public bool DeRegEntity(ICollideable entity)
         {
@@ -89,6 +90,8 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
         {
             if (movingEntities.Contains(entity))
                 movingEntities.Remove(entity);
+            entity.Velocity = new Vector2(0, 0);
+            entity.Acceleration = new Vector2(0, 0);
 
         }
         public void Update()
@@ -153,7 +156,10 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
                 {
                     command.Execute();
                 }
+
+                DeRegEntity(entity); 
                 entity.Pos = Vector2.Add(entity.Pos, walkBack);
+                RegEntity(entity);
                 entity.UpdateBBox();
             }
         }

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SprintZeroSpriteDrawing.Collision.CollisionManager;
+using SprintZeroSpriteDrawing.Commands;
 
 namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
 {
@@ -135,16 +136,29 @@ namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
                 batch.Draw(_texture, new Rectangle(BBox.Right, BBox.Top, 1, BBox.Height), color);
                 batch.Draw(_texture, new Rectangle(BBox.Left, BBox.Bottom, BBox.Width, 1), color);
                 batch.Draw(_texture, new Rectangle(BBox.Left, BBox.Top, 1, BBox.Height), color);
+                if (CollideMaybe)
+                {
+                    batch.Draw(_texture, new Rectangle(BBox.Left, BBox.Top, BBox.Width, 5), color);
+                    batch.Draw(_texture, new Rectangle(BBox.Right, BBox.Top, 5, BBox.Height), color);
+                    batch.Draw(_texture, new Rectangle(BBox.Left, BBox.Bottom, BBox.Width, 5), color);
+                    batch.Draw(_texture, new Rectangle(BBox.Left, BBox.Top, 5, BBox.Height), color);
+                }
             }
+        }
 
-            if (CollideMaybe)
-            {
-                batch.Draw(_texture, new Rectangle(BBox.Left, BBox.Top, BBox.Width, 5), color);
-                batch.Draw(_texture, new Rectangle(BBox.Right, BBox.Top, 5, BBox.Height), color);
-                batch.Draw(_texture, new Rectangle(BBox.Left, BBox.Bottom, BBox.Width, 5), color);
-                batch.Draw(_texture, new Rectangle(BBox.Left, BBox.Top, 5, BBox.Height), color);
-            }
-
+        public void ForceDeReg(int dereg)
+        {
+            Game1.SpriteList.Remove(this);
+            CollisionManager.getCM().DeRegEntity(this);
+            CollisionManager.getCM().DeRegMoving(this);
+        }
+        public void Floored(int dereg)
+        {
+            Velocity = new Vector2(Velocity.X, 0);
+        }
+        public void Walled(int dereg)
+        {
+            Velocity = new Vector2(0, Velocity.Y);
         }
     }
 }
