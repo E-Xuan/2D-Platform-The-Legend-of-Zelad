@@ -21,6 +21,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
 
     public enum CType
     {
+        UNCOLLIDEABLE,
         AVATAR_SMALL,
         AVATAR_LARGE,
         AVATAR_STAR,
@@ -92,10 +93,11 @@ namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
 
         public override void Update()
         {
-
-            CollisionManager.getCM().DeRegEntity(this);
+            if (CollideableType != CType.UNCOLLIDEABLE)
+                CollisionManager.getCM().DeRegEntity(this);
             base.Update();
-            CollisionManager.getCM().RegEntity(this);
+            if (CollideableType != CType.UNCOLLIDEABLE)
+                CollisionManager.getCM().RegEntity(this);
             CollideMaybe = false;
             if(Velocity.X != 0 || Velocity.Y != 0)
                 BBox = new Rectangle((int)(Pos.X - Sprite.Width / SheetSize.X), (int)(Pos.Y - Sprite.Height / SheetSize.Y), (int)(Sprite.Width / SheetSize.X), (int)(Sprite.Height / SheetSize.Y));

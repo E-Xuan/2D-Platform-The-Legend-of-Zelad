@@ -95,6 +95,8 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
         {
             foreach (ICollideable entity in movingEntities.ToImmutableList())
             {
+                Vector2 walkBack = new Vector2(0, 0);
+                List<ICommand> exeList = new List<ICommand>();
                 for (int x = -1; x < 2; x++)
                 {
                     for (int y = -1; y < 2; y++)
@@ -102,7 +104,6 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
                         bool isLegal = (int)(entity.Pos.X / 96) + x >= 0 && (int)(entity.Pos.X / 96) + x < (int)(Game1.LEVELSIZE.X / 96) + 1 && (int)(entity.Pos.Y / 96) + y >= 0 && (int)(entity.Pos.Y / 96) + y < (int)(Game1.LEVELSIZE.Y / 96) + 1;
                         if (isLegal)
                         {
-                            Vector2 walkBack = new Vector2(0, 0);
                             foreach (ICollideable entity2 in entityList[(int)(entity.Pos.X / 96) + x,
                                          (int)(entity.Pos.Y / 96) + y].ToImmutableList())
                             {
@@ -117,7 +118,7 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
                                         if (response.Item3 == entity2.CollideableType &&
                                             response.Item2 == CollisionDirection)
                                         {
-                                            response.Item1.Execute();
+                                            exeList.Add(response.Item1);
                                         }
                                     }
                                     if ((int)CollisionDirection % 2 == 0)
@@ -130,7 +131,7 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
                                         if (response.Item3 == entity.CollideableType &&
                                             response.Item2 == CollisionDirection)
                                         {
-                                            response.Item1.Execute();
+                                            exeList.Add(response.Item1);
                                         }
 
                                     }
@@ -144,11 +145,16 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
                                     }
                                 }
                             }
-                            entity.Pos = Vector2.Add(entity.Pos, walkBack);
-                            entity.UpdateBBox();
                         }
                     }
                 }
+
+                foreach (ICommand command in exeList)
+                {
+                    command.Execute();
+                }
+                entity.Pos = Vector2.Add(entity.Pos, walkBack);
+                entity.UpdateBBox();
             }
         }
     }

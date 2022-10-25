@@ -21,6 +21,7 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         {
             Velocity = velocity;
             Acceleration = acceleration;
+            CollideableType = CType.UNCOLLIDEABLE;
         }
 
         public override void Update()
