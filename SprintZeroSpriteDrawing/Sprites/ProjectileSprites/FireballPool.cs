@@ -10,7 +10,7 @@ namespace SprintZeroSpriteDrawing.Sprites.ProjectileSprites
     public class FireballPool<Fireball> where Fireball : new()
     {
         private readonly ConcurrentBag<Fireball> fireballs = new ConcurrentBag<Fireball>();
-        private int MAX = 10;
+        private int MAX = 3;
         private int counter = 0;
 
         private void Release(Fireball fireball)
