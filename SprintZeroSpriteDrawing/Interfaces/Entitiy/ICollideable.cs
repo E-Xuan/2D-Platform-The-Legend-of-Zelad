@@ -160,5 +160,9 @@ namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
         {
             Velocity = new Vector2(0, Velocity.Y);
         }
+        public void BounceWalled(int dereg)
+        {
+            Velocity = new Vector2(-Velocity.X, Velocity.Y);
+        }
     }
 }
