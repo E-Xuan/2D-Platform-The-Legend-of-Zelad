@@ -18,7 +18,7 @@ namespace SprintZeroSpriteDrawing.Sprites.ItemSprites
 
             if (State.CurrState == Interfaces.ItemState.State.EMERGING)
             {
-                Velocity = new Vector2(4, 0);
+                Velocity = new Vector2(3, 0);
                 Acceleration = new Vector2(0, (float).065);
                 CollisionManager.getCM().RegMoving(this);
             }
