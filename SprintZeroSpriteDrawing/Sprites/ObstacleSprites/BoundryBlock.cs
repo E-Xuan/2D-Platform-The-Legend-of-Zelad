@@ -14,7 +14,7 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
     {
         public BounderyBlock(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos) : base (nSprite, nSheetSize, nPos)
         {
-
+            CollideableType = CType.BOUNDRY;
         }
     }
 }
