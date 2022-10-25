@@ -54,7 +54,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             StatePowerup = new SmallMario(this);
             StateAction = new MarioIdle(this);
             currState = new int[5];
-            
+
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(TakeDamage, 0)), Direction.SIDE, CType.ENEMY));
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeAction, (int)ActionState.IDLE)), Direction.SIDE, CType.ENEMY));
 
@@ -155,7 +155,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
         }
         public int GetDirection()
         {
-            return effects == SpriteEffects.None ? 2 : -2;
+            return effects == SpriteEffects.None ? 4 : -4;
         }
         //action positive is right
        public void MoveAction(int action)
