@@ -20,6 +20,7 @@ namespace SprintZeroSpriteDrawing.Sprites.SpriteFactory
     {
         public Vector2 nPos { get; set; }
         public Vector2 SheetSize;
+        //FireballPool<Fireball> fireballPool;
 
         public Texture2D FireBallSpriteSheet;
         private static ProjectileSpriteFactory _spriteFactory;
@@ -38,10 +39,11 @@ namespace SprintZeroSpriteDrawing.Sprites.SpriteFactory
             FireBallSpriteSheet = content.Load<Texture2D>("FireMario/FireballProjectile");     
         }
 
-        public ISprite CreateFireball(Vector2 nPos)
+        /*public ISprite CreateFireball(Vector2 nPos)
         {
-            var fireball = new Fireball(FireBallSpriteSheet, new Vector2(2, 2), nPos);
+            var fireball = fireballPool.Get();
             return fireball;
         }
+        */
     }
 }
