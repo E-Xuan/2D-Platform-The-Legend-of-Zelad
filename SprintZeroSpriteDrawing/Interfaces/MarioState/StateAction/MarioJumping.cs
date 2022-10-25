@@ -13,6 +13,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
 {
     public class MarioJumping : IMarioState
     {
+        private int startDir = 0;
         public MarioJumping(Mario nMario): base(nMario)
         {
 
@@ -34,6 +35,8 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
         }
         public override void Update()
         {
+            if(previousActionState == ActionState.WALKING)
+                mario.Velocity = new Vector2(mario.GetDirection(), mario.Velocity.Y);
             if (mario.Velocity.Y >= 0)
                 ChangeActionState((int)ActionState.FALLING);
         }

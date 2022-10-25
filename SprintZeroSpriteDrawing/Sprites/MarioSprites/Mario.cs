@@ -62,7 +62,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Drag, 100)), Direction.BOTTOM, CType.NEUTRAL));
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeAction, (int)ActionState.FALLING)), Direction.TOP, CType.NEUTRAL));
-            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeAction, (int)ActionState.FALLING)), Direction.SIDE, CType.NEUTRAL));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Impact, (int)ActionState.FALLING)), Direction.SIDE, CType.NEUTRAL));
 
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangePowerup, (int)PowerupState.BIG)), Direction.BOTTOM, CType.LEVELUP));
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangePowerup, (int)PowerupState.BIG)), Direction.TOP, CType.LEVELUP));
@@ -91,6 +91,12 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             BigMarioSpriteSheet = content.Load<Texture2D>("BigMario/BigMarioSpriteSheet");
             FireMarioSpriteSheet = content.Load<Texture2D>("FireMario/FireMarioSpriteSheet");
         }
+
+        public void Impact(int state)
+        {
+            Velocity = new Vector2(0, Velocity.Y);
+        }
+
         public void ChangePowerup(int powerup)
         {
             StatePowerup.ChangePowerupState(powerup);
@@ -145,8 +151,10 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
                 ChangeAction((int)ActionState.IDLE);
             }
         }
-       
-
+        public int GetDirection()
+        {
+            return effects == SpriteEffects.None ? 2 : -2;
+        }
         //action positive is right
        public void MoveAction(int action)
         {

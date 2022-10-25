@@ -18,6 +18,10 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
     public class CollisionManager
     {
         private static CollisionManager CM;
+        public static bool IsCM()
+        {
+            return CM == null;
+        }
         public static CollisionManager getCM()
         {
             if (CM == null)
@@ -72,10 +76,9 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
         {
             entityList[(int)(entity.Pos.X / 96), (int)(entity.Pos.Y / 96)].Add(entity);
         }
-        public void DeRegEntity(ICollideable entity)
+        public bool DeRegEntity(ICollideable entity)
         {
-            if (entityList[(int)(entity.Pos.X / 96), (int)(entity.Pos.Y / 96)].Contains(entity))
-                entityList[(int)(entity.Pos.X / 96), (int)(entity.Pos.Y / 96)].Remove(entity);
+            return entityList[(int)(entity.Pos.X / 96), (int)(entity.Pos.Y / 96)].Remove(entity);
         }
         public void RegMoving(ICollideable entity)
         {
@@ -92,7 +95,6 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
         {
             foreach (ICollideable entity in movingEntities.ToImmutableList())
             {
-
                 for (int x = -1; x < 2; x++)
                 {
                     for (int y = -1; y < 2; y++)
