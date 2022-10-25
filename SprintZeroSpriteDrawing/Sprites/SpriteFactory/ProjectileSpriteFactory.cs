@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 using SprintZeroSpriteDrawing.Commands;
 using SprintZeroSpriteDrawing.Interfaces;
 using SprintZeroSpriteDrawing.Interfaces.BlockState;
+using SprintZeroSpriteDrawing.Sprites.ObstacleSprites;
+using SprintZeroSpriteDrawing.Sprites.ProjectileSprites;
+
 namespace SprintZeroSpriteDrawing.Sprites.SpriteFactory
 {
     public class ProjectileSpriteFactory
@@ -18,10 +21,10 @@ namespace SprintZeroSpriteDrawing.Sprites.SpriteFactory
         public Vector2 nPos { get; set; }
         public Vector2 SheetSize;
 
-        public Texture2D fireBallSpriteSheet;
+        public Texture2D FireBallSpriteSheet;
         private static ProjectileSpriteFactory _spriteFactory;
 
-        public static ProjectileSpriteFactory GetProjectileSpriteFactory()
+        public static ProjectileSpriteFactory getSpriteFactory()
         {
             if (_spriteFactory == null)
             {
@@ -32,12 +35,13 @@ namespace SprintZeroSpriteDrawing.Sprites.SpriteFactory
 
         public void LoadContent(ContentManager content) 
         {
-            fireBallSpriteSheet = content.Load<Texture2D>("FireMario/FireballProjectile");     
+            FireBallSpriteSheet = content.Load<Texture2D>("FireMario/FireballProjectile");     
         }
 
-        /*public ISprite CreateFireball(Vector2 nPos)
+        public ISprite CreateFireball(Vector2 nPos)
         {
-            //var projectile;
-        }*/
+            var fireball = new Fireball(FireBallSpriteSheet, new Vector2(2, 2), nPos);
+            return fireball;
+        }
     }
 }

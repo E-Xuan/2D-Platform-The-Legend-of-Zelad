@@ -19,6 +19,8 @@ using SprintZeroSpriteDrawing.Interfaces.Entitiy;
 using SprintZeroSpriteDrawing.Interfaces.MarioState;
 using SprintZeroSpriteDrawing.GameMode;
 using SprintZeroSpriteDrawing.Collision;
+using SprintZeroSpriteDrawing.Sprites.ProjectileSprites;
+using SprintZeroSpriteDrawing.Sprites.SpriteFactory;
 
 namespace SprintZeroSpriteDrawing
 {
@@ -86,6 +88,7 @@ namespace SprintZeroSpriteDrawing
             BlockSpriteFactory.getFactory().LoadContent(Content);
             EnemySpriteFactory.getFactory().LoadContent(Content);
             MarioSpriteFactory.getSpriteFactory().LoadContent(Content);
+            ProjectileSpriteFactory.getSpriteFactory().LoadContent(Content);
             Mario.LoadContent(Content);
             SpriteList.Add(BlockSpriteFactory.getFactory().CreateBrickBlock(new Vector2(400, 400)));
             // set game binding

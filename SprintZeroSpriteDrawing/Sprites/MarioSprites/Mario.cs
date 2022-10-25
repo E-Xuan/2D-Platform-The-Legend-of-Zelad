@@ -23,11 +23,14 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
 
 
 
-
+        public int LIVES = 5;
         public SpriteEffects effects;
         private static Mario _mario;
         bool left = false;
         bool right = false;
+        bool up = false;
+        bool down = false;
+        public bool fireBall { get; set; }
 
         public IMarioState StatePowerup;
         public IMarioState StateAction;
