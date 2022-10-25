@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SprintZeroSpriteDrawing.Interfaces.Entitiy;
+using SprintZeroSpriteDrawing.Collision.CollisionManager;
 
 namespace SprintZeroSpriteDrawing.Sprites.ItemSprites
 {
