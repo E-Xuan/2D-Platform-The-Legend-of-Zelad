@@ -21,6 +21,9 @@ using SprintZeroSpriteDrawing.GameMode;
 using SprintZeroSpriteDrawing.Collision;
 using SprintZeroSpriteDrawing.Sprites.ProjectileSprites;
 using SprintZeroSpriteDrawing.Sprites.SpriteFactory;
+using SprintZeroSpriteDrawing.States.MarioState;
+using SprintZeroSpriteDrawing.Interfaces.MarioState.StatePowerup;
+using SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction;
 
 namespace SprintZeroSpriteDrawing
 {
@@ -90,6 +93,7 @@ namespace SprintZeroSpriteDrawing
             MarioSpriteFactory.getSpriteFactory().LoadContent(Content);
             ProjectileSpriteFactory.getSpriteFactory().LoadContent(Content);
             Mario.LoadContent(Content);
+            Mario.GetMario().StatePowerup = new SmallMario(Mario.GetMario());
             SpriteList.Add(BlockSpriteFactory.getFactory().CreateBrickBlock(new Vector2(400, 400)));
             // set game binding
             BindingCmd.SetGameBinding(keyboardController, gamepadController);

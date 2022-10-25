@@ -27,7 +27,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
             currActionState = ActionState.FALLING;
             mario.IsVis = true;
             mario.Velocity = new Vector2(mario.Velocity.X, (float).1);
-            mario.Acceleration = new Vector2(0, (float)0.07);
+            mario.Acceleration = new Vector2(0, (float)0.25);
             mario.Frame = 1;
             mario.AutoFrame = false;
         }
