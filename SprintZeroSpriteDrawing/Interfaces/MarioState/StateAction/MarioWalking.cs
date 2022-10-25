@@ -24,7 +24,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
 
         public override void Enter()
         {
-            int direction = 2; 
+            int direction = 4; 
             CollisionManager.getCM().RegMoving(mario);
             currActionState = ActionState.WALKING;
             mario.IsVis = true;
