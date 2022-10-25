@@ -17,7 +17,10 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
         {
 
         }
+        public MarioFalling(Mario nMario, ActionState nState) : base(nMario, nState)
+        {
 
+        }
         public override void Enter()
         {
             CollisionManager.getCM().RegMoving(mario);
@@ -32,7 +35,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
         public override void Update()
         {
             if(mario.Velocity.Y <= .1)
-                ChangeActionState((int)ActionState.IDLE);
+                RevertAction();
         }
 
         public override void ChangeActionState(int state)
@@ -41,17 +44,22 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
             {
                 case ActionState.RUNNING:
                     Exit();
-                    mario.StateAction = new MarioRunning(mario);
+                    mario.StateAction = new MarioRunning(mario, currActionState);
                     break;
                 case ActionState.WALKING:
                     Exit();
-                    mario.StateAction = new MarioWalking(mario);
+                    mario.StateAction = new MarioWalking(mario, currActionState);
                     break;
                 case ActionState.IDLE:
                     Exit();
-                    mario.StateAction = new MarioIdle(mario);
+                    mario.StateAction = new MarioIdle(mario, currActionState);
                     break;
             }
+        }
+
+        public void RevertAction()
+        {
+            ChangeActionState((int)mario.StateAction.previousActionState);
         }
     }
 }

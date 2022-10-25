@@ -17,6 +17,10 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
         {
 
         }
+        public MarioWalking(Mario nMario, ActionState nState) : base(nMario, nState)
+        {
+
+        }
 
         public override void Enter()
         {
@@ -28,7 +32,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
             {
                 direction *= -1;
             }
-            mario.Velocity = new Vector2((float)(direction), 0);
+            mario.Velocity = new Vector2((float)(direction), mario.Velocity.Y);
             mario.Acceleration = new Vector2(0, (float)0.1);
             mario.AutoFrame = true;
             mario.Frame = 3;
@@ -43,15 +47,15 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
             {
                 case ActionState.IDLE:
                     Exit();
-                    mario.StateAction = new MarioIdle(mario);
+                    mario.StateAction = new MarioIdle(mario, currActionState);
                     break;
                 case ActionState.JUMPING:
                     Exit();
-                    mario.StateAction = new MarioJumping(mario);
+                    mario.StateAction = new MarioJumping(mario, currActionState);
                     break;
                 case ActionState.RUNNING:
                     Exit();
-                    mario.StateAction = new MarioRunning(mario);
+                    mario.StateAction = new MarioRunning(mario, currActionState);
                     break;
             }
         }

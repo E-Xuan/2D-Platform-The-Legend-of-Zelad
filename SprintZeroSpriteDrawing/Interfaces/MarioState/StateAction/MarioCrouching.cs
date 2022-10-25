@@ -17,6 +17,10 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
         {
 
         }
+        public MarioCrouching(Mario nMario, ActionState nState) : base(nMario, nState)
+        {
+
+        }
 
         public override void Enter()
         {
@@ -39,11 +43,11 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
             {
                 case ActionState.IDLE:
                     Exit();
-                    mario.StateAction = new MarioIdle(mario);
+                    mario.StateAction = new MarioIdle(mario, currActionState);
                     break;
                 case ActionState.WALKING:
                     Exit();
-                    mario.StateAction = new MarioWalking(mario);
+                    mario.StateAction = new MarioWalking(mario, currActionState);
                     break;
             }
         }

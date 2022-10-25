@@ -17,7 +17,10 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
         {
 
         }
+        public MarioRunning(Mario nMario, ActionState nState) : base(nMario, nState)
+        {
 
+        }
         public override void Enter()
         {
             CollisionManager.getCM().RegMoving(mario);
@@ -35,15 +38,15 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
             {
                 case ActionState.IDLE:
                     Exit();
-                    mario.StateAction = new MarioIdle(mario);
+                    mario.StateAction = new MarioIdle(mario, currActionState);
                     break;
                 case ActionState.WALKING:
                     Exit();
-                    mario.StateAction = new MarioWalking(mario);
+                    mario.StateAction = new MarioWalking(mario, currActionState);
                     break;
                 case ActionState.JUMPING:
                     Exit();
-                    mario.StateAction = new MarioJumping(mario);
+                    mario.StateAction = new MarioJumping(mario, currActionState);
                     break;
             }
         }

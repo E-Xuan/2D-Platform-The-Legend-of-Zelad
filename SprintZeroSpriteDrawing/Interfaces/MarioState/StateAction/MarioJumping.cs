@@ -17,6 +17,10 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
         {
 
         }
+        public MarioJumping(Mario nMario, ActionState nState) : base(nMario, nState)
+        {
+
+        }
 
         public override void Enter()
         {
@@ -33,26 +37,25 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
             if (mario.Velocity.Y >= 0)
                 ChangeActionState((int)ActionState.FALLING);
         }
-
         public override void ChangeActionState(int state)
         {
             switch ((ActionState)state)
             {
                 case ActionState.RUNNING:
                     Exit();
-                    mario.StateAction = new MarioRunning(mario);
+                    mario.StateAction = new MarioRunning(mario, currActionState);
                     break;
                 case ActionState.WALKING:
                     Exit();
-                    mario.StateAction = new MarioWalking(mario);
+                    mario.StateAction = new MarioWalking(mario, currActionState);
                     break;
                 case ActionState.IDLE:
                     Exit();
-                    mario.StateAction = new MarioIdle(mario);
+                    mario.StateAction = new MarioIdle(mario, currActionState);
                     break;
                 case ActionState.FALLING:
                     Exit();
-                    mario.StateAction=new MarioFalling(mario);
+                    mario.StateAction=new MarioFalling(mario, previousActionState);
                     break;
             }
         }

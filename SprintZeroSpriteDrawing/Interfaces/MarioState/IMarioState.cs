@@ -44,10 +44,23 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState
             Enter();
         }
 
+        public IMarioState(Mario nMario, ActionState nState)
+        {
+            mario = nMario;
+            previousActionState = nState;
+            Enter();
+        }
+        public IMarioState(Mario nMario, PowerupState nState)
+        {
+            mario = nMario;
+            prevPowerupState = nState;
+            Enter();
+        }
+
         public virtual void Update() { }
         public virtual void Draw(SpriteBatch spriteBatch, Vector2 location) { }
         public virtual void Enter() { }
-        public virtual void Exit() 
+        public virtual void Exit()
         {
             previousPowerupState = this;        
         }

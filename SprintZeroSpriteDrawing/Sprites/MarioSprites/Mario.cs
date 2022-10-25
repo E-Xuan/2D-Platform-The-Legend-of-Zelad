@@ -26,14 +26,12 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
 
         public SpriteEffects effects;
         private static Mario _mario;
-        int Speed = 5;
         bool left = false;
         bool right = false;
-        bool up = false;
-        bool down = false;
 
         public IMarioState StatePowerup;
         public IMarioState StateAction;
+        
         public int[] currState;
 
          public static Mario GetMario() {
@@ -59,7 +57,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
 
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeAction, (int)ActionState.FALLING)), Direction.TOP, CType.INVISIBLE));
             
-            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Drag, 99)), Direction.BOTTOM, CType.NEUTRAL));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Drag, 100)), Direction.BOTTOM, CType.NEUTRAL));
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeAction, (int)ActionState.FALLING)), Direction.TOP, CType.NEUTRAL));
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeAction, (int)ActionState.FALLING)), Direction.SIDE, CType.NEUTRAL));
 
@@ -71,14 +69,6 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangePowerup, (int)PowerupState.FIRE)), Direction.TOP, CType.FLOWER));
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangePowerup, (int)PowerupState.FIRE)), Direction.SIDE, CType.FLOWER));
          }
-
-        public void UpdateState()
-        {
-            int prevPowerup = (int)StatePowerup.prevPowerupState;
-            int currPowerup = (int)StatePowerup.currPowerupState;
-            currState[prevPowerup] = 0;
-            currState[currPowerup] = (int)StateAction.currActionState;
-        }
 
         public override void Update()
         {

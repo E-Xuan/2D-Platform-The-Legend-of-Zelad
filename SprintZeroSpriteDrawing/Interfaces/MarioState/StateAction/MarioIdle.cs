@@ -12,7 +12,11 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
 {
     public class MarioIdle : IMarioState
     {
-        public MarioIdle(Mario nMario): base(nMario)
+        public MarioIdle(Mario nMario) : base(nMario)
+        {
+
+        }
+        public MarioIdle(Mario nMario, ActionState nState): base(nMario, nState)
         {
 
         }
@@ -22,7 +26,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
             //CollisionManager.getCM().DeRegMoving(mario);
             currActionState = ActionState.IDLE;
             mario.IsVis = true;
-            mario.Velocity = new Vector2(0, 0);
+            mario.Velocity = new Vector2(0, mario.Velocity.Y);
             mario.Acceleration = new Vector2(0, (float) .1);
             mario.StartFrame = 0;
             mario.Frame = 0;
@@ -36,15 +40,15 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
             {
                 case ActionState.JUMPING:
                     Exit();
-                    mario.StateAction = new MarioJumping(mario);
+                    mario.StateAction = new MarioJumping(mario, currActionState);
                     break;
                 case ActionState.WALKING:
                     Exit();
-                    mario.StateAction = new MarioWalking(mario);
+                    mario.StateAction = new MarioWalking(mario, currActionState);
                     break;
                 case ActionState.CROUCHING:
                     Exit();
-                    mario.StateAction = new MarioCrouching(mario);
+                    mario.StateAction = new MarioCrouching(mario, currActionState);
                     break;
             }
         }
