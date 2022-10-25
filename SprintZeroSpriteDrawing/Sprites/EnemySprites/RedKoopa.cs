@@ -15,8 +15,8 @@ namespace SprintZeroSpriteDrawing.Sprites.EnemySprites
         public RedKoopa(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos) : base(nSprite, nSheetSize, nPos)
         {
             Frame = 2;
-            StartFrame = 2;
-            LastFrame = 4;
+            StartFrame = 3;
+            LastFrame = 5;
         }
 
     }
