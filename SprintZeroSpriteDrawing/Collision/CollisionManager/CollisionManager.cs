@@ -43,21 +43,25 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
             //Make the screen boundries
             for (int i = 0; i < (int)Game1.LEVELSIZE.X; i += 48)
             {
-                var screenEdgeTop = BlockSpriteFactory.getFactory().CreateBoundryBlock(new Vector2(i, 0));
+                var screenEdgeTop = BlockSpriteFactory.getFactory().CreateBoundryBlock(new Vector2(i-48, 0));
                 screenEdgeTop.IsVis = false;
                 RegEntity((ICollideable)screenEdgeTop);
-                var screenEdgeBottom = BlockSpriteFactory.getFactory().CreateBoundryBlock(new Vector2(i, Game1.LEVELSIZE.Y));
+                Game1.SpriteList.Add(screenEdgeTop);
+                var screenEdgeBottom = BlockSpriteFactory.getFactory().CreateBoundryBlock(new Vector2(i-48, Game1.LEVELSIZE.Y));
                 screenEdgeBottom.IsVis = false;
                 RegEntity((ICollideable)screenEdgeBottom);
+                Game1.SpriteList.Add(screenEdgeBottom);
             }
             for (int i = 0; i < (int)Game1.LEVELSIZE.Y; i += 48)
             {
-                var screenEdgeTop = BlockSpriteFactory.getFactory().CreateBoundryBlock(new Vector2(0, i));
+                var screenEdgeTop = BlockSpriteFactory.getFactory().CreateBoundryBlock(new Vector2(-48, i));
                 screenEdgeTop.IsVis = false;
                 RegEntity((ICollideable)screenEdgeTop);
-                var screenEdgeBottom = BlockSpriteFactory.getFactory().CreateBoundryBlock(new Vector2(Game1.LEVELSIZE.X, i));
+                Game1.SpriteList.Add(screenEdgeTop);
+                var screenEdgeBottom = BlockSpriteFactory.getFactory().CreateBoundryBlock(new Vector2(Game1.LEVELSIZE.X-48, i));
                 screenEdgeBottom.IsVis = false;
                 RegEntity((ICollideable)screenEdgeBottom);
+                Game1.SpriteList.Add(screenEdgeBottom);
             }
 
         }
@@ -90,9 +94,6 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
         {
             if (movingEntities.Contains(entity))
                 movingEntities.Remove(entity);
-            entity.Velocity = new Vector2(0, 0);
-            entity.Acceleration = new Vector2(0, 0);
-
         }
         public void Update()
         {
