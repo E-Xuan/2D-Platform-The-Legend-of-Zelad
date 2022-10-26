@@ -25,7 +25,7 @@ namespace SprintZeroSpriteDrawing.Sprites.EnemySprites
             /*Frame = 2;
             this.Velocity = new Vector2(0, 0);
             this.Acceleration = new Vector2(0, 0);*/
-            State.CurrState = Interfaces.EnemyState.State.SHELLIDLE;
+            //State.CurrState = Interfaces.EnemyState.State.SHELLIDLE;
         }
         /*public override void Update()
         {
