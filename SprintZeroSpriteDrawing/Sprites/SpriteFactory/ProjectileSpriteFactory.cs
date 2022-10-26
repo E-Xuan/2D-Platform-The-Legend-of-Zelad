@@ -20,7 +20,7 @@ namespace SprintZeroSpriteDrawing.Sprites.SpriteFactory
     {
         public Vector2 nPos { get; set; }
         public Vector2 SheetSize;
-        //FireballPool<Fireball> fireballPool;
+        
 
         public Texture2D FireBallSpriteSheet;
         private static ProjectileSpriteFactory _spriteFactory;
