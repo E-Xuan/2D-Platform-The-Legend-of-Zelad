@@ -24,10 +24,6 @@ namespace SprintZeroSpriteDrawing.Sprites.ProjectileSprites
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Walled, 0)), Direction.SIDE, CType.NEUTRAL));
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(BounceFloored, 0)), Direction.BOTTOM, CType.NEUTRAL));
 
-            
-
-            CollisionManager.getCM().RegEntity(this);
-            CollisionManager.getCM().RegMoving(this);
         }
 
     }

@@ -16,7 +16,6 @@ namespace SprintZeroSpriteDrawing.Sprites.ProjectileSprites
     {
         public Queue<Fireball> fireballs = new Queue<Fireball>();
         public readonly int MAX = 2;
-        public int counter = 2;
         public Vector2 position;
 
 
@@ -32,19 +31,13 @@ namespace SprintZeroSpriteDrawing.Sprites.ProjectileSprites
 
         public FireballPool(Fireball fireball)
         {
-           
             fireballs.Enqueue(fireball);
+            fireballs.Enqueue((Fireball)ProjectileSpriteFactory.getSpriteFactory().CreateFireball(Mario.GetMario().Pos));
         }
 
         public void Release(Fireball fireball)
         {
-            if(counter < MAX)
-            {
-                
-                fireball.Pos = new Vector2(Mario.GetMario().Pos.X, Mario.GetMario().Pos.Y-48);
-                fireballs.Enqueue(fireball);
-                counter++;
-            }
+            fireballs.Enqueue(fireball);
         }
 
         
@@ -54,14 +47,12 @@ namespace SprintZeroSpriteDrawing.Sprites.ProjectileSprites
             if (fireballs.Count > 0)
             {
                 fireball = fireballs.Dequeue();
-                counter--;
+                fireball.Pos = new Vector2(Mario.GetMario().Pos.X + (Mario.GetMario().GetDirection() * 25), Mario.GetMario().Pos.Y - 48);
                 return fireball; 
             }
             else
             {
-
                 return null;
-                
             }
         }
     }
