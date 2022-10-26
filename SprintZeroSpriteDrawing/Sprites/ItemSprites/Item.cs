@@ -31,8 +31,6 @@ namespace SprintZeroSpriteDrawing.Sprites.ItemSprites
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Collect, 1)), Direction.BOTTOM, CType.AVATAR_STAR));
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Collect, 1)), Direction.SIDE, CType.AVATAR_STAR));
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Collect, 1)), Direction.TOP, CType.AVATAR_STAR));
-            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(BounceFloored, 1)), Direction.BOTTOM, CType.NEUTRAL));
-            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(BounceWalled, 1)), Direction.SIDE, CType.NEUTRAL));
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Floored, 1)), Direction.TOP, CType.NEUTRAL));
         }
         public void Collect(int collect)
