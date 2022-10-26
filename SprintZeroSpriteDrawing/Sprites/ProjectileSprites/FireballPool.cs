@@ -22,7 +22,7 @@ namespace SprintZeroSpriteDrawing.Sprites.ProjectileSprites
         {
             if (_fireballPool == null)
             {
-                _fireballPool = new FireballPool((Fireball)ProjectileSpriteFactory.getSpriteFactory().CreateFireball(Mario.GetMario().Pos));
+                _fireballPool = new FireballPool((Fireball)ProjectileSpriteFactory.getSpriteFactory().CreateFireball(new Vector2(100,100)));
             }
             return _fireballPool;
         }
