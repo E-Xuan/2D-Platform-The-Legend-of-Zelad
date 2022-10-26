@@ -19,7 +19,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.ProjectileState
         {
             CurrState = State.APPEAR;
             projectile.IsVis = true;
-            projectile.Velocity = new Vector2(0, 0);
+            projectile.Velocity = new Vector2(5, 5);
             projectile.Acceleration = new Vector2(0, 0);
         }
 
