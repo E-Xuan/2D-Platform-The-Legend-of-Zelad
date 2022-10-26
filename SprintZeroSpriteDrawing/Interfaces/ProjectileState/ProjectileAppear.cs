@@ -13,6 +13,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.ProjectileState
     {
         public ProjectileAppear(Projectile nProjectile) : base(nProjectile)
         {
+
         }
  
         public override void Enter()

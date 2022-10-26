@@ -20,6 +20,10 @@ namespace SprintZeroSpriteDrawing.Sprites.EnemySprites
         public Enemy(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos) : base(nSprite, nSheetSize, nPos)
         {
             State = new EnemyMoving(this);
+
+
+            //NOTE:: KOOPA's DONT BOUNCE BECAUSE THEY CONTACT WITH TWO BLOCKS AT ONCE AND DOUBLE CANCEL THEIR VELOCITY
+
             CollideableType = CType.ENEMY;
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(kill, 0)), Direction.TOP, CType.AVATAR_SMALL));
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(kill, 0)), Direction.TOP, CType.AVATAR_LARGE));

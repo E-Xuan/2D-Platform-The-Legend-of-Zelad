@@ -18,8 +18,6 @@ namespace SprintZeroSpriteDrawing.Interfaces.ItemState
         public override void Enter()
         {
             base.Enter();
-            item.Velocity = new Vector2(0, 0);
-            item.Acceleration = new Vector2(0, 0);
             //CollisionManager.getCM().RegEntity(item);
         }
     }

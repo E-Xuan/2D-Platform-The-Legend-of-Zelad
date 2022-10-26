@@ -12,8 +12,8 @@ namespace SprintZeroSpriteDrawing.Sprites.ProjectileSprites
 {
     public class FireballPool
     {
-        public Queue<Fireball> fireballs = new();
-        public readonly int MAX = 3;
+        public Queue<Fireball> fireballs = new Queue<Fireball>();
+        public readonly int MAX = 2;
         public int counter = 0;
         public int mode;
 
@@ -29,7 +29,6 @@ namespace SprintZeroSpriteDrawing.Sprites.ProjectileSprites
 
         public FireballPool(Fireball fireball)
         {
-            fireballs.Enqueue(fireball);
             fireballs.Enqueue(fireball);
             fireballs.Enqueue(fireball);
         }

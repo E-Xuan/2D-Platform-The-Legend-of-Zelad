@@ -23,7 +23,6 @@ namespace SprintZeroSpriteDrawing.Interfaces.ItemState
         }
         public override void Exit()
         {
-            CollisionManager.getCM().DeRegMoving(item);
         }
         public override void Update()
         {
