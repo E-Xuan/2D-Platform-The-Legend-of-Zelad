@@ -14,9 +14,9 @@ namespace SprintZeroSpriteDrawing.Sprites.ItemSprites
         private bool emerge = false;
         public Starman(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos) : base(nSprite, nSheetSize, nPos)
         {
-            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(BounceWalled, 0)), Direction.SIDE, CType.NEUTRAL));
-            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Floored, 0)), Direction.BOTTOM, CType.NEUTRAL));
-            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(BounceWalled, 0)), Direction.TOP, CType.NEUTRAL));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(BounceWalled, 1)), Direction.SIDE, CType.NEUTRAL));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(
+                new IntCmd(new KeyValuePair<Action<int>, int>(BounceFloored, 1)), Direction.BOTTOM, CType.NEUTRAL));
         }
         public override void Update()
         {

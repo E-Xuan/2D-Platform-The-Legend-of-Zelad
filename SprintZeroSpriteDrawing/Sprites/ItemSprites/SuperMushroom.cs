@@ -1,8 +1,11 @@
-﻿using SprintZeroSpriteDrawing.Interfaces;
+﻿using System;
+using System.Collections.Generic;
+using SprintZeroSpriteDrawing.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SprintZeroSpriteDrawing.Interfaces.Entitiy;
 using SprintZeroSpriteDrawing.Collision.CollisionManager;
+using SprintZeroSpriteDrawing.Commands;
 
 namespace SprintZeroSpriteDrawing.Sprites.ItemSprites
 {
@@ -12,7 +15,9 @@ namespace SprintZeroSpriteDrawing.Sprites.ItemSprites
         public SuperMushroom(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos) : base(nSprite, nSheetSize, nPos)
         {
             CollideableType = CType.LEVELUP;
-            
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(BounceWalled, 1)), Direction.SIDE, CType.NEUTRAL));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Floored, 1)), Direction.BOTTOM, CType.NEUTRAL));
+
         }
         public override void Update()
         {
