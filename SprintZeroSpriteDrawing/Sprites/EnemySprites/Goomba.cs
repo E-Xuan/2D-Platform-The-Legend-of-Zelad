@@ -17,7 +17,6 @@ namespace SprintZeroSpriteDrawing.Sprites.EnemySprites
         {
             Velocity = new Vector2(-1, 0);
             Acceleration = new Vector2(0, (float).065);
-            CollisionManager.getCM().RegMoving(this);
         }
     }
 }
