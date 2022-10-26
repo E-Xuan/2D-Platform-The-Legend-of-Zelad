@@ -47,7 +47,7 @@ namespace SprintZeroSpriteDrawing
         public static Vector2 LEVELSIZE = new Vector2(1920,1080);
         public static Vector2 WINDOWSIZE = new Vector2(1920, 1080);
         public static Camera2D _Camera2D;
-        public static bool DEBUGBBOX = true;
+        public static bool DEBUGBBOX = false;
         public Game1()
         {
             //starting the graphics device for monogame
