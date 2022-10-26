@@ -15,11 +15,8 @@ namespace SprintZeroSpriteDrawing.Sprites.EnemySprites
 {
     public class Enemy : ICollideable
     {
-<<<<<<< HEAD
         public IEnemyState State;
-=======
         private bool frozen = true;
->>>>>>> 28d7e41d9ea35516a97015da81fe51bf7332f912
         public Enemy(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos) : base(nSprite, nSheetSize, nPos)
         {
             State = new EnemyMoving(this);
