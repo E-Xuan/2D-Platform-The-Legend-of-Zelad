@@ -16,20 +16,9 @@ namespace SprintZeroSpriteDrawing.Interfaces.EnemyState
         public EnemyMoving(Enemy nEnemy) : base(nEnemy)
         {
             CurrState = State.MOVING;
-            //enemy.Velocity = new Vector2(-1, 0);
-            //enemy.Acceleration = new Vector2(0, (float).065);
-            //CollisionManager.getCM().RegEntity(enemy);
-
-        }
-        public override void Enter()
-        {
-            base.Enter();
-            CurrState = State.MOVING;
-            enemy.Velocity = new Vector2(-1, -1);
+            enemy.Velocity = new Vector2(-1, 0);
             enemy.Acceleration = new Vector2(0, (float).065);
-            //CollisionManager.getCM().RegEntity();
-
-
+            CollisionManager.getCM().RegEntity(enemy);
         }
     }
 }

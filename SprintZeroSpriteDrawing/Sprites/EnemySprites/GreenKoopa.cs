@@ -7,25 +7,25 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SprintZeroSpriteDrawing.Collision.CollisionManager;
 using SprintZeroSpriteDrawing.Interfaces;
+using SprintZeroSpriteDrawing.Interfaces.EnemyState;
 using SprintZeroSpriteDrawing.Interfaces.Entitiy;
+using SprintZeroSpriteDrawing.States.EnemyState;
 
 namespace SprintZeroSpriteDrawing.Sprites.EnemySprites
 {
     public class GreenKoopa : Enemy
     {
+        IEnemyState State;
         public GreenKoopa(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos) : base(nSprite, nSheetSize, nPos)
         {
             Frame = 2;
             StartFrame = 0;
             LastFrame = 2;
+            State = new EnemyMoving(this);
         }
         public override void kill(int kill)
         {
-            //base.kill(kill);
-            /*Frame = 2;
-            this.Velocity = new Vector2(0, 0);
-            this.Acceleration = new Vector2(0, 0);*/
-            //State.CurrState = Interfaces.EnemyState.State.SHELLIDLE;
+            State = new ShellIdle(this);
         }
         /*public override void Update()
         {

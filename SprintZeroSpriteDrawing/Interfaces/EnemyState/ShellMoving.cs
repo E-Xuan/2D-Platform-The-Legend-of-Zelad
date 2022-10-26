@@ -1,4 +1,8 @@
-﻿using SprintZeroSpriteDrawing.Sprites.EnemySprites;
+﻿using Microsoft.Xna.Framework;
+using SprintZeroSpriteDrawing.Collision.CollisionManager;
+using SprintZeroSpriteDrawing.Commands;
+using SprintZeroSpriteDrawing.Interfaces.Entitiy;
+using SprintZeroSpriteDrawing.Sprites.EnemySprites;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,10 +17,18 @@ namespace SprintZeroSpriteDrawing.Interfaces.EnemyState
         public ShellMoving(Enemy nEnemy) : base(nEnemy)
         {
             CurrState = State.SHELLMOVING;
+            enemy = nEnemy;
+            enemy.Velocity = new Vector2(10, 0); 
+            enemy.CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(enemy.BounceWalled, 0)), Direction.SIDE, CType.NEUTRAL));
+            enemy.CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Kill, 0)), Direction.SIDE, CType.BOUNDRY));
+            enemy.CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Kill, 0)), Direction.BOTTOM, CType.BOUNDRY));
+            enemy.CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Kill, 0)), Direction.TOP, CType.BOUNDRY));
         }
-        public override void Enter()
+        public virtual void Kill(int kill)
         {
-            base.Enter();
+            Game1.SpriteList.Remove(enemy);
+            CollisionManager.getCM().DeRegEntity(enemy);
+            CollisionManager.getCM().DeRegMoving(enemy);
         }
     }
 }
