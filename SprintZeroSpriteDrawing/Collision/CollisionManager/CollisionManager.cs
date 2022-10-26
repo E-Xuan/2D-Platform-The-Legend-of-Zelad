@@ -122,7 +122,8 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
                                         if (response.Item3 == entity2.CollideableType &&
                                             response.Item2 == CollisionDirection)
                                         {
-                                            exeList.Add(response.Item1);
+                                            if(!exeList.Contains(response.Item1))
+                                                exeList.Add(response.Item1);
                                         }
                                     }
 
@@ -140,7 +141,7 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
                                         if (response.Item3 == entity.CollideableType &&
                                             response.Item2 == CollisionDirection)
                                         {
-                                            exeList.Add(response.Item1);
+                                                exeList.Add(response.Item1);
                                         }
 
                                     }

@@ -2,7 +2,7 @@ Author of the code review: Yixuan Huang
 Date of the code review: 10/25/2022
 Sprint number: 3
 Name of the .cs file being reviewed: IItemState.cs
-Author of the .cs file being reviewed: Yixuan
+Author of the .cs file being reviewed: phil
 Specific comments on code quality: The code overall is well-formed, the code smell is not bad. The code is efficient.
 
 Number of minutes taken to complete the review: 10 minutes
