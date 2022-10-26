@@ -1,40 +1,63 @@
-﻿using System;
+﻿using SprintZeroSpriteDrawing.Sprites.SpriteFactory;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
+using SprintZeroSpriteDrawing.Sprites.MarioSprites;
 
 namespace SprintZeroSpriteDrawing.Sprites.ProjectileSprites
 {
-    public class FireballPool<Fireball> where Fireball : new()
+    public class FireballPool
     {
-        private readonly ConcurrentBag<Fireball> fireballs = new ConcurrentBag<Fireball>();
-        private int MAX = 3;
-        private int counter = 0;
+        public Queue<Fireball> fireballs = new();
+        public readonly int MAX = 3;
+        public int counter = 0;
+        public int mode;
+
+        private static FireballPool _fireballPool;
+        public static FireballPool GetFireballPool()
+        {
+            if (_fireballPool == null)
+            {
+                _fireballPool = new FireballPool((Fireball)ProjectileSpriteFactory.getSpriteFactory().CreateFireball(Mario.GetMario().Pos));
+            }
+            return _fireballPool;
+        }
+
+        public FireballPool(Fireball fireball)
+        {
+            fireballs.Enqueue(fireball);
+            fireballs.Enqueue(fireball);
+            fireballs.Enqueue(fireball);
+        }
 
         private void Release(Fireball fireball)
         {
             if(counter < MAX)
             {
-                fireballs.Add(fireball);
+                fireballs.Enqueue(fireball);
                 counter++;
             }
         }
+
+        
         public Fireball Get()
         {
             Fireball fireball;
-            if (fireballs.TryTake(out fireball))
+            if (fireballs.Count > 0)
             {
+                fireball = fireballs.Dequeue();
                 counter--;
-                return fireball;
+                return fireball; 
             }
             else
             {
-                Fireball nFireball = new Fireball();
-                fireballs.Add(nFireball);
-                counter++;
-                return nFireball;
+
+                return null;
+                
             }
         }
     }

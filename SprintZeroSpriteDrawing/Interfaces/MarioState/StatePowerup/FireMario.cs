@@ -38,6 +38,10 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StatePowerup
         {
             switch ((PowerupState)state)
             {
+                case PowerupState.DEAD:
+                    Exit();
+                    mario.StatePowerup = new SmallMario(mario);
+                    break;
                 case PowerupState.SMALL:
                     Exit();
                     mario.StatePowerup = new SmallMario(mario);

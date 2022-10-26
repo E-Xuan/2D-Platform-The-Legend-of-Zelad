@@ -15,7 +15,11 @@ namespace SprintZeroSpriteDrawing.Sprites.EnemySprites
 {
     public class Enemy : ICollideable
     {
+<<<<<<< HEAD
         public IEnemyState State;
+=======
+        private bool frozen = true;
+>>>>>>> 28d7e41d9ea35516a97015da81fe51bf7332f912
         public Enemy(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos) : base(nSprite, nSheetSize, nPos)
         {
             State = new EnemyMoving(this);
@@ -26,11 +30,9 @@ namespace SprintZeroSpriteDrawing.Sprites.EnemySprites
 
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(BounceWalled, 0)), Direction.SIDE, CType.NEUTRAL));
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Floored, 0)), Direction.BOTTOM, CType.NEUTRAL));
-            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Floored, 0)), Direction.TOP, CType.NEUTRAL));
 
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(BounceWalled, 0)), Direction.SIDE, CType.ENEMY));
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Floored, 0)), Direction.BOTTOM, CType.ENEMY));
-            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Floored, 0)), Direction.TOP, CType.ENEMY));
 
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(kill, 0)), Direction.SIDE, CType.BOUNDRY));
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(kill, 0)), Direction.BOTTOM, CType.BOUNDRY));
@@ -38,9 +40,21 @@ namespace SprintZeroSpriteDrawing.Sprites.EnemySprites
 
             CollisionManager.getCM().RegMoving(this);
         }
+        public override void Update()
+        {
+            base.Update();
+            if (frozen && Vector2.Subtract(Pos, Game1._Camera2D.Position).X < 1920)
+            {
+                Velocity = new Vector2(-2, 0); //This speed is high, but its used to fix something else
+                Acceleration = new Vector2(0, (float).065);
+                CollisionManager.getCM().RegMoving(this);
+                frozen = false;
+            }
+        }
 
         public virtual void kill(int kill)
         {
+            CollideableType = CType.UNCOLLIDEABLE;
             Game1.SpriteList.Remove(this);
             CollisionManager.getCM().DeRegEntity(this);
             CollisionManager.getCM().DeRegMoving(this);

@@ -94,7 +94,6 @@ namespace SprintZeroSpriteDrawing
             ProjectileSpriteFactory.getSpriteFactory().LoadContent(Content);
             Mario.LoadContent(Content);
             Mario.GetMario().StatePowerup = new SmallMario(Mario.GetMario());
-            SpriteList.Add(BlockSpriteFactory.getFactory().CreateBrickBlock(new Vector2(400, 400)));
             // set game binding
             BindingCmd.SetGameBinding(keyboardController, gamepadController);
 
@@ -127,14 +126,13 @@ namespace SprintZeroSpriteDrawing
             base.Update(gameTime);
             _Camera2D.LookAt(Mario.GetMario().Pos);
             _Camera2D.Limits = new Rectangle(0, 0, 6000, 1080);
-
+            //Danish Tilt
+            //_Camera2D.Rotation = (float)(Math.PI / 16);
         }
 
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
-
             sBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, _Camera2D.GetViewMatrix(new Vector2(0.5f)));
             sBatch.Draw(BackgroundSpriteFactory.getFactory().BackgroundSpriteSheet, new Vector2(300, 478), Color.White);
             sBatch.End();

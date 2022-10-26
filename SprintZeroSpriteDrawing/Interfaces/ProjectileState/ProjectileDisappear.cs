@@ -16,8 +16,8 @@ namespace SprintZeroSpriteDrawing.Interfaces.ProjectileState
 
         public override void Enter()
         {
-            CurrState = State.APPEAR;
-            projectile.IsVis = true;
+            CurrState = State.DISAPPEAR;
+            projectile.IsVis = false;
             projectile.Velocity = new Vector2(0, 0);
             projectile.Acceleration = new Vector2(0, 0);
         }
