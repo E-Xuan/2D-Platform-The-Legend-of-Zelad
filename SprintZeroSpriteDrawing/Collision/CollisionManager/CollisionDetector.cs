@@ -33,11 +33,11 @@ namespace SprintZeroSpriteDrawing.Collision
                 {
                     return Direction.SIDE;
                 }
-                if ((FirstObject.Velocity.Y - SecondObject.Velocity.Y) >= 0)
+                if ((Intersection.Height <= Intersection.Width) && (FirstObject.Velocity.Y - SecondObject.Velocity.Y) >= 0)
                 {
                     return Direction.BOTTOM;
                 }
-                if((FirstObject.Velocity.Y - SecondObject.Velocity.Y) <= 0)
+                if((Intersection.Height <= Intersection.Width) && (FirstObject.Velocity.Y - SecondObject.Velocity.Y) <= 0)
                 {
                     return Direction.TOP;
                 }

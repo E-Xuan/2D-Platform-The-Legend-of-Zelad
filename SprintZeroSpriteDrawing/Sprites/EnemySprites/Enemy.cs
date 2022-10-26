@@ -14,6 +14,7 @@ namespace SprintZeroSpriteDrawing.Sprites.EnemySprites
 {
     public class Enemy : ICollideable
     {
+        private bool frozen = true;
         public Enemy(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos) : base(nSprite, nSheetSize, nPos)
         {
             CollideableType = CType.ENEMY;
@@ -30,6 +31,17 @@ namespace SprintZeroSpriteDrawing.Sprites.EnemySprites
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(kill, 0)), Direction.SIDE, CType.BOUNDRY));
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(kill, 0)), Direction.BOTTOM, CType.BOUNDRY));
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(kill, 0)), Direction.TOP, CType.BOUNDRY));
+        }
+        public override void Update()
+        {
+            base.Update();
+            if (frozen && Vector2.Subtract(Pos, Game1._Camera2D.Position).X < 1920)
+            {
+                Velocity = new Vector2(-2, 0); //This speed is high, but its used to fix something else
+                Acceleration = new Vector2(0, (float).065);
+                CollisionManager.getCM().RegMoving(this);
+                frozen = false;
+            }
         }
 
         public virtual void kill(int kill)

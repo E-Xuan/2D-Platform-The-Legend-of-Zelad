@@ -59,7 +59,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.BlockState
         public override void Update()
         {
             //reminder that (0,0) is top right
-            if(Inventory.Count <= 1 && block.Pos.Y > anchor.Y)
+            if(Inventory.Count == 0 && block.Pos.Y > anchor.Y)
                 ChangeState((int)State.TAPPED);
             else if(block.Pos.Y > anchor.Y)
                 ChangeState((int)State.UNTAPPED);
