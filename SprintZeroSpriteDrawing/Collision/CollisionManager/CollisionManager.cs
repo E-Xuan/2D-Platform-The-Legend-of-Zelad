@@ -43,22 +43,22 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
             //Make the screen boundries
             for (int i = 0; i < (int)Game1.LEVELSIZE.X; i += 48)
             {
-                var screenEdgeTop = BlockSpriteFactory.getFactory().CreateBoundryBlock(new Vector2(i-48, 0));
+                var screenEdgeTop = BlockSpriteFactory.getFactory().CreateBoundryBlock(new Vector2(i, 0));
                 screenEdgeTop.IsVis = false;
                 RegEntity((ICollideable)screenEdgeTop);
                 Game1.SpriteList.Add(screenEdgeTop);
-                var screenEdgeBottom = BlockSpriteFactory.getFactory().CreateBoundryBlock(new Vector2(i-48, Game1.LEVELSIZE.Y));
+                var screenEdgeBottom = BlockSpriteFactory.getFactory().CreateBoundryBlock(new Vector2(i, Game1.LEVELSIZE.Y));
                 screenEdgeBottom.IsVis = false;
                 RegEntity((ICollideable)screenEdgeBottom);
                 Game1.SpriteList.Add(screenEdgeBottom);
             }
             for (int i = 0; i < (int)Game1.LEVELSIZE.Y; i += 48)
             {
-                var screenEdgeTop = BlockSpriteFactory.getFactory().CreateBoundryBlock(new Vector2(-48, i));
+                var screenEdgeTop = BlockSpriteFactory.getFactory().CreateBoundryBlock(new Vector2(0, i));
                 screenEdgeTop.IsVis = false;
                 RegEntity((ICollideable)screenEdgeTop);
                 Game1.SpriteList.Add(screenEdgeTop);
-                var screenEdgeBottom = BlockSpriteFactory.getFactory().CreateBoundryBlock(new Vector2(Game1.LEVELSIZE.X-48, i));
+                var screenEdgeBottom = BlockSpriteFactory.getFactory().CreateBoundryBlock(new Vector2(Game1.LEVELSIZE.X, i));
                 screenEdgeBottom.IsVis = false;
                 RegEntity((ICollideable)screenEdgeBottom);
                 Game1.SpriteList.Add(screenEdgeBottom);
@@ -125,11 +125,16 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
                                             exeList.Add(response.Item1);
                                         }
                                     }
-                                    if ((int)CollisionDirection % 2 == 0)
+
+                                    if (CollisionDirection == Direction.BOTTOM)
                                     {
-                                        CollisionDirection += 2;
-                                        CollisionDirection = (Direction)((int)CollisionDirection % 4);
+                                        CollisionDirection = Direction.TOP;
+                                    } 
+                                    else if (CollisionDirection == Direction.TOP)
+                                    {
+                                        CollisionDirection = Direction.BOTTOM;
                                     }
+
                                     foreach (var response in entity2.CollisionResponse)
                                     {
                                         if (response.Item3 == entity.CollideableType &&
@@ -160,8 +165,8 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
 
                 DeRegEntity(entity); 
                 entity.Pos = Vector2.Add(entity.Pos, walkBack);
-                RegEntity(entity);
                 entity.UpdateBBox();
+                RegEntity(entity);
             }
         }
     }

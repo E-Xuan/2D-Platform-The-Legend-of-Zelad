@@ -45,11 +45,11 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         }
         public ISprite CreateGreenKoopa(Vector2 nPos)
         {
-            return new GreenKoopa(GreenKoopa, new Vector2(2, 2), nPos);
+            return new GreenKoopa(GreenKoopa, new Vector2(3, 2), nPos);
         }
         public ISprite CreateRedKoopa(Vector2 nPos)
         {
-            return new RedKoopa(GreenKoopa, new Vector2(2, 2), nPos);
+            return new RedKoopa(GreenKoopa, new Vector2(3, 2), nPos);
         }
     }
 }

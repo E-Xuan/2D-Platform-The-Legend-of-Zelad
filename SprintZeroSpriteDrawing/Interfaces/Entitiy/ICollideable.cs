@@ -97,11 +97,11 @@ namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
             if (CollideableType != CType.UNCOLLIDEABLE)
                 CollisionManager.getCM().DeRegEntity(this);
             base.Update();
+            CollideMaybe = false;
+            if (Velocity.X != 0 || Velocity.Y != 0)
+                BBox = new Rectangle((int)(Pos.X - Sprite.Width / SheetSize.X), (int)(Pos.Y - Sprite.Height / SheetSize.Y), (int)(Sprite.Width / SheetSize.X), (int)(Sprite.Height / SheetSize.Y));
             if (CollideableType != CType.UNCOLLIDEABLE)
                 CollisionManager.getCM().RegEntity(this);
-            CollideMaybe = false;
-            if(Velocity.X != 0 || Velocity.Y != 0)
-                BBox = new Rectangle((int)(Pos.X - Sprite.Width / SheetSize.X), (int)(Pos.Y - Sprite.Height / SheetSize.Y), (int)(Sprite.Width / SheetSize.X), (int)(Sprite.Height / SheetSize.Y));
         }
 
         public override void Draw(SpriteBatch batch, SpriteEffects effects)
@@ -155,6 +155,10 @@ namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
         public void Floored(int dereg)
         {
             Velocity = new Vector2(Velocity.X, 0);
+        }
+        public void BounceFloored(int dereg)
+        {
+            Velocity = new Vector2(Velocity.X, -Velocity.Y);
         }
         public void Walled(int dereg)
         {

@@ -29,16 +29,15 @@ namespace SprintZeroSpriteDrawing.Collision
             Rectangle Intersection = Rectangle.Intersect(FirstObject.BBox, SecondObject.BBox);
             if (!Intersection.IsEmpty)
             {
-                if ((Intersection.Height > Intersection.Width && FirstObject.BBox.X < SecondObject.BBox.X ||
-                    Intersection.Height > Intersection.Width && FirstObject.BBox.X > SecondObject.BBox.X) && FirstObject.Velocity.X != 0)
+                if ((Intersection.Height >= Intersection.Width) && (Math.Abs(FirstObject.Velocity.X - SecondObject.Velocity.X) > Math.Abs(FirstObject.Velocity.Y - SecondObject.Velocity.Y)))
                 {
                     return Direction.SIDE;
                 }
-                if(Intersection.Width > Intersection.Height && FirstObject.BBox.Y < SecondObject.BBox.Y && FirstObject.Velocity.Y >= 0)
+                if ((FirstObject.Velocity.Y - SecondObject.Velocity.Y) >= 0)
                 {
                     return Direction.BOTTOM;
                 }
-                if(Intersection.Width > Intersection.Height && FirstObject.BBox.Y > SecondObject.BBox.Y && FirstObject.Velocity.Y <= 0)
+                if((FirstObject.Velocity.Y - SecondObject.Velocity.Y) <= 0)
                 {
                     return Direction.TOP;
                 }
