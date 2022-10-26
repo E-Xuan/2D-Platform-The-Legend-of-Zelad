@@ -20,8 +20,8 @@ namespace SprintZeroSpriteDrawing.Interfaces.ProjectileState
         {
             CurrState = State.APPEAR;
             projectile.IsVis = true;
-            projectile.Velocity = new Vector2(5, 5);
-            projectile.Acceleration = new Vector2(0, 0);
+            projectile.Velocity = new Vector2(5, 0);
+            projectile.Acceleration = new Vector2((float)0.1, 0);
         }
 
         public override void ChangeState(int state)
