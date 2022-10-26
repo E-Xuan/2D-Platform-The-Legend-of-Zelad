@@ -15,6 +15,11 @@ namespace SprintZeroSpriteDrawing.Sprites.EnemySprites
     {
         public Goomba(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos) : base(nSprite, nSheetSize, nPos)
         {
+<<<<<<< HEAD
+            Velocity = new Vector2(-1, 0);
+            Acceleration = new Vector2(0, (float).065);
+=======
+>>>>>>> b389454d94269f2cec454ed9d6c8ad9adf1a1f0d
         }
     }
 }
