@@ -32,7 +32,8 @@ namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
         NEUTRAL,
         ENEMY,
         LEVELUP,
-        FLOWER
+        FLOWER,
+        PROJECTILE
     }
 
     public class ICollideable : IRBody

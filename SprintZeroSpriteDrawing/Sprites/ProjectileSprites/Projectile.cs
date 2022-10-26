@@ -1,5 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SprintZeroSpriteDrawing.Collision.CollisionManager;
+using SprintZeroSpriteDrawing.Commands;
+using SprintZeroSpriteDrawing.Interfaces;
 using SprintZeroSpriteDrawing.Interfaces.Entitiy;
 using SprintZeroSpriteDrawing.Interfaces.ProjectileState;
 using System;
@@ -15,8 +18,16 @@ namespace SprintZeroSpriteDrawing.Sprites.ProjectileSprites
         public IProjectileState State { get; set; }
         public Projectile(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos) : base(nSprite, nSheetSize, nPos)
         {
-            CollideableType = CType.NEUTRAL;
+            CollideableType = CType.PROJECTILE;
             State = new ProjectileAppear(this);
+
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Walled, 0)), Direction.SIDE, CType.NEUTRAL));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(BounceFloored, 0)), Direction.BOTTOM, CType.NEUTRAL));
+
+            
+
+            CollisionManager.getCM().RegEntity(this);
+            CollisionManager.getCM().RegMoving(this);
         }
 
     }

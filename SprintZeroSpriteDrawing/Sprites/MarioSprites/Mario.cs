@@ -216,7 +216,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             if((int)(Mario.GetMario().StatePowerup.currPowerupState) == Powerup)
             {
                 Fireball fire = FireballPool.GetFireballPool().Get();
-                if( fire != null)
+                if(fire != null)
                 {
                     fire.State = new ProjectileAppear((Projectile)fire);
                 }

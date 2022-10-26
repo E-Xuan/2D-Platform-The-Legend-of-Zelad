@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using SprintZeroSpriteDrawing.Collision.CollisionManager;
 using SprintZeroSpriteDrawing.Sprites.ProjectileSprites;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,9 @@ namespace SprintZeroSpriteDrawing.Interfaces.ProjectileState
         public override void Enter()
         {
             CurrState = State.DISAPPEAR;
+            Game1.SpriteList.Remove(projectile);
+            CollisionManager.getCM().DeRegEntity(projectile);
+            CollisionManager.getCM().DeRegMoving(projectile);
             projectile.IsVis = false;
             projectile.Velocity = new Vector2(0, 0);
             projectile.Acceleration = new Vector2(0, 0);
@@ -26,9 +30,9 @@ namespace SprintZeroSpriteDrawing.Interfaces.ProjectileState
         {
             switch ((State)state)
             {
-                case State.DISAPPEAR:
+                case State.APPEAR:
                     Exit();
-                    projectile.State = new ProjectileDisappear(projectile);
+                    projectile.State = new ProjectileAppear(projectile);
                     break;
             }
         }

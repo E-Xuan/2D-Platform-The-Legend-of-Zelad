@@ -42,6 +42,7 @@ namespace SprintZeroSpriteDrawing.Sprites.SpriteFactory
         public ISprite CreateFireball(Vector2 nPos)
         {
             Fireball fireball = new Fireball(FireBallSpriteSheet,new Vector2 (2,2), nPos);
+            Game1.SpriteList.Add(fireball);
             return fireball;
         }
         
