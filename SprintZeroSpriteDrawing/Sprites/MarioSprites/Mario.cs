@@ -9,6 +9,8 @@ using SprintZeroSpriteDrawing.Interfaces.Entitiy;
 using SprintZeroSpriteDrawing.Interfaces.MarioState;
 using SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction;
 using SprintZeroSpriteDrawing.Interfaces.MarioState.StatePowerup;
+using SprintZeroSpriteDrawing.Interfaces.ProjectileState;
+using SprintZeroSpriteDrawing.Sprites.ProjectileSprites;
 
 namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
 {
@@ -204,6 +206,19 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
                 ChangeAction((int)ActionState.IDLE);
                 right = false;
                 left = false;
+            }
+
+        }
+
+        public void ShootFire(int Powerup)
+        {
+            if((int)(Mario.GetMario().StatePowerup.currPowerupState) == Powerup)
+            {
+                Fireball fire = FireballPool.GetFireballPool().Get();
+                if( fire != null)
+                {
+                    fire.State = new ProjectileAppear(fire);
+                }
             }
         }
     }
