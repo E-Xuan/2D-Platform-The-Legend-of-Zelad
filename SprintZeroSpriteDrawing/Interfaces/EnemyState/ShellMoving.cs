@@ -18,7 +18,8 @@ namespace SprintZeroSpriteDrawing.Interfaces.EnemyState
         {
             CurrState = State.SHELLMOVING;
             enemy = nEnemy;
-            enemy.Velocity = new Vector2(10, 0); 
+            enemy.Velocity = new Vector2(10, 0);
+            enemy.Acceleration = new Vector2(0, (float).065);
             enemy.CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(enemy.BounceWalled, 0)), Direction.SIDE, CType.NEUTRAL));
             enemy.CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Kill, 0)), Direction.SIDE, CType.BOUNDRY));
             enemy.CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Kill, 0)), Direction.BOTTOM, CType.BOUNDRY));
