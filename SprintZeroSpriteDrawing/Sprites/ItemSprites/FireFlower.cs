@@ -11,5 +11,15 @@ namespace SprintZeroSpriteDrawing.Sprites.ItemSprites
         {
             CollideableType = CType.FLOWER;
         }
+        public override void Update()
+        {
+            base.Update();
+
+            if (State.CurrState == Interfaces.ItemState.State.IDLE)
+            {
+                Velocity = new Vector2(0, 0);
+                Acceleration = new Vector2(0, 0);
+            }
+        }
     }
 }

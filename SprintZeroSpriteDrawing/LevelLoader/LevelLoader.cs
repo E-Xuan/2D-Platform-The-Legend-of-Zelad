@@ -52,6 +52,7 @@ namespace SprintZeroSpriteDrawing.LevelLoader
                 x = 48;
                 y += 48;
             }
+            fileStream.Close();
         }
 
         private int FindStartLine(FileStream fileStream)
