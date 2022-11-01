@@ -25,13 +25,25 @@ namespace SprintZeroSpriteDrawing.Sprites.ItemSprites
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Collect, 1)), Direction.BOTTOM, CType.AVATAR_SMALL));
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Collect, 1)), Direction.SIDE, CType.AVATAR_SMALL));
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Collect, 1)), Direction.TOP, CType.AVATAR_SMALL));
+
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Collect, 1)), Direction.BOTTOM, CType.AVATAR_LARGE));
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Collect, 1)), Direction.SIDE, CType.AVATAR_LARGE));
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Collect, 1)), Direction.TOP, CType.AVATAR_LARGE));
+
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Collect, 1)), Direction.BOTTOM, CType.AVATAR_STAR));
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Collect, 1)), Direction.SIDE, CType.AVATAR_STAR));
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Collect, 1)), Direction.TOP, CType.AVATAR_STAR));
+
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Kill, 1)), Direction.BOTTOM, CType.BOUNDRY));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Kill, 1)), Direction.SIDE, CType.BOUNDRY));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Kill, 1)), Direction.TOP, CType.BOUNDRY));
+
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Floored, 1)), Direction.TOP, CType.NEUTRAL));
+        }
+        public void Kill(int collect)
+        {
+            CollisionManager.getCM().DeRegEntity(this);
+            CollisionManager.getCM().DeRegMoving(this);
         }
         public void Collect(int collect)
         {

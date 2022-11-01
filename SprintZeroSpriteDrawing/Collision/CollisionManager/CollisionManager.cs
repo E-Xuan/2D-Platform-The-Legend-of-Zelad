@@ -101,6 +101,10 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
             {
                 Vector2 walkBack = new Vector2(0, 0);
                 List<ICommand> exeList = new List<ICommand>();
+
+                //General Setup, dereg entity
+                DeRegEntity(entity);
+                entity.BBox = entity.KExtendedBBox();
                 for (int x = -1; x < 2; x++)
                 {
                     for (int y = -1; y < 2; y++)
@@ -158,16 +162,13 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
                         }
                     }
                 }
-
+                entity.Pos = Vector2.Add(entity.Pos, walkBack);
+                entity.UpdateBBox();
+                RegEntity(entity);
                 foreach (ICommand command in exeList)
                 {
                     command.Execute();
                 }
-
-                DeRegEntity(entity); 
-                entity.Pos = Vector2.Add(entity.Pos, walkBack);
-                entity.UpdateBBox();
-                RegEntity(entity);
             }
         }
     }

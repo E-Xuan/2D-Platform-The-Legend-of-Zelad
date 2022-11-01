@@ -92,7 +92,23 @@ namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
         {
             BBox = new Rectangle((int)(Pos.X - Sprite.Width / SheetSize.X), (int)(Pos.Y - Sprite.Height / SheetSize.Y), (int)(Sprite.Width / SheetSize.X), (int)(Sprite.Height / SheetSize.Y));
         }
+        public Rectangle KExtendedBBox()
+        {
+            float x = BBox.X;
+            float y = BBox.Y;
+            float height = BBox.Height + Math.Abs(Velocity.Y);
+            float width = BBox.Width + Math.Abs(Velocity.X);
 
+            if (Velocity.X < 0)
+            {
+                x += Velocity.X;
+            }
+            if (Velocity.Y < 0)
+            {
+                y += Velocity.Y;
+            }
+            return new Rectangle((int)x, (int)y, (int)width, (int)height);
+        }
         public override void Update()
         {
             if (CollideableType != CType.UNCOLLIDEABLE)
@@ -100,7 +116,12 @@ namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
             base.Update();
             CollideMaybe = false;
             if (Velocity.X != 0 || Velocity.Y != 0)
-                BBox = new Rectangle((int)(Pos.X - Sprite.Width / SheetSize.X), (int)(Pos.Y - Sprite.Height / SheetSize.Y), (int)(Sprite.Width / SheetSize.X), (int)(Sprite.Height / SheetSize.Y));
+            {
+                BBox = new Rectangle((int)(Pos.X - Sprite.Width / SheetSize.X),
+                    (int)(Pos.Y - Sprite.Height / SheetSize.Y), (int)(Sprite.Width / SheetSize.X),
+                    (int)(Sprite.Height / SheetSize.Y));
+            }
+
             if (CollideableType != CType.UNCOLLIDEABLE)
                 CollisionManager.getCM().RegEntity(this);
         }
