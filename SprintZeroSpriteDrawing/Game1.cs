@@ -126,6 +126,7 @@ namespace SprintZeroSpriteDrawing
             base.Update(gameTime);
             _Camera2D.LookAt(Mario.GetMario().Pos);
             _Camera2D.Limits = new Rectangle(0, 0, 6000, 1080);
+            //BackgroundSpriteFactory.getFactory().BackgroundSpriteSheet
             //Danish Tilt
             //_Camera2D.Rotation = (float)(Math.PI / 16);
         }
@@ -133,8 +134,9 @@ namespace SprintZeroSpriteDrawing
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            sBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, _Camera2D.GetViewMatrix(new Vector2(0.5f)));
-            sBatch.Draw(BackgroundSpriteFactory.getFactory().BackgroundSpriteSheet, new Vector2(300, 478), Color.White);
+            sBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.LinearWrap, null, null);
+            sBatch.Draw(BackgroundSpriteFactory.getFactory().BackgroundSpriteSheet, new Vector2(0, 478), new Rectangle((int)(_Camera2D.Position.X * 0.5f), (int)(_Camera2D.Position.Y*0.5f), BackgroundSpriteFactory.getFactory().BackgroundSpriteSheet.Width,
+               BackgroundSpriteFactory.getFactory().BackgroundSpriteSheet.Height), Color.White);
             sBatch.End();
 
             sBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, _Camera2D.GetViewMatrix(new Vector2(1f)));
