@@ -24,9 +24,16 @@ namespace SprintZeroSpriteDrawing.Sprites.ItemSprites
 
             if (State.CurrState == Interfaces.ItemState.State.EMERGING && !emerge)
             {
-                //if(Mario.GetMario().Pos - )
-                Velocity = new Vector2(-2, 0);
-                Acceleration = new Vector2(0, (float).065);
+                if (Mario.GetMario().Pos.X - Pos.X > 0)
+                {
+                    Velocity = new Vector2(-2, 0);
+                    Acceleration = new Vector2(0, (float).065);
+                }
+                else
+                {
+                    Velocity = new Vector2(2, 0);
+                    Acceleration = new Vector2(0, (float).065);
+                }
                 CollisionManager.getCM().RegMoving(this);
                 emerge = true;
             }
