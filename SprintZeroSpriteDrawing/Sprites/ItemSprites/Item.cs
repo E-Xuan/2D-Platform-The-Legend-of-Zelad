@@ -42,6 +42,7 @@ namespace SprintZeroSpriteDrawing.Sprites.ItemSprites
         }
         public void Kill(int collect)
         {
+            Game1.SpriteList.Remove(this);
             CollisionManager.getCM().DeRegEntity(this);
             CollisionManager.getCM().DeRegMoving(this);
         }

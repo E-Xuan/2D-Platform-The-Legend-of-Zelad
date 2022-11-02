@@ -13,7 +13,6 @@ namespace SprintZeroSpriteDrawing.Sprites.EnemySprites
 {
     public class RedKoopa : Enemy
     {
-        IEnemyState State;
         public RedKoopa(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos) : base(nSprite, nSheetSize, nPos)
         {
             Frame = 2;
@@ -21,10 +20,15 @@ namespace SprintZeroSpriteDrawing.Sprites.EnemySprites
             LastFrame = 5;
             State = new EnemyMoving(this);
         }
-        public override void kill(int kill)
+        public override void Damage(int kill)
         {
             State = new ShellIdle(this);
         }
 
+        public override void Draw(SpriteBatch batch)
+        {
+            SpriteEffects effects = Velocity.X > 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
+            base.Draw(batch, effects);
+        }
     }
 }

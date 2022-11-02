@@ -79,12 +79,6 @@ namespace SprintZeroSpriteDrawing
 
         protected override void LoadContent()
         {
-            Restart();
-        }
-
-        public void Restart()
-        {
-            SpriteList = new List<ISprite>();
             //Loading the images, and creating the sprites too
             BackgroundSpriteFactory.getFactory().LoadContent(Content);
             ItemSpriteFactory.getFactory().LoadContent(Content);
@@ -93,17 +87,20 @@ namespace SprintZeroSpriteDrawing
             MarioSpriteFactory.getSpriteFactory().LoadContent(Content);
             ProjectileSpriteFactory.getSpriteFactory().LoadContent(Content);
             Mario.LoadContent(Content);
-            Mario.GetMario().StatePowerup = new SmallMario(Mario.GetMario());
             // set game binding
             BindingCmd.SetGameBinding(keyboardController, gamepadController);
-
             //Starting the sprite batch on our new graphics device
             //move init and loading of textures?
             sBatch = new SpriteBatch(GraphicsDevice);
-
             //Loading the fonts
             HUDFont = Content.Load<SpriteFont>("Fonts/Arial");
+            Restart();
+        }
 
+        public void Restart()
+        {
+            SpriteList = new List<ISprite>();
+            Mario.GetMario().StatePowerup = new SmallMario(Mario.GetMario());
             LevelLoader.LevelLoader.GetLevelLoader().LoadLevel("Level/test.txt");
             CollisionManager.getCM().Init();
             CollisionManager.getCM().RegMoving(Mario.GetMario());
