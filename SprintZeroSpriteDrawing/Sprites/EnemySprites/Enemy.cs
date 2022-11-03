@@ -48,8 +48,11 @@ namespace SprintZeroSpriteDrawing.Sprites.EnemySprites
         }
         public override void Update()
         {
-            base.Update();
-            State.Update();
+            if (!frozen)
+            {
+                base.Update();
+                State.Update();
+            }
             if (frozen && Vector2.Subtract(Pos, Game1._Camera2D.Position).X < 1920)
             {
                 Velocity = new Vector2(-2, 0); //This speed is high, but its used to fix something else
