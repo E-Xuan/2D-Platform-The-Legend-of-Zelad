@@ -15,7 +15,6 @@ namespace SprintZeroSpriteDrawing.Sprites.EnemySprites
 {
     public class GreenKoopa : Enemy
     {
-        IEnemyState State;
         public GreenKoopa(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos) : base(nSprite, nSheetSize, nPos)
         {
             Frame = 2;
@@ -23,13 +22,14 @@ namespace SprintZeroSpriteDrawing.Sprites.EnemySprites
             LastFrame = 2;
             State = new EnemyMoving(this);
         }
-        public override void kill(int kill)
+        public override void Damage(int kill)
         {
             State = new ShellIdle(this);
         }
-        /*public override void Update()
+        public override void Draw(SpriteBatch batch)
         {
-            //State.CurrState = Interfaces.EnemyState.State.MOVING;
-        }*/
+            SpriteEffects effects = Velocity.X > 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
+            base.Draw(batch, effects);
+        }
     }
 }

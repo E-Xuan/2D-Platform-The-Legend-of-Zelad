@@ -68,6 +68,7 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
 
         public void Init()
         {
+            CM = new CollisionManager();
             foreach (ISprite entity in Game1.SpriteList)
             {
                 try 

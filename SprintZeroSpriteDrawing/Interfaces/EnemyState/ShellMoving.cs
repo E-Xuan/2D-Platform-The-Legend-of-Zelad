@@ -17,10 +17,13 @@ namespace SprintZeroSpriteDrawing.Interfaces.EnemyState
         public ShellMoving(Enemy nEnemy) : base(nEnemy)
         {
             CurrState = State.SHELLMOVING;
+            enemy.CollideableType = CType.PROJECTILE;
             enemy = nEnemy;
             enemy.Velocity = new Vector2(10, 0);
-            enemy.Acceleration = new Vector2(0, (float).065);
+            enemy.Acceleration = new Vector2(0, (float).10);
             enemy.CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(enemy.BounceWalled, 0)), Direction.SIDE, CType.NEUTRAL));
+            enemy.CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(enemy.BounceWalled, 0)), Direction.SIDE, CType.AVATAR_SMALL));
+            enemy.CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(enemy.BounceWalled, 0)), Direction.SIDE, CType.AVATAR_LARGE));
             enemy.CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Kill, 0)), Direction.SIDE, CType.BOUNDRY));
             enemy.CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Kill, 0)), Direction.BOTTOM, CType.BOUNDRY));
             enemy.CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Kill, 0)), Direction.TOP, CType.BOUNDRY));

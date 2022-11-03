@@ -25,9 +25,9 @@ namespace SprintZeroSpriteDrawing.Sprites.EnemySprites
             //NOTE:: KOOPA's DONT BOUNCE BECAUSE THEY CONTACT WITH TWO BLOCKS AT ONCE AND DOUBLE CANCEL THEIR VELOCITY
 
             CollideableType = CType.ENEMY;
-            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(kill, 0)), Direction.TOP, CType.AVATAR_SMALL));
-            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(kill, 0)), Direction.TOP, CType.AVATAR_LARGE));
-            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(kill, 0)), Direction.TOP, CType.AVATAR_STAR));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Damage, 0)), Direction.TOP, CType.AVATAR_SMALL));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Damage, 0)), Direction.TOP, CType.AVATAR_LARGE));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Damage, 0)), Direction.TOP, CType.AVATAR_STAR));
 
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(BounceWalled, 0)), Direction.SIDE, CType.NEUTRAL));
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Floored, 0)), Direction.BOTTOM, CType.NEUTRAL));
@@ -35,20 +35,24 @@ namespace SprintZeroSpriteDrawing.Sprites.EnemySprites
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(BounceWalled, 0)), Direction.SIDE, CType.ENEMY));
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Floored, 0)), Direction.BOTTOM, CType.ENEMY));
 
-            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(kill, 0)), Direction.SIDE, CType.BOUNDRY));
-            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(kill, 0)), Direction.BOTTOM, CType.BOUNDRY));
-            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(kill, 0)), Direction.TOP, CType.BOUNDRY));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Kill, 0)), Direction.SIDE, CType.BOUNDRY));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Kill, 0)), Direction.BOTTOM, CType.BOUNDRY));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Kill, 0)), Direction.TOP, CType.BOUNDRY));
 
-            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(kill, 0)), Direction.TOP, CType.PROJECTILE));
-            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(kill, 0)), Direction.BOTTOM, CType.PROJECTILE));
-            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(kill, 0)), Direction.SIDE, CType.PROJECTILE));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Kill, 0)), Direction.TOP, CType.PROJECTILE));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Kill, 0)), Direction.BOTTOM, CType.PROJECTILE));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Kill, 0)), Direction.SIDE, CType.PROJECTILE));
 
 
             CollisionManager.getCM().RegMoving(this);
         }
         public override void Update()
         {
-            base.Update();
+            if (!frozen)
+            {
+                base.Update();
+                State.Update();
+            }
             if (frozen && Vector2.Subtract(Pos, Game1._Camera2D.Position).X < 1920)
             {
                 Velocity = new Vector2(-2, 0); //This speed is high, but its used to fix something else
@@ -58,17 +62,16 @@ namespace SprintZeroSpriteDrawing.Sprites.EnemySprites
             }
         }
 
-        public virtual void kill(int kill)
+        public virtual void Damage(int kill)
+        {
+            Damage(kill);
+        }
+        public virtual void Kill(int kill)
         {
             CollideableType = CType.UNCOLLIDEABLE;
             Game1.SpriteList.Remove(this);
             CollisionManager.getCM().DeRegEntity(this);
             CollisionManager.getCM().DeRegMoving(this);
         }
-        /*public override void Update()
-        {
-            base.Update();
-            //State.Update();
-        }*/
     }
 }
