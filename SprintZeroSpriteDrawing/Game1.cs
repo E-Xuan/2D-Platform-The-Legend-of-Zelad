@@ -125,7 +125,7 @@ namespace SprintZeroSpriteDrawing
             CollisionManager.getCM().Update();
             base.Update(gameTime);
             _Camera2D.LookAt(Mario.GetMario().Pos);
-            _Camera2D.Limits = new Rectangle(0, 0, 6000, 1080);
+            _Camera2D.Limits = new Rectangle(0, 0, 10100, 1080);
             //BackgroundSpriteFactory.getFactory().BackgroundSpriteSheet
             //Danish Tilt
             //_Camera2D.Rotation = (float)(Math.PI / 16);
