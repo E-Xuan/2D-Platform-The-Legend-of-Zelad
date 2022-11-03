@@ -46,7 +46,7 @@ namespace SprintZeroSpriteDrawing
         #endregion
         public static Vector2 LEVELSIZE = new Vector2(1920,1080);
         public static Vector2 WINDOWSIZE = new Vector2(1920, 1080);
-        public static Camera2D _Camera2D;
+        public static Camera _Camera2D;
         public static bool DEBUGBBOX = false;
         public Game1()
         {
@@ -64,7 +64,7 @@ namespace SprintZeroSpriteDrawing
             Graphics.PreferredBackBufferHeight = (int)LEVELSIZE.Y;
             Graphics.ApplyChanges();
 
-            _Camera2D = new Camera2D(GraphicsDevice.Viewport);
+            _Camera2D = new Camera(GraphicsDevice.Viewport);
             #region Command Mapping
 
             keyboardController.UpdateBinding(Keys.Q, new IntCmd(new KeyValuePair<Action<int>, int>(ExitWithCode, 0)), BindingType.PRESSED);
