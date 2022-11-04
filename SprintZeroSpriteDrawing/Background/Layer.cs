@@ -11,7 +11,7 @@ namespace SprintZeroSpriteDrawing.Background
 {
     public class Layer
     {
-        public Layer(Camera2D camera2D)
+        public Layer(Camera camera2D)
         {
             _Camera2D = camera2D;
             Parallax = Vector2.One;
@@ -29,6 +29,6 @@ namespace SprintZeroSpriteDrawing.Background
             spriteBatch.End();
         }
 
-        private readonly Camera2D _Camera2D;
+        private readonly Camera _Camera2D;
     }
 }

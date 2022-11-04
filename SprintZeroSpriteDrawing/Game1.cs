@@ -46,8 +46,9 @@ namespace SprintZeroSpriteDrawing
         #endregion
         public static Vector2 LEVELSIZE = new Vector2(1920,1080);
         public static Vector2 WINDOWSIZE = new Vector2(1920, 1080);
-        public static Camera2D _Camera2D;
+        public static Camera _Camera2D;
         public static bool DEBUGBBOX = false;
+        public static bool PAUSE = false;
         public Game1()
         {
             //starting the graphics device for monogame
@@ -64,7 +65,7 @@ namespace SprintZeroSpriteDrawing
             Graphics.PreferredBackBufferHeight = (int)LEVELSIZE.Y;
             Graphics.ApplyChanges();
 
-            _Camera2D = new Camera2D(GraphicsDevice.Viewport);
+            _Camera2D = new Camera(GraphicsDevice.Viewport);
             #region Command Mapping
 
             keyboardController.UpdateBinding(Keys.Q, new IntCmd(new KeyValuePair<Action<int>, int>(ExitWithCode, 0)), BindingType.PRESSED);
@@ -109,20 +110,21 @@ namespace SprintZeroSpriteDrawing
         protected override void Update(GameTime gameTime)
         {
             //This could again be moved into a collection and iterated over, but I'm lazy
-
             keyboardController.UpdateInput();
             gamepadController.UpdateInput();
-            Mode.GetMode().Update();
-
-            //iterate over all of the sprites and run their update methods every iteration
-            foreach (ISprite spriteEntry in SpriteList.ToImmutableList())
+            if (!PAUSE)
             {
-                spriteEntry.Update();
+                Mode.GetMode().Update();
+                //iterate over all of the sprites and run their update methods every iteration
+                foreach (ISprite spriteEntry in SpriteList.ToImmutableList())
+                {
+                    spriteEntry.Update();
+                }
+                CollisionManager.getCM().Update();
+                base.Update(gameTime);
             }
-            CollisionManager.getCM().Update();
-            base.Update(gameTime);
             _Camera2D.LookAt(Mario.GetMario().Pos);
-            _Camera2D.Limits = new Rectangle(0, 0, 6000, 1080);
+            _Camera2D.Limits = new Rectangle(0, 0, 10100, 1080);
             //BackgroundSpriteFactory.getFactory().BackgroundSpriteSheet
             //Danish Tilt
             //_Camera2D.Rotation = (float)(Math.PI / 16);
@@ -158,6 +160,10 @@ namespace SprintZeroSpriteDrawing
         public static void DebugBBox(int errCode)
         {
             DEBUGBBOX = !DEBUGBBOX;
+        }
+        public static void PauseGame(int errCode)
+        {
+            PAUSE = !PAUSE;
         }
     }
 }
