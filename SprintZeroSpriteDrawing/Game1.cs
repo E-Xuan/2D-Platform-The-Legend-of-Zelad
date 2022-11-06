@@ -24,6 +24,8 @@ using SprintZeroSpriteDrawing.Sprites.SpriteFactory;
 using SprintZeroSpriteDrawing.States.MarioState;
 using SprintZeroSpriteDrawing.Interfaces.MarioState.StatePowerup;
 using SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction;
+using SprintZeroSpriteDrawing.Music_SoundEffects;
+using Microsoft.Xna.Framework.Media;
 
 namespace SprintZeroSpriteDrawing
 {
@@ -96,6 +98,7 @@ namespace SprintZeroSpriteDrawing
             sBatch = new SpriteBatch(GraphicsDevice);
             //Loading the fonts
             HUDFont = Content.Load<SpriteFont>("Fonts/Arial");
+            MusicPlayer.GetMusicPlayer().LoadSongs(Content);
             Restart();
         }
 
@@ -124,6 +127,7 @@ namespace SprintZeroSpriteDrawing
                 base.Update(gameTime);
                 keyboardController.UpdateInput();
                 gamepadController.UpdateInput();
+                MusicPlayer.GetMusicPlayer().Play();
             }
             _Camera2D.LookAt(Mario.GetMario().Pos);
             _Camera2D.Limits = new Rectangle(0, 0, 10100, 1080);
