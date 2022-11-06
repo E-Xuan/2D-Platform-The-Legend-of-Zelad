@@ -34,8 +34,13 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
 
         public override void Update()
         {
-            if(mario.Velocity.Y <= .1)
-                RevertAction();
+            if (mario.Velocity.Y <= .1)
+            {
+                if(mario.Velocity.X != 0)
+                    RevertAction(ActionState.WALKING);
+                else
+                    RevertAction(ActionState.IDLE);
+            }
         }
 
         public override void ChangeActionState(int state)
@@ -43,23 +48,31 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
             switch ((ActionState)state)
             {
                 case ActionState.RUNNING:
-                    Exit();
-                    mario.StateAction = new MarioRunning(mario, currActionState);
+                    mario.Velocity = new Vector2(mario.GetDirection(), mario.Velocity.Y);
                     break;
                 case ActionState.WALKING:
-                    Exit();
-                    mario.StateAction = new MarioWalking(mario, currActionState);
+                    mario.Velocity = new Vector2(mario.GetDirection(), mario.Velocity.Y);
                     break;
                 case ActionState.IDLE:
-                    Exit();
-                    mario.StateAction = new MarioIdle(mario, currActionState);
+                    mario.Velocity = new Vector2(0, mario.Velocity.Y);
                     break;
             }
         }
 
-        public void RevertAction()
+        public void RevertAction(ActionState state)
         {
-            ChangeActionState((int)mario.StateAction.previousActionState);
+            switch (state)
+            {
+                case ActionState.RUNNING:
+                    mario.StateAction = new MarioRunning(mario, currActionState);
+                    break;
+                case ActionState.WALKING:
+                    mario.StateAction = new MarioWalking(mario, currActionState);
+                    break;
+                case ActionState.IDLE:
+                    mario.StateAction = new MarioIdle(mario, currActionState);
+                    break;
+            }
         }
     }
 }
