@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
@@ -93,7 +94,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
         #region movement
         public void Move(Vector2 delta)
         {
-            Pos = Vector2.Add(Pos, delta);
+            Pos = new Vector2(Math.Max(Math.Min(Pos.X + delta.X, Game1.LEVELSIZE.X), 0), Math.Max(Math.Min(Pos.Y + delta.Y, Game1.LEVELSIZE.Y), 0));
         }
         public void MoveX(int delta)
         {

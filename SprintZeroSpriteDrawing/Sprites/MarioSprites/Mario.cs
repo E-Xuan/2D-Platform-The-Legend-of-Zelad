@@ -97,6 +97,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             base.Draw(batch, effects);
             batch.DrawString(OverlayFont, "Coins: " + Coins.ToString("000"), new Vector2(100, 100), Color.Black);
             batch.DrawString(OverlayFont, "Time: " + Coins.ToString("400"), new Vector2(800, 100), Color.Black); 
+            batch.DrawString(OverlayFont, "Coins: " + Coins.ToString("000"), new Vector2(Math.Max(Pos.X - 860, 100), 100), Color.Black);
         }
 
         public static void LoadContent(ContentManager content)
