@@ -189,6 +189,7 @@ namespace SprintZeroSpriteDrawing
             if (mario.Time == 0)
             {
                 isTimeCounting = false;
+                Mario.GetMario().ChangePowerup(4); // Mario dies
             }
         }
     }
