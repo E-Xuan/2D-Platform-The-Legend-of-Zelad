@@ -232,14 +232,9 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
                Lives++;
            }
        }
-
-       public void startTimer()
+        public void resetTimer()
         {
-            isTimeCounting = true;
-        }
-        public void stopTimer()
-        {
-            isTimeCounting = false;
+            Time = 400;
         }
         public void ShootFire(int Powerup)
         {

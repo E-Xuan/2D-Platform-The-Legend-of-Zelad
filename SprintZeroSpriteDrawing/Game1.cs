@@ -110,6 +110,8 @@ namespace SprintZeroSpriteDrawing
             LevelLoader.LevelLoader.GetLevelLoader().LoadLevel("Level/test.txt");
             CollisionManager.getCM().Init();
             CollisionManager.getCM().RegMoving(Mario.GetMario());
+            Mario.GetMario().resetTimer();
+            counter = 0;
         }
 
         protected override void Update(GameTime gameTime)
@@ -150,7 +152,6 @@ namespace SprintZeroSpriteDrawing
             {
                 spriteEntry.Draw(sBatch);
             }
-
             //Write text onto the screen in a nice method
             sBatch.End();
 
