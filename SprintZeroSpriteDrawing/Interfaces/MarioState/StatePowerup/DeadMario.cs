@@ -22,7 +22,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StatePowerup
             mario.SheetSize = new Vector2(1, 1);
             mario.SetSprite(MarioSpriteFactory.getSpriteFactory().DeadMarioSpriteSheet);
             mario.UpdateBBox();
-            mario.LIVES--;
+            mario.Lives--;
         }
 
         public override void Update()

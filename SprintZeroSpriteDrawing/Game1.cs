@@ -46,7 +46,6 @@ namespace SprintZeroSpriteDrawing
         public static List<ISprite> SpriteList = new List<ISprite>();
         #endregion
         public static Vector2 LEVELSIZE = new Vector2(1920,1080);
-        public static Vector2 WINDOWSIZE = new Vector2(1920, 1080);
         public static Camera _Camera2D;
         public static bool DEBUGBBOX = false;
         public static bool PAUSE = false;
