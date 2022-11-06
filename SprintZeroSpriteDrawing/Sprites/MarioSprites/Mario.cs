@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -28,6 +29,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
         public int Score = 0;
         public int Coins = 0;
         public int Lives = 5;
+        public int time = 400;
         public SpriteEffects effects;
         private static Mario _mario;
         bool left = false;
@@ -93,6 +95,8 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
         public override void Draw(SpriteBatch batch)
         {
             base.Draw(batch, effects);
+            //batch.DrawString(OverlayFont, "Coins: " + Coins.ToString("000"), new Vector2(100, 100), Color.Black);
+            batch.DrawString(OverlayFont, "Time: " + Coins.ToString("400"), new Vector2(Math.Max(Pos.X + 700, 1660), 100), Color.Black); 
             batch.DrawString(OverlayFont, "Coins: " + Coins.ToString("000"), new Vector2(Math.Max(Pos.X - 860, 100), 100), Color.Black);
         }
 
