@@ -34,6 +34,7 @@ namespace SprintZeroSpriteDrawing
         #region Controller
         private IController<Keys> keyboardController;
         private IController<Buttons> gamepadController;
+        private IController<Keys> quitpauseController;
         #endregion
 
         #region sprites
@@ -61,6 +62,7 @@ namespace SprintZeroSpriteDrawing
         {
             keyboardController = new KeyboardController();
             gamepadController = new GamepadController();
+            quitpauseController = new QuitPauseController();
             Graphics.PreferredBackBufferWidth = (int)LEVELSIZE.X;
             Graphics.PreferredBackBufferHeight = (int)LEVELSIZE.Y;
             Graphics.ApplyChanges();
@@ -68,7 +70,7 @@ namespace SprintZeroSpriteDrawing
             _Camera2D = new Camera(GraphicsDevice.Viewport);
             #region Command Mapping
 
-            keyboardController.UpdateBinding(Keys.Q, new IntCmd(new KeyValuePair<Action<int>, int>(ExitWithCode, 0)), BindingType.PRESSED);
+            quitpauseController.UpdateBinding(Keys.Q, new IntCmd(new KeyValuePair<Action<int>, int>(ExitWithCode, 0)), BindingType.PRESSED);
             keyboardController.UpdateBinding(Keys.R, new LevelReset(this), BindingType.PRESSED);
             gamepadController.UpdateBinding(Buttons.Start, new IntCmd(new KeyValuePair<Action<int>, int>(ExitWithCode, 0)), BindingType.PRESSED);
 
@@ -89,7 +91,7 @@ namespace SprintZeroSpriteDrawing
             ProjectileSpriteFactory.getSpriteFactory().LoadContent(Content);
             Mario.LoadContent(Content);
             // set game binding
-            BindingCmd.SetGameBinding(keyboardController, gamepadController);
+            BindingCmd.SetGameBinding(keyboardController, gamepadController, quitpauseController);
             //Starting the sprite batch on our new graphics device
             //move init and loading of textures?
             sBatch = new SpriteBatch(GraphicsDevice);
@@ -110,8 +112,7 @@ namespace SprintZeroSpriteDrawing
         protected override void Update(GameTime gameTime)
         {
             //This could again be moved into a collection and iterated over, but I'm lazy
-            keyboardController.UpdateInput();
-            gamepadController.UpdateInput();
+            quitpauseController.UpdateInput();
             if (!PAUSE)
             {
                 Mode.GetMode().Update();
@@ -122,6 +123,8 @@ namespace SprintZeroSpriteDrawing
                 }
                 CollisionManager.getCM().Update();
                 base.Update(gameTime);
+                keyboardController.UpdateInput();
+                gamepadController.UpdateInput();
             }
             _Camera2D.LookAt(Mario.GetMario().Pos);
             _Camera2D.Limits = new Rectangle(0, 0, 10100, 1080);
