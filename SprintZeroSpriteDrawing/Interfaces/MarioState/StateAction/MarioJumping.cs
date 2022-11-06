@@ -35,8 +35,6 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
         }
         public override void Update()
         {
-            if(previousActionState == ActionState.WALKING)
-                mario.Velocity = new Vector2(mario.GetDirection(), mario.Velocity.Y);
             if (mario.Velocity.Y >= 0)
                 ChangeActionState((int)ActionState.FALLING);
         }
@@ -45,20 +43,17 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
             switch ((ActionState)state)
             {
                 case ActionState.RUNNING:
-                    Exit();
-                    mario.StateAction = new MarioRunning(mario, currActionState);
+                    mario.Velocity = new Vector2(mario.GetDirection(), mario.Velocity.Y);
                     break;
                 case ActionState.WALKING:
-                    Exit();
-                    mario.StateAction = new MarioWalking(mario, currActionState);
+                    mario.Velocity = new Vector2(mario.GetDirection(), mario.Velocity.Y);
                     break;
                 case ActionState.IDLE:
-                    Exit();
-                    mario.StateAction = new MarioIdle(mario, currActionState);
+                    mario.Velocity = new Vector2(0, mario.Velocity.Y);
                     break;
                 case ActionState.FALLING:
                     Exit();
-                    mario.StateAction=new MarioFalling(mario, previousActionState);
+                    mario.StateAction = new MarioFalling(mario, previousActionState);
                     break;
             }
         }
