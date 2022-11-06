@@ -50,15 +50,15 @@ namespace SprintZeroSpriteDrawing.Collision
             Rectangle Intersection = Rectangle.Intersect(FirstObject.BBox, SecondObject.BBox);
             Vector2 walkback = new Vector2();
 
-            if (Intersection.Height > Intersection.Width && (Math.Abs(FirstObject.Velocity.X - SecondObject.Velocity.X) > Math.Abs(FirstObject.Velocity.Y - SecondObject.Velocity.Y)) && FirstObject.BBox.X < SecondObject.BBox.X)
+            if (Intersection.Height > Intersection.Width && FirstObject.BBox.X < SecondObject.BBox.X)
             {
                 walkback.X = -Intersection.Width;
             }
-            else if (Intersection.Height > Intersection.Width && (Math.Abs(FirstObject.Velocity.X - SecondObject.Velocity.X) > Math.Abs(FirstObject.Velocity.Y - SecondObject.Velocity.Y)))
+            else if (Intersection.Height > Intersection.Width)
             {
                 walkback.X = Intersection.Width;
             }
-            else if (FirstObject.BBox.Y < SecondObject.BBox.Y && (FirstObject.Velocity.Y - SecondObject.Velocity.Y) >= 0)
+            else if (FirstObject.BBox.Y < SecondObject.BBox.Y)
             {
                 walkback.Y = -Intersection.Height;
             }
