@@ -95,8 +95,8 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
         public override void Draw(SpriteBatch batch)
         {
             base.Draw(batch, effects);
-            batch.DrawString(OverlayFont, "Coins: " + Coins.ToString("000"), new Vector2(100, 100), Color.Black);
-            batch.DrawString(OverlayFont, "Time: " + Coins.ToString("400"), new Vector2(800, 100), Color.Black); 
+            //batch.DrawString(OverlayFont, "Coins: " + Coins.ToString("000"), new Vector2(100, 100), Color.Black);
+            batch.DrawString(OverlayFont, "Time: " + Coins.ToString("400"), new Vector2(Math.Max(Pos.X + 700, 1660), 100), Color.Black); 
             batch.DrawString(OverlayFont, "Coins: " + Coins.ToString("000"), new Vector2(Math.Max(Pos.X - 860, 100), 100), Color.Black);
         }
 
