@@ -24,8 +24,8 @@ using SprintZeroSpriteDrawing.Sprites.SpriteFactory;
 using SprintZeroSpriteDrawing.States.MarioState;
 using SprintZeroSpriteDrawing.Interfaces.MarioState.StatePowerup;
 using SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction;
-using SprintZeroSpriteDrawing.Music_SoundEffects;
-using Microsoft.Xna.Framework.Media;
+using System.Diagnostics.Metrics;
+using System.Reflection;
 
 namespace SprintZeroSpriteDrawing
 {
@@ -49,6 +49,8 @@ namespace SprintZeroSpriteDrawing
         #endregion
         public static Vector2 LEVELSIZE = new Vector2(1920,1080);
         public static Camera _Camera2D;
+        public static int counter = 0;
+        public static bool isTimeCounting = true;
         public static bool DEBUGBBOX = false;
         public static bool PAUSE = false;
         public Game1()
@@ -117,6 +119,7 @@ namespace SprintZeroSpriteDrawing
             quitpauseController.UpdateInput();
             if (!PAUSE)
             {
+                timeCount(gameTime, Mario.GetMario());
                 Mode.GetMode().Update();
                 //iterate over all of the sprites and run their update methods every iteration
                 foreach (ISprite spriteEntry in SpriteList.ToImmutableList())
@@ -170,6 +173,22 @@ namespace SprintZeroSpriteDrawing
         public static void PauseGame(int errCode)
         {
             PAUSE = !PAUSE;
+        }
+        public void timeCount(GameTime gameTime, Mario mario)
+        {
+            if (isTimeCounting)
+            {
+                counter += gameTime.ElapsedGameTime.Milliseconds;
+                if (counter >= 1000)
+                {
+                    mario.Time--;
+                    counter = 0;
+                }
+            }
+            if (mario.Time == 0)
+            {
+                isTimeCounting = false;
+            }
         }
     }
 }

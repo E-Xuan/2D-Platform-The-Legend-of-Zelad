@@ -18,6 +18,7 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
     public class CollisionManager
     {
         private static CollisionManager CM;
+        private static HashSet<CType> NonCollideables;
         public static bool IsCM()
         {
             return CM == null;
@@ -33,6 +34,8 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
 
         private CollisionManager()
         {
+            NonCollideables = new HashSet<CType>
+                { CType.FLOWER, CType.FRIENDLY, CType.LEVELUP, CType.INVISIBLE, CType.UNCOLLIDEABLE };
             entityList = new List<ICollideable>[(int)(Game1.LEVELSIZE.X / 96) + 1, (int)(Game1.LEVELSIZE.Y / 96) + 2];
             movingEntities = new List<ICollideable>();
             for (int i = 0; i < entityList.Length; i++)
@@ -127,8 +130,7 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
                                         if (response.Item3 == entity2.CollideableType &&
                                             response.Item2 == CollisionDirection)
                                         {
-                                            if(!exeList.Contains(response.Item1))
-                                                exeList.Add(response.Item1);
+                                            exeList.Add(response.Item1);
                                         }
                                     }
 
@@ -146,23 +148,25 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
                                         if (response.Item3 == entity.CollideableType &&
                                             response.Item2 == CollisionDirection)
                                         {
-                                                exeList.Add(response.Item1);
+                                            exeList.Add(response.Item1);
                                         }
 
                                     }
-                                    if (entity2.CollideableType != CType.INVISIBLE)
+                                    if (!NonCollideables.Contains(entity2.CollideableType))
                                     {
                                         Vector2 tempWB = CollisionDetector.getCD().BuildWalkback(entity, entity2);
-                                        if (Math.Abs(tempWB.X) > Math.Abs(walkBack.X))
-                                            walkBack.X = tempWB.X;
-                                        if (Math.Abs(tempWB.Y) > Math.Abs(walkBack.Y))
-                                            walkBack.Y = tempWB.Y;
+                                        if (Math.Sign(tempWB.X) == Math.Sign(entity.Velocity.X) && Math.Abs(tempWB.X) > Math.Abs(walkBack.X))
+                                            walkBack = new Vector2(tempWB.X, walkBack.Y);
+                                        if (Math.Sign(tempWB.Y) == Math.Sign(entity.Velocity.Y) && Math.Abs(tempWB.Y) > Math.Abs(walkBack.Y))
+                                            walkBack = new Vector2(walkBack.X, tempWB.Y);
                                     }
                                 }
                             }
                         }
                     }
                 }
+
+                walkBack = new Vector2(Math.Sign(walkBack.X) * Math.Min(36 - Math.Abs(entity.Velocity.X), Math.Abs(walkBack.X)), Math.Sign(walkBack.Y) * Math.Min(36 - Math.Abs(entity.Velocity.X), Math.Abs(walkBack.Y)));
                 entity.Pos = Vector2.Add(entity.Pos, walkBack);
                 entity.UpdateBBox();
                 RegEntity(entity);
