@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Reflection;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -24,12 +25,12 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
         public static Texture2D FireMarioSpriteSheet;
         public static SpriteFont OverlayFont;
         #endregion
-
-
         public int Score = 0;
         public int Coins = 0;
         public int Lives = 5;
-        public int time = 400;
+        public int Time = 400;
+        public int counter = 0;
+        public bool isTimeCounting = true;
         public SpriteEffects effects;
         private static Mario _mario;
         bool left = false;
@@ -100,7 +101,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             base.Draw(batch, effects);
             //batch.DrawString(OverlayFont, "Coins: " + Coins.ToString("000"), new Vector2(100, 100), Color.Black);
             batch.DrawString(OverlayFont, "Time: " + Coins.ToString("400"), new Vector2(Math.Max(Pos.X + 700, 1660), 100), Color.Black); 
-            batch.DrawString(OverlayFont, "Coins: " + Coins.ToString("000") + "    Score: " + Score.ToString("000000"), new Vector2(Math.Max(Pos.X - 860, 100), 100), Color.Black);
+            batch.DrawString(OverlayFont, "Coins: " + Coins.ToString("000") + "    Score: " + Score.ToString("0000000"), new Vector2(Math.Max(Pos.X - 860, 100), 100), Color.Black);
         }
         public static void LoadContent(ContentManager content)
         {
@@ -235,8 +236,11 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
                Lives++;
            }
        }
-
-       public void ShootFire(int Powerup)
+        public void resetTimer()
+        {
+            Time = 400;
+        }
+        public void ShootFire(int Powerup)
         {
             if((int)(Mario.GetMario().StatePowerup.currPowerupState) == Powerup)
             {
