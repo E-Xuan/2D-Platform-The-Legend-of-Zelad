@@ -21,11 +21,13 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
         public static Texture2D SmallMarioSpriteSheet;
         public static Texture2D BigMarioSpriteSheet;
         public static Texture2D FireMarioSpriteSheet;
+        public static SpriteFont OverlayFont;
         #endregion
 
 
-
-        public int LIVES = 5;
+        public int Score = 0;
+        public int Coins = 0;
+        public int Lives = 5;
         public SpriteEffects effects;
         private static Mario _mario;
         bool left = false;
@@ -66,6 +68,10 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeAction, (int)ActionState.FALLING)), Direction.TOP, CType.NEUTRAL));
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Impact, (int)ActionState.FALLING)), Direction.SIDE, CType.NEUTRAL));
 
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(CollectCoin, 1)), Direction.BOTTOM, CType.FRIENDLY));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(CollectCoin, 1)), Direction.TOP, CType.FRIENDLY));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(CollectCoin, 1)), Direction.SIDE, CType.FRIENDLY));
+
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangePowerup, (int)PowerupState.BIG)), Direction.BOTTOM, CType.LEVELUP));
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangePowerup, (int)PowerupState.BIG)), Direction.TOP, CType.LEVELUP));
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangePowerup, (int)PowerupState.BIG)), Direction.SIDE, CType.LEVELUP));
@@ -87,6 +93,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
         public override void Draw(SpriteBatch batch)
         {
             base.Draw(batch, effects);
+            batch.DrawString(OverlayFont, "Coins: " + Coins.ToString("000"), new Vector2(100, 100), Color.Black);
         }
 
         public static void LoadContent(ContentManager content)
@@ -94,6 +101,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             SmallMarioSpriteSheet = content.Load<Texture2D>("SmallMario/SmallMarioSpriteSheet");
             BigMarioSpriteSheet = content.Load<Texture2D>("BigMario/BigMarioSpriteSheet");
             FireMarioSpriteSheet = content.Load<Texture2D>("FireMario/FireMarioSpriteSheet");
+            OverlayFont = content.Load<SpriteFont>("Fonts/Arial");
         }
 
         public void Impact(int state)
@@ -210,7 +218,17 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
 
         }
 
-        public void ShootFire(int Powerup)
+       public void CollectCoin(int coin)
+       {
+           Coins += coin;
+           if (Coins >= 100)
+           {
+               Coins -= 100;
+               Lives++;
+           }
+       }
+
+       public void ShootFire(int Powerup)
         {
             if((int)(Mario.GetMario().StatePowerup.currPowerupState) == Powerup)
             {

@@ -64,7 +64,7 @@ namespace SprintZeroSpriteDrawing.Sprites.EnemySprites
 
         public virtual void Damage(int kill)
         {
-            Damage(kill);
+            Kill(kill);
         }
         public virtual void Kill(int kill)
         {

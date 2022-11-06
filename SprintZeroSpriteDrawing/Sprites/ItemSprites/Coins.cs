@@ -14,7 +14,6 @@ namespace SprintZeroSpriteDrawing.Sprites.ItemSprites
         public override void Update()
         {
             base.Update();
-            Acceleration = new Vector2(0, (float)(.065));
             if (State.CurrState == Interfaces.ItemState.State.EMERGING && Velocity.Y >= 0)
             {
                 State.CurrState = Interfaces.ItemState.State.COLLECTING;
