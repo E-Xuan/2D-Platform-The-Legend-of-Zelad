@@ -197,6 +197,9 @@ namespace SprintZeroSpriteDrawing.LevelLoader
                     case 'B':
                         entity = BlockSpriteFactory.getFactory().CreatePipeBottom(new Vector2(x, y));
                         break;
+                    case 'V':
+                        entity = BlockSpriteFactory.getFactory().CreateEnterPipeTop(new Vector2(x, y));
+                        break;
                     case 'C':
                         entity = BlockSpriteFactory.getFactory().CreateCastle(new Vector2(x, y));
                         break;
