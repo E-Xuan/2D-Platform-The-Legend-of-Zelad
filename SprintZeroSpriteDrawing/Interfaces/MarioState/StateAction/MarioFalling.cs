@@ -56,6 +56,10 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
                 case ActionState.IDLE:
                     mario.Velocity = new Vector2(0, mario.Velocity.Y);
                     break;
+                case ActionState.POLESLIDE:
+                    Exit();
+                    mario.StateAction = new MarioPoleslide(mario, currActionState);
+                    break;
             }
         }
 

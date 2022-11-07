@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SprintZeroSpriteDrawing.Interfaces.Entitiy;
 
 namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
 {
@@ -12,6 +13,7 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
     {
         public Flag(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos) : base(nSprite, nSheetSize, nPos)
         {
+            CollideableType = CType.FLAG;
         }
     }
 }

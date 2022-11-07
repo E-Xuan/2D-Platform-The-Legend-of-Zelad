@@ -23,6 +23,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState
     {
         JUMPING,
         FALLING,
+        POLESLIDE,
         WALKING,
         RUNNING,
         CROUCHING,

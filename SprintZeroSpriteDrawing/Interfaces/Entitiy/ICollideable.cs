@@ -28,6 +28,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
         AVATAR_STAR,
         INVISIBLE,
         BOUNDRY,
+        FLAG,
         FRIENDLY,
         NEUTRAL,
         ENEMY,

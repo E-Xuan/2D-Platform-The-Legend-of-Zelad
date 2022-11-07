@@ -48,6 +48,10 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
                     Exit();
                     mario.StateAction = new MarioIdle(mario, currActionState);
                     break;
+                case ActionState.POLESLIDE:
+                    Exit();
+                    mario.StateAction = new MarioPoleslide(mario, currActionState);
+                    break;
                 case ActionState.JUMPING:
                     Exit();
                     mario.StateAction = new MarioJumping(mario, currActionState);
