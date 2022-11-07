@@ -73,6 +73,7 @@ namespace SprintZeroSpriteDrawing
             Graphics.ApplyChanges();
 
             _Camera2D = new Camera(GraphicsDevice.Viewport);
+            
             #region Command Mapping
 
             quitpauseController.UpdateBinding(Keys.Q, new IntCmd(new KeyValuePair<Action<int>, int>(ExitWithCode, 0)), BindingType.PRESSED);
@@ -104,6 +105,7 @@ namespace SprintZeroSpriteDrawing
             HUDFont = Content.Load<SpriteFont>("Fonts/Arial");
             MusicPlayer.GetMusicPlayer().LoadSongs(Content);
             SoundEffectPlayer.GetSoundEffectPlayer().LoadSoundEffects(Content);
+            MusicPlayer.GetMusicPlayer().PlaySong();
             Restart();
         }
 
@@ -124,6 +126,7 @@ namespace SprintZeroSpriteDrawing
             quitpauseController.UpdateInput();
             if (!PAUSE)
             {
+               
                 timeCount(gameTime, Mario.GetMario());
                 Mode.GetMode().Update();
                 //iterate over all of the sprites and run their update methods every iteration
@@ -135,9 +138,10 @@ namespace SprintZeroSpriteDrawing
                 base.Update(gameTime);
                 keyboardController.UpdateInput();
                 gamepadController.UpdateInput();
-                MusicPlayer.GetMusicPlayer().PlaySong();
+               
             }
             
+
             _Camera2D.LookAt(Mario.GetMario().Pos);
             _Camera2D.Limits = new Rectangle(0, 0, 10100, 1080);
             //BackgroundSpriteFactory.getFactory().BackgroundSpriteSheet
