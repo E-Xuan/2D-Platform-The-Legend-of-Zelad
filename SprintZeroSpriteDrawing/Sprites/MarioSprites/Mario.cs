@@ -83,6 +83,10 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangePowerup, (int)PowerupState.FIRE)), Direction.TOP, CType.FLOWER));
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangePowerup, (int)PowerupState.FIRE)), Direction.SIDE, CType.FLOWER));
 
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangePowerup, (int)PowerupState.STAR)), Direction.BOTTOM, CType.STAR));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangePowerup, (int)PowerupState.STAR)), Direction.TOP, CType.STAR));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangePowerup, (int)PowerupState.STAR)), Direction.SIDE, CType.STAR));
+
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangePowerup, (int)PowerupState.DEAD)), Direction.BOTTOM, CType.BOUNDRY));
         }
 
@@ -92,15 +96,13 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             StateAction.Update();
             base.Update();
         }
-
         public override void Draw(SpriteBatch batch)
         {
             base.Draw(batch, effects);
             //batch.DrawString(OverlayFont, "Coins: " + Coins.ToString("000"), new Vector2(100, 100), Color.Black);
             batch.DrawString(OverlayFont, "Time: " + Time.ToString(), new Vector2(Math.Max(Pos.X + 700, 1660), 100), Color.Black); 
-            batch.DrawString(OverlayFont, "Coins: " + Coins.ToString("000"), new Vector2(Math.Max(Pos.X - 860, 100), 100), Color.Black);
+            batch.DrawString(OverlayFont, "Coins: " + Coins.ToString("000") + "    Score: " + Score.ToString("0000000"), new Vector2(Math.Max(Pos.X - 860, 100), 100), Color.Black);
         }
-
         public static void LoadContent(ContentManager content)
         {
             SmallMarioSpriteSheet = content.Load<Texture2D>("SmallMario/SmallMarioSpriteSheet");
@@ -108,15 +110,16 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             FireMarioSpriteSheet = content.Load<Texture2D>("FireMario/FireMarioSpriteSheet");
             OverlayFont = content.Load<SpriteFont>("Fonts/Arial");
         }
-
         public void Impact(int state)
         {
             Velocity = new Vector2(0, Velocity.Y);
         }
-
         public void ChangePowerup(int powerup)
         {
-            StatePowerup.ChangePowerupState(powerup);
+            if (powerup != 4)
+                Score += 1000;
+            if(powerup > (int)StatePowerup.currPowerupState)
+                StatePowerup.ChangePowerupState(powerup);
         }
         public void ChangeAction(int action)
         {
@@ -225,6 +228,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
 
        public void CollectCoin(int coin)
        {
+           Score += 200;
            Coins += coin;
            if (Coins >= 100)
            {
@@ -232,14 +236,9 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
                Lives++;
            }
        }
-
-       public void startTimer()
+        public void resetTimer()
         {
-            isTimeCounting = true;
-        }
-        public void stopTimer()
-        {
-            isTimeCounting = false;
+            Time = 400;
         }
         public void ShootFire(int Powerup)
         {

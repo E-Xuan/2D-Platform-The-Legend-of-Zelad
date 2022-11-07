@@ -101,7 +101,7 @@ namespace SprintZeroSpriteDrawing
             sBatch = new SpriteBatch(GraphicsDevice);
             //Loading the fonts
             HUDFont = Content.Load<SpriteFont>("Fonts/Arial");
-            MusicPlayer.GetMusicPlayer().LoadSongs(Content);
+            //MusicPlayer.GetMusicPlayer().LoadSongs(Content);
             Restart();
         }
 
@@ -112,6 +112,8 @@ namespace SprintZeroSpriteDrawing
             LevelLoader.LevelLoader.GetLevelLoader().LoadLevel("Level/test.txt");
             CollisionManager.getCM().Init();
             CollisionManager.getCM().RegMoving(Mario.GetMario());
+            Mario.GetMario().resetTimer();
+            counter = 0;
         }
 
         protected override void Update(GameTime gameTime)
@@ -131,7 +133,7 @@ namespace SprintZeroSpriteDrawing
                 base.Update(gameTime);
                 keyboardController.UpdateInput();
                 gamepadController.UpdateInput();
-                MusicPlayer.GetMusicPlayer().Play();
+                //MusicPlayer.GetMusicPlayer().Play();
             }
             _Camera2D.LookAt(Mario.GetMario().Pos);
             _Camera2D.Limits = new Rectangle(0, 0, 10100, 1080);
@@ -153,7 +155,6 @@ namespace SprintZeroSpriteDrawing
             {
                 spriteEntry.Draw(sBatch);
             }
-
             //Write text onto the screen in a nice method
             sBatch.End();
 
@@ -189,6 +190,7 @@ namespace SprintZeroSpriteDrawing
             if (mario.Time == 0)
             {
                 isTimeCounting = false;
+                Mario.GetMario().ChangePowerup(4); // Mario dies
             }
         }
     }
