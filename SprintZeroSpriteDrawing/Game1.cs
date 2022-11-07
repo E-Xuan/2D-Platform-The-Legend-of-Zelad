@@ -106,7 +106,16 @@ namespace SprintZeroSpriteDrawing
             SoundEffectPlayer.GetSoundEffectPlayer().LoadSoundEffects(Content);
             Restart();
         }
-
+        public void Restart(String level)
+        {
+            SpriteList = new List<ISprite>();
+            Mario.GetMario().StatePowerup = new SmallMario(Mario.GetMario());
+            LevelLoader.LevelLoader.GetLevelLoader().LoadLevel("Level/" + level);
+            CollisionManager.getCM().Init();
+            CollisionManager.getCM().RegMoving(Mario.GetMario());
+            Mario.GetMario().resetTimer();
+            counter = 0;
+        }
         public void Restart()
         {
             SpriteList = new List<ISprite>();
