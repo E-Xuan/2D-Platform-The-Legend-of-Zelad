@@ -18,7 +18,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.ItemState
         public override void Enter()
         {
             item.Velocity = new Vector2(0, (float)-4.9);
-            item.Acceleration = new Vector2(0, (float)1.4);
+            item.Acceleration = new Vector2(0, (float).5);
             CollisionManager.getCM().RegMoving(item);
         }
         public override void Exit()
@@ -27,7 +27,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.ItemState
         public override void Update()
         {
             base.Update();
-            if(item.Velocity.Y >= 2.1)
+            if(item.Velocity.Y >= 4.9)
                 ChangeState((int)State.IDLE);
         }
     }

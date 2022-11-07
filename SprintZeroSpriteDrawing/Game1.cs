@@ -183,19 +183,26 @@ namespace SprintZeroSpriteDrawing
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-            sBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.LinearWrap, null, null);
-            sBatch.Draw(BackgroundSpriteFactory.getFactory().BackgroundSpriteSheet, new Vector2(0, 478), new Rectangle((int)(_Camera2D.Position.X * 0.5f), (int)(_Camera2D.Position.Y*0.5f), BackgroundSpriteFactory.getFactory().BackgroundSpriteSheet.Width,
-               BackgroundSpriteFactory.getFactory().BackgroundSpriteSheet.Height), Color.White);
-            sBatch.End();
-
-            sBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, _Camera2D.GetViewMatrix(new Vector2(1f)));
-            foreach (ISprite spriteEntry in SpriteList)
+            if (currState != GameModes.OVER)
             {
-                spriteEntry.Draw(sBatch);
+                GraphicsDevice.Clear(Color.CornflowerBlue);
+                sBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.LinearWrap, null, null);
+                sBatch.Draw(BackgroundSpriteFactory.getFactory().BackgroundSpriteSheet, new Vector2(0, 478), new Rectangle((int)(_Camera2D.Position.X * 0.5f), (int)(_Camera2D.Position.Y * 0.5f), BackgroundSpriteFactory.getFactory().BackgroundSpriteSheet.Width,
+                   BackgroundSpriteFactory.getFactory().BackgroundSpriteSheet.Height), Color.White);
+                sBatch.End();
+
+                sBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, _Camera2D.GetViewMatrix(new Vector2(1f)));
+                foreach (ISprite spriteEntry in SpriteList)
+                {
+                    spriteEntry.Draw(sBatch);
+                }
+                //Write text onto the screen in a nice method
+                sBatch.End();
             }
-            //Write text onto the screen in a nice method
-            sBatch.End();
+            else
+            {
+                GraphicsDevice.Clear(Color.Black);
+            }
 
             //Uses AlphaBlend by default, which allows the sprites to easily blend with backgrounds they match with
             //Iterate over the sprite entry list again and draw each sprite
