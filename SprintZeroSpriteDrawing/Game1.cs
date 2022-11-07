@@ -27,6 +27,7 @@ using SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction;
 using System.Diagnostics.Metrics;
 using System.Reflection;
 using SprintZeroSpriteDrawing.Music_SoundEffects;
+using SprintZeroSpriteDrawing.Interfaces.GameState;
 using Microsoft.Xna.Framework.Audio;
 
 namespace SprintZeroSpriteDrawing
@@ -55,6 +56,8 @@ namespace SprintZeroSpriteDrawing
         public static bool isTimeCounting = true;
         public static bool DEBUGBBOX = false;
         public static bool PAUSE = false;
+        public static GameModes currState;
+
         public Game1()
         {
             //starting the graphics device for monogame
@@ -71,8 +74,9 @@ namespace SprintZeroSpriteDrawing
             Graphics.PreferredBackBufferWidth = (int)LEVELSIZE.X;
             Graphics.PreferredBackBufferHeight = (int)LEVELSIZE.Y;
             Graphics.ApplyChanges();
-
+            currState = new GameModes();
             _Camera2D = new Camera(GraphicsDevice.Viewport);
+            
             #region Command Mapping
 
             quitpauseController.UpdateBinding(Keys.Q, new IntCmd(new KeyValuePair<Action<int>, int>(ExitWithCode, 0)), BindingType.PRESSED);
@@ -104,6 +108,7 @@ namespace SprintZeroSpriteDrawing
             HUDFont = Content.Load<SpriteFont>("Fonts/Arial");
             MusicPlayer.GetMusicPlayer().LoadSongs(Content);
             SoundEffectPlayer.GetSoundEffectPlayer().LoadSoundEffects(Content);
+            MusicPlayer.GetMusicPlayer().PlaySong();
             Restart();
         }
         public void Restart(String level)
@@ -131,8 +136,9 @@ namespace SprintZeroSpriteDrawing
         {
             //This could again be moved into a collection and iterated over, but I'm lazy
             quitpauseController.UpdateInput();
-            if (!PAUSE)
+            if (currState != GameModes.PAUSE)
             {
+               
                 timeCount(gameTime, Mario.GetMario());
                 Mode.GetMode().Update();
                 //iterate over all of the sprites and run their update methods every iteration
@@ -144,9 +150,10 @@ namespace SprintZeroSpriteDrawing
                 base.Update(gameTime);
                 keyboardController.UpdateInput();
                 gamepadController.UpdateInput();
-                MusicPlayer.GetMusicPlayer().PlaySong();
+               
             }
             
+
             _Camera2D.LookAt(Mario.GetMario().Pos);
             _Camera2D.Limits = new Rectangle(0, 0, 10100, 1080);
             //BackgroundSpriteFactory.getFactory().BackgroundSpriteSheet
@@ -187,6 +194,14 @@ namespace SprintZeroSpriteDrawing
         public static void PauseGame(int errCode)
         {
             PAUSE = !PAUSE;
+            if (PAUSE)
+            {
+                currState = GameModes.PAUSE;
+            }
+            else
+            {
+                currState = GameModes.NORMAL;
+            }
         }
         public void timeCount(GameTime gameTime, Mario mario)
         {
@@ -203,6 +218,7 @@ namespace SprintZeroSpriteDrawing
             {
                 isTimeCounting = false;
                 Mario.GetMario().ChangePowerup(4); // Mario dies
+                currState = GameModes.OVER;
             }
         }
     }

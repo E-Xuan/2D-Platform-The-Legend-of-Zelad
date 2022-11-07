@@ -15,7 +15,9 @@ namespace SprintZeroSpriteDrawing.Interfaces.GameState
     {
         NORMAL,
         DEBUG,
-        COLLISIONS
+        COLLISIONS,
+        PAUSE,
+        OVER
     }
 
     

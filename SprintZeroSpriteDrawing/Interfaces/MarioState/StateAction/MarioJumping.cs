@@ -32,12 +32,15 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
             mario.Acceleration = new Vector2(0, (float)0.25);
             mario.Frame = 1;
             mario.AutoFrame = false;
+            
         }
         public override void Update()
         {
             if (mario.Velocity.Y >= 0)
                 ChangeActionState((int)ActionState.FALLING);
         }
+
+        
         public override void ChangeActionState(int state)
         {
             switch ((ActionState)state)

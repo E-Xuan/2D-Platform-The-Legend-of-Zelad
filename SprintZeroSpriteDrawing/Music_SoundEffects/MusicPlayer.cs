@@ -35,6 +35,7 @@ namespace SprintZeroSpriteDrawing.Music_SoundEffects
         }
         public void PlaySong()
         {
+            MediaPlayer.IsMuted = false;
             MediaPlayer.Play(overworldMusic); 
         }
         public void Mute(int mute)
