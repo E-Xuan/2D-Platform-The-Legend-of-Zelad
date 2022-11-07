@@ -138,6 +138,10 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         {
             return new Pipe_Top(PipeTopSpriteSheet, new Vector2(1, 1), nPos);
         }
+        public ISprite CreateEnterPipeTop(Vector2 nPos)
+        {
+            return new PIpeTopEnter(PipeTopSpriteSheet, new Vector2(1, 1), nPos) ;
+        }
         public ISprite CreateCastle(Vector2 nPos)
         {
             return new Castle(CastleSpriteSheet, new Vector2(1, 1), nPos);  
