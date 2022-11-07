@@ -27,6 +27,7 @@ using SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction;
 using System.Diagnostics.Metrics;
 using System.Reflection;
 using SprintZeroSpriteDrawing.Music_SoundEffects;
+using Microsoft.Xna.Framework.Audio;
 
 namespace SprintZeroSpriteDrawing
 {
@@ -102,6 +103,7 @@ namespace SprintZeroSpriteDrawing
             //Loading the fonts
             HUDFont = Content.Load<SpriteFont>("Fonts/Arial");
             MusicPlayer.GetMusicPlayer().LoadSongs(Content);
+            SoundEffectPlayer.GetSoundEffectPlayer().LoadSoundEffects(Content);
             Restart();
         }
 

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework.Audio;
 
 namespace SprintZeroSpriteDrawing.Music_SoundEffects
 {
@@ -39,6 +40,15 @@ namespace SprintZeroSpriteDrawing.Music_SoundEffects
         public void Mute(int mute)
         {
             MediaPlayer.IsMuted = !MediaPlayer.IsMuted;
+            
+            if(SoundEffect.MasterVolume == 0.0f)
+            {
+                SoundEffect.MasterVolume = 1.0f;
+            }
+            else
+            {
+                SoundEffect.MasterVolume = 0.0f;
+            }
         }
 
        
