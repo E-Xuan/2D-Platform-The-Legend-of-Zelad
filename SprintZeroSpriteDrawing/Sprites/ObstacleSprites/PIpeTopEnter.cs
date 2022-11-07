@@ -16,10 +16,8 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
     {
         public PIpeTopEnter(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos) : base(nSprite, nSheetSize, nPos)
         {
-            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeState, (int)Interfaces.BlockState.State.PIPEENTER)), Direction.TOP, CType.AVATAR_LARGE));
-            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeState, (int)Interfaces.BlockState.State.PIPEENTER)), Direction.TOP, CType.AVATAR_SMALL));
-            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeState, (int)Interfaces.BlockState.State.PIPEENTER)), Direction.TOP, CType.AVATAR_STAR));
-
+            CollideableType = CType.PIPE_ENTER;
+            
         }
 
     }

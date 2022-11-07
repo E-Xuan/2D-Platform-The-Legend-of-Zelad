@@ -93,6 +93,12 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
 
 
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangePowerup, (int)PowerupState.DEAD)), Direction.BOTTOM, CType.BOUNDRY));
+
+            // change
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Drag, 100)), Direction.BOTTOM, CType.PIPE_ENTER));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeAction, (int)ActionState.FALLING)), Direction.TOP, CType.PIPE_ENTER));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Impact, (int)ActionState.FALLING)), Direction.SIDE, CType.PIPE_ENTER));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(PipeEnterLevelChange, 0)), Direction.BOTTOM, CType.PIPE_ENTER));
         }
 
         public override void Update()
@@ -260,6 +266,15 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
                     fire.State = new ProjectileAppear((Projectile)fire);
                 }
             }
+        }
+        
+        public void PipeEnterLevelChange(int x)
+        {
+            if(StateAction.currActionState == ActionState.CROUCHING)
+            {
+                StateAction.previousActionState = ActionState.CROUCHING;
+            }
+
         }
     }
 }

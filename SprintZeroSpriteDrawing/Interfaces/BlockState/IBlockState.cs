@@ -17,7 +17,6 @@ namespace SprintZeroSpriteDrawing.Interfaces.BlockState
         TAPPED,
         HIDDEN,
         BROKEN,
-        PIPEENTER
     }
     public class IBlockState
     {
