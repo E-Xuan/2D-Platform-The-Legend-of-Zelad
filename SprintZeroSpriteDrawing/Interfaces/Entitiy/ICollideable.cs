@@ -33,6 +33,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
         ENEMY,
         LEVELUP,
         FLOWER,
+        STAR,
         PROJECTILE
     }
 

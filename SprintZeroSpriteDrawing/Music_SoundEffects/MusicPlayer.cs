@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Media;
+using SprintZeroSpriteDrawing.Sprites.MarioSprites;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,16 @@ namespace SprintZeroSpriteDrawing.Music_SoundEffects
         Song overworldMusic;
         Song starmanMusic;
         Song underworldMusic;
+        private static MusicPlayer _musicPlayer;
+
+        public static MusicPlayer GetMusicPlayer()
+        {
+            if (_musicPlayer == null)
+            {
+                _musicPlayer = new MusicPlayer();
+            }
+            return _musicPlayer;
+        }
 
         public void LoadSongs(ContentManager content)
         {
@@ -21,9 +32,13 @@ namespace SprintZeroSpriteDrawing.Music_SoundEffects
             starmanMusic = content.Load<Song>("Music/Starman");
             underworldMusic = content.Load<Song>("Music/Underworld");
         }
-        public void Play(ContentManager content)
+        public void Play()
         {
             MediaPlayer.Play(overworldMusic); 
+        }
+        public void Mute(int mute)
+        {
+            MediaPlayer.IsMuted = !MediaPlayer.IsMuted;
         }
     }
 }
