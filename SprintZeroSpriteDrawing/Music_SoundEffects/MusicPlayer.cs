@@ -32,7 +32,7 @@ namespace SprintZeroSpriteDrawing.Music_SoundEffects
             starmanMusic = content.Load<Song>("Music/Starman");
             underworldMusic = content.Load<Song>("Music/Underworld");
         }
-        public void Play()
+        public void PlaySong()
         {
             MediaPlayer.Play(overworldMusic); 
         }
@@ -40,5 +40,7 @@ namespace SprintZeroSpriteDrawing.Music_SoundEffects
         {
             MediaPlayer.IsMuted = !MediaPlayer.IsMuted;
         }
+
+       
     }
 }

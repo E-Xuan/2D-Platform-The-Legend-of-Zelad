@@ -101,7 +101,7 @@ namespace SprintZeroSpriteDrawing
             sBatch = new SpriteBatch(GraphicsDevice);
             //Loading the fonts
             HUDFont = Content.Load<SpriteFont>("Fonts/Arial");
-            //MusicPlayer.GetMusicPlayer().LoadSongs(Content);
+            MusicPlayer.GetMusicPlayer().LoadSongs(Content);
             Restart();
         }
 
@@ -133,8 +133,9 @@ namespace SprintZeroSpriteDrawing
                 base.Update(gameTime);
                 keyboardController.UpdateInput();
                 gamepadController.UpdateInput();
-                //MusicPlayer.GetMusicPlayer().Play();
+                MusicPlayer.GetMusicPlayer().PlaySong();
             }
+            
             _Camera2D.LookAt(Mario.GetMario().Pos);
             _Camera2D.Limits = new Rectangle(0, 0, 10100, 1080);
             //BackgroundSpriteFactory.getFactory().BackgroundSpriteSheet
