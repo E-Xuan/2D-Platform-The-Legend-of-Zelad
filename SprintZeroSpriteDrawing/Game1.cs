@@ -58,6 +58,9 @@ namespace SprintZeroSpriteDrawing
         public static bool PAUSE = false;
         public static GameModes currState;
 
+        public static bool underGround = false;
+        public static bool level_update = false; 
+
         public Game1()
         {
             //starting the graphics device for monogame
@@ -159,6 +162,23 @@ namespace SprintZeroSpriteDrawing
             //BackgroundSpriteFactory.getFactory().BackgroundSpriteSheet
             //Danish Tilt
             //_Camera2D.Rotation = (float)(Math.PI / 16);
+
+
+
+
+            if (level_update)
+            {
+                if (!underGround)
+                {
+                    Restart("test.txt");
+                }
+                else
+                {
+                    Restart("underground.txt");
+                }
+                level_update = false;
+            }
+
         }
 
         protected override void Draw(GameTime gameTime)
