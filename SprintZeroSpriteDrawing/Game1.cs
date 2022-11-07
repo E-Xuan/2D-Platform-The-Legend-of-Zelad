@@ -27,6 +27,7 @@ using SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction;
 using System.Diagnostics.Metrics;
 using System.Reflection;
 using SprintZeroSpriteDrawing.Music_SoundEffects;
+using SprintZeroSpriteDrawing.Interfaces.GameState;
 using Microsoft.Xna.Framework.Audio;
 
 namespace SprintZeroSpriteDrawing
@@ -55,6 +56,8 @@ namespace SprintZeroSpriteDrawing
         public static bool isTimeCounting = true;
         public static bool DEBUGBBOX = false;
         public static bool PAUSE = false;
+        public static GameModes currState;
+
         public Game1()
         {
             //starting the graphics device for monogame
@@ -71,7 +74,7 @@ namespace SprintZeroSpriteDrawing
             Graphics.PreferredBackBufferWidth = (int)LEVELSIZE.X;
             Graphics.PreferredBackBufferHeight = (int)LEVELSIZE.Y;
             Graphics.ApplyChanges();
-
+            currState = new GameModes();
             _Camera2D = new Camera(GraphicsDevice.Viewport);
             
             #region Command Mapping
@@ -124,7 +127,7 @@ namespace SprintZeroSpriteDrawing
         {
             //This could again be moved into a collection and iterated over, but I'm lazy
             quitpauseController.UpdateInput();
-            if (!PAUSE)
+            if (currState != GameModes.PAUSE)
             {
                
                 timeCount(gameTime, Mario.GetMario());
@@ -182,6 +185,14 @@ namespace SprintZeroSpriteDrawing
         public static void PauseGame(int errCode)
         {
             PAUSE = !PAUSE;
+            if (PAUSE)
+            {
+                currState = GameModes.PAUSE;
+            }
+            else
+            {
+                currState = GameModes.NORMAL;
+            }
         }
         public void timeCount(GameTime gameTime, Mario mario)
         {
@@ -198,6 +209,7 @@ namespace SprintZeroSpriteDrawing
             {
                 isTimeCounting = false;
                 Mario.GetMario().ChangePowerup(4); // Mario dies
+                currState = GameModes.OVER;
             }
         }
     }

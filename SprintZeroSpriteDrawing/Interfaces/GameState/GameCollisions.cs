@@ -33,6 +33,10 @@ namespace SprintZeroSpriteDrawing.Interfaces.GameState
                     Exit();
                     mode.State = new GameDebug(mode);
                     break;
+                case GameModes.PAUSE:
+                    Exit();
+                    mode.State = new GamePause(mode);
+                    break;
             }
         }
     }
