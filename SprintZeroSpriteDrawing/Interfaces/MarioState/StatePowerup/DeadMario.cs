@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using SprintZeroSpriteDrawing.Sprites.MarioSprites;
 using SprintZeroSpriteDrawing.Sprites.MarioActionSprites;
-
+using SprintZeroSpriteDrawing.Music_SoundEffects;
 
 namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StatePowerup
 {
@@ -14,6 +14,9 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StatePowerup
 
         public override void Enter()
         {
+            //var soundEffectPlayer = SoundEffectPlayer.GetSoundEffectPlayer();
+            //soundEffectPlayer.PlaySoundEffect += new delEventHandler(onFlagChanged);
+            //soundEffectPlayer.Trigger = !soundEffectPlayer._trigger;
             prevPowerupState = currPowerupState;
             currPowerupState = PowerupState.DEAD;
             mario.IsVis = true;
@@ -28,6 +31,11 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StatePowerup
         public override void Update()
         {
             mario.ChangeAction((int)MarioState.ActionState.IDLE);
+        }
+
+        public static void onFlagChanged()
+        {
+            //SoundEffectPlayer.GetSoundEffectPlayer().PlaySounds((int)SoundEffectPlayer.Sounds.DIE);
         }
 
         public override void ChangePowerupState(int state)

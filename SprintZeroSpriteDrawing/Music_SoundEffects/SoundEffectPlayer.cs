@@ -9,9 +9,9 @@ using Microsoft.Xna.Framework.Audio;
 
 namespace SprintZeroSpriteDrawing.Music_SoundEffects
 {
+    public delegate void delEventHandler();
     public class SoundEffectPlayer
     {
-        List<SoundEffect> soundEffects = new List<SoundEffect>();
         public enum Sounds
         {
             ONEUP,
@@ -34,7 +34,10 @@ namespace SprintZeroSpriteDrawing.Music_SoundEffects
             WARNING,
         }
 
-        public event EventHandler<EventArgs> PlaySoundEffect;
+        public bool _trigger;
+        List<SoundEffect> soundEffects = new List<SoundEffect>();
+
+        public event delEventHandler PlaySoundEffect;
 
         private static SoundEffectPlayer _soundEffectPlayer;
 
@@ -47,9 +50,19 @@ namespace SprintZeroSpriteDrawing.Music_SoundEffects
             return _soundEffectPlayer;
         }
 
-        protected virtual void OnSoundEffectPlayed(EventArgs sound)
+        public bool Trigger 
         {
-            PlaySoundEffect?.Invoke(this, sound);
+            set
+            {
+                if(value != _trigger)
+                {
+                    _trigger = value;
+                    if(PlaySoundEffect!= null)
+                    {
+                        PlaySoundEffect();
+                    }
+                }
+            }
         }
 
         public void LoadSoundEffects(ContentManager content)
@@ -73,7 +86,7 @@ namespace SprintZeroSpriteDrawing.Music_SoundEffects
             soundEffects.Add(content.Load<SoundEffect>("SoundEffects/stomp"));
             soundEffects.Add(content.Load<SoundEffect>("SoundEffects/warning"));
         }
-        public void PlaySounds(int sound, SoundEffect soundEffect)
+        public void PlaySounds(int sound)
         {
             soundEffects[sound].CreateInstance().Play();
         }

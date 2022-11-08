@@ -66,6 +66,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeAction, (int)ActionState.IDLE)), Direction.SIDE, CType.ENEMY));
 
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeAction, (int)ActionState.POLESLIDE)), Direction.SIDE, CType.FLAG));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeAction, (int)ActionState.POLESLIDE)), Direction.BOTTOM, CType.FLAG));
 
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeAction, (int)ActionState.FALLING)), Direction.TOP, CType.INVISIBLE));
             
@@ -184,7 +185,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
         }
         public int GetDirection()
         {
-            return effects == SpriteEffects.None ? 4 : -4;
+            return effects == SpriteEffects.None ? 4 :-4;
         }
         //action positive is right
        public void MoveAction(int action)
