@@ -58,6 +58,9 @@ namespace SprintZeroSpriteDrawing
         public static bool PAUSE = false;
         public static GameModes currState;
 
+        public static bool underGround = false;
+        public static bool level_update = false; 
+
         public Game1()
         {
             //starting the graphics device for monogame
@@ -118,8 +121,6 @@ namespace SprintZeroSpriteDrawing
             LevelLoader.LevelLoader.GetLevelLoader().LoadLevel("Level/" + level);
             CollisionManager.getCM().Init();
             CollisionManager.getCM().RegMoving(Mario.GetMario());
-            Mario.GetMario().resetTimer();
-            counter = 0;
         }
         public void Restart()
         {
@@ -159,6 +160,23 @@ namespace SprintZeroSpriteDrawing
             //BackgroundSpriteFactory.getFactory().BackgroundSpriteSheet
             //Danish Tilt
             //_Camera2D.Rotation = (float)(Math.PI / 16);
+
+
+
+
+            if (level_update)
+            {
+                if (!underGround)
+                {
+                    Restart("test.txt");
+                }
+                else
+                {
+                    Restart("underground.txt");
+                }
+                level_update = false;
+            }
+
         }
 
         protected override void Draw(GameTime gameTime)
@@ -182,6 +200,10 @@ namespace SprintZeroSpriteDrawing
             else
             {
                 GraphicsDevice.Clear(Color.Black);
+                sBatch.Begin();
+                sBatch.DrawString(HUDFont, "You fucking loser ", new Vector2(500, 500), Color.Red);
+                sBatch.End();
+
             }
 
             //Uses AlphaBlend by default, which allows the sprites to easily blend with backgrounds they match with
