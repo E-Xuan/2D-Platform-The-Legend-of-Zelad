@@ -183,19 +183,35 @@ namespace SprintZeroSpriteDrawing
         {
             if (currState != GameModes.OVER)
             {
-                GraphicsDevice.Clear(Color.CornflowerBlue);
-                sBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.LinearWrap, null, null);
-                sBatch.Draw(BackgroundSpriteFactory.getFactory().BackgroundSpriteSheet, new Vector2(0, 478), new Rectangle((int)(_Camera2D.Position.X * 0.5f), (int)(_Camera2D.Position.Y * 0.5f), BackgroundSpriteFactory.getFactory().BackgroundSpriteSheet.Width,
-                   BackgroundSpriteFactory.getFactory().BackgroundSpriteSheet.Height), Color.White);
-                sBatch.End();
-
-                sBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, _Camera2D.GetViewMatrix(new Vector2(1f)));
-                foreach (ISprite spriteEntry in SpriteList)
+                if (underGround)
                 {
-                    spriteEntry.Draw(sBatch);
+                    GraphicsDevice.Clear(Color.Black);
+                    sBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.LinearWrap, null, null);
+                    foreach (ISprite spriteEntry in SpriteList)
+                    {
+                        spriteEntry.Draw(sBatch);
+                    }
+                    //Write text onto the screen in a nice method
+                    sBatch.End();
                 }
-                //Write text onto the screen in a nice method
-                sBatch.End();
+
+                else
+                {
+                    GraphicsDevice.Clear(Color.CornflowerBlue);
+
+                    sBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.LinearWrap, null, null);
+                    sBatch.Draw(BackgroundSpriteFactory.getFactory().BackgroundSpriteSheet, new Vector2(0, 478), new Rectangle((int)(_Camera2D.Position.X * 0.5f), (int)(_Camera2D.Position.Y * 0.5f), BackgroundSpriteFactory.getFactory().BackgroundSpriteSheet.Width,
+                       BackgroundSpriteFactory.getFactory().BackgroundSpriteSheet.Height), Color.White);
+                    sBatch.End();
+
+                    sBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, _Camera2D.GetViewMatrix(new Vector2(1f)));
+                    foreach (ISprite spriteEntry in SpriteList)
+                    {
+                        spriteEntry.Draw(sBatch);
+                    }
+                    //Write text onto the screen in a nice method
+                    sBatch.End();
+                }
             }
             else
             {
