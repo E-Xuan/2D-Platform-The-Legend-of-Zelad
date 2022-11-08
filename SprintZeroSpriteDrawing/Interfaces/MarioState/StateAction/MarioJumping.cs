@@ -7,7 +7,7 @@ using SprintZeroSpriteDrawing.Interfaces.Entitiy;
 using SprintZeroSpriteDrawing.Sprites.MarioSprites;
 using System.Runtime.CompilerServices;
 using SprintZeroSpriteDrawing.Collision.CollisionManager;
-
+using SprintZeroSpriteDrawing.Music_SoundEffects;
 
 namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
 {
@@ -26,6 +26,9 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
         public override void Enter()
         {
             CollisionManager.getCM().RegMoving(mario);
+            var soundEffectPlayer = SoundEffectPlayer.GetSoundEffectPlayer();
+            soundEffectPlayer.PlaySoundEffect += new delEventHandler(onFlagChanged);
+            soundEffectPlayer.Trigger = !soundEffectPlayer._trigger;
             currActionState = ActionState.JUMPING;
             mario.IsVis = true;
             mario.Velocity = new Vector2(mario.Velocity.X, -10);
@@ -38,6 +41,11 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
         {
             if (mario.Velocity.Y >= 0)
                 ChangeActionState((int)ActionState.FALLING);
+        }
+
+        public static void onFlagChanged()
+        {
+            SoundEffectPlayer.GetSoundEffectPlayer().PlaySounds((int)SoundEffectPlayer.Sounds.JUMPSUPER);
         }
 
         
