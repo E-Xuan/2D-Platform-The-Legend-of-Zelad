@@ -255,7 +255,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
        }
         public void resetTimer()
         {
-            Time = 3;
+            Time = 400;
         }
         public void ShootFire(int Powerup)
         {
