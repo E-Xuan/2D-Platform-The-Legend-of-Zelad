@@ -35,7 +35,8 @@ namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
         LEVELUP,
         FLOWER,
         STAR,
-        PROJECTILE
+        PROJECTILE,
+        PIPE_ENTER
     }
 
     public class ICollideable : IRBody

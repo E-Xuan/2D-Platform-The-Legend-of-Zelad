@@ -24,11 +24,14 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
         public override void Enter()
         {
             //SOMEHOW DISABLE THE POLESLIDE COLLISION RESPONSE?
+
+
             CollisionManager.getCM().RegMoving(mario);
             mario.Score += 2000 - (int)mario.Pos.Y;
+            mario.Score += mario.Time * 5;
             currActionState = ActionState.POLESLIDE;
             mario.IsVis = true;
-            mario.Velocity = new Vector2(0, (float).5);
+            mario.Velocity = new Vector2(0, (float)2);
             mario.Acceleration = new Vector2(0, 0);
             mario.Frame = 1;
             mario.AutoFrame = false;

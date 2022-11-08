@@ -44,7 +44,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
         
         public int[] currState;
 
-         public static Mario GetMario() {
+        public static Mario GetMario() {
              if(_mario == null)
              {
                 _mario = new Mario(SmallMarioSpriteSheet, new Vector2(3, 3), new Vector2(0, 0));
@@ -66,6 +66,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeAction, (int)ActionState.IDLE)), Direction.SIDE, CType.ENEMY));
 
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeAction, (int)ActionState.POLESLIDE)), Direction.SIDE, CType.FLAG));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeAction, (int)ActionState.POLESLIDE)), Direction.BOTTOM, CType.FLAG));
 
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeAction, (int)ActionState.FALLING)), Direction.TOP, CType.INVISIBLE));
             
@@ -93,6 +94,12 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
 
 
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangePowerup, (int)PowerupState.DEAD)), Direction.BOTTOM, CType.BOUNDRY));
+
+            // change
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Drag, 100)), Direction.BOTTOM, CType.PIPE_ENTER));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeAction, (int)ActionState.FALLING)), Direction.TOP, CType.PIPE_ENTER));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Impact, (int)ActionState.FALLING)), Direction.SIDE, CType.PIPE_ENTER));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(PipeEnterLevelChange, 0)), Direction.BOTTOM, CType.PIPE_ENTER));
         }
 
         public override void Update()
@@ -178,7 +185,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
         }
         public int GetDirection()
         {
-            return effects == SpriteEffects.None ? 4 : -4;
+            return effects == SpriteEffects.None ? 4 :-4;
         }
         //action positive is right
        public void MoveAction(int action)
@@ -260,6 +267,16 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
                     fire.State = new ProjectileAppear((Projectile)fire);
                 }
             }
+        }
+        
+        public void PipeEnterLevelChange(int x)
+        {
+            if(StateAction.currActionState == ActionState.CROUCHING)
+            {
+                Game1.level_update = true;
+                Game1.underGround = !Game1.underGround;
+            }
+
         }
     }
 }

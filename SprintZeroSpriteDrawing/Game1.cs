@@ -58,6 +58,9 @@ namespace SprintZeroSpriteDrawing
         public static bool PAUSE = false;
         public static GameModes currState;
 
+        public static bool underGround = false;
+        public static bool level_update = false; 
+
         public Game1()
         {
             //starting the graphics device for monogame
@@ -111,7 +114,14 @@ namespace SprintZeroSpriteDrawing
             MusicPlayer.GetMusicPlayer().PlaySong();
             Restart();
         }
-
+        public void Restart(String level)
+        {
+            SpriteList = new List<ISprite>();
+            Mario.GetMario().StatePowerup = new SmallMario(Mario.GetMario());
+            LevelLoader.LevelLoader.GetLevelLoader().LoadLevel("Level/" + level);
+            CollisionManager.getCM().Init();
+            CollisionManager.getCM().RegMoving(Mario.GetMario());
+        }
         public void Restart()
         {
             SpriteList = new List<ISprite>();
@@ -150,23 +160,51 @@ namespace SprintZeroSpriteDrawing
             //BackgroundSpriteFactory.getFactory().BackgroundSpriteSheet
             //Danish Tilt
             //_Camera2D.Rotation = (float)(Math.PI / 16);
+
+
+
+
+            if (level_update)
+            {
+                if (!underGround)
+                {
+                    Restart("test.txt");
+                }
+                else
+                {
+                    Restart("underground.txt");
+                }
+                level_update = false;
+            }
+
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-            sBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.LinearWrap, null, null);
-            sBatch.Draw(BackgroundSpriteFactory.getFactory().BackgroundSpriteSheet, new Vector2(0, 478), new Rectangle((int)(_Camera2D.Position.X * 0.5f), (int)(_Camera2D.Position.Y*0.5f), BackgroundSpriteFactory.getFactory().BackgroundSpriteSheet.Width,
-               BackgroundSpriteFactory.getFactory().BackgroundSpriteSheet.Height), Color.White);
-            sBatch.End();
-
-            sBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, _Camera2D.GetViewMatrix(new Vector2(1f)));
-            foreach (ISprite spriteEntry in SpriteList)
+            if (currState != GameModes.OVER)
             {
-                spriteEntry.Draw(sBatch);
+                GraphicsDevice.Clear(Color.CornflowerBlue);
+                sBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.LinearWrap, null, null);
+                sBatch.Draw(BackgroundSpriteFactory.getFactory().BackgroundSpriteSheet, new Vector2(0, 478), new Rectangle((int)(_Camera2D.Position.X * 0.5f), (int)(_Camera2D.Position.Y * 0.5f), BackgroundSpriteFactory.getFactory().BackgroundSpriteSheet.Width,
+                   BackgroundSpriteFactory.getFactory().BackgroundSpriteSheet.Height), Color.White);
+                sBatch.End();
+
+                sBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, _Camera2D.GetViewMatrix(new Vector2(1f)));
+                foreach (ISprite spriteEntry in SpriteList)
+                {
+                    spriteEntry.Draw(sBatch);
+                }
+                //Write text onto the screen in a nice method
+                sBatch.End();
             }
-            //Write text onto the screen in a nice method
-            sBatch.End();
+            else
+            {
+                GraphicsDevice.Clear(Color.Black);
+                sBatch.Begin();
+                sBatch.DrawString(HUDFont, "You fucking loser ", new Vector2(500, 500), Color.Red);
+                sBatch.End();
+
+            }
 
             //Uses AlphaBlend by default, which allows the sprites to easily blend with backgrounds they match with
             //Iterate over the sprite entry list again and draw each sprite

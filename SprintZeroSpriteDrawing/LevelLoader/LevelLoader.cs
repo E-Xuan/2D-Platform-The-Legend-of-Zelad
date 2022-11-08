@@ -23,7 +23,10 @@ namespace SprintZeroSpriteDrawing.LevelLoader
         public void LoadLevel(String levelName)
         {
             int x = 48;
+            Game1.LEVELSIZE.X = 1920;
             int y = 48;
+            Game1.LEVELSIZE.Y = 1080;
+
             FileStream fileStream = File.Open(levelName, FileMode.OpenOrCreate, FileAccess.Read);
 
             while (FindStartLine(fileStream) != 255)
@@ -193,6 +196,9 @@ namespace SprintZeroSpriteDrawing.LevelLoader
                         break;
                     case 'B':
                         entity = BlockSpriteFactory.getFactory().CreatePipeBottom(new Vector2(x, y));
+                        break;
+                    case 'V':
+                        entity = BlockSpriteFactory.getFactory().CreateEnterPipeTop(new Vector2(x, y));
                         break;
                     case 'C':
                         entity = BlockSpriteFactory.getFactory().CreateCastle(new Vector2(x, y));
