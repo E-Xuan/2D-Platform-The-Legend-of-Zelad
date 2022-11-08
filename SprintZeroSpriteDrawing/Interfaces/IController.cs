@@ -50,7 +50,10 @@ namespace SprintZeroSpriteDrawing.Interfaces
         {
             CommandBindingList = nCommandBindingList;
         }
-
+        public void ClearBinding()
+        {
+            CommandBindingList = new List<Dictionary<T, ICommand>>();
+        }
         public bool RemoveBinding(T key, BindingType bindingType)
         {
             if (CommandBindingList[(int)bindingType].ContainsKey(key))
