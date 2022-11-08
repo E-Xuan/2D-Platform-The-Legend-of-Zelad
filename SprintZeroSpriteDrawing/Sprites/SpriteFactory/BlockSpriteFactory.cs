@@ -33,6 +33,9 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         public Texture2D PoleBottomSpriteSheet;
         public Texture2D PoleTopSpriteSheet;
         public Texture2D FlagSpriteSheet;
+        public Texture2D UGBrick;
+        public Texture2D UGBroken;
+        public Texture2D UGGround;
 
         private static BlockSpriteFactory sprite;
 
@@ -60,18 +63,44 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
             PoleBottomSpriteSheet = content.Load<Texture2D>("Obstacles/pole_bot");
             PoleTopSpriteSheet = content.Load<Texture2D>("Obstacles/pole_top");
             FlagSpriteSheet = content.Load<Texture2D>("Obstacles/flag");
+            UGBrick = content.Load<Texture2D>("Obstacles/UG-BrickBlock");
+            UGBroken = content.Load<Texture2D>("Obstacles/UG-BrokenBlock");
+            UGGround = content.Load<Texture2D>("Obstacles/UG-GroundBlock");
+
         }
         
         public ISprite CreateBrickBlock(Vector2 nPos)
         {
-            var block = new BrickBlock(BrickBlockSpriteSheet, new Vector2(1, 1), nPos);
-            block.CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(block.ChangeState, (int)State.BROKEN)), Direction.BOTTOM, CType.AVATAR_LARGE));
-            block.CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(block.ChangeState, (int)State.BUMPING)), Direction.BOTTOM, CType.AVATAR_SMALL));
+            ISprite block;
+
+            if (Game1.underGround)
+            {
+                block = new UGBrickBlock(UGBrick, new Vector2(1, 1), nPos);
+                ((ICollideable)block).CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(((Block)block).ChangeState, (int)State.BROKEN)), Direction.BOTTOM, CType.AVATAR_LARGE));
+                ((ICollideable)block).CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(((Block)block).ChangeState, (int)State.BUMPING)), Direction.BOTTOM, CType.AVATAR_SMALL));
+
+            }
+            else
+            {
+                block = new BrickBlock(BrickBlockSpriteSheet, new Vector2(1, 1), nPos);
+                ((ICollideable)block).CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(((Block)block).ChangeState, (int)State.BROKEN)), Direction.BOTTOM, CType.AVATAR_LARGE));
+                ((ICollideable)block).CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(((Block)block).ChangeState, (int)State.BUMPING)), Direction.BOTTOM, CType.AVATAR_SMALL));
+
+            }
             return block;
         }
         public ISprite CreateGroundBlock(Vector2 nPos)
         {
-            var block = new GroundBlock(GroundBlockSpriteSheet, new Vector2(1, 1), nPos);
+            ISprite block;
+            if (Game1.underGround)
+            {
+                block = new UGGround(UGGround, new Vector2(1, 1), nPos);
+            }
+            else
+            {
+                block = new GroundBlock(GroundBlockSpriteSheet, new Vector2(1, 1), nPos);
+            }
+
             return block;
         }
         public ISprite CreateBoundryBlock(Vector2 nPos)
@@ -125,10 +154,14 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         }
         public ISprite CreateBrokenBlock(Vector2 nPos)
         {
-            //fix the vector
-            //need to also give accelaraiton and velocity at exploding brickblock?
-            //how to get the brick block and set visibility to false?
-            return new FourExplodingBrick(ExplodingBrickBlockSpriteSheet, new Vector2(2, 2), nPos);
+            if (Game1.underGround)
+            {
+                return new FourExplodingBrick(UGBroken, new Vector2(2, 2), nPos);
+            }
+            else
+            {
+                return new FourExplodingBrick(ExplodingBrickBlockSpriteSheet, new Vector2(2, 2), nPos);
+            }
         }
         public ISprite CreatePipeBottom(Vector2 nPos)
         {
