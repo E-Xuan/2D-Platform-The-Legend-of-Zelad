@@ -182,6 +182,10 @@ namespace SprintZeroSpriteDrawing
             else
             {
                 GraphicsDevice.Clear(Color.Black);
+                sBatch.Begin();
+                sBatch.DrawString(HUDFont, "You fucking loser ", new Vector2(500, 500), Color.Red);
+                sBatch.End();
+
             }
 
             //Uses AlphaBlend by default, which allows the sprites to easily blend with backgrounds they match with
