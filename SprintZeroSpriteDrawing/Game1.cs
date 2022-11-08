@@ -121,8 +121,6 @@ namespace SprintZeroSpriteDrawing
             LevelLoader.LevelLoader.GetLevelLoader().LoadLevel("Level/" + level);
             CollisionManager.getCM().Init();
             CollisionManager.getCM().RegMoving(Mario.GetMario());
-            Mario.GetMario().resetTimer();
-            counter = 0;
         }
         public void Restart()
         {
