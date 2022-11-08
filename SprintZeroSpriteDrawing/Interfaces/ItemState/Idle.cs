@@ -15,10 +15,5 @@ namespace SprintZeroSpriteDrawing.Interfaces.ItemState
         {
             CurrState = State.IDLE;
         }
-        public override void Enter()
-        {
-            base.Enter();
-            //CollisionManager.getCM().RegEntity(item);
-        }
     }
 }

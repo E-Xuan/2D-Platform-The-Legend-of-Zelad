@@ -171,6 +171,10 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         {
             return new Pipe_Top(PipeTopSpriteSheet, new Vector2(1, 1), nPos);
         }
+        public ISprite CreatePPipeTop(Vector2 nPos)
+        {
+            return new Pipe_Top(PipeTopSpriteSheet, new Vector2(1, 1), nPos, new List<Item>{(Item)ItemSpriteFactory.getFactory().CreatePiranaPlant(Vector2.Add(nPos, new Vector2(-24, -48)))});
+        }
         public ISprite CreateEnterPipeTop(Vector2 nPos)
         {
             return new PIpeTopEnter(PipeTopSpriteSheet, new Vector2(1, 1), nPos) ;

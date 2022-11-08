@@ -14,7 +14,6 @@ namespace SprintZeroSpriteDrawing.Sprites.ItemSprites
         public override void Update()
         {
             base.Update();
-
             if (State.CurrState == Interfaces.ItemState.State.IDLE)
             {
                 Velocity = new Vector2(0, 0);
