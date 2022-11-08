@@ -15,6 +15,10 @@ namespace SprintZeroSpriteDrawing.Commands
     {
         public static void SetGameBinding(IController<Keys> keyboardController, IController<Buttons> gamepadController, IController<Keys> QuitPauseController)
         {
+            /*keyboardController.ClearBinding();
+            gamepadController.ClearBinding();
+            QuitPauseController.ClearBinding();*/
+
             keyboardController.UpdateBinding(Keys.C, new IntCmd(new KeyValuePair<Action<int>, int>(Game1.DebugBBox, -1)), BindingType.PRESSED);
             QuitPauseController.UpdateBinding(Keys.P, new IntCmd(new KeyValuePair<Action<int>, int>(Game1.PauseGame, -1)), BindingType.PRESSED);
 
@@ -50,6 +54,13 @@ namespace SprintZeroSpriteDrawing.Commands
 
             gamepadController.UpdateBinding(Buttons.DPadUp, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().ChangeAction, 3)), BindingType.PRESSED);
             gamepadController.UpdateBinding(Buttons.DPadDown, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().ChangeAction, 4)), BindingType.PRESSED);
+        }
+        public static void SetGameOverBinding(IController<Keys> keyboardController, IController<Buttons> gamepadController, IController<Keys> QuitPauseController)
+        {
+            /*keyboardController.ClearBinding();
+            gamepadController.ClearBinding();
+            QuitPauseController.ClearBinding();*/
+
         }
     }
 }

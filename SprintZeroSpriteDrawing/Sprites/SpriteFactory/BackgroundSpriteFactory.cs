@@ -22,6 +22,7 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
 
         public Texture2D BackgroundSpriteSheet;
         public Texture2D TitleImage;
+        public Texture2D GameOverScreen;
 
         private static BackgroundSpriteFactory sprite;
 
@@ -38,6 +39,7 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         {
             BackgroundSpriteSheet = content.Load<Texture2D>("Background/bg_Cloud_Mt");
             TitleImage = content.Load<Texture2D>("Background/TitleImage");
+            GameOverScreen = content.Load<Texture2D>("Background/GameOverScreen");
         }
         public ISprite CreateBackground(Vector2 nPos)
         {
