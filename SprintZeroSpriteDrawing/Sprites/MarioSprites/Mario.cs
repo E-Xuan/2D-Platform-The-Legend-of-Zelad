@@ -44,7 +44,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
         
         public int[] currState;
 
-         public static Mario GetMario() {
+        public static Mario GetMario() {
              if(_mario == null)
              {
                 _mario = new Mario(SmallMarioSpriteSheet, new Vector2(3, 3), new Vector2(0, 0));
@@ -272,7 +272,8 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
         {
             if(StateAction.currActionState == ActionState.CROUCHING)
             {
-                StateAction.previousActionState = ActionState.CROUCHING;
+                Game1.level_update = true;
+                Game1.underGround = !Game1.underGround;
             }
 
         }
