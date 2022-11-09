@@ -33,6 +33,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
         public int Coins = 0;
         public int Lives = 5;
         public int Time = 400;
+        private int invunTimer = 0;
         public int counter = 0;
         public bool isTimeCounting = true;
         public SpriteEffects effects;
@@ -86,6 +87,10 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(CollectCoin, 1)), Direction.TOP, CType.FRIENDLY));
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(CollectCoin, 1)), Direction.SIDE, CType.FRIENDLY));
 
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Oneup, 1)), Direction.BOTTOM, CType.ONEUP));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Oneup, 1)), Direction.TOP, CType.ONEUP));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Oneup, 1)), Direction.SIDE, CType.ONEUP));
+
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(KillEnemy, 100)), Direction.BOTTOM, CType.ENEMY)); //Score 100 pts
 
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangePowerup, (int)PowerupState.BIG)), Direction.BOTTOM, CType.LEVELUP));
@@ -115,6 +120,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             StatePowerup.Update();
             StateAction.Update();
             base.Update();
+            invunTimer++;
         }
         public override void Draw(SpriteBatch batch)
         {
@@ -160,16 +166,24 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
         }
         public void TakeDamage(int powerup)
         {
-            var soundEffectPlayer = SoundEffectPlayer.GetSoundEffectPlayer();
-            soundEffectPlayer.PlaySoundEffect += new delEventHandler(onFlagChanged);
-            soundEffectPlayer.Trigger = (int)SoundEffectPlayer.Sounds.PIPEPOWERDOWN;
-            if (StatePowerup.currPowerupState != PowerupState.SMALL)
+            if (invunTimer > 75 || powerup == -1)
             {
-                ChangePowerup((int)PowerupState.SMALL + 5);
-            }
-            else
-            {
-                ChangePowerup((int)PowerupState.DEAD + 5);
+                var soundEffectPlayer = SoundEffectPlayer.GetSoundEffectPlayer();
+                soundEffectPlayer.PlaySoundEffect += new delEventHandler(onFlagChanged);
+                soundEffectPlayer.Trigger = (int)SoundEffectPlayer.Sounds.PIPEPOWERDOWN;
+                if (StatePowerup.currPowerupState != PowerupState.SMALL)
+                {
+                    if (StatePowerup.currPowerupState != PowerupState.SMALL)
+                    {
+                        ChangePowerup((int)PowerupState.SMALL + 5);
+                    }
+                    else
+                    {
+                        ChangePowerup((int)PowerupState.DEAD + 5);
+                    }
+
+                    invunTimer = 0;
+                }
             }
         }
         public void ToWin(int action)
@@ -275,7 +289,11 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
                Lives++;
            }
        }
-       public void KillEnemy(int points)
+       public void Oneup(int coin)
+       {
+           Lives++;
+       }
+        public void KillEnemy(int points)
        {
            Score += points;
            GetMario().Velocity = new Vector2(GetMario().Velocity.X, -2);

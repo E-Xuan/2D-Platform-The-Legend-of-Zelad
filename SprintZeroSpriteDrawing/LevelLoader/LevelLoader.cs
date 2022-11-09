@@ -85,6 +85,9 @@ namespace SprintZeroSpriteDrawing.LevelLoader
                         Mario.GetMario().UpdateBBox();
                         entity = Mario.GetMario();
                         break;
+                    case 'X':
+                        Game1.PipeExit = new Vector2(x, y);
+                        return err;
 
                     #endregion
 
@@ -208,6 +211,8 @@ namespace SprintZeroSpriteDrawing.LevelLoader
                         break;
                     case '[':
                         entity = BlockSpriteFactory.getFactory().CreatePoleBot(new Vector2(x, y));
+                        if(Game1.Flagbase < y)
+                            Game1.Flagbase = y;
                         break;
                     case ']':
                         entity = BlockSpriteFactory.getFactory().CreatePoleTop(new Vector2(x, y));

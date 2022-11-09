@@ -53,6 +53,9 @@ namespace SprintZeroSpriteDrawing
         public static List<ISprite> SpriteList = new List<ISprite>();
         #endregion
         public static Vector2 LEVELSIZE = new Vector2(1920,1080);
+        public static Vector2 PipeExit = new Vector2(1920, 1080);
+        public static Vector2 PrePipeExit = new Vector2(1920, 1080);
+        public static int Flagbase = 0;
         public static Camera _Camera2D;
         public static int counter = 0;
         public static bool isTimeCounting = true;
@@ -123,7 +126,9 @@ namespace SprintZeroSpriteDrawing
             
             SpriteList = new List<ISprite>();
             Mario.GetMario().StatePowerup = new SmallMario(Mario.GetMario());
+            PrePipeExit = PipeExit;
             LevelLoader.LevelLoader.GetLevelLoader().LoadLevel("Level/" + level);
+            Mario.GetMario().Pos = PrePipeExit;
             CollisionManager.getCM().Init();
             CollisionManager.getCM().RegMoving(Mario.GetMario());
         }
