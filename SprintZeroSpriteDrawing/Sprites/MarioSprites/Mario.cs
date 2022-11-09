@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using SprintZeroSpriteDrawing.Commands;
 using SprintZeroSpriteDrawing.Interfaces;
 using SprintZeroSpriteDrawing.Interfaces.Entitiy;
+using SprintZeroSpriteDrawing.Interfaces.GameState;
 using SprintZeroSpriteDrawing.Interfaces.MarioState;
 using SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction;
 using SprintZeroSpriteDrawing.Interfaces.MarioState.StatePowerup;
