@@ -183,7 +183,7 @@ namespace SprintZeroSpriteDrawing
             }
 
             _Camera2D.LookAt(Mario.GetMario().Pos);
-            _Camera2D.Limits = new Rectangle(0, 0, (int)LEVELSIZE.X, (int)LEVELSIZE.Y);
+            _Camera2D.Limits = new Rectangle(0, 0, 10010, 1080);
 
             if (level_update)
             {
