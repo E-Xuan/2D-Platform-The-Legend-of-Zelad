@@ -86,7 +86,7 @@ namespace SprintZeroSpriteDrawing.LevelLoader
                         entity = Mario.GetMario();
                         break;
                     case 'X':
-                        Game1.PipeExit = new Vector2(x, y);
+                        Game1.PipeExit = new Vector2(x - 24, y);
                         return err;
 
                     #endregion
