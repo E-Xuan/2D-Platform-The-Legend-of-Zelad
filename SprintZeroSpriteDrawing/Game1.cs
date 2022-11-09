@@ -154,7 +154,11 @@ namespace SprintZeroSpriteDrawing
         {
             if(Mario.GetMario().Lives == 0)
             {
-
+                var soundEffectPlayer = SoundEffectPlayer.GetSoundEffectPlayer();
+                soundEffectPlayer.PlaySoundEffect += new delEventHandler(onFlagChanged);
+                soundEffectPlayer.Trigger = (int)SoundEffectPlayer.Sounds.GAMEOVER;
+                MediaPlayer.Stop();
+                Mario.GetMario().Lives--;
                 currState = GameModes.OVER;
             }
             quitpauseController.UpdateInput();
@@ -335,9 +339,13 @@ namespace SprintZeroSpriteDrawing
             }
             if(mario.Time == 100)
             {
+                MediaPlayer.Pause();
                 var soundEffectPlayer = SoundEffectPlayer.GetSoundEffectPlayer();
                 soundEffectPlayer.PlaySoundEffect += new delEventHandler(onFlagChanged);
                 soundEffectPlayer.Trigger = (int)SoundEffectPlayer.Sounds.WARNING;
+                mario.Time--;
+                
+                MediaPlayer.Resume();
             }
         }
     }
