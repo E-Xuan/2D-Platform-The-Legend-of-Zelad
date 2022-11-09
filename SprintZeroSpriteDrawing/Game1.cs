@@ -30,6 +30,7 @@ using SprintZeroSpriteDrawing.Music_SoundEffects;
 using SprintZeroSpriteDrawing.Interfaces.GameState;
 using Microsoft.Xna.Framework.Audio;
 using System.Reflection.Metadata;
+using Microsoft.Xna.Framework.Media;
 
 namespace SprintZeroSpriteDrawing
 {
@@ -61,7 +62,7 @@ namespace SprintZeroSpriteDrawing
         public static bool DEBUGBBOX = false;
         public static bool PAUSE = false;
         public static GameModes currState;
-        
+        //public static Direction CD;
         public static bool underGround = false;
         public static bool level_update = false; 
 
@@ -78,6 +79,8 @@ namespace SprintZeroSpriteDrawing
             keyboardController = new KeyboardController();
             gamepadController = new GamepadController();
             quitpauseController = new QuitPauseController();
+            
+            //CD = CollisionDetector.getCD().DetectColDirection(Mario.GetMario(), Castle.GetCastle());
             Graphics.PreferredBackBufferWidth = (int)LEVELSIZE.X;
             Graphics.PreferredBackBufferHeight = (int)LEVELSIZE.Y;
             Graphics.ApplyChanges();
@@ -120,6 +123,7 @@ namespace SprintZeroSpriteDrawing
         }
         public void Restart(String level)
         {
+            
             SpriteList = new List<ISprite>();
             Mario.GetMario().StatePowerup = new SmallMario(Mario.GetMario());
             PrePipeExit = PipeExit;
@@ -130,6 +134,8 @@ namespace SprintZeroSpriteDrawing
         }
         public void Restart()
         {
+            MusicPlayer.GetMusicPlayer().StopSong();
+            MusicPlayer.GetMusicPlayer().PlaySong();
             SpriteList = new List<ISprite>();
             Mario.GetMario().StatePowerup = new SmallMario(Mario.GetMario());
             Mario.GetMario().Reset();
@@ -145,7 +151,14 @@ namespace SprintZeroSpriteDrawing
         protected override void Update(GameTime gameTime)
         {
             //This could again be moved into a collection and iterated over, but I'm lazy
-
+            //if(CD != Direction.NULL)
+            //{
+                //currState = GameModes.WIN;
+            //}
+            if(Mario.GetMario().Lives == 0)
+            {
+                currState = GameModes.OVER;
+            }
             quitpauseController.UpdateInput();
             if (currState != GameModes.PAUSE)
             {
@@ -160,7 +173,6 @@ namespace SprintZeroSpriteDrawing
                 base.Update(gameTime);
                 keyboardController.UpdateInput();
                 gamepadController.UpdateInput();
-               
             }
 
             _Camera2D.LookAt(Mario.GetMario().Pos);
@@ -168,10 +180,6 @@ namespace SprintZeroSpriteDrawing
             //BackgroundSpriteFactory.getFactory().BackgroundSpriteSheet
             //Danish Tilt
             //_Camera2D.Rotation = (float)(Math.PI / 16);
-
-
-
-
             if (level_update)
             {
                 if (!underGround)
@@ -184,12 +192,13 @@ namespace SprintZeroSpriteDrawing
                 }
                 level_update = false;
             }
+            
 
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            if (currState != GameModes.OVER)
+            if (currState != GameModes.OVER && currState != GameModes.WIN)
             {
                 if (underGround)
                 {
@@ -221,15 +230,24 @@ namespace SprintZeroSpriteDrawing
                     sBatch.End();
                 }
             }
-            else
+            else if(currState == GameModes.OVER)
             {
+
                 GraphicsDevice.Clear(Color.White);
                 sBatch.Begin();
                 sBatch.Draw(BackgroundSpriteFactory.getFactory().GameOverScreen, new Vector2(0, 0), new Rectangle(-200,0,1920,1080), Color.White);
                 sBatch.DrawString(HUDFont, "Press Y to restart", new Vector2(300, 800), Color.White);
                 sBatch.DrawString(HUDFont, "Press O to quit", new Vector2(1350, 800), Color.White);
                 sBatch.End();
-
+            }
+            else
+            {
+                GraphicsDevice.Clear(Color.Yellow);
+                sBatch.Begin();
+                sBatch.Draw(BackgroundSpriteFactory.getFactory().WinningScreen, new Vector2(0, 0), new Rectangle(-200, 0, 2224, 1668), Color.White);
+                sBatch.DrawString(HUDFont, "Press R to replay", new Vector2(300, 900), Color.Black);
+                sBatch.DrawString(HUDFont, "Press Q to quit", new Vector2(1350, 900), Color.Black);
+                sBatch.End();
             }
 
             //Uses AlphaBlend by default, which allows the sprites to easily blend with backgrounds they match with
@@ -252,12 +270,23 @@ namespace SprintZeroSpriteDrawing
             if (PAUSE)
             {
                 currState = GameModes.PAUSE;
+                var soundEffectPlayer = SoundEffectPlayer.GetSoundEffectPlayer();
+                soundEffectPlayer.PlaySoundEffect += new delEventHandler(onFlagChanged);
+                soundEffectPlayer.Trigger = (int)SoundEffectPlayer.Sounds.PAUSE;
+                MediaPlayer.Pause();
             }
             else
             {
                 currState = GameModes.NORMAL;
+                MediaPlayer.Resume();
             }
         }
+
+        public static void onFlagChanged(int sound)
+        {
+            SoundEffectPlayer.GetSoundEffectPlayer().PlaySounds(sound);
+        }
+
         public void timeCount(GameTime gameTime, Mario mario)
         {
             if (isTimeCounting)

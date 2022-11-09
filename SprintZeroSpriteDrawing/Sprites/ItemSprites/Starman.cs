@@ -7,6 +7,7 @@ using SprintZeroSpriteDrawing.Commands;
 using System.Collections.Generic;
 using System;
 using SprintZeroSpriteDrawing.Sprites.MarioSprites;
+using SprintZeroSpriteDrawing.Music_SoundEffects;
 
 namespace SprintZeroSpriteDrawing.Sprites.ItemSprites
 {
@@ -26,6 +27,7 @@ namespace SprintZeroSpriteDrawing.Sprites.ItemSprites
 
             if (State.CurrState == Interfaces.ItemState.State.EMERGING && !emerge)
             {
+                
                 if (Mario.GetMario().Pos.X - Pos.X > 0)
                 {
                     Velocity = new Vector2(-3, 0);
@@ -40,5 +42,6 @@ namespace SprintZeroSpriteDrawing.Sprites.ItemSprites
                 emerge = true;
             }
         }
+        
     }
 }

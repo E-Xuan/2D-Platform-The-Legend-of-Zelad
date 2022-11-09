@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SprintZeroSpriteDrawing.Interfaces.Entitiy;
+using SprintZeroSpriteDrawing.Sprites.MarioSprites;
+using SprintZeroSpriteDrawing.Collision;
 
 namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
 {
@@ -13,7 +15,8 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
     {
         public Castle(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos) : base(nSprite, nSheetSize, nPos)
         {
-            CollideableType = CType.INVISIBLE;
+            CollideableType = CType.CASTLE;
         }
+
     }
 }

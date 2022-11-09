@@ -7,6 +7,7 @@ using SprintZeroSpriteDrawing.Collision.CollisionManager;
 using SprintZeroSpriteDrawing.Commands;
 using SprintZeroSpriteDrawing.Interfaces.Entitiy;
 using SprintZeroSpriteDrawing.Sprites.MarioSprites;
+using SprintZeroSpriteDrawing.Music_SoundEffects;
 
 namespace SprintZeroSpriteDrawing.Sprites.ItemSprites
 {
@@ -25,6 +26,8 @@ namespace SprintZeroSpriteDrawing.Sprites.ItemSprites
 
             if (State.CurrState == Interfaces.ItemState.State.EMERGING && !emerge)
             {
+                emerge = true;
+               
                 if (Mario.GetMario().Pos.X - Pos.X > 0)
                 {
                     Velocity = new Vector2(-2, 0);
@@ -36,8 +39,10 @@ namespace SprintZeroSpriteDrawing.Sprites.ItemSprites
                     Acceleration = new Vector2(0, (float).065);
                 }
                 CollisionManager.getCM().RegMoving(this);
-                emerge = true;
+                
+
             }
         }
+        
     }
 }

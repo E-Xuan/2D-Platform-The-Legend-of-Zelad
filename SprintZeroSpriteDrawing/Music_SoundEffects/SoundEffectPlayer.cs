@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Audio;
 
 namespace SprintZeroSpriteDrawing.Music_SoundEffects
 {
-    public delegate void delEventHandler();
+    public delegate void delEventHandler(int sound);
     public class SoundEffectPlayer
     {
         public enum Sounds
@@ -34,7 +34,7 @@ namespace SprintZeroSpriteDrawing.Music_SoundEffects
             WARNING,
         }
 
-        public bool _trigger;
+        public int _trigger;
         List<SoundEffect> soundEffects = new List<SoundEffect>();
 
         public event delEventHandler PlaySoundEffect;
@@ -50,17 +50,15 @@ namespace SprintZeroSpriteDrawing.Music_SoundEffects
             return _soundEffectPlayer;
         }
 
-        public bool Trigger 
+        public int Trigger 
         {
             set
             {
                 if(value != _trigger)
                 {
                     _trigger = value;
-                    if(PlaySoundEffect!= null)
-                    {
-                        PlaySoundEffect();
-                    }
+                    PlaySoundEffect?.Invoke(_trigger);
+                    _trigger = 0;
                 }
             }
         }
@@ -88,7 +86,7 @@ namespace SprintZeroSpriteDrawing.Music_SoundEffects
         }
         public void PlaySounds(int sound)
         {
-            soundEffects[sound].CreateInstance().Play();
+            soundEffects[sound].Play();
         }
     }
 }

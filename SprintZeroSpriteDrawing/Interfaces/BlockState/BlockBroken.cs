@@ -6,6 +6,7 @@ using SprintZeroSpriteDrawing.Collision.CollisionManager;
 using SprintZeroSpriteDrawing.Sprites.ObstacleSprites;
 using SprintZeroSpriteDrawing.Interfaces.Entitiy;
 using SprintZeroSpriteDrawing.Sprites.ItemSprites;
+using SprintZeroSpriteDrawing.Music_SoundEffects;
 
 namespace SprintZeroSpriteDrawing.Interfaces.BlockState
 {
@@ -20,7 +21,9 @@ namespace SprintZeroSpriteDrawing.Interfaces.BlockState
 
         public override void Enter()
         {
-            
+            var soundEffectPlayer = SoundEffectPlayer.GetSoundEffectPlayer();
+            soundEffectPlayer.PlaySoundEffect += new delEventHandler(onFlagChanged);
+            soundEffectPlayer.Trigger = (int)SoundEffectPlayer.Sounds.BREAKBLOCK;
             CurrState = State.BROKEN;
             Game1.SpriteList.Remove(block);
             CollisionManager.getCM().DeRegEntity(block);
@@ -31,6 +34,11 @@ namespace SprintZeroSpriteDrawing.Interfaces.BlockState
         public override void Exit()
         {
             base.Exit();
+        }
+
+        public static void onFlagChanged(int sound)
+        {
+            SoundEffectPlayer.GetSoundEffectPlayer().PlaySounds(sound);
         }
     }
 }

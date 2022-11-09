@@ -7,7 +7,7 @@ using SprintZeroSpriteDrawing.Interfaces.Entitiy;
 using SprintZeroSpriteDrawing.Sprites.MarioSprites;
 using System.Runtime.CompilerServices;
 using SprintZeroSpriteDrawing.Collision.CollisionManager;
-
+using SprintZeroSpriteDrawing.Music_SoundEffects;
 
 namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
 {
@@ -23,6 +23,11 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
         }
         public override void Enter()
         {
+            //SOMEHOW DISABLE THE POLESLIDE COLLISION RESPONSE?
+            MusicPlayer.GetMusicPlayer().StopSong();
+            var soundEffectPlayer = SoundEffectPlayer.GetSoundEffectPlayer();
+            soundEffectPlayer.PlaySoundEffect += new delEventHandler(onFlagChanged);
+            soundEffectPlayer.Trigger = (int)SoundEffectPlayer.Sounds.FLAGPOLE;
             CollisionManager.getCM().RegMoving(mario);
             int height = Game1.Flagbase - (int)mario.Pos.Y;
             if (height < 17)
@@ -72,9 +77,16 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
             switch (state)
             {
                 case ActionState.WALKING:
+                    var soundEffectPlayer = SoundEffectPlayer.GetSoundEffectPlayer();
+                    soundEffectPlayer.PlaySoundEffect += new delEventHandler(onFlagChanged);
+                    soundEffectPlayer.Trigger = (int)SoundEffectPlayer.Sounds.STAGECLEAR;
                     mario.StateAction = new MarioWalking(mario, currActionState);
                     break;
             }
+        }
+        public static void onFlagChanged(int sound)
+        {
+            SoundEffectPlayer.GetSoundEffectPlayer().PlaySounds(sound);
         }
     }
 }
