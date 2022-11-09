@@ -14,9 +14,11 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StatePowerup
 
         public override void Enter()
         {
-            var soundEffectPlayer = SoundEffectPlayer.GetSoundEffectPlayer();
-            soundEffectPlayer.PlaySoundEffect += new delEventHandler(onFlagChanged);
-            soundEffectPlayer.Trigger = (int)SoundEffectPlayer.Sounds.DIE;
+           
+                var soundEffectPlayer = SoundEffectPlayer.GetSoundEffectPlayer();
+                soundEffectPlayer.PlaySoundEffect += new delEventHandler(onFlagChanged);
+                soundEffectPlayer.Trigger = (int)SoundEffectPlayer.Sounds.DIE;
+           
             prevPowerupState = currPowerupState;
             currPowerupState = PowerupState.DEAD;
             mario.IsVis = true;

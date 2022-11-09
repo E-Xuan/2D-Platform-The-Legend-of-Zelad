@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SprintZeroSpriteDrawing.States.EnemyState;
+using SprintZeroSpriteDrawing.Music_SoundEffects;
 
 namespace SprintZeroSpriteDrawing.Interfaces.EnemyState
 {
@@ -30,6 +31,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.EnemyState
         public void Pew(int pew) 
         {
             enemy.State = new ShellMoving(enemy);
+            
         }
         public override void Update()
         {
@@ -39,6 +41,10 @@ namespace SprintZeroSpriteDrawing.Interfaces.EnemyState
                 enemy.AutoFrame = true;
                 enemy.State = new EnemyMoving(enemy);
             }
+        }
+        public static void onFlagChanged(int sound)
+        {
+            SoundEffectPlayer.GetSoundEffectPlayer().PlaySounds(sound);
         }
     }
 }
