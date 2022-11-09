@@ -1,11 +1,10 @@
 Author of the code review: Yifei Zhuang
 Date of the code review: 11/8/2022
 Sprint number: 4
-Name of the .cs file being reviewed: ICollideable.cs
-Author of the .cs file being reviewed: Phil
-Specific comments on code quality: It could be better when more clean up is made and also have simpler with less redundency with definitly more comments.
+Name of the .cs file being reviewed: Game1.cs
+Author of the .cs file being reviewed: All
+Specific comments on code quality: I think the quality is kinda of alright consider the time frame we have. There are quite a bit code that should be moved to other class or be removed simply because it was never really used. But not gonna lie, the code allow the game to work!
 
 Number of minutes taken to complete the review: 12 minutes
 
-There are quite a bit different methods that were not ever referenced. Some of the duplicated methods that has different parameter passes in can be combined to a same one, for example, the Rectangle nBBox can just not be passed in and use and use the next one which is "new Rectangle((int)(nPos.X - nSprite.Width), (int)(nPos.Y - nSprite.Height), (int)(nSprite.Width), (int)(nSprite.Height))" to achieve the same functionality. 
-The collision response has in the form of list<tuple<...>> which i think there might be a more easier way to do. Some of other ones involves collision manager which has for example the DeRegEntity and the regEntity is used whenever update the uncollidible items which is a little bit reduntant. 
+Some of the game state is currently lives in game1. I think it would be better managed if they are at a speparate class. So as the time count. I think currently, it lives in game1 cause some of the game mode is accessable trough game1. I think it would be better to move to a different class which calls the gamemode. And because of the game state, the game over screen and the winning screen is determined inside game 1 which can be moved with the gamemode to a different file. And again, the restart method can just be combined to one method but passing in level strings into the method so the duplicate code can be removed. 

@@ -1,0 +1,16 @@
+Author of the code review: Yixuan Huang
+Date of the code review: 11/8/2022
+Sprint number: 4
+Name of the .cs file being reviewed: DeadMario.cs
+Author of the .cs file being reviewed: zack
+Specific comments on code quality: The code overall is not bad, but it does not need to have such class.
+
+Number of minutes taken to complete the review: 5 minutes
+
+The DeadMario.cs is used for holding the Dead State. Besides, DeadMario.cs also count the Mario life number in the game. Every time when Mario dies, the life
+count will minue 1. Dead Mario also has its own BGM and movement: it can only move up and down unless you use the cheat code to respawn. I think we have too much
+different Mario state classes, and in those classes, some parts of the code are the same, the only differences are BGM, Movement, and spritesheets. Maybe, we can
+try to simplfiy our Mario classes. Or we should still use the Mario Factory. I am not quite sure whether our Mario Factory still be used. Our file system is 
+mess, and most classes are not in the correct place. 
+
+- Yixuan Huang
