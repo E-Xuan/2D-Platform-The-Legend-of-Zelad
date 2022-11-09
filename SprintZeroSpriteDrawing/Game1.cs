@@ -333,6 +333,12 @@ namespace SprintZeroSpriteDrawing
                 Mario.GetMario().ChangePowerup(4); // Mario dies
                 currState = GameModes.OVER;
             }
+            if(mario.Time == 100)
+            {
+                var soundEffectPlayer = SoundEffectPlayer.GetSoundEffectPlayer();
+                soundEffectPlayer.PlaySoundEffect += new delEventHandler(onFlagChanged);
+                soundEffectPlayer.Trigger = (int)SoundEffectPlayer.Sounds.WARNING;
+            }
         }
     }
 }
