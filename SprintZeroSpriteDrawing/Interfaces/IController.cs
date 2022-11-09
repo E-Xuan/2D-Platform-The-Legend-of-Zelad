@@ -52,7 +52,12 @@ namespace SprintZeroSpriteDrawing.Interfaces
         }
         public void ClearBinding()
         {
-            CommandBindingList = new List<Dictionary<T, ICommand>>();
+            CommandBindingList = new List<Dictionary<T, ICommand>>()
+            {
+                new Dictionary<T, ICommand>(),
+                new Dictionary<T, ICommand>(),
+                new Dictionary<T, ICommand>()
+            };
         }
         public bool RemoveBinding(T key, BindingType bindingType)
         {
