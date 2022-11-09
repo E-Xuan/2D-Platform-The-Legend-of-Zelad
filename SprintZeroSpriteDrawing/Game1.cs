@@ -120,6 +120,7 @@ namespace SprintZeroSpriteDrawing
         }
         public void Restart(String level)
         {
+            
             SpriteList = new List<ISprite>();
             Mario.GetMario().StatePowerup = new SmallMario(Mario.GetMario());
             LevelLoader.LevelLoader.GetLevelLoader().LoadLevel("Level/" + level);
@@ -128,6 +129,8 @@ namespace SprintZeroSpriteDrawing
         }
         public void Restart()
         {
+            MusicPlayer.GetMusicPlayer().StopSong();
+            MusicPlayer.GetMusicPlayer().PlaySong();
             SpriteList = new List<ISprite>();
             Mario.GetMario().StatePowerup = new SmallMario(Mario.GetMario());
             Mario.GetMario().Reset();
@@ -224,6 +227,7 @@ namespace SprintZeroSpriteDrawing
             }
             else if(currState == GameModes.OVER)
             {
+
                 GraphicsDevice.Clear(Color.White);
                 sBatch.Begin();
                 sBatch.Draw(BackgroundSpriteFactory.getFactory().GameOverScreen, new Vector2(0, 0), new Rectangle(-200,0,1920,1080), Color.White);
