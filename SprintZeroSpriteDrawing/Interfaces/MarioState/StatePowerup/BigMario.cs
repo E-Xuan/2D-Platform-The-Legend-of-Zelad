@@ -7,6 +7,7 @@ using SprintZeroSpriteDrawing.Interfaces.Entitiy;
 using SprintZeroSpriteDrawing.Sprites.MarioSprites;
 using System.Runtime.CompilerServices;
 using SprintZeroSpriteDrawing.Sprites.MarioActionSprites;
+using SprintZeroSpriteDrawing.Music_SoundEffects;
 
 namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StatePowerup
 {
@@ -19,6 +20,9 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StatePowerup
 
         public override void Enter()
         {
+            var soundEffectPlayer = SoundEffectPlayer.GetSoundEffectPlayer();
+            soundEffectPlayer.PlaySoundEffect += new delEventHandler(onFlagChanged);
+            soundEffectPlayer.Trigger = (int)SoundEffectPlayer.Sounds.POWERUP;
             mario.CollideableType = CType.AVATAR_LARGE;
             prevPowerupState = currPowerupState;
             currPowerupState = PowerupState.BIG;
@@ -26,6 +30,10 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StatePowerup
             mario.SheetSize = new Vector2(4, 2);
             mario.SetSprite(Mario.BigMarioSpriteSheet);
             mario.UpdateBBox();
+        }
+        public static void onFlagChanged(int sound)
+        {
+            SoundEffectPlayer.GetSoundEffectPlayer().PlaySounds(sound);
         }
 
         public override void ChangePowerupState(int state)

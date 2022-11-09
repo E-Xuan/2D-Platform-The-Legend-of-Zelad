@@ -12,6 +12,7 @@ using SprintZeroSpriteDrawing.Interfaces.MarioState;
 using SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction;
 using SprintZeroSpriteDrawing.Interfaces.MarioState.StatePowerup;
 using SprintZeroSpriteDrawing.Interfaces.ProjectileState;
+using SprintZeroSpriteDrawing.Music_SoundEffects;
 using SprintZeroSpriteDrawing.Sprites.ProjectileSprites;
 
 namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
@@ -41,7 +42,9 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
 
         public IMarioState StatePowerup;
         public IMarioState StateAction;
+
         
+
         public int[] currState;
 
         public static Mario GetMario() {
@@ -143,6 +146,9 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
         }
         public void TakeDamage(int powerup)
         {
+            var soundEffectPlayer = SoundEffectPlayer.GetSoundEffectPlayer();
+            soundEffectPlayer.PlaySoundEffect += new delEventHandler(onFlagChanged);
+            soundEffectPlayer.Trigger = (int)SoundEffectPlayer.Sounds.PIPEPOWERDOWN;
             if (StatePowerup.currPowerupState != PowerupState.SMALL)
             {
                 ChangePowerup((int)PowerupState.SMALL);
@@ -240,7 +246,10 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
 
        public void CollectCoin(int coin)
        {
-           Score += 200;
+            var soundEffectPlayer = SoundEffectPlayer.GetSoundEffectPlayer();
+            soundEffectPlayer.PlaySoundEffect += new delEventHandler(onFlagChanged);
+            soundEffectPlayer.Trigger = (int)SoundEffectPlayer.Sounds.COIN;
+            Score += 200;
            Coins += coin;
            if (Coins >= 100)
            {
@@ -252,7 +261,10 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
        {
            Score += points;
            GetMario().Velocity = new Vector2(GetMario().Velocity.X, -2);
-       }
+            var soundEffectPlayer = SoundEffectPlayer.GetSoundEffectPlayer();
+            soundEffectPlayer.PlaySoundEffect += new delEventHandler(onFlagChanged);
+            soundEffectPlayer.Trigger = (int)SoundEffectPlayer.Sounds.STOMP;
+        }
         public void resetTimer()
         {
             Time = 400;
@@ -277,6 +289,11 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
                 Game1.underGround = !Game1.underGround;
             }
 
+        }
+
+        public static void onFlagChanged(int sound)
+        {
+            SoundEffectPlayer.GetSoundEffectPlayer().PlaySounds(sound);
         }
     }
 }
