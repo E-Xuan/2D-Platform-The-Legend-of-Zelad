@@ -29,8 +29,31 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
             soundEffectPlayer.PlaySoundEffect += new delEventHandler(onFlagChanged);
             soundEffectPlayer.Trigger = (int)SoundEffectPlayer.Sounds.FLAGPOLE;
             CollisionManager.getCM().RegMoving(mario);
-            mario.Score += 2000 - (int)mario.Pos.Y;
-            mario.Score += mario.Time * 5;
+            int height = Game1.Flagbase - (int)mario.Pos.Y;
+            if (height < 17)
+            {
+                mario.Score += 100;
+            }
+            else if (height < 57)
+            {
+                mario.Score += 400;
+            }
+            else if (height < 81)
+            {
+                mario.Score += 800;
+            }
+            else if (height < 127)
+            {
+                mario.Score += 2000;
+            }
+            else if (height < 153)
+            {
+                mario.Score += 4000;
+            }
+            else
+            {
+                mario.Lives += 1;
+            }
             currActionState = ActionState.POLESLIDE;
             mario.IsVis = true;
             mario.Velocity = new Vector2(0, (float)2);

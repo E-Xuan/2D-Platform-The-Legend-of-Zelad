@@ -21,8 +21,8 @@ namespace SprintZeroSpriteDrawing.Interfaces.ItemState
             var soundEffectPlayer = SoundEffectPlayer.GetSoundEffectPlayer();
             soundEffectPlayer.PlaySoundEffect += new delEventHandler(onFlagChanged);
             soundEffectPlayer.Trigger = (int)SoundEffectPlayer.Sounds.ITEM;
-            item.Velocity = new Vector2(0, (float)-4.9);
-            item.Acceleration = new Vector2(0, (float).5);
+            item.Velocity = new Vector2(0, (float)-2);
+            item.Acceleration = new Vector2(0, (float).1);
             CollisionManager.getCM().RegMoving(item);
         }
         public override void Exit()

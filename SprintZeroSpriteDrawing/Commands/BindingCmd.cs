@@ -19,7 +19,6 @@ namespace SprintZeroSpriteDrawing.Commands
             keyboardController.ClearBinding();
             gamepadController.ClearBinding();
             QuitPauseController.ClearBinding();
-
             keyboardController.UpdateBinding(Keys.C, new IntCmd(new KeyValuePair<Action<int>, int>(Game1.DebugBBox, -1)), BindingType.PRESSED);
             QuitPauseController.UpdateBinding(Keys.P, new IntCmd(new KeyValuePair<Action<int>, int>(Game1.PauseGame, -1)), BindingType.PRESSED);
 
@@ -61,7 +60,6 @@ namespace SprintZeroSpriteDrawing.Commands
             keyboardController.ClearBinding();
             gamepadController.ClearBinding();
             QuitPauseController.ClearBinding();
-
 
         }
     }
