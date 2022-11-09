@@ -17,15 +17,17 @@ namespace SprintZeroSpriteDrawing.Interfaces.GameState
         DEBUG,
         COLLISIONS,
         PAUSE,
-        OVER
+        OVER,
+        WIN
     }
 
     
     public class IGameState
     {
+        public static GameModes GM;
         protected Mode mode;
         public GameModes CurrState { get; set; }
-        
+
 
         public IGameState(Mode nMode)
         {
