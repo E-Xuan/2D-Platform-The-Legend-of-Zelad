@@ -34,6 +34,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
         ENEMY,
         PIRANA,
         LEVELUP,
+        ONEUP,
         FLOWER,
         STAR,
         PROJECTILE,

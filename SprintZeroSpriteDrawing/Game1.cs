@@ -52,6 +52,7 @@ namespace SprintZeroSpriteDrawing
         public static List<ISprite> SpriteList = new List<ISprite>();
         #endregion
         public static Vector2 LEVELSIZE = new Vector2(1920,1080);
+        public static int Flagbase = 0;
         public static Camera _Camera2D;
         public static int counter = 0;
         public static bool isTimeCounting = true;
