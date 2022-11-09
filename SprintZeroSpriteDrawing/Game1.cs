@@ -52,8 +52,12 @@ namespace SprintZeroSpriteDrawing
         //Sprites and their names, could use UUID's if I wanted to, but I like names its unnecessary tho
         public static List<ISprite> SpriteList = new List<ISprite>();
         #endregion
+
+
+
         public static Vector2 LEVELSIZE = new Vector2(1920,1080);
         public static Vector2 PipeExit = new Vector2(1920, 1080);
+        private bool piped = false;
         public static int Flagbase = 0;
         public static Camera _Camera2D;
         public static int counter = 0;
@@ -129,7 +133,8 @@ namespace SprintZeroSpriteDrawing
             SpriteList = new List<ISprite>();
             Mario.GetMario().StatePowerup = new SmallMario(Mario.GetMario());
             LevelLoader.LevelLoader.GetLevelLoader().LoadLevel("Level/" + level);
-            Mario.GetMario().Pos = PipeExit;
+            if(piped)
+                Mario.GetMario().Pos = PipeExit;
             CollisionManager.getCM().Init();
             CollisionManager.getCM().RegMoving(Mario.GetMario());
         }
@@ -178,7 +183,7 @@ namespace SprintZeroSpriteDrawing
             }
 
             _Camera2D.LookAt(Mario.GetMario().Pos);
-            _Camera2D.Limits = new Rectangle(0, 0, 10100, 1080);
+            _Camera2D.Limits = new Rectangle(0, 0, (int)LEVELSIZE.X, (int)LEVELSIZE.Y);
 
             if (level_update)
             {
@@ -188,6 +193,7 @@ namespace SprintZeroSpriteDrawing
                 }
                 else
                 {
+                    piped = true;
                     Restart("underground.txt");
                 }
                 level_update = false;
@@ -236,7 +242,7 @@ namespace SprintZeroSpriteDrawing
                 if (underGround)
                 {
                     GraphicsDevice.Clear(Color.Black);
-                    sBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.LinearWrap, null, null);
+                    sBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, _Camera2D.GetViewMatrix(new Vector2(1f)));
                     foreach (ISprite spriteEntry in SpriteList)
                     {
                         spriteEntry.Draw(sBatch);

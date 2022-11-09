@@ -32,6 +32,14 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
         private List<ICollideable>[,] entityList;
         private List<ICollideable> movingEntities;
 
+        public List<ICollideable>[,] MomentityList()
+        {
+            return entityList;
+        }
+        public List<ICollideable> MovingMomento()
+        {
+            return movingEntities;
+        }
         private CollisionManager()
         {
             NonCollideables = new HashSet<CType>
