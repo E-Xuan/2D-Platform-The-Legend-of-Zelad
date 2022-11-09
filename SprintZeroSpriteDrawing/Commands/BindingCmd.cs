@@ -8,6 +8,7 @@ using SprintZeroSpriteDrawing.Interfaces.MarioState;
 using SprintZeroSpriteDrawing.GameMode;
 using SprintZeroSpriteDrawing.Interfaces.GameState;
 using SprintZeroSpriteDrawing.Music_SoundEffects;
+using SprintZeroSpriteDrawing.Controllers;
 
 namespace SprintZeroSpriteDrawing.Commands
 {
@@ -15,9 +16,9 @@ namespace SprintZeroSpriteDrawing.Commands
     {
         public static void SetGameBinding(IController<Keys> keyboardController, IController<Buttons> gamepadController, IController<Keys> QuitPauseController)
         {
-            /*keyboardController.ClearBinding();
+            keyboardController.ClearBinding();
             gamepadController.ClearBinding();
-            QuitPauseController.ClearBinding();*/
+            QuitPauseController.ClearBinding();
 
             keyboardController.UpdateBinding(Keys.C, new IntCmd(new KeyValuePair<Action<int>, int>(Game1.DebugBBox, -1)), BindingType.PRESSED);
             QuitPauseController.UpdateBinding(Keys.P, new IntCmd(new KeyValuePair<Action<int>, int>(Game1.PauseGame, -1)), BindingType.PRESSED);
@@ -57,9 +58,10 @@ namespace SprintZeroSpriteDrawing.Commands
         }
         public static void SetGameOverBinding(IController<Keys> keyboardController, IController<Buttons> gamepadController, IController<Keys> QuitPauseController)
         {
-            /*keyboardController.ClearBinding();
+            keyboardController.ClearBinding();
             gamepadController.ClearBinding();
-            QuitPauseController.ClearBinding();*/
+            QuitPauseController.ClearBinding();
+
 
         }
     }

@@ -84,10 +84,12 @@ namespace SprintZeroSpriteDrawing
             _Camera2D = new Camera(GraphicsDevice.Viewport);
 
             #region Command Mapping
+
+
             quitpauseController.UpdateBinding(Keys.Q, new IntCmd(new KeyValuePair<Action<int>, int>(ExitWithCode, 0)), BindingType.PRESSED);
             keyboardController.UpdateBinding(Keys.R, new LevelReset(this), BindingType.PRESSED);
             gamepadController.UpdateBinding(Buttons.Start, new IntCmd(new KeyValuePair<Action<int>, int>(ExitWithCode, 0)), BindingType.PRESSED);
-         
+           
             #endregion
 
             base.Initialize();
@@ -105,7 +107,6 @@ namespace SprintZeroSpriteDrawing
             ProjectileSpriteFactory.getSpriteFactory().LoadContent(Content);
             Mario.LoadContent(Content);
             BindingCmd.SetGameBinding(keyboardController, gamepadController, quitpauseController);
-
             // set game binding
             //Starting the sprite batch on our new graphics device
             //move init and loading of textures?
@@ -141,11 +142,6 @@ namespace SprintZeroSpriteDrawing
 
         protected override void Update(GameTime gameTime)
         {
-            //This could again be moved into a collection and iterated over, but I'm lazy
-            //if(CD != Direction.NULL)
-            //{
-                //currState = GameModes.WIN;
-            //}
             if(Mario.GetMario().Lives == 0)
             {
                 currState = GameModes.OVER;
@@ -168,9 +164,7 @@ namespace SprintZeroSpriteDrawing
 
             _Camera2D.LookAt(Mario.GetMario().Pos);
             _Camera2D.Limits = new Rectangle(0, 0, 10100, 1080);
-            //BackgroundSpriteFactory.getFactory().BackgroundSpriteSheet
-            //Danish Tilt
-            //_Camera2D.Rotation = (float)(Math.PI / 16);
+
             if (level_update)
             {
                 if (!underGround)
@@ -184,7 +178,29 @@ namespace SprintZeroSpriteDrawing
                 level_update = false;
             }
             
-
+            if(currState == GameModes.OVER)
+            {
+                keyboardController.ClearBinding();
+                gamepadController.ClearBinding();
+                quitpauseController.ClearBinding();
+                keyboardController.UpdateBinding(Keys.Y, new LevelReset(this), BindingType.PRESSED);
+                keyboardController.UpdateBinding(Keys.O, new IntCmd(new KeyValuePair<Action<int>, int>(ExitWithCode, 0)), BindingType.PRESSED);
+            }
+            if (currState == GameModes.WIN)
+            {
+                keyboardController.ClearBinding();
+                gamepadController.ClearBinding();
+                quitpauseController.ClearBinding();
+                keyboardController.UpdateBinding(Keys.R, new LevelReset(this), BindingType.PRESSED);
+                keyboardController.UpdateBinding(Keys.Q, new IntCmd(new KeyValuePair<Action<int>, int>(ExitWithCode, 0)), BindingType.PRESSED);
+            }
+            if(currState == GameModes.NORMAL)
+            {
+                BindingCmd.SetGameBinding(keyboardController, gamepadController, quitpauseController);
+                quitpauseController.UpdateBinding(Keys.Q, new IntCmd(new KeyValuePair<Action<int>, int>(ExitWithCode, 0)), BindingType.PRESSED);
+                keyboardController.UpdateBinding(Keys.R, new LevelReset(this), BindingType.PRESSED);
+                gamepadController.UpdateBinding(Buttons.Start, new IntCmd(new KeyValuePair<Action<int>, int>(ExitWithCode, 0)), BindingType.PRESSED);
+            }
         }
 
         protected override void Draw(GameTime gameTime)
