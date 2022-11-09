@@ -53,6 +53,10 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
             else
             {
                 mario.Lives += 1;
+                var oneUpSoundEffectPlayer = SoundEffectPlayer.GetSoundEffectPlayer();
+                soundEffectPlayer.PlaySoundEffect += new delEventHandler(onFlagChanged);
+                soundEffectPlayer.Trigger = (int)SoundEffectPlayer.Sounds.FLAGPOLE;
+
             }
             currActionState = ActionState.POLESLIDE;
             mario.IsVis = true;

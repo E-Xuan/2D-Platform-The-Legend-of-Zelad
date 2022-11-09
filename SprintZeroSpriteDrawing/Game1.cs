@@ -340,12 +340,5 @@ namespace SprintZeroSpriteDrawing
                 currState = GameModes.OVER;
             }
         }
-        public void lifeCount(Mario mario)
-        {
-            if (mario.Lives == 0)
-            {
-                currState = GameModes.OVER;
-            }
-        }
     }
 }

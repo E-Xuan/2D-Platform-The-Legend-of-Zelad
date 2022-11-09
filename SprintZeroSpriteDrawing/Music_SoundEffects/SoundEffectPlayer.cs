@@ -58,7 +58,7 @@ namespace SprintZeroSpriteDrawing.Music_SoundEffects
                 {
                     _trigger = value;
                     PlaySoundEffect?.Invoke(_trigger);
-                    _trigger = 0;
+                    _trigger = -1;
                 }
             }
         }
@@ -86,7 +86,11 @@ namespace SprintZeroSpriteDrawing.Music_SoundEffects
         }
         public void PlaySounds(int sound)
         {
-            soundEffects[sound].Play();
+            
+            SoundEffectInstance temp;
+            temp = soundEffects[sound].CreateInstance();
+            temp.Play();
+            
         }
     }
 }
