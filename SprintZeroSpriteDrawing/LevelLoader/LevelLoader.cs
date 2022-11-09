@@ -42,7 +42,7 @@ namespace SprintZeroSpriteDrawing.LevelLoader
             }
             Game1.LEVELSIZE.Y = y;
             fileStream.Seek(0, SeekOrigin.Begin);
-            CollisionManager.getCM();
+            CollisionManager.getCM().Resize();
             x = 48;
             y = 48;
 

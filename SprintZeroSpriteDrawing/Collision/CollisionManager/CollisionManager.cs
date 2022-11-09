@@ -69,6 +69,10 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
 
         }
 
+        public void Resize()
+        {
+            CM = new CollisionManager();
+        }
         public void Init()
         {
             CM = new CollisionManager();
