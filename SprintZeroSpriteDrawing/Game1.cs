@@ -152,6 +152,7 @@ namespace SprintZeroSpriteDrawing
             //}
             if(Mario.GetMario().Lives == 0)
             {
+
                 currState = GameModes.OVER;
             }
             quitpauseController.UpdateInput();
