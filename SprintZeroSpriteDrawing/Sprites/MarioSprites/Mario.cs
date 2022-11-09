@@ -168,13 +168,13 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
         {
             if (invunTimer > 75 || powerup == -1)
             {
-                var soundEffectPlayer = SoundEffectPlayer.GetSoundEffectPlayer();
-                soundEffectPlayer.PlaySoundEffect += new delEventHandler(onFlagChanged);
-                soundEffectPlayer.Trigger = (int)SoundEffectPlayer.Sounds.PIPEPOWERDOWN;
-                if (StatePowerup.currPowerupState != PowerupState.SMALL)
-                {
+                
+               
                     if (StatePowerup.currPowerupState != PowerupState.SMALL)
                     {
+                        var soundEffectPlayer = SoundEffectPlayer.GetSoundEffectPlayer();
+                        soundEffectPlayer.PlaySoundEffect += new delEventHandler(onFlagChanged);
+                        soundEffectPlayer.Trigger = (int)SoundEffectPlayer.Sounds.PIPEPOWERDOWN;
                         ChangePowerup((int)PowerupState.SMALL + 5);
                     }
                     else
@@ -183,7 +183,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
                     }
 
                     invunTimer = 0;
-                }
+                
             }
         }
         public void ToWin(int action)
