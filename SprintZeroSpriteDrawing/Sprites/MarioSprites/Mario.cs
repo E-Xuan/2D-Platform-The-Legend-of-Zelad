@@ -34,14 +34,10 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
         public int Lives = 5;
         public int Time = 400;
         private int invunTimer = 0;
-        public int counter = 0;
-        public bool isTimeCounting = true;
         public SpriteEffects effects;
         private static Mario _mario;
         bool left = false;
         bool right = false;
-        bool up = false;
-        bool down = false;
         public bool fireBall { get; set; }
         public IMarioState StatePowerup;
         public IMarioState StateAction;
@@ -126,8 +122,8 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
         {
             base.Draw(batch, effects);
             //batch.DrawString(OverlayFont, "Coins: " + Coins.ToString("000"), new Vector2(100, 100), Color.Black);
-            batch.DrawString(OverlayFont, "Time: " + Time.ToString(), new Vector2(Math.Max(Pos.X + 700, 1660), 100), Color.Black); 
-            batch.DrawString(OverlayFont, "Coins: " + Coins.ToString("000") + "    Score: " + Score.ToString("0000000") + "    Lives: " + Lives.ToString("00"), new Vector2(Math.Max(Pos.X - 860, 100), 100), Color.Black);
+            batch.DrawString(OverlayFont, "Time: " + Time.ToString(), new Vector2(Math.Min(Math.Max(Pos.X + 700, 1660), Game1.LEVELSIZE.X - 220), 100), Color.White); 
+            batch.DrawString(OverlayFont, "Coins: " + Coins.ToString("000") + "    Score: " + Score.ToString("0000000") + "    Lives: " + Lives.ToString("00"), new Vector2(Math.Min(Math.Max(Pos.X - 860, 100), Game1.LEVELSIZE.X - 1820), 100), Color.White);
         }
 
         public void Reset()
@@ -155,6 +151,8 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
                 Score += 1000;
             if(powerup > (int)StatePowerup.currPowerupState)
                 StatePowerup.ChangePowerupState(powerup % 5);
+            if (powerup == (int)PowerupState.DEAD)
+                Game1.level_update = true;
         }
         public void ChangeAction(int action)
         {
@@ -179,7 +177,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
                     }
                     else
                     {
-                        ChangePowerup((int)PowerupState.DEAD + 5);
+                        ChangePowerup((int)PowerupState.DEAD);
                     }
 
                     invunTimer = 0;
