@@ -33,6 +33,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
         FRIENDLY,
         NEUTRAL,
         ENEMY,
+        PIRANA,
         LEVELUP,
         FLOWER,
         STAR,

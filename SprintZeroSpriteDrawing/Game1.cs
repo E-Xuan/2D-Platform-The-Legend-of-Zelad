@@ -129,6 +129,7 @@ namespace SprintZeroSpriteDrawing
         {
             SpriteList = new List<ISprite>();
             Mario.GetMario().StatePowerup = new SmallMario(Mario.GetMario());
+            Mario.GetMario().Reset();
             LevelLoader.LevelLoader.GetLevelLoader().LoadLevel("Level/test.txt");
             CollisionManager.getCM().Init();
             CollisionManager.getCM().RegMoving(Mario.GetMario());
@@ -280,6 +281,13 @@ namespace SprintZeroSpriteDrawing
             {
                 isTimeCounting = false;
                 Mario.GetMario().ChangePowerup(4); // Mario dies
+                currState = GameModes.OVER;
+            }
+        }
+        public void lifeCount(Mario mario)
+        {
+            if (mario.Lives == 0)
+            {
                 currState = GameModes.OVER;
             }
         }

@@ -22,6 +22,7 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         public Texture2D SMushroom;
         public Texture2D UPMushroom;
         public Texture2D Star;
+        public Texture2D Pirana;
 
         private static ItemSpriteFactory sprite;
         public static ItemSpriteFactory getFactory()
@@ -40,6 +41,7 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
             SMushroom = content.Load<Texture2D>("Items/SuperMushroom");
             UPMushroom = content.Load<Texture2D>("Items/1UPMushroom");
             Star = content.Load<Texture2D>("Items/Starman");
+            Pirana = content.Load<Texture2D>("Enemy/Piranha");
         }
 
         public ISprite createCoin(Vector2 nPos)
@@ -61,6 +63,10 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         public ISprite createStar(Vector2 nPos)
         {
             return new Starman(Star, new Vector2(2, 2), nPos);
+        }
+        public ISprite CreatePiranaPlant(Vector2 nPos)
+        {
+            return new PiranaPlant(Pirana, new Vector2(2, 1), nPos);
         }
     }
 }

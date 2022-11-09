@@ -6,6 +6,7 @@ using SprintZeroSpriteDrawing.Collision.CollisionManager;
 using SprintZeroSpriteDrawing.Sprites.ObstacleSprites;
 using SprintZeroSpriteDrawing.Interfaces.Entitiy;
 using SprintZeroSpriteDrawing.Sprites.ItemSprites;
+using SprintZeroSpriteDrawing.Music_SoundEffects;
 
 namespace SprintZeroSpriteDrawing.Interfaces.BlockState
 {
@@ -22,6 +23,9 @@ namespace SprintZeroSpriteDrawing.Interfaces.BlockState
 
         public override void Enter()
         {
+            var soundEffectPlayer = SoundEffectPlayer.GetSoundEffectPlayer();
+            soundEffectPlayer.PlaySoundEffect += new delEventHandler(onFlagChanged);
+            soundEffectPlayer.Trigger = (int)SoundEffectPlayer.Sounds.BUMP;
             CurrState = State.BUMPING;
             block.IsVis = true;
             anchor = block.Pos;
@@ -39,6 +43,10 @@ namespace SprintZeroSpriteDrawing.Interfaces.BlockState
         public override void Exit()
         {
             block.Pos = anchor;
+        }
+        public static void onFlagChanged(int sound)
+        {
+            SoundEffectPlayer.GetSoundEffectPlayer().PlaySounds(sound);
         }
 
         public override void ChangeState(int state)

@@ -16,6 +16,14 @@ namespace SprintZeroSpriteDrawing.Music_SoundEffects
         Song overworldMusic;
         Song starmanMusic;
         Song underworldMusic;
+       
+
+        public enum Songs
+        {
+            OVERWORLD,
+            UNDERWORLD,
+            STARMAN
+        }
         private static MusicPlayer _musicPlayer;
 
         public static MusicPlayer GetMusicPlayer()
@@ -35,9 +43,35 @@ namespace SprintZeroSpriteDrawing.Music_SoundEffects
         }
         public void PlaySong()
         {
+            MediaPlayer.IsRepeating = true;
             MediaPlayer.IsMuted = false;
             MediaPlayer.Play(overworldMusic); 
         }
+
+        public void StopSong()
+        {
+            MediaPlayer.Stop();
+        }
+        public void ChangeSong(int song)
+        {
+            MediaPlayer.Stop();
+            switch(song)
+            {
+                case (int)Songs.OVERWORLD:
+                    MediaPlayer.IsRepeating = true;
+                    MediaPlayer.Play(overworldMusic);
+                    break;
+                case (int)Songs.UNDERWORLD:
+                    MediaPlayer.IsRepeating = true;
+                    MediaPlayer.Play(underworldMusic);
+                    break;
+                case (int)Songs.STARMAN:
+                    MediaPlayer.Play(starmanMusic);
+                    break;
+            }
+        }
+
+       
         public void Mute(int mute)
         {
             MediaPlayer.IsMuted = !MediaPlayer.IsMuted;

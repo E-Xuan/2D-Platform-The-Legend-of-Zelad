@@ -15,6 +15,7 @@ using SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction;
 using SprintZeroSpriteDrawing.Interfaces.MarioState.StatePowerup;
 using SprintZeroSpriteDrawing.Interfaces.ProjectileState;
 using SprintZeroSpriteDrawing.Sprites.ObstacleSprites;
+using SprintZeroSpriteDrawing.Music_SoundEffects;
 using SprintZeroSpriteDrawing.Sprites.ProjectileSprites;
 
 namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
@@ -43,6 +44,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
         public bool fireBall { get; set; }
         public IMarioState StatePowerup;
         public IMarioState StateAction;
+
         public int[] currState;
 
         public static Mario GetMario() {
@@ -67,6 +69,9 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new  IntCmd(new KeyValuePair<Action<int>, int>(ChangeAction, (int)ActionState.IDLE)), Direction.SIDE, CType.ENEMY));
 
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ToWin, 0)), Direction.SIDE, CType.CASTLE));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeAction, (int)ActionState.IDLE)), Direction.SIDE, CType.ENEMY));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(TakeDamage, 0)), Direction.SIDE, CType.PIRANA));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeAction, (int)ActionState.IDLE)), Direction.SIDE, CType.PIRANA));
 
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeAction, (int)ActionState.POLESLIDE)), Direction.SIDE, CType.FLAG));
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeAction, (int)ActionState.POLESLIDE)), Direction.BOTTOM, CType.FLAG));
@@ -118,6 +123,15 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             batch.DrawString(OverlayFont, "Time: " + Time.ToString(), new Vector2(Math.Max(Pos.X + 700, 1660), 100), Color.Black); 
             batch.DrawString(OverlayFont, "Coins: " + Coins.ToString("000") + "    Score: " + Score.ToString("0000000") + "    Lives: " + Lives.ToString("00"), new Vector2(Math.Max(Pos.X - 860, 100), 100), Color.Black);
         }
+
+        public void Reset()
+        {
+            resetTimer();
+            Score = 0;
+            Coins = 0;
+            Lives = 5;
+        }
+
         public static void LoadContent(ContentManager content)
         {
             SmallMarioSpriteSheet = content.Load<Texture2D>("SmallMario/SmallMarioSpriteSheet");
@@ -131,7 +145,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
         }
         public void ChangePowerup(int powerup)
         {
-            if (powerup != 4)
+            if(powerup != 4 && powerup < 5)
                 Score += 1000;
             if(powerup > (int)StatePowerup.currPowerupState)
                 StatePowerup.ChangePowerupState(powerup % 5);
@@ -146,13 +160,16 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
         }
         public void TakeDamage(int powerup)
         {
+            var soundEffectPlayer = SoundEffectPlayer.GetSoundEffectPlayer();
+            soundEffectPlayer.PlaySoundEffect += new delEventHandler(onFlagChanged);
+            soundEffectPlayer.Trigger = (int)SoundEffectPlayer.Sounds.PIPEPOWERDOWN;
             if (StatePowerup.currPowerupState != PowerupState.SMALL)
             {
-                ChangePowerup((int)PowerupState.SMALL);
+                ChangePowerup((int)PowerupState.SMALL + 5);
             }
             else
             {
-                ChangePowerup((int)PowerupState.DEAD);
+                ChangePowerup((int)PowerupState.DEAD + 5);
             }
         }
         public void ToWin(int action)
@@ -247,7 +264,10 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
 
        public void CollectCoin(int coin)
        {
-           Score += 200;
+            var soundEffectPlayer = SoundEffectPlayer.GetSoundEffectPlayer();
+            soundEffectPlayer.PlaySoundEffect += new delEventHandler(onFlagChanged);
+            soundEffectPlayer.Trigger = (int)SoundEffectPlayer.Sounds.COIN;
+            Score += 200;
            Coins += coin;
            if (Coins >= 100)
            {
@@ -259,7 +279,10 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
        {
            Score += points;
            GetMario().Velocity = new Vector2(GetMario().Velocity.X, -2);
-       }
+            var soundEffectPlayer = SoundEffectPlayer.GetSoundEffectPlayer();
+            soundEffectPlayer.PlaySoundEffect += new delEventHandler(onFlagChanged);
+            soundEffectPlayer.Trigger = (int)SoundEffectPlayer.Sounds.STOMP;
+        }
         public void resetTimer()
         {
             Time = 400;
@@ -284,6 +307,11 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
                 Game1.underGround = !Game1.underGround;
             }
 
+        }
+
+        public static void onFlagChanged(int sound)
+        {
+            SoundEffectPlayer.GetSoundEffectPlayer().PlaySounds(sound);
         }
     }
 }
