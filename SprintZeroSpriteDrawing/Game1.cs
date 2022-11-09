@@ -144,7 +144,7 @@ namespace SprintZeroSpriteDrawing
             LevelLoader.LevelLoader.GetLevelLoader().LoadLevel("Level/test.txt");
             CollisionManager.getCM().Init();
             CollisionManager.getCM().RegMoving(Mario.GetMario());
-            currState = GameModes.NORMAL;
+            currState = GameModes.START;
             Mario.GetMario().resetTimer();
             isTimeCounting = true;
             counter = 0;
@@ -188,9 +188,18 @@ namespace SprintZeroSpriteDrawing
                 }
                 level_update = false;
             }
-            
-            if(currState == GameModes.OVER)
+            if(currState == GameModes.START)
             {
+                isTimeCounting = false;
+                keyboardController.ClearBinding();
+                gamepadController.ClearBinding();
+                quitpauseController.ClearBinding();
+                keyboardController.UpdateBinding(Keys.Y, new IntCmd(new KeyValuePair<Action<int>, int>(StartGame, 0)), BindingType.PRESSED);
+                keyboardController.UpdateBinding(Keys.Q, new IntCmd(new KeyValuePair<Action<int>, int>(ExitWithCode, 0)), BindingType.PRESSED);
+            }
+            if (currState == GameModes.OVER)
+            {
+                isTimeCounting = false;
                 keyboardController.ClearBinding();
                 gamepadController.ClearBinding();
                 quitpauseController.ClearBinding();
@@ -199,6 +208,7 @@ namespace SprintZeroSpriteDrawing
             }
             if (currState == GameModes.WIN)
             {
+                isTimeCounting = false;
                 keyboardController.ClearBinding();
                 gamepadController.ClearBinding();
                 quitpauseController.ClearBinding();
@@ -207,6 +217,7 @@ namespace SprintZeroSpriteDrawing
             }
             if(currState == GameModes.NORMAL)
             {
+                isTimeCounting = true;
                 BindingCmd.SetGameBinding(keyboardController, gamepadController, quitpauseController);
                 quitpauseController.UpdateBinding(Keys.Q, new IntCmd(new KeyValuePair<Action<int>, int>(ExitWithCode, 0)), BindingType.PRESSED);
                 keyboardController.UpdateBinding(Keys.R, new LevelReset(this), BindingType.PRESSED);
@@ -257,6 +268,14 @@ namespace SprintZeroSpriteDrawing
                     }
                     //Write text onto the screen in a nice method
                     sBatch.End();
+                    if(currState == GameModes.START)
+                    {
+                        sBatch.Begin();
+                        sBatch.Draw(BackgroundSpriteFactory.getFactory().StartScreen, new Vector2(400, 200), new Rectangle (0, 0, BackgroundSpriteFactory.getFactory().StartScreen.Width, BackgroundSpriteFactory.getFactory().StartScreen.Height), Color.White);
+                        sBatch.DrawString(HUDFont, "Press Y to start", new Vector2(600, 450), Color.Black);
+                        sBatch.DrawString(HUDFont, "Press Q to quit", new Vector2(1150, 450), Color.Black);
+                        sBatch.End();
+                    }
                 }
             }
             else if(currState == GameModes.OVER)
@@ -271,7 +290,6 @@ namespace SprintZeroSpriteDrawing
             }
             else
             {
-                GraphicsDevice.Clear(Color.Yellow);
                 sBatch.Begin();
                 sBatch.Draw(BackgroundSpriteFactory.getFactory().WinningScreen, new Vector2(0, 0), new Rectangle(-200, 0, 2224, 1668), Color.White);
                 sBatch.DrawString(HUDFont, "Press R to replay", new Vector2(300, 900), Color.Black);
@@ -288,6 +306,10 @@ namespace SprintZeroSpriteDrawing
         private void ExitWithCode(int errCode) {
             Console.WriteLine(errCode);
             Exit();
+        }
+        public void StartGame(int errCode)
+        {
+            currState = GameModes.NORMAL;
         }
         public static void DebugBBox(int errCode)
         {
