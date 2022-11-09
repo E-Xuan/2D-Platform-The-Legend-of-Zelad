@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SprintZeroSpriteDrawing.Interfaces.BlockState;
+using SprintZeroSpriteDrawing.Sprites.MarioSprites;
 
 namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
 {
@@ -31,7 +32,9 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         public override void Update()
         {
             base.Update();
-            timecounter++;
+            State.Update();
+            if(Math.Abs(Mario.GetMario().Pos.X - Pos.X + 48) > 72)
+                timecounter++;
             if (timecounter >= 300)
             {
                 if (State.Inventory.Count == 0 && recurInvin != null)

@@ -18,9 +18,9 @@ namespace SprintZeroSpriteDrawing.Sprites.ItemSprites
         public PiranaPlant(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos) : base(nSprite, nSheetSize, nPos)
         {
             CollideableType = CType.PIRANA;
-            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Kill, 0)), Direction.TOP, CType.PROJECTILE));
-            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Kill, 0)), Direction.BOTTOM, CType.PROJECTILE));
-            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Kill, 0)), Direction.SIDE, CType.PROJECTILE));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Retire, 0)), Direction.TOP, CType.PROJECTILE));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Retire, 0)), Direction.BOTTOM, CType.PROJECTILE));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Retire, 0)), Direction.SIDE, CType.PROJECTILE));
         }
         public override void Update()
         {
@@ -46,6 +46,10 @@ namespace SprintZeroSpriteDrawing.Sprites.ItemSprites
                     Collect(0);
                 }
             }
+        }
+        public void Retire(int remove)
+        {
+            Collect(0);
         }
     }
 }
