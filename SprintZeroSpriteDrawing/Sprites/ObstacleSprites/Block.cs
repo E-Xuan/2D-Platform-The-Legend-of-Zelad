@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SprintZeroSpriteDrawing.Interfaces.BlockState;
 using SprintZeroSpriteDrawing.Sprites.ItemSprites;
+using SprintZeroSpriteDrawing.Sprites.MarioSprites;
 
 namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
 {

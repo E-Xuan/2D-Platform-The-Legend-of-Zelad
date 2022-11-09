@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SprintZeroSpriteDrawing.Interfaces.Entitiy;
+using SprintZeroSpriteDrawing.Music_SoundEffects;
 
 namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
 {
@@ -23,6 +24,9 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
             {
                 this.ChangeState((int)Interfaces.BlockState.State.UNTAPPED);
             }
+
+           
         }
+       
     }
 }
