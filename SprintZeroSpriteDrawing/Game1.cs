@@ -29,6 +29,7 @@ using System.Reflection;
 using SprintZeroSpriteDrawing.Music_SoundEffects;
 using SprintZeroSpriteDrawing.Interfaces.GameState;
 using Microsoft.Xna.Framework.Audio;
+using System.Reflection.Metadata;
 
 namespace SprintZeroSpriteDrawing
 {
@@ -57,7 +58,7 @@ namespace SprintZeroSpriteDrawing
         public static bool DEBUGBBOX = false;
         public static bool PAUSE = false;
         public static GameModes currState;
-
+        
         public static bool underGround = false;
         public static bool level_update = false; 
 
@@ -77,15 +78,14 @@ namespace SprintZeroSpriteDrawing
             Graphics.PreferredBackBufferWidth = (int)LEVELSIZE.X;
             Graphics.PreferredBackBufferHeight = (int)LEVELSIZE.Y;
             Graphics.ApplyChanges();
-            currState = new GameModes();
+            currState = GameModes.NORMAL;
             _Camera2D = new Camera(GraphicsDevice.Viewport);
-            
-            #region Command Mapping
 
+            #region Command Mapping
             quitpauseController.UpdateBinding(Keys.Q, new IntCmd(new KeyValuePair<Action<int>, int>(ExitWithCode, 0)), BindingType.PRESSED);
             keyboardController.UpdateBinding(Keys.R, new LevelReset(this), BindingType.PRESSED);
             gamepadController.UpdateBinding(Buttons.Start, new IntCmd(new KeyValuePair<Action<int>, int>(ExitWithCode, 0)), BindingType.PRESSED);
-
+         
             #endregion
 
             base.Initialize();
@@ -102,8 +102,9 @@ namespace SprintZeroSpriteDrawing
             MarioSpriteFactory.getSpriteFactory().LoadContent(Content);
             ProjectileSpriteFactory.getSpriteFactory().LoadContent(Content);
             Mario.LoadContent(Content);
-            // set game binding
             BindingCmd.SetGameBinding(keyboardController, gamepadController, quitpauseController);
+
+            // set game binding
             //Starting the sprite batch on our new graphics device
             //move init and loading of textures?
             sBatch = new SpriteBatch(GraphicsDevice);
@@ -126,20 +127,23 @@ namespace SprintZeroSpriteDrawing
         {
             SpriteList = new List<ISprite>();
             Mario.GetMario().StatePowerup = new SmallMario(Mario.GetMario());
+            Mario.GetMario().Reset();
             LevelLoader.LevelLoader.GetLevelLoader().LoadLevel("Level/test.txt");
             CollisionManager.getCM().Init();
             CollisionManager.getCM().RegMoving(Mario.GetMario());
+            currState = GameModes.NORMAL;
             Mario.GetMario().resetTimer();
+            isTimeCounting = true;
             counter = 0;
         }
 
         protected override void Update(GameTime gameTime)
         {
             //This could again be moved into a collection and iterated over, but I'm lazy
+
             quitpauseController.UpdateInput();
             if (currState != GameModes.PAUSE)
             {
-               
                 timeCount(gameTime, Mario.GetMario());
                 Mode.GetMode().Update();
                 //iterate over all of the sprites and run their update methods every iteration
@@ -153,7 +157,6 @@ namespace SprintZeroSpriteDrawing
                 gamepadController.UpdateInput();
                
             }
-            
 
             _Camera2D.LookAt(Mario.GetMario().Pos);
             _Camera2D.Limits = new Rectangle(0, 0, 10100, 1080);
@@ -215,9 +218,11 @@ namespace SprintZeroSpriteDrawing
             }
             else
             {
-                GraphicsDevice.Clear(Color.Black);
+                GraphicsDevice.Clear(Color.White);
                 sBatch.Begin();
-                sBatch.DrawString(HUDFont, "You fucking loser ", new Vector2(500, 500), Color.Red);
+                sBatch.Draw(BackgroundSpriteFactory.getFactory().GameOverScreen, new Vector2(0, 0), new Rectangle(-200,0,1920,1080), Color.White);
+                sBatch.DrawString(HUDFont, "Press Y to restart", new Vector2(300, 800), Color.White);
+                sBatch.DrawString(HUDFont, "Press O to quit", new Vector2(1350, 800), Color.White);
                 sBatch.End();
 
             }
@@ -263,6 +268,13 @@ namespace SprintZeroSpriteDrawing
             {
                 isTimeCounting = false;
                 Mario.GetMario().ChangePowerup(4); // Mario dies
+                currState = GameModes.OVER;
+            }
+        }
+        public void lifeCount(Mario mario)
+        {
+            if (mario.Lives == 0)
+            {
                 currState = GameModes.OVER;
             }
         }

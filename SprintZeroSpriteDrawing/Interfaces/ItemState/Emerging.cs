@@ -31,7 +31,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.ItemState
         public override void Update()
         {
             base.Update();
-            if(item.Velocity.Y >= 4.9)
+            if(item.Velocity.Y >= 2)
                 ChangeState((int)State.IDLE);
         }
         public static void onFlagChanged(int sound)
