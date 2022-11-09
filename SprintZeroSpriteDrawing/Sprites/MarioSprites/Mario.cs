@@ -17,6 +17,7 @@ using SprintZeroSpriteDrawing.Interfaces.ProjectileState;
 using SprintZeroSpriteDrawing.Sprites.ObstacleSprites;
 using SprintZeroSpriteDrawing.Music_SoundEffects;
 using SprintZeroSpriteDrawing.Sprites.ProjectileSprites;
+using Microsoft.Xna.Framework.Media;
 
 namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
 {
@@ -292,7 +293,10 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
        public void Oneup(int coin)
        {
            Lives++;
-       }
+            var soundEffectPlayer = SoundEffectPlayer.GetSoundEffectPlayer();
+            soundEffectPlayer.PlaySoundEffect += new delEventHandler(onFlagChanged);
+            soundEffectPlayer.Trigger = (int)SoundEffectPlayer.Sounds.ONEUP;
+        }
         public void KillEnemy(int points)
        {
            Score += points;
@@ -326,6 +330,11 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             {
                 Game1.level_update = true;
                 Game1.underGround = !Game1.underGround;
+                
+                MusicPlayer.GetMusicPlayer().ChangeSong((int)MusicPlayer.Songs.UNDERWORLD);
+                var soundEffectPlayer = SoundEffectPlayer.GetSoundEffectPlayer();
+                soundEffectPlayer.PlaySoundEffect += new delEventHandler(onFlagChanged);
+                soundEffectPlayer.Trigger = (int)SoundEffectPlayer.Sounds.PIPEPOWERDOWN;
             }
 
         }
