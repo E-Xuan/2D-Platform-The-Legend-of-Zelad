@@ -30,6 +30,7 @@ using SprintZeroSpriteDrawing.Music_SoundEffects;
 using SprintZeroSpriteDrawing.Interfaces.GameState;
 using Microsoft.Xna.Framework.Audio;
 using System.Reflection.Metadata;
+using Microsoft.Xna.Framework.Media;
 
 namespace SprintZeroSpriteDrawing
 {
@@ -247,12 +248,23 @@ namespace SprintZeroSpriteDrawing
             if (PAUSE)
             {
                 currState = GameModes.PAUSE;
+                var soundEffectPlayer = SoundEffectPlayer.GetSoundEffectPlayer();
+                soundEffectPlayer.PlaySoundEffect += new delEventHandler(onFlagChanged);
+                soundEffectPlayer.Trigger = (int)SoundEffectPlayer.Sounds.PAUSE;
+                MediaPlayer.Pause();
             }
             else
             {
                 currState = GameModes.NORMAL;
+                MediaPlayer.Resume();
             }
         }
+
+        public static void onFlagChanged(int sound)
+        {
+            SoundEffectPlayer.GetSoundEffectPlayer().PlaySounds(sound);
+        }
+
         public void timeCount(GameTime gameTime, Mario mario)
         {
             if (isTimeCounting)

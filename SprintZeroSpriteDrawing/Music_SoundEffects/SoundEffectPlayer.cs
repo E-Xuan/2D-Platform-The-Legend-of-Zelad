@@ -86,7 +86,7 @@ namespace SprintZeroSpriteDrawing.Music_SoundEffects
         }
         public void PlaySounds(int sound)
         {
-            soundEffects[sound].CreateInstance().Play();
+            soundEffects[sound].Play();
         }
     }
 }

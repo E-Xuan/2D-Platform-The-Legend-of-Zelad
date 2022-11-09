@@ -289,6 +289,9 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
                 if(fire != null)
                 {
                     fire.State = new ProjectileAppear((Projectile)fire);
+                    var soundEffectPlayer = SoundEffectPlayer.GetSoundEffectPlayer();
+                    soundEffectPlayer.PlaySoundEffect += new delEventHandler(onFlagChanged);
+                    soundEffectPlayer.Trigger = (int)SoundEffectPlayer.Sounds.FIREBALL;
                 }
             }
         }
