@@ -5,13 +5,16 @@ using System.Reflection;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using SprintZeroSpriteDrawing.Collision;
 using SprintZeroSpriteDrawing.Commands;
 using SprintZeroSpriteDrawing.Interfaces;
 using SprintZeroSpriteDrawing.Interfaces.Entitiy;
+using SprintZeroSpriteDrawing.Interfaces.GameState;
 using SprintZeroSpriteDrawing.Interfaces.MarioState;
 using SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction;
 using SprintZeroSpriteDrawing.Interfaces.MarioState.StatePowerup;
 using SprintZeroSpriteDrawing.Interfaces.ProjectileState;
+using SprintZeroSpriteDrawing.Sprites.ObstacleSprites;
 using SprintZeroSpriteDrawing.Sprites.ProjectileSprites;
 
 namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
@@ -38,10 +41,8 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
         bool up = false;
         bool down = false;
         public bool fireBall { get; set; }
-
         public IMarioState StatePowerup;
         public IMarioState StateAction;
-        
         public int[] currState;
 
         public static Mario GetMario() {
@@ -63,7 +64,9 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             currState = new int[5];
 
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(TakeDamage, 0)), Direction.SIDE, CType.ENEMY));
-            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeAction, (int)ActionState.IDLE)), Direction.SIDE, CType.ENEMY));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new  IntCmd(new KeyValuePair<Action<int>, int>(ChangeAction, (int)ActionState.IDLE)), Direction.SIDE, CType.ENEMY));
+
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ToWin, 0)), Direction.SIDE, CType.CASTLE));
 
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeAction, (int)ActionState.POLESLIDE)), Direction.SIDE, CType.FLAG));
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangeAction, (int)ActionState.POLESLIDE)), Direction.BOTTOM, CType.FLAG));
@@ -152,7 +155,11 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
                 ChangePowerup((int)PowerupState.DEAD);
             }
         }
-       
+        public void ToWin(int action)
+        {
+            Game1.currState = GameModes.WIN;
+        }
+        
         public void IncreaseAction(int action)
         {
             if(StateAction.currActionState == ActionState.IDLE)

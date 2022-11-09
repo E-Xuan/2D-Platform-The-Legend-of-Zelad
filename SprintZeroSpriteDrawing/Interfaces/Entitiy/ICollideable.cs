@@ -29,6 +29,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
         INVISIBLE,
         BOUNDRY,
         FLAG,
+        CASTLE,
         FRIENDLY,
         NEUTRAL,
         ENEMY,

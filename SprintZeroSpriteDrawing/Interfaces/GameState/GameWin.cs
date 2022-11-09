@@ -5,20 +5,18 @@ using Microsoft.Xna.Framework;
 using SprintZeroSpriteDrawing.Sprites.ObstacleSprites;
 using SprintZeroSpriteDrawing.Interfaces.Entitiy;
 using SprintZeroSpriteDrawing.GameMode;
-using SprintZeroSpriteDrawing.Sprites.MarioSprites;
-using SprintZeroSpriteDrawing.Interfaces.MarioState;
 
 namespace SprintZeroSpriteDrawing.Interfaces.GameState
 {
-    public class GameOver : IGameState
+    public class GameWin : IGameState
     {
-        public GameOver(Mode nMode) : base(nMode)
+        public GameWin(Mode nMode) : base(nMode)
         {
         }
 
         public override void Enter()
         {
-            CurrState = GameModes.OVER;
+            CurrState = GameModes.WIN;
         }
 
         public override void Update()
