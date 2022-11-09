@@ -18,7 +18,8 @@ namespace SprintZeroSpriteDrawing.Interfaces.GameState
         COLLISIONS,
         PAUSE,
         OVER,
-        WIN
+        WIN,
+        START
     }
 
     
