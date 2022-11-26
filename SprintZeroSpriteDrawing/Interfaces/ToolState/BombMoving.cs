@@ -28,8 +28,10 @@ namespace SprintZeroSpriteDrawing.Interfaces.ToolState
                 tool.Velocity = new Vector2(-10, 0);
             }
             
-            tool.Acceleration = new Vector2(0, 0);
+            tool.Acceleration = new Vector2(0, (float).10);
             tool.CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(tool.Walled, 0)), Direction.SIDE, CType.NEUTRAL));
+            tool.CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(tool.Floored, 0)), Direction.BOTTOM, CType.NEUTRAL));
+
         }
     }
 }
