@@ -39,7 +39,7 @@ namespace SprintZeroSpriteDrawing.Sprites.ProjectileSprites
         public override void Update()
         {
             base.Update();
-            
+
         }
     }
 }

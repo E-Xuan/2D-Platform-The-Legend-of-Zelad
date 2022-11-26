@@ -14,10 +14,13 @@ using SprintZeroSpriteDrawing.Interfaces.MarioState;
 using SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction;
 using SprintZeroSpriteDrawing.Interfaces.MarioState.StatePowerup;
 using SprintZeroSpriteDrawing.Interfaces.ProjectileState;
+using SprintZeroSpriteDrawing.Interfaces.ToolState;
 using SprintZeroSpriteDrawing.Sprites.ObstacleSprites;
 using SprintZeroSpriteDrawing.Music_SoundEffects;
 using SprintZeroSpriteDrawing.Sprites.ProjectileSprites;
 using Microsoft.Xna.Framework.Media;
+using SprintZeroSpriteDrawing.Sprites.ItemSprites;
+using SprintZeroSpriteDrawing.Sprites.ToolSprites;
 
 namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
 {
@@ -319,6 +322,14 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
                     soundEffectPlayer.PlaySoundEffect += new delEventHandler(onFlagChanged);
                     soundEffectPlayer.Trigger = (int)SoundEffectPlayer.Sounds.FIREBALL;
                 }
+            }
+        }
+        public void PlaceBomb(int x)
+        {
+            Bomb bomb = BombPool.GetBombPool().Get();
+            if(bomb != null)
+            {
+                bomb.State = new BombIdle((Tool)bomb);
             }
         }
         
