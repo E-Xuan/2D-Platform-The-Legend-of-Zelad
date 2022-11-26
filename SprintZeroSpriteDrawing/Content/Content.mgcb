@@ -440,6 +440,78 @@
 /processorParam:TextureFormat=Color
 /build:Link/LinkSword.png
 
+#begin LOZMusic/Dungeon.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:LOZMusic/Dungeon.mp3
+
+#begin LOZMusic/Intro.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:LOZMusic/Intro.mp3
+
+#begin LOZSoundEffects/ArrowShoot.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:LOZSoundEffects/ArrowShoot.wav
+
+#begin LOZSoundEffects/BombBlow.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:LOZSoundEffects/BombBlow.wav
+
+#begin LOZSoundEffects/EnemyHit.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:LOZSoundEffects/EnemyHit.wav
+
+#begin LOZSoundEffects/Game Over.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:LOZSoundEffects/Game Over.mp3
+
+#begin LOZSoundEffects/GetItem.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:LOZSoundEffects/GetItem.wav
+
+#begin LOZSoundEffects/GetRupee.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:LOZSoundEffects/GetRupee.wav
+
+#begin LOZSoundEffects/Item.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:LOZSoundEffects/Item.mp3
+
+#begin LOZSoundEffects/Secret.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:LOZSoundEffects/Secret.mp3
+
+#begin LOZSoundEffects/Shield.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:LOZSoundEffects/Shield.wav
+
+#begin LOZSoundEffects/SwordSlash.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:LOZSoundEffects/SwordSlash.wav
+
 #begin Music/MainThemeOverworld.mp3
 /importer:Mp3Importer
 /processor:SongProcessor
