@@ -20,7 +20,7 @@ namespace SprintZeroSpriteDrawing.Sprites.ItemSprites
         public BombPool(Bomb bomb)
         {
             bombs.Enqueue(bomb);
-            while(bombs.Count < BombsMax)
+            while (bombs.Count < BombsMax)
                 bombs.Enqueue((Bomb)ItemSpriteFactory.getFactory().CreateBomb(position));
 
         }
@@ -42,7 +42,7 @@ namespace SprintZeroSpriteDrawing.Sprites.ItemSprites
             if (bombs.Count > 0)
             {
                 bomb = bombs.Dequeue();
-                if(Mario.GetMario().GetDirection() > 0)
+                if (Mario.GetMario().GetDirection() > 0)
                 {
                     bomb.Pos = new Vector2(Mario.GetMario().Pos.X + 100, Mario.GetMario().Pos.Y);
                 }

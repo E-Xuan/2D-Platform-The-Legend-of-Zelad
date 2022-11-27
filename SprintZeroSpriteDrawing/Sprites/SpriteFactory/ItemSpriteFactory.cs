@@ -28,10 +28,10 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         private static ItemSpriteFactory sprite;
         public static ItemSpriteFactory getFactory()
         {
-             if (sprite == null)
-             {
+            if (sprite == null)
+            {
                 sprite = new ItemSpriteFactory();
-             }
+            }
             return sprite;
         }
 
@@ -72,7 +72,7 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         }
         public ISprite CreateBomb(Vector2 nPos)
         {
-            return new Bomb(Bomb, new Vector2(1, 1), nPos);
+            return new Bomb(Bomb, new Vector2(2, 2), nPos);
         }
     }
 }

@@ -25,5 +25,6 @@ namespace SprintZeroSpriteDrawing.Interfaces.ToolState
             Enter();
         }
         public virtual void Enter() { }
+        public virtual void Update() { }
     }
 }

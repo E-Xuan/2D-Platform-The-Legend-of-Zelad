@@ -47,6 +47,17 @@ namespace SprintZeroSpriteDrawing.Sprites.EnemySprites
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Kill, 0)), Direction.BOTTOM, CType.PROJECTILE));
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Kill, 0)), Direction.SIDE, CType.PROJECTILE));
 
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Kill, 0)), Direction.TOP, CType.BOMB));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Kill, 0)), Direction.BOTTOM, CType.BOMB));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Kill, 0)), Direction.SIDE, CType.BOMB));
+
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Kill, 0)), Direction.TOP, CType.MOVBOMB));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Kill, 0)), Direction.BOTTOM, CType.MOVBOMB));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Kill, 0)), Direction.SIDE, CType.MOVBOMB));
+
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Kill, 0)), Direction.TOP, CType.EXPBOMB));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Kill, 0)), Direction.BOTTOM, CType.EXPBOMB));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Kill, 0)), Direction.SIDE, CType.EXPBOMB));
 
             CollisionManager.getCM().RegMoving(this);
         }

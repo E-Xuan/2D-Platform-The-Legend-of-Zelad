@@ -20,11 +20,18 @@ namespace SprintZeroSpriteDrawing.Interfaces.ToolState
         {
             tool = nTool;
             CurrState = State.BOMBIDLE;
+            tool.CollideableType = Entitiy.CType.BOMB;
+            tool.AutoFrame = false;
             tool.Velocity = new Vector2(0, 0);
-            tool.Acceleration = new Vector2(0, 0);
+            tool.Acceleration = new Vector2(0, (float).10);
             tool.IsVis = true;
             tool.CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Biu, 0)), Direction.SIDE, CType.AVATAR_SMALL));
             tool.CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Biu, 0)), Direction.SIDE, CType.AVATAR_LARGE));
+            tool.CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(tool.Floored, 0)), Direction.BOTTOM, CType.NEUTRAL));
+
+            tool.CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(kill, 0)), Direction.SIDE, CType.BOUNDRY));
+            tool.CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(kill, 0)), Direction.BOTTOM, CType.BOUNDRY));
+            tool.CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(kill, 0)), Direction.TOP, CType.BOUNDRY));
         }
         public override void Enter()
         {
@@ -36,6 +43,19 @@ namespace SprintZeroSpriteDrawing.Interfaces.ToolState
         {
             tool.State = new BombMoving(tool);
 
+        }
+        public override void Update()
+        {
+            resetCount++;
+            if (resetCount > 80)
+            {
+                tool.AutoFrame = true;
+                tool.State = new BombExplosion(tool);
+            }
+        }
+        public virtual void kill(int kill)
+        {
+            tool.State = new BombExplosion(tool);
         }
     }
 }
