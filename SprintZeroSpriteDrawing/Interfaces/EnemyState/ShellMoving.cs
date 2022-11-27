@@ -3,6 +3,7 @@ using SprintZeroSpriteDrawing.Collision.CollisionManager;
 using SprintZeroSpriteDrawing.Commands;
 using SprintZeroSpriteDrawing.Interfaces.Entitiy;
 using SprintZeroSpriteDrawing.Sprites.EnemySprites;
+using SprintZeroSpriteDrawing.Sprites.MarioSprites;
 using System;
 using System.Collections.Generic;
 using System.Linq;

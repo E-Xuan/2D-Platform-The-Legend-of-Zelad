@@ -39,7 +39,12 @@ namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
         FLOWER,
         STAR,
         PROJECTILE,
-        PIPE_ENTER
+        PIPE_ENTER,
+        BOMB,
+        MOVBOMB,
+        EXPBOMB,
+        SHOARROW,
+        COLARROW
     }
 
     public class ICollideable : IRBody
@@ -135,7 +140,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
         public override void Draw(SpriteBatch batch, SpriteEffects effects)
         {
             base.Draw(batch, effects);
-            
+
 
             Color color = Color.Aqua;
             switch (CollideableType)
