@@ -188,6 +188,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
         public void ToWin(int action)
         {
             Game1.currState = GameModes.WIN;
+            ChangeAction((int)ActionState.IDLE);
         }
         
         public void IncreaseAction(int action)

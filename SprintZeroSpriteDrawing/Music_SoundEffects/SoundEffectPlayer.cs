@@ -89,7 +89,13 @@ namespace SprintZeroSpriteDrawing.Music_SoundEffects
             
             SoundEffectInstance temp;
             temp = soundEffects[sound].CreateInstance();
-            temp.Play();   
+            try
+            {
+                temp.Play();
+            }
+            catch (Exception e)
+            {
+            }
         }
     }
 }
