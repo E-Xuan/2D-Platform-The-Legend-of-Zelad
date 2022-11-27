@@ -16,13 +16,17 @@ namespace SprintZeroSpriteDrawing.Music_SoundEffects
         Song overworldMusic;
         Song starmanMusic;
         Song underworldMusic;
+        Song dungeonMusic;
+        Song introMusic;
        
 
         public enum Songs
         {
             OVERWORLD,
             UNDERWORLD,
-            STARMAN
+            STARMAN,
+            DUNGEON,
+            INTRO
         }
         private static MusicPlayer _musicPlayer;
 
@@ -40,12 +44,14 @@ namespace SprintZeroSpriteDrawing.Music_SoundEffects
             overworldMusic = content.Load<Song>("Music/MainThemeOverworld");
             starmanMusic = content.Load<Song>("Music/Starman");
             underworldMusic = content.Load<Song>("Music/Underworld");
+            introMusic = content.Load<Song>("LOZMusic/Intro");
+            dungeonMusic = content.Load<Song>("LOZMusic/Dungeon");
         }
         public void PlaySong()
         {
             MediaPlayer.IsRepeating = true;
             MediaPlayer.IsMuted = false;
-            MediaPlayer.Play(overworldMusic); 
+            MediaPlayer.Play(dungeonMusic); 
         }
 
         public void StopSong()

@@ -39,7 +39,7 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
 
         public void LoadContent(ContentManager content)
         {
-            Coin = content.Load<Texture2D>("Items/Coins");
+            Coin = content.Load<Texture2D>("Items/Rupee");
             FireFlower = content.Load<Texture2D>("Items/FireFlower");
             SMushroom = content.Load<Texture2D>("Items/SuperMushroom");
             UPMushroom = content.Load<Texture2D>("Items/1UPMushroom");
@@ -51,7 +51,7 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
 
         public ISprite createCoin(Vector2 nPos)
         {
-            return new Coins(Coin, new Vector2(2, 2), nPos);
+            return new Coins(Coin, new Vector2(1, 1), nPos);
         }
         public ISprite createFlower(Vector2 nPos)
         {
