@@ -46,7 +46,7 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
             Star = content.Load<Texture2D>("Items/Starman");
             Pirana = content.Load<Texture2D>("Enemy/Piranha");
             Bomb = content.Load<Texture2D>("Tools/Bomb");
-            Arrow = content.Load<Texture2D>("Tools/Arrow");
+            Arrow = content.Load<Texture2D>("Tools/ArrowRe");
         }
 
         public ISprite createCoin(Vector2 nPos)
