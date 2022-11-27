@@ -27,8 +27,8 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StatePowerup
             prevPowerupState = currPowerupState;
             currPowerupState = PowerupState.FIRE;
             mario.IsVis = true;
-            mario.SheetSize = new Vector2(4, 2);
-            mario.SetSprite(MarioSpriteFactory.getSpriteFactory().FireMarioSpriteSheet);
+            mario.SheetSize = new Vector2(2, 3);
+            mario.SetSprite(MarioSpriteFactory.getSpriteFactory().bombLinkSpriteSheet);
             mario.UpdateBBox();
             mario.fireBall = true;
         }
