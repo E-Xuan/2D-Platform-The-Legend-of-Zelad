@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using SprintZeroSpriteDrawing.Interfaces.Entitiy;
 using SprintZeroSpriteDrawing.Sprites.ItemSprites;
+using SprintZeroSpriteDrawing.Sprites.ToolSprites;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,7 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         public Texture2D Star;
         public Texture2D Pirana;
         public Texture2D Bomb;
+        public Texture2D Arrow;
 
         private static ItemSpriteFactory sprite;
         public static ItemSpriteFactory getFactory()
@@ -44,6 +46,7 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
             Star = content.Load<Texture2D>("Items/Starman");
             Pirana = content.Load<Texture2D>("Enemy/Piranha");
             Bomb = content.Load<Texture2D>("Tools/Bomb");
+            Arrow = content.Load<Texture2D>("Tools/Arrow");
         }
 
         public ISprite createCoin(Vector2 nPos)
@@ -73,6 +76,10 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         public ISprite CreateBomb(Vector2 nPos)
         {
             return new Bomb(Bomb, new Vector2(2, 2), nPos);
+        }
+        public ISprite CreateArrow(Vector2 nPos)
+        {
+            return new Arrow(Arrow, new Vector2(1, 1), nPos);
         }
     }
 }

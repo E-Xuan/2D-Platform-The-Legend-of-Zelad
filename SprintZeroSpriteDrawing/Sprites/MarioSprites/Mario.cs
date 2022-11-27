@@ -334,6 +334,14 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
                 }
             }
         }
+        public void ShootArrow(int x)
+        {
+            Arrow arrow = ArrowPool.GetArrowPool().Get();
+            if(arrow != null)
+            {
+                arrow.State = new ArrowShooting(arrow);
+            }
+        }
         public void PlaceBomb(int x)
         {
             Bomb bomb = BombPool.GetBombPool().Get();

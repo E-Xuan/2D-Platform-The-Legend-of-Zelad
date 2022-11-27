@@ -13,7 +13,9 @@ namespace SprintZeroSpriteDrawing.Interfaces.ToolState
     {
         BOMBIDLE,
         BOMBMOVING,
-        BOMBEXPLOSION
+        BOMBEXPLOSION,
+        ARROWSHOOTING,
+        ARRROWCOL
     }
     public class IToolState
     {
