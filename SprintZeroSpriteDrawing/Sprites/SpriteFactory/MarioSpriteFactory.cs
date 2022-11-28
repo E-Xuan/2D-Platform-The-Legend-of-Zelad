@@ -27,6 +27,12 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioActionSprites
         public Texture2D BigMarioSpriteSheet;
         public Texture2D FireMarioSpriteSheet;
         #endregion
+        #region Link Sprite Sheets
+        public Texture2D bombLinkSpriteSheet;
+        public Texture2D bowLinkSpriteSheet;
+        public Texture2D normalLinkSpriteSheet;
+        public Texture2D swordLinkSpriteSheet;
+        #endregion
 
         public Vector2 position { get; set; }
 
@@ -72,6 +78,12 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioActionSprites
             BigMarioSpriteSheet = content.Load<Texture2D>("BigMario/BigMarioSpriteSheet");
             FireMarioSpriteSheet = content.Load<Texture2D>("FireMario/FireMarioSpriteSheet");
             DeadMarioSpriteSheet = content.Load<Texture2D>("SmallMario/smallDying");
+
+            normalLinkSpriteSheet = content.Load<Texture2D>("Link/LinkNormalShield");
+            bowLinkSpriteSheet = content.Load<Texture2D>("Link/LinkBow");
+            bombLinkSpriteSheet = content.Load<Texture2D>("Link/LinkBomb");
+            swordLinkSpriteSheet = content.Load<Texture2D>("Link/LinkSword");
+
         }
         public ISprite createMario(Vector2 nPos)
         {

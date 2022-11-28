@@ -27,8 +27,8 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StatePowerup
             prevPowerupState = currPowerupState;
             currPowerupState = PowerupState.BIG;
             mario.IsVis = true;
-            mario.SheetSize = new Vector2(4, 2);
-            mario.SetSprite(Mario.BigMarioSpriteSheet);
+            mario.SheetSize = new Vector2(2, 2);
+            mario.SetSprite(Mario.bowLinkSpriteSheet);
             mario.UpdateBBox();
         }
         public static void onFlagChanged(int sound)

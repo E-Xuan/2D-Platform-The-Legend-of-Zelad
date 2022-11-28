@@ -23,8 +23,8 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StatePowerup
             prevPowerupState = currPowerupState;
             currPowerupState = PowerupState.SMALL;
             mario.IsVis = true;
-            mario.SheetSize = new Vector2(3, 3);
-            mario.SetSprite(MarioSpriteFactory.getSpriteFactory().SmallMarioSpriteSheet);
+            mario.SheetSize = new Vector2(2, 3);
+            mario.SetSprite(MarioSpriteFactory.getSpriteFactory().normalLinkSpriteSheet);
             mario.UpdateBBox();
         }
 

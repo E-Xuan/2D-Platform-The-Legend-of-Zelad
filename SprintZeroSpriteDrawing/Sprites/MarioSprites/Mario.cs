@@ -35,6 +35,13 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
         public static Texture2D FireMarioSpriteSheet;
         public static SpriteFont OverlayFont;
         #endregion
+        #region Link Sprite Sheets
+        public static Texture2D bombLinkSpriteSheet;
+        public static Texture2D bowLinkSpriteSheet;
+        public static Texture2D normalLinkSpriteSheet;
+        public static Texture2D swordLinkSpriteSheet;
+        #endregion
+
         public int Score = 0;
         public int Coins = 0;
         public int Lives = 5;
@@ -55,7 +62,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
         {
             if (_mario == null)
             {
-                _mario = new Mario(SmallMarioSpriteSheet, new Vector2(3, 3), new Vector2(0, 0));
+                _mario = new Mario(normalLinkSpriteSheet, new Vector2(2, 3), new Vector2(0, 0));
             }
             return _mario;
         }
@@ -140,7 +147,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             base.Draw(batch, effects);
             //batch.DrawString(OverlayFont, "Coins: " + Coins.ToString("000"), new Vector2(100, 100), Color.Black);
             batch.DrawString(OverlayFont, "Time: " + Time.ToString(), new Vector2(Math.Min(Math.Max(Pos.X + 700, 1660), Game1.LEVELSIZE.X - 220), 100), Color.White);
-            batch.DrawString(OverlayFont, "Coins: " + Coins.ToString("000") + "    Score: " + Score.ToString("0000000") + "    Lives: " + Lives.ToString("00"), new Vector2(Math.Min(Math.Max(Pos.X - 860, 100), Game1.LEVELSIZE.X - 1820), 100), Color.White);
+            batch.DrawString(OverlayFont, "Rupees: " + Coins.ToString("000") + "    Score: " + Score.ToString("0000000") + "    Lives: " + Lives.ToString("00"), new Vector2(Math.Min(Math.Max(Pos.X - 860, 100), Game1.LEVELSIZE.X - 1820), 100), Color.White);
         }
 
         public void Reset()
@@ -157,6 +164,11 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             BigMarioSpriteSheet = content.Load<Texture2D>("BigMario/BigMarioSpriteSheet");
             FireMarioSpriteSheet = content.Load<Texture2D>("FireMario/FireMarioSpriteSheet");
             OverlayFont = content.Load<SpriteFont>("Fonts/Arial");
+
+            normalLinkSpriteSheet = content.Load<Texture2D>("Link/LinkNormalShield");
+            bowLinkSpriteSheet = content.Load<Texture2D>("Link/LinkBow");
+            bombLinkSpriteSheet = content.Load<Texture2D>("Link/LinkBomb");
+            swordLinkSpriteSheet = content.Load<Texture2D>("Link/LinkSword");
         }
         public void Impact(int state)
         {
