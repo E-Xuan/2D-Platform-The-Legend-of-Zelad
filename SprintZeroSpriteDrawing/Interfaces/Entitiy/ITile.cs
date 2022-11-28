@@ -24,6 +24,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
         public int StartFrame { get; set; }
         public int LastFrame { get; set; }
         public Vector2 SheetSize { get; set; }
+        public Color tint { get; set; }
         private Vector2 FrameSize;
         #endregion
         public ITile(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos)
@@ -36,6 +37,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
             SheetSize = nSheetSize;
             StartFrame = 0;
             LastFrame = (int)(SheetSize.X * SheetSize.Y);
+            tint = Color.White;
             if (nSprite != null)
                 FrameSize = new Vector2(nSprite.Width / SheetSize.X, nSprite.Height / SheetSize.Y);
         }
@@ -43,11 +45,13 @@ namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
         {
             SubframeLimit = 20;
             AutoFrame = true;
+            IsVis = true;
             Sprite = nSprite;
             Pos = nPos;
             SheetSize = new Vector2(1, 1);
             StartFrame = 0;
             LastFrame = (int)(SheetSize.X * SheetSize.Y);
+            tint = Color.White;
             if (nSprite != null)
                 FrameSize = new Vector2(nSprite.Width / SheetSize.X, nSprite.Height / SheetSize.Y);
         }
@@ -66,7 +70,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
             {
                 Rectangle Rect = new Rectangle((int)(Frame % (int)SheetSize.X * FrameSize.X), (int)(Frame / (int)SheetSize.X * FrameSize.Y),
                     (int)FrameSize.X, (int)FrameSize.Y);
-                batch.Draw(Sprite, Vector2.Add(Pos, -FrameSize), Rect, Color.White, 0, new Vector2(0, 0), 1, SpriteEffects.None, 0);
+                batch.Draw(Sprite, Vector2.Add(Pos, -FrameSize), Rect, tint, 0, new Vector2(0, 0), 1, SpriteEffects.None, 0);
             }
         }
         public virtual void Draw(SpriteBatch batch, SpriteEffects effects)
@@ -75,7 +79,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
             {
                 Rectangle Rect = new Rectangle((int)(Frame % (int)SheetSize.X * FrameSize.X), (int)(Frame / (int)SheetSize.X * FrameSize.Y),
                     (int)FrameSize.X, (int)FrameSize.Y);
-                batch.Draw(Sprite, Vector2.Add(Pos, -FrameSize), Rect, Color.White, 0, new Vector2(0, 0), 1, effects, 0);
+                batch.Draw(Sprite, Vector2.Add(Pos, -FrameSize), Rect, tint, 0, new Vector2(0, 0), 1, effects, 0);
             }
         }
         virtual public void Update()
