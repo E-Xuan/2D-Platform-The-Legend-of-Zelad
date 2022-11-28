@@ -28,7 +28,9 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState
         RUNNING,
         CROUCHING,
         IDLE,
-        DAMMAGED
+        DAMMAGED,
+        STAB,
+        SHEILD
     }
     public class IMarioState
     {

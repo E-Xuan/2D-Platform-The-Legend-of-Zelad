@@ -13,6 +13,18 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin ../../../../../Documents/CSE 3902/Sprite Assets/Complete Zelda Sprites/sword.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:../../../../../Documents/CSE 3902/Sprite Assets/Complete Zelda Sprites/sword.png;Tools/sword.png
+
 #begin Background/bg_Cloud_Mt.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -566,6 +578,18 @@
 /processorParam:TextureFormat=Color
 /build:Obstacles/flag.png
 
+#begin Obstacles/Gate.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Obstacles/Gate.png
+
 #begin Obstacles/GroundBlock(Overworld).png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -709,6 +733,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Obstacles/StairBlock.png
+
+#begin Obstacles/Switch.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Obstacles/Switch.png
 
 #begin Obstacles/UG-BrickBlock.png
 /importer:TextureImporter
@@ -962,6 +998,18 @@
 /processorParam:TextureFormat=Color
 /build:Tools/Bomb.png
 
+#begin Tools/Bow.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Tools/Bow.png
+
 #begin Tools/Hookshot.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -973,4 +1021,28 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Tools/Hookshot.png
+
+#begin Tools/Sheild.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Tools/Sheild.png
+
+#begin Tools/sword.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Tools/sword.png
 

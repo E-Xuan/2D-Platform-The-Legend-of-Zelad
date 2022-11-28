@@ -47,9 +47,10 @@ namespace SprintZeroSpriteDrawing.Commands
 
             //keyboardController.UpdateBinding(Keys.Space, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().ShootFire, (int)PowerupState.FIRE)), BindingType.PRESSED);
             keyboardController.UpdateBinding(Keys.M, new IntCmd(new KeyValuePair<Action<int>, int>(MusicPlayer.GetMusicPlayer().Mute, 0)), BindingType.PRESSED);
-            keyboardController.UpdateBinding(Keys.Space, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().PlaceBomb, 0)), BindingType.PRESSED);
+            keyboardController.UpdateBinding(Keys.F, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().PlaceBomb, 0)), BindingType.PRESSED);
             keyboardController.UpdateBinding(Keys.L, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().ShootArrow, 0)), BindingType.PRESSED);
             //mouseController.RegisterLeftClickCommand(new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().ShootArrow, 0)));
+            keyboardController.UpdateBinding(Keys.Space, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().ShootArrow, 0)), BindingType.PRESSED);
 
             gamepadController.UpdateBinding(Buttons.LeftStick, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().ChangeAction, -1)), BindingType.PRESSED);
             gamepadController.UpdateBinding(Buttons.RightStick, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().ChangeAction, 1)), BindingType.PRESSED);
