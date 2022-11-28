@@ -42,6 +42,7 @@ namespace SprintZeroSpriteDrawing
         private IController<Keys> keyboardController;
         private IController<Buttons> gamepadController;
         private IController<Keys> quitpauseController;
+        private MouseController2 mouseController;
         #endregion
 
         #region sprites
@@ -81,6 +82,7 @@ namespace SprintZeroSpriteDrawing
 
         protected override void Initialize()
         {
+            mouseController = new MouseController2();
             keyboardController = new KeyboardController();
             gamepadController = new GamepadController();
             quitpauseController = new QuitPauseController();
@@ -115,7 +117,7 @@ namespace SprintZeroSpriteDrawing
             MarioSpriteFactory.getSpriteFactory().LoadContent(Content);
             ProjectileSpriteFactory.getSpriteFactory().LoadContent(Content);
             Mario.LoadContent(Content);
-            BindingCmd.SetGameBinding(keyboardController, gamepadController, quitpauseController);
+            BindingCmd.SetGameBinding(keyboardController, gamepadController, quitpauseController, mouseController);
             // set game binding
             //Starting the sprite batch on our new graphics device
             //move init and loading of textures?
@@ -180,6 +182,7 @@ namespace SprintZeroSpriteDrawing
                 }
                 CollisionManager.getCM().Update();
                 base.Update(gameTime);
+                mouseController.UpdateInput();
                 keyboardController.UpdateInput();
                 gamepadController.UpdateInput();
             }
@@ -230,7 +233,7 @@ namespace SprintZeroSpriteDrawing
             if(currState == GameModes.NORMAL)
             {
                 isTimeCounting = true;
-                BindingCmd.SetGameBinding(keyboardController, gamepadController, quitpauseController);
+                BindingCmd.SetGameBinding(keyboardController, gamepadController, quitpauseController, mouseController);
                 quitpauseController.UpdateBinding(Keys.Q, new IntCmd(new KeyValuePair<Action<int>, int>(ExitWithCode, 0)), BindingType.PRESSED);
                 keyboardController.UpdateBinding(Keys.R, new LevelReset(this), BindingType.PRESSED);
                 gamepadController.UpdateBinding(Buttons.Start, new IntCmd(new KeyValuePair<Action<int>, int>(ExitWithCode, 0)), BindingType.PRESSED);
