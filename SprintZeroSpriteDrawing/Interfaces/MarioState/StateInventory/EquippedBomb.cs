@@ -14,7 +14,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateInventory
         public EquippedBomb(Mario nMario) : base(nMario)
         {
         }
-        public EquippedBomb(Mario nMario, HashSet<Type> inventoryItems) : base(nMario, inventoryItems)
+        public EquippedBomb(Mario nMario, HashSet<EquippableItems> inventoryItems) : base(nMario, inventoryItems)
         {
         }
         public override void ItemAction()

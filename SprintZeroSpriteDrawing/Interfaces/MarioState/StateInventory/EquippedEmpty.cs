@@ -15,9 +15,9 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateInventory
     {
         public EquippedEmpty(Mario nMario) : base(nMario)
         {
-            PlayerInventory = new HashSet<Type>(){typeof(Bomb), typeof(Sword), typeof(Bow), typeof(Hookshot)};
+            PlayerInventory = new HashSet<EquippableItems>(){};
         }
-        public EquippedEmpty(Mario nMario, HashSet<Type> inventoryItems) : base(nMario, inventoryItems)
+        public EquippedEmpty(Mario nMario, HashSet<EquippableItems> inventoryItems) : base(nMario, inventoryItems)
         {
         }
 

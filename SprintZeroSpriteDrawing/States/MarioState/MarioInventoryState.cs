@@ -30,7 +30,7 @@ namespace SprintZeroSpriteDrawing.States.MarioState
         public static Texture2D BombHUDTexture { get; set; }
         public static Texture2D HookshotHUDTexture { get; set; }
         public static List<ITile> Icons { get; set; }
-        public HashSet<Type> PlayerInventory { get; set; }
+        public HashSet<EquippableItems> PlayerInventory { get; set; }
         public MarioInventoryState(Mario nMario) : base(nMario)
         {
             if (Icons == null)
@@ -47,33 +47,17 @@ namespace SprintZeroSpriteDrawing.States.MarioState
                 }
             }
         }
-        public MarioInventoryState(Mario nMario, HashSet<Type> inventoryItems) : base(nMario)
+        public MarioInventoryState(Mario nMario, HashSet<EquippableItems> inventoryItems) : base(nMario)
         {
             PlayerInventory = inventoryItems;
         }
         public virtual void ItemAction()
         {
         }
-        public void EquipItem(Item item)
+        public void EquipItem(int item)
         {
-            Type type = item.GetType();
-            PlayerInventory.Add(type);
-            if (type == typeof(Sword))
-            {
-                Icons[0].tint = Color.White;
-            }
-            if (type == typeof(Bow))
-            {
-                Icons[1].tint = Color.White;
-            }
-            if (type == typeof(Bomb))
-            {
-                Icons[2].tint = Color.White;
-            }
-            if (type == typeof(Hookshot))
-            {
-                Icons[3].tint = Color.White;
-            }
+            PlayerInventory.Add((EquippableItems)item);
+            Icons[item].tint = Color.White;
         }
         public void Draw(SpriteBatch batch)
         {
@@ -85,24 +69,23 @@ namespace SprintZeroSpriteDrawing.States.MarioState
         }
         public void SwitchToItem(int item)
         {
-            switch ((EquippableItems)item)
+            if (PlayerInventory.Contains((EquippableItems)item))
             {
-                case EquippableItems.SWORD:
-                    if (PlayerInventory.Contains(typeof(Sword)))
+                switch ((EquippableItems)item)
+                {
+                    case EquippableItems.SWORD:
                         mario.StateInventory = new EquippedSword(mario, PlayerInventory);
-                    break;
-                case EquippableItems.BOMB:
-                    if (PlayerInventory.Contains(typeof(Bomb)))
-                        mario.StateInventory = new EquippedBomb(mario, PlayerInventory);
-                    break;
-                case EquippableItems.BOW:
-                    if (PlayerInventory.Contains(typeof(Bow)))
-                        mario.StateInventory = new EquippedBow(mario, PlayerInventory);
-                    break;
-                case EquippableItems.HOOKSHOT:
-                    if (PlayerInventory.Contains(typeof(Hookshot)))
-                        mario.StateInventory = new EquippedHookshot(mario, PlayerInventory);
-                    break;
+                        break;
+                    case EquippableItems.BOMB:
+                            mario.StateInventory = new EquippedBomb(mario, PlayerInventory);
+                        break;
+                    case EquippableItems.BOW:
+                            mario.StateInventory = new EquippedBow(mario, PlayerInventory);
+                        break;
+                    case EquippableItems.HOOKSHOT:
+                            mario.StateInventory = new EquippedHookshot(mario, PlayerInventory);
+                        break;
+                }
             }
         }
     }

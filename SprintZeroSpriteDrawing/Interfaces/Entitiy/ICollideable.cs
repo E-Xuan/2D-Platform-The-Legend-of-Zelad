@@ -15,6 +15,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
         TOP,
         SIDE,
         BOTTOM,
+        ANY,
         LEFT,
         RIGHT,
         NULL
@@ -40,6 +41,10 @@ namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
         STAR,
         PROJECTILE,
         PIPE_ENTER,
+        BOMB_PWR,
+        BOW_PWR,
+        SWORD_PWR,
+        HOOKSHOT_PWR,
         BOMB,
         MOVBOMB,
         EXPBOMB,

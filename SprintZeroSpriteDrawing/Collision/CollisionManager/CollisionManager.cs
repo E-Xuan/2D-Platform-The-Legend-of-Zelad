@@ -140,7 +140,7 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
                                     foreach (var response in entity.CollisionResponse)
                                     {
                                         if (response.Item3 == entity2.CollideableType &&
-                                            response.Item2 == CollisionDirection)
+                                            (response.Item2 == CollisionDirection || response.Item2 == Direction.ANY))
                                         {
                                             exeList.Add(response.Item1);
                                         }
@@ -158,7 +158,7 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
                                     foreach (var response in entity2.CollisionResponse)
                                     {
                                         if (response.Item3 == entity.CollideableType &&
-                                            response.Item2 == CollisionDirection)
+                                            (response.Item2 == CollisionDirection || response.Item2 == Direction.ANY))
                                         {
                                             exeList.Add(response.Item1);
                                         }
