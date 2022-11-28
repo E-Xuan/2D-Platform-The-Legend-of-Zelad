@@ -129,6 +129,8 @@ namespace SprintZeroSpriteDrawing
         }
         public void Restart(String level)
         {
+            MusicPlayer.GetMusicPlayer().StopSong();
+            MusicPlayer.GetMusicPlayer().PlaySong();
             SPLASH_BACK = true;
             SpriteList = new List<ISprite>();
             Mario.GetMario().StatePowerup = new SmallMario(Mario.GetMario());

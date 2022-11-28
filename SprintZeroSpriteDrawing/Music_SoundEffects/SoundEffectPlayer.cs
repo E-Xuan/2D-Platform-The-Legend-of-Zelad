@@ -65,6 +65,7 @@ namespace SprintZeroSpriteDrawing.Music_SoundEffects
 
         public void LoadSoundEffects(ContentManager content)
         {
+            #region Mario Sound Effects
             soundEffects.Add(content.Load<SoundEffect>("SoundEffects/1-up"));
             soundEffects.Add(content.Load<SoundEffect>("SoundEffects/breakblock"));
             soundEffects.Add(content.Load<SoundEffect>("SoundEffects/bump"));
@@ -83,6 +84,20 @@ namespace SprintZeroSpriteDrawing.Music_SoundEffects
             soundEffects.Add(content.Load<SoundEffect>("SoundEffects/stageClear"));
             soundEffects.Add(content.Load<SoundEffect>("SoundEffects/stomp"));
             soundEffects.Add(content.Load<SoundEffect>("SoundEffects/warning"));
+            #endregion
+            #region Zelda Sound Effects
+            soundEffects.Add(content.Load<SoundEffect>("LOZSoundEffects/ArrowShoot"));
+            soundEffects.Add(content.Load<SoundEffect>("LOZSoundEffects/BombBlow"));
+            soundEffects.Add(content.Load<SoundEffect>("LOZSoundEffects/EnemyHit"));
+            //soundEffects.Add(content.Load<SoundEffect>("LOZSoundEffects/Game Over"));
+            soundEffects.Add(content.Load<SoundEffect>("LOZSoundEffects/GetItem"));
+            soundEffects.Add(content.Load<SoundEffect>("LOZSoundEffects/GetRupee"));
+            //soundEffects.Add(content.Load<SoundEffect>("LOZSoundEffects/Item"));
+            //soundEffects.Add(content.Load<SoundEffect>("LOZSoundEffects/Secret"));
+            soundEffects.Add(content.Load<SoundEffect>("LOZSoundEffects/Shield"));
+            soundEffects.Add(content.Load<SoundEffect>("LOZSoundEffects/SwordSlash"));
+            #endregion
+
         }
         public void PlaySounds(int sound)
         {
