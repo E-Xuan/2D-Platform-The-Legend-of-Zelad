@@ -14,7 +14,7 @@ namespace SprintZeroSpriteDrawing.Commands
 {
     public class BindingCmd
     {
-        public static void SetGameBinding(IController<Keys> keyboardController, IController<Buttons> gamepadController, IController<Keys> QuitPauseController)
+        public static void SetGameBinding(IController<Keys> keyboardController, IController<Buttons> gamepadController, IController<Keys> QuitPauseController, MouseController2 mouseController)
         {
             keyboardController.ClearBinding();
             gamepadController.ClearBinding();
@@ -49,7 +49,7 @@ namespace SprintZeroSpriteDrawing.Commands
             keyboardController.UpdateBinding(Keys.M, new IntCmd(new KeyValuePair<Action<int>, int>(MusicPlayer.GetMusicPlayer().Mute, 0)), BindingType.PRESSED);
             keyboardController.UpdateBinding(Keys.Space, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().PlaceBomb, 0)), BindingType.PRESSED);
             keyboardController.UpdateBinding(Keys.L, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().ShootArrow, 0)), BindingType.PRESSED);
-
+            //mouseController.RegisterLeftClickCommand(new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().ShootArrow, 0)));
 
             gamepadController.UpdateBinding(Buttons.LeftStick, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().ChangeAction, -1)), BindingType.PRESSED);
             gamepadController.UpdateBinding(Buttons.RightStick, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().ChangeAction, 1)), BindingType.PRESSED);

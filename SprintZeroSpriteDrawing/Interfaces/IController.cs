@@ -32,11 +32,11 @@ namespace SprintZeroSpriteDrawing.Interfaces
             };
         }
 
+
         public virtual void UpdateInput()
         {
             throw new NotImplementedException("Implement Controllers Update Input Method");
         }
-
         //This could really be an abstract class... The update bindings method is the same either way
         public void UpdateBinding(T key, ICommand command, BindingType bindingType)
         {
@@ -46,6 +46,7 @@ namespace SprintZeroSpriteDrawing.Interfaces
                 CommandBindingList[(int)bindingType].Add(key, command);
             }
         }
+
         public void ReplaceBinding(List<Dictionary<T, ICommand>> nCommandBindingList)
         {
             CommandBindingList = nCommandBindingList;
