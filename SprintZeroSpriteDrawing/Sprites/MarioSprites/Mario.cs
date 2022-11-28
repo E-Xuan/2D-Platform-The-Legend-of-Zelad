@@ -126,6 +126,12 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangePowerup, (int)PowerupState.STAR)), Direction.SIDE, CType.STAR));
 
 
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(EquipItem, (int)EquippableItems.SWORD)), Direction.ANY, CType.SWORD_PWR));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(EquipItem, (int)EquippableItems.BOW)), Direction.ANY, CType.BOW_PWR));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(EquipItem, (int)EquippableItems.BOMB)), Direction.ANY, CType.BOMB_PWR));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(EquipItem, (int)EquippableItems.HOOKSHOT)), Direction.ANY, CType.HOOKSHOT_PWR));
+
+
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(ChangePowerup, (int)PowerupState.DEAD)), Direction.BOTTOM, CType.BOUNDRY));
 
             // change
@@ -188,6 +194,10 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
                 StatePowerup.ChangePowerupState(powerup % 5);
             if (powerup == (int)PowerupState.DEAD)
                 Game1.level_update = true;
+        }
+        public void EquipItem(int item)
+        {
+            StateInventory.EquipItem(item);
         }
         public void ChangeAction(int action)
         {

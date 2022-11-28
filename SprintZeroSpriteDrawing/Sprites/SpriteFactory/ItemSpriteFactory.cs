@@ -10,6 +10,8 @@ using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
+using SprintZeroSpriteDrawing.Sprites.ItemSprites.EquippableItem;
+using Bomb = SprintZeroSpriteDrawing.Sprites.ItemSprites.Bomb;
 
 namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
 {
@@ -26,6 +28,11 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         public Texture2D Pirana;
         public Texture2D Bomb;
         public Texture2D Arrow;
+
+        public Texture2D SwordPwr;
+        public Texture2D BowPwr;
+        public Texture2D BombPwr;
+        public Texture2D HookshotPwr;
 
         private static ItemSpriteFactory sprite;
         public static ItemSpriteFactory getFactory()
@@ -47,6 +54,11 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
             Pirana = content.Load<Texture2D>("Enemy/Piranha");
             Bomb = content.Load<Texture2D>("Tools/Bomb");
             Arrow = content.Load<Texture2D>("Tools/ArrowRe");
+
+            SwordPwr = content.Load<Texture2D>("Tools/sword");
+            BowPwr = content.Load<Texture2D>("Tools/ArrowRe");
+            BombPwr = content.Load<Texture2D>("Tools/Bomb");
+            HookshotPwr = content.Load<Texture2D>("Tools/Hookshot");
         }
 
         public ISprite createCoin(Vector2 nPos)
@@ -72,6 +84,22 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         public ISprite CreatePiranaPlant(Vector2 nPos)
         {
             return new PiranaPlant(Pirana, new Vector2(2, 1), nPos);
+        }
+        public ISprite CreateSwordPwr(Vector2 nPos)
+        {
+            return new Sword(SwordPwr, new Vector2(1, 1), nPos);
+        }
+        public ISprite CreateBowPwr(Vector2 nPos)
+        {
+            return new Bow(BowPwr, new Vector2(1, 1), nPos);
+        }
+        public ISprite CreateBombPwr(Vector2 nPos)
+        {
+            return new ItemSprites.EquippableItem.Bomb(BombPwr, new Vector2(2, 2), nPos);
+        }
+        public ISprite CreateHookshotPwr(Vector2 nPos)
+        {
+            return new Hookshot(HookshotPwr, new Vector2(2, 2), nPos);
         }
         public ISprite CreateBomb(Vector2 nPos)
         {

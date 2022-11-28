@@ -56,7 +56,6 @@ namespace SprintZeroSpriteDrawing.Commands
 
             keyboardController.UpdateBinding(Keys.Space, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().UseItem, 0)), BindingType.PRESSED);
             //mouseController.RegisterLeftClickCommand(new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().ShootArrow, 0)));
-            keyboardController.UpdateBinding(Keys.Space, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().ShootArrow, 0)), BindingType.PRESSED);
 
             gamepadController.UpdateBinding(Buttons.LeftStick, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().ChangeAction, -1)), BindingType.PRESSED);
             gamepadController.UpdateBinding(Buttons.RightStick, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().ChangeAction, 1)), BindingType.PRESSED);
