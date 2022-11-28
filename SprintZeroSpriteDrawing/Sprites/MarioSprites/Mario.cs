@@ -19,8 +19,10 @@ using SprintZeroSpriteDrawing.Sprites.ObstacleSprites;
 using SprintZeroSpriteDrawing.Music_SoundEffects;
 using SprintZeroSpriteDrawing.Sprites.ProjectileSprites;
 using Microsoft.Xna.Framework.Media;
+using SprintZeroSpriteDrawing.Interfaces.MarioState.StateInventory;
 using SprintZeroSpriteDrawing.Sprites.ItemSprites;
 using SprintZeroSpriteDrawing.Sprites.ToolSprites;
+using SprintZeroSpriteDrawing.States.MarioState;
 
 namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
 {
@@ -52,6 +54,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
         public bool fireBall { get; set; }
         public IMarioState StatePowerup;
         public IMarioState StateAction;
+        public MarioInventoryState StateInventory;
 
         public int[] currState;
 
@@ -72,6 +75,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             StartFrame = 0;
             StatePowerup = new SmallMario(this);
             StateAction = new MarioIdle(this);
+            StateInventory = new EquippedEmpty(this);
             currState = new int[5];
 
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(TakeDamage, 0)), Direction.SIDE, CType.EXPBOMB));
@@ -182,6 +186,10 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
         public void ChangeAction(int action)
         {
             StateAction.ChangeActionState(action);
+        }
+        public void ChangeItem(int item)
+        {
+            StateInventory.SwitchToItem(item);
         }
         public void Drag(int coeff)
         {
@@ -346,6 +354,10 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
                     soundEffectPlayer.Trigger = (int)SoundEffectPlayer.Sounds.FIREBALL;
                 }
             }
+        }
+        public void UseItem(int x)
+        {
+            StateInventory.ItemAction();
         }
         public void ShootArrow(int x)
         {

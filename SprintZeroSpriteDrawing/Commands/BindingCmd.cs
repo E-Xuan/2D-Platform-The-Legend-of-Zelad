@@ -9,6 +9,7 @@ using SprintZeroSpriteDrawing.GameMode;
 using SprintZeroSpriteDrawing.Interfaces.GameState;
 using SprintZeroSpriteDrawing.Music_SoundEffects;
 using SprintZeroSpriteDrawing.Controllers;
+using SprintZeroSpriteDrawing.States.MarioState;
 
 namespace SprintZeroSpriteDrawing.Commands
 {
@@ -47,8 +48,13 @@ namespace SprintZeroSpriteDrawing.Commands
 
             //keyboardController.UpdateBinding(Keys.Space, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().ShootFire, (int)PowerupState.FIRE)), BindingType.PRESSED);
             keyboardController.UpdateBinding(Keys.M, new IntCmd(new KeyValuePair<Action<int>, int>(MusicPlayer.GetMusicPlayer().Mute, 0)), BindingType.PRESSED);
-            keyboardController.UpdateBinding(Keys.F, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().PlaceBomb, 0)), BindingType.PRESSED);
-            keyboardController.UpdateBinding(Keys.L, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().ShootArrow, 0)), BindingType.PRESSED);
+
+            keyboardController.UpdateBinding(Keys.D1, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().ChangeItem, (int)EquippableItems.SWORD)), BindingType.PRESSED);
+            keyboardController.UpdateBinding(Keys.D2, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().ChangeItem, (int)EquippableItems.BOW)), BindingType.PRESSED);
+            keyboardController.UpdateBinding(Keys.D3, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().ChangeItem, (int)EquippableItems.BOMB)), BindingType.PRESSED);
+            keyboardController.UpdateBinding(Keys.D4, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().ChangeItem, (int)EquippableItems.HOOKSHOT)), BindingType.PRESSED);
+
+            keyboardController.UpdateBinding(Keys.Space, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().UseItem, 0)), BindingType.PRESSED);
             //mouseController.RegisterLeftClickCommand(new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().ShootArrow, 0)));
             keyboardController.UpdateBinding(Keys.Space, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().ShootArrow, 0)), BindingType.PRESSED);
 
