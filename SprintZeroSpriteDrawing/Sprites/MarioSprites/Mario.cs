@@ -200,6 +200,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
         public void ChangeItem(int item)
         {
             StateInventory.SwitchToItem(item);
+            ChangePowerup(item);
         }
         public void Drag(int coeff)
         {
