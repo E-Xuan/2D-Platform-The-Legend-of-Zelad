@@ -36,11 +36,11 @@ namespace SprintZeroSpriteDrawing.Commands
             keyboardController.UpdateBinding(Keys.D, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().ChangeAction, (int)(ActionState.IDLE))), BindingType.RELEASED);
             keyboardController.UpdateBinding(Keys.Right, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().ChangeAction, (int)(ActionState.IDLE))), BindingType.RELEASED);
 
-            keyboardController.UpdateBinding(Keys.Y, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().ChangePowerup, (int)PowerupState.SMALL + 5)), BindingType.PRESSED);
-            keyboardController.UpdateBinding(Keys.U, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().ChangePowerup, (int)PowerupState.BIG + 5)), BindingType.PRESSED);
-            keyboardController.UpdateBinding(Keys.I, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().ChangePowerup, (int)PowerupState.FIRE + 5)), BindingType.PRESSED);
-            keyboardController.UpdateBinding(Keys.T, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().ChangePowerup, (int)PowerupState.SHIELD + 5)), BindingType.PRESSED);
-            keyboardController.UpdateBinding(Keys.G, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().ChangePowerup, (int)PowerupState.SWORD + 5)), BindingType.PRESSED);
+            keyboardController.UpdateBinding(Keys.Y, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().ChangePowerup, (int)PowerupState.SMALL + 7)), BindingType.PRESSED);
+            keyboardController.UpdateBinding(Keys.U, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().ChangePowerup, (int)PowerupState.BIG + 7)), BindingType.PRESSED);
+            keyboardController.UpdateBinding(Keys.I, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().ChangePowerup, (int)PowerupState.FIRE + 7)), BindingType.PRESSED);
+            keyboardController.UpdateBinding(Keys.T, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().ChangePowerup, (int)PowerupState.SHIELD + 7)), BindingType.PRESSED);
+            keyboardController.UpdateBinding(Keys.G, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().ChangePowerup, (int)PowerupState.SWORD + 7)), BindingType.PRESSED);
 
             keyboardController.UpdateBinding(Keys.O, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().TakeDamage, -1)), BindingType.PRESSED);
 
@@ -61,8 +61,8 @@ namespace SprintZeroSpriteDrawing.Commands
             keyboardController.UpdateBinding(Keys.Space, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().UseItem, 0)), BindingType.PRESSED);
             //mouseController.RegisterLeftClickCommand(new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().ShootArrow, 0)));
             keyboardController.UpdateBinding(Keys.Space, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().ShootArrow, 0)), BindingType.PRESSED);
-            keyboardController.UpdateBinding(Keys.E, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().ChangeAction, (int)ActionState.SHIELDED)), BindingType.PRESSED);
-            keyboardController.UpdateBinding(Keys.F, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().ChangeAction, (int)ActionState.STAB)), BindingType.PRESSED);
+            keyboardController.UpdateBinding(Keys.E, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().ShieldPlayer, (int)PowerupState.SHIELD)), BindingType.PRESSED);
+            keyboardController.UpdateBinding(Keys.F, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().Stabing, (int)PowerupState.SWORD)), BindingType.PRESSED);
 
             keyboardController.UpdateBinding(Keys.Z, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().ShootHookShot, 0)), BindingType.PRESSED);
 

@@ -29,6 +29,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StatePowerup
         {
             CollisionManager.getCM().RegMoving(mario);
             currActionState = ActionState.STAB;
+            mario.CollideableType = CType.PROJECTILE;
             mario.IsVis = true;
             mario.Velocity = new Vector2(0, 0);
             mario.Acceleration = new Vector2(0, 0);
