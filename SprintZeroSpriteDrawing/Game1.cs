@@ -25,6 +25,7 @@ using SprintZeroSpriteDrawing.States.MarioState;
 using SprintZeroSpriteDrawing.Interfaces.MarioState.StatePowerup;
 using SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction;
 using System.Diagnostics.Metrics;
+using System.Linq;
 using System.Reflection;
 using SprintZeroSpriteDrawing.Music_SoundEffects;
 using SprintZeroSpriteDrawing.Interfaces.GameState;
@@ -53,8 +54,7 @@ namespace SprintZeroSpriteDrawing
         //Sprites and their names, could use UUID's if I wanted to, but I like names its unnecessary tho
         public static List<ISprite> SpriteList = new List<ISprite>();
         #endregion
-
-
+        public int[] LevelOrder { get; set; }
 
         public static Vector2 LEVELSIZE = new Vector2(1920,1080);
         public static Vector2 PipeExit = new Vector2(1920, 1080);
@@ -68,8 +68,8 @@ namespace SprintZeroSpriteDrawing
         public static bool SPLASH_BACK = false;
         private int splashback_timer = 0;
         public static GameModes currState;
-        //public static Direction CD;
         public static bool underGround = false;
+        public static int level_index = 0;
         public static bool level_update = false; 
 
         public Game1()
@@ -78,8 +78,21 @@ namespace SprintZeroSpriteDrawing
             Graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+            GenerateLevelOrder();
         }
-
+        public void GenerateLevelOrder()
+        {
+            Random rand = new Random();
+            int[] innerLevels = new int[5] { 2, 3, 4, 5, 6 };
+            innerLevels = innerLevels.OrderBy(x => rand.Next()).ToArray();
+            LevelOrder = new int[7];
+            LevelOrder[0] = 1;
+            for (int i = 0; i < 5; i++)
+            {
+                LevelOrder[i + 1] = innerLevels[i];
+            }
+            LevelOrder[6] = 7;
+        }
         protected override void Initialize()
         {
             mouseController = new MouseController2();
@@ -136,7 +149,7 @@ namespace SprintZeroSpriteDrawing
             SPLASH_BACK = true;
             SpriteList = new List<ISprite>();
             Mario.GetMario().StatePowerup = new SmallMario(Mario.GetMario());
-            LevelLoader.LevelLoader.GetLevelLoader().LoadLevel("Level/" + level);
+            LevelLoader.LevelLoader.GetLevelLoader().LoadLevel("Level/level_" + LevelOrder[level_index] + ".txt");
             if(piped)
                 Mario.GetMario().Pos = PipeExit;
             CollisionManager.getCM().Init();
@@ -150,7 +163,8 @@ namespace SprintZeroSpriteDrawing
             SpriteList = new List<ISprite>();
             Mario.GetMario().StatePowerup = new SmallMario(Mario.GetMario());
             Mario.GetMario().Reset();
-            LevelLoader.LevelLoader.GetLevelLoader().LoadLevel("Level/test.txt");
+            underGround = false;
+            LevelLoader.LevelLoader.GetLevelLoader().LoadLevel("Level/level_1.txt");
             CollisionManager.getCM().Init();
             CollisionManager.getCM().RegMoving(Mario.GetMario());
             currState = GameModes.START;

@@ -38,8 +38,6 @@ namespace SprintZeroSpriteDrawing.States.MarioState
         {
             _texture = new Texture2D(Game1.Graphics.GraphicsDevice, 1, 1);
             _texture.SetData(new Color[] { Color.White });
-            if (Icons == null)
-            {
                 Icons = new List<ITile>()
                 {
                     new ITile(SwordHUDTexture, new Vector2(800, 100)), new ITile(ShieldHUDTexture, new Vector2(900, 100)),
@@ -51,7 +49,6 @@ namespace SprintZeroSpriteDrawing.States.MarioState
                 {
                     icon.tint = Color.Gray;
                 }
-            }
         }
         public MarioInventoryState(Mario nMario, HashSet<EquippableItems> inventoryItems) : base(nMario)
         {
@@ -72,7 +69,7 @@ namespace SprintZeroSpriteDrawing.States.MarioState
             int posoffset = -200;
             foreach (ITile icon in Icons)
             {
-                icon.Pos = new Vector2(Math.Max(mario.Pos.X, 900) + posoffset, 100);
+                icon.Pos = new Vector2(Math.Max(mario.Pos.X - 960 + 348, 348) + posoffset, 200);
                 icon.Draw(batch);
                 posoffset += 100;
             }

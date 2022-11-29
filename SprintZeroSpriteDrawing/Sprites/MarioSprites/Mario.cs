@@ -143,6 +143,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             //batch.DrawString(OverlayFont, "Coins: " + Coins.ToString("000"), new Vector2(100, 100), Color.Black);
             batch.DrawString(OverlayFont, "Time: " + Time.ToString(), new Vector2(Math.Min(Math.Max(Pos.X + 700, 1660), Game1.LEVELSIZE.X - 220), 100), Color.White);
             batch.DrawString(OverlayFont, "Rupees: " + Coins.ToString("000") + "    Score: " + Score.ToString("0000000") + "    Lives: " + Lives.ToString("00"), new Vector2(Math.Min(Math.Max(Pos.X - 860, 100), Game1.LEVELSIZE.X - 1820), 100), Color.White);
+            batch.DrawString(OverlayFont, "1:      2:        3:        4:        5:", new Vector2(Math.Min(Math.Max(Pos.X - 860, 100), Game1.LEVELSIZE.X - 1820), 148), Color.White);
             StateInventory.Draw(batch);
         }
 
@@ -170,7 +171,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             MarioInventoryState.ShieldHUDTexture = content.Load<Texture2D>("Tools/Sheild");
             MarioInventoryState.BowHUDTexture = content.Load<Texture2D>("Tools/Bow");
             MarioInventoryState.BombHUDTexture = content.Load<Texture2D>("Tools/Bomb");
-            MarioInventoryState.HookshotHUDTexture = content.Load<Texture2D>("Tools/Hookshot");
+            MarioInventoryState.HookshotHUDTexture = content.Load<Texture2D>("Tools/HookshotRe");
 
             upBowLinkSpriteSheet = content.Load<Texture2D>("Link/Bow/LinkBowUp");
             downBowLinkSpriteSheet = content.Load<Texture2D>("Link/Bow/LinkBowDown");
@@ -416,6 +417,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             if (StateAction.currActionState == ActionState.CROUCHING)
             {
                 Game1.level_update = true;
+                Game1.level_index++;
                 Game1.underGround = !Game1.underGround;
 
                 MusicPlayer.GetMusicPlayer().ChangeSong((int)MusicPlayer.Songs.UNDERWORLD);
