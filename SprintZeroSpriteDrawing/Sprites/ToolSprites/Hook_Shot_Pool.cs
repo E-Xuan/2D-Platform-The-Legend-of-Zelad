@@ -12,7 +12,7 @@ namespace SprintZeroSpriteDrawing.Sprites.ToolSprites
     public class Hook_Shot_Pool
     {
         public Queue<Hook_Shot> hook_Shots = new Queue<Hook_Shot>();
-        public static int hook_Shots_Max = 1;
+        public static int hook_Shots_Max = 2;
         public static Vector2 position;
         private static Hook_Shot_Pool hook_Shot_Pool;
         public Hook_Shot_Pool(Hook_Shot hook_shot)
@@ -30,9 +30,9 @@ namespace SprintZeroSpriteDrawing.Sprites.ToolSprites
             }
             return hook_Shot_Pool;
         }
-        public void Collect()
+        public void Collect(Hook_Shot hook_Shot)
         {
-            Hook_Shot hook_Shot;
+            /*Hook_Shot hook_Shot;
             if (hook_Shots.Count > 0)
             {
                 hook_Shot = hook_Shots.Peek();
@@ -40,7 +40,8 @@ namespace SprintZeroSpriteDrawing.Sprites.ToolSprites
             else
             {
                 hook_Shot = (Hook_Shot)ItemSpriteFactory.getFactory().CreateHookShot(position);
-            }
+            }*/
+            hook_Shots.Clear();
             hook_Shots.Enqueue(hook_Shot);
         }
 

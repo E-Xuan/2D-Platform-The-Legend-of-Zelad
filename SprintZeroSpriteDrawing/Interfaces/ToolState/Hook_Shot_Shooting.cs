@@ -33,12 +33,6 @@ namespace SprintZeroSpriteDrawing.Interfaces.ToolState
 
             }
             tool.IsVis = true;
-            tool.CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Collect, 0)), Direction.SIDE, CType.AVATAR_SMALL));
-            tool.CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Collect, 0)), Direction.SIDE, CType.AVATAR_LARGE));
-            tool.CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Collect, 0)), Direction.TOP, CType.AVATAR_SMALL));
-            tool.CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Collect, 0)), Direction.TOP, CType.AVATAR_LARGE));
-            tool.CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Collect, 0)), Direction.BOTTOM, CType.AVATAR_SMALL));
-            tool.CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Collect, 0)), Direction.BOTTOM, CType.AVATAR_LARGE));
             tool.CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Hooked, 0)), Direction.BOTTOM, CType.NEUTRAL));
             tool.CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Hooked, 0)), Direction.SIDE, CType.NEUTRAL));
             CollisionManager.getCM().RegEntity(tool);
@@ -49,12 +43,6 @@ namespace SprintZeroSpriteDrawing.Interfaces.ToolState
         public override void Enter()
         {
             Game1.SpriteList.Add(tool);
-        }
-        public virtual void Collect(int collect)
-        {
-            tool.CollideableType = CType.UNCOLLIDEABLE;
-            Game1.SpriteList.Remove(tool);
-            Hook_Shot_Pool.GetHook_ShotPool().Collect();
         }
         public virtual void Hooked(int hooked)
         {
