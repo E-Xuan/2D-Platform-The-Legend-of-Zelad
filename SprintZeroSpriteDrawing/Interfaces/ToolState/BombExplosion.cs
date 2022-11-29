@@ -23,6 +23,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.ToolState
             tool.StartFrame = 1;
             tool.IsVis = true;
             tool.AutoFrame = true;
+            tool.BBox = new Rectangle(tool.BBox.X - 48, tool.BBox.Y - 48, 48 * 3, 48 * 3);
 
         }
         public override void Update()
