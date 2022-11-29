@@ -1046,6 +1046,18 @@
 /processorParam:TextureFormat=Color
 /build:Tools/Hookshot.png
 
+#begin Tools/HookshotRe.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Tools/HookshotRe.png
+
 #begin Tools/Sheild.png
 /importer:TextureImporter
 /processor:TextureProcessor
