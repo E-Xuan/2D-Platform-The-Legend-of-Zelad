@@ -44,6 +44,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
         BOMB_PWR,
         BOW_PWR,
         SWORD_PWR,
+        SHIELD_PWR,
         HOOKSHOT_PWR,
         BOMB,
         MOVBOMB,

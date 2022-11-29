@@ -105,10 +105,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Impact, (int)ActionState.FALLING)), Direction.SIDE, CType.MOVBOMB));
 
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(CollectCoin, 1)), Direction.ANY, CType.FRIENDLY));
-
-            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Oneup, 1)), Direction.BOTTOM, CType.ONEUP));
-            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Oneup, 1)), Direction.TOP, CType.ONEUP));
-            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Oneup, 1)), Direction.SIDE, CType.ONEUP));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Oneup, 1)), Direction.ANY, CType.ONEUP));
 
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(KillEnemy, 100)), Direction.BOTTOM, CType.ENEMY)); //Score 100 pts
 
@@ -118,6 +115,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
 
 
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(EquipItem, (int)EquippableItems.SWORD)), Direction.ANY, CType.SWORD_PWR));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(EquipItem, (int)EquippableItems.SHIELD)), Direction.ANY, CType.SHIELD_PWR));
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(EquipItem, (int)EquippableItems.BOW)), Direction.ANY, CType.BOW_PWR));
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(EquipItem, (int)EquippableItems.BOMB)), Direction.ANY, CType.BOMB_PWR));
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(EquipItem, (int)EquippableItems.HOOKSHOT)), Direction.ANY, CType.HOOKSHOT_PWR));
@@ -169,7 +167,8 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             swordLinkSpriteSheet = content.Load<Texture2D>("Link/LinkSword");
 
             MarioInventoryState.SwordHUDTexture = content.Load<Texture2D>("Tools/sword");
-            MarioInventoryState.BowHUDTexture = content.Load<Texture2D>("Tools/ArrowRe");
+            MarioInventoryState.ShieldHUDTexture = content.Load<Texture2D>("Tools/Sheild");
+            MarioInventoryState.BowHUDTexture = content.Load<Texture2D>("Tools/Bow");
             MarioInventoryState.BombHUDTexture = content.Load<Texture2D>("Tools/Bomb");
             MarioInventoryState.HookshotHUDTexture = content.Load<Texture2D>("Tools/Hookshot");
 

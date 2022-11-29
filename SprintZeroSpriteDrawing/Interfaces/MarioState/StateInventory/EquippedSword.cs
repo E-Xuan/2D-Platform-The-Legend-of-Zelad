@@ -21,7 +21,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateInventory
         }
         public override void ItemAction()
         {
-            base.ItemAction();
+            mario.Stabing(0);
         }
         public override void Draw(SpriteBatch batch)
         {

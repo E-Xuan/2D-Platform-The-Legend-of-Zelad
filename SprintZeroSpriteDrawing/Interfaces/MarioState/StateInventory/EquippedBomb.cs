@@ -26,10 +26,10 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateInventory
         public override void Draw(SpriteBatch batch)
         {
             base.Draw(batch);
-            batch.Draw(_texture, new Rectangle((int)Icons[2].Pos.X - 48, (int)Icons[2].Pos.Y - 48, 48, 1), Color.White);
-            batch.Draw(_texture, new Rectangle((int)Icons[2].Pos.X, (int)Icons[2].Pos.Y - 48, 1, 48), Color.White);
-            batch.Draw(_texture, new Rectangle((int)Icons[2].Pos.X - 48, (int)Icons[2].Pos.Y, 48, 1), Color.White);
-            batch.Draw(_texture, new Rectangle((int)Icons[2].Pos.X - 48, (int)Icons[2].Pos.Y - 48, 1, 48), Color.White);
+            batch.Draw(_texture, new Rectangle((int)Icons[3].Pos.X - 48, (int)Icons[3].Pos.Y - 48, 48, 1), Color.White);
+            batch.Draw(_texture, new Rectangle((int)Icons[3].Pos.X, (int)Icons[3].Pos.Y - 48, 1, 48), Color.White);
+            batch.Draw(_texture, new Rectangle((int)Icons[3].Pos.X - 48, (int)Icons[3].Pos.Y, 48, 1), Color.White);
+            batch.Draw(_texture, new Rectangle((int)Icons[3].Pos.X - 48, (int)Icons[3].Pos.Y - 48, 1, 48), Color.White);
         }
     }
 }

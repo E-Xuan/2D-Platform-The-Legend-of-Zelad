@@ -18,6 +18,7 @@ namespace SprintZeroSpriteDrawing.States.MarioState
     public enum EquippableItems
     {
         SWORD,
+        SHIELD,
         BOW,
         BOMB,
         HOOKSHOT
@@ -26,6 +27,7 @@ namespace SprintZeroSpriteDrawing.States.MarioState
     public class MarioInventoryState : IMarioState
     {
         public static Texture2D SwordHUDTexture { get; set; }
+        public static Texture2D ShieldHUDTexture { get; set; }
         public static Texture2D BowHUDTexture { get; set; }
         public static Texture2D BombHUDTexture { get; set; }
         public static Texture2D HookshotHUDTexture { get; set; }
@@ -40,9 +42,10 @@ namespace SprintZeroSpriteDrawing.States.MarioState
             {
                 Icons = new List<ITile>()
                 {
-                    new ITile(SwordHUDTexture, new Vector2(800, 100)), new ITile(BowHUDTexture, new Vector2(900, 100)),
-                    new ITile(BombHUDTexture, new Vector2(2, 2), new Vector2(1000, 100)),
-                    new ITile(HookshotHUDTexture, new Vector2(2, 2), new Vector2(1100, 100))
+                    new ITile(SwordHUDTexture, new Vector2(800, 100)), new ITile(ShieldHUDTexture, new Vector2(900, 100)),
+                    new ITile(BowHUDTexture, new Vector2(1000, 100)),
+                    new ITile(BombHUDTexture, new Vector2(2, 2), new Vector2(1100, 100)),
+                    new ITile(HookshotHUDTexture, new Vector2(2, 2), new Vector2(1200, 100))
                 };
                 foreach (ITile icon in Icons)
                 {
@@ -66,10 +69,10 @@ namespace SprintZeroSpriteDrawing.States.MarioState
         }
         public virtual void Draw(SpriteBatch batch)
         {
-            int posoffset = -150;
+            int posoffset = -200;
             foreach (ITile icon in Icons)
             {
-                icon.Pos = new Vector2(Math.Max(mario.Pos.X, 950) + posoffset, 100);
+                icon.Pos = new Vector2(Math.Max(mario.Pos.X, 900) + posoffset, 100);
                 icon.Draw(batch);
                 posoffset += 100;
             }
@@ -82,6 +85,9 @@ namespace SprintZeroSpriteDrawing.States.MarioState
                 {
                     case EquippableItems.SWORD:
                         mario.StateInventory = new EquippedSword(mario, PlayerInventory);
+                        break;
+                    case EquippableItems.SHIELD:
+                        mario.StateInventory = new EquippedShield(mario, PlayerInventory);
                         break;
                     case EquippableItems.BOMB:
                             mario.StateInventory = new EquippedBomb(mario, PlayerInventory);

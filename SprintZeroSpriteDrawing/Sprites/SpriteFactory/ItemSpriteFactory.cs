@@ -31,6 +31,7 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         public Texture2D Hookshot;
 
         public Texture2D SwordPwr;
+        public Texture2D ShieldPwr;
         public Texture2D BowPwr;
         public Texture2D BombPwr;
         public Texture2D HookshotPwr;
@@ -59,7 +60,8 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
 
 
             SwordPwr = content.Load<Texture2D>("Tools/sword");
-            BowPwr = content.Load<Texture2D>("Tools/ArrowRe");
+            ShieldPwr = content.Load<Texture2D>("Tools/Sheild");
+            BowPwr = content.Load<Texture2D>("Tools/Bow");
             BombPwr = content.Load<Texture2D>("Tools/Bomb");
             HookshotPwr = content.Load<Texture2D>("Tools/HookshotRe");
         }
@@ -91,6 +93,10 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         public ISprite CreateSwordPwr(Vector2 nPos)
         {
             return new Sword(SwordPwr, new Vector2(1, 1), nPos);
+        }
+        public ISprite CreateShieldPwr(Vector2 nPos)
+        {
+            return new Shield(ShieldPwr, new Vector2(1, 1), nPos);
         }
         public ISprite CreateBowPwr(Vector2 nPos)
         {

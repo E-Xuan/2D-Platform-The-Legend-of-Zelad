@@ -193,12 +193,15 @@ namespace SprintZeroSpriteDrawing.LevelLoader
                         entity = ItemSpriteFactory.getFactory().CreateSwordPwr(new Vector2(x, y));
                         break;
                     case '&':
-                        entity = ItemSpriteFactory.getFactory().CreateBowPwr(new Vector2(x, y));
+                        entity = ItemSpriteFactory.getFactory().CreateShieldPwr(new Vector2(x, y));
                         break;
                     case '*':
-                        entity = ItemSpriteFactory.getFactory().CreateBombPwr(new Vector2(x, y));
+                        entity = ItemSpriteFactory.getFactory().CreateBowPwr(new Vector2(x, y));
                         break;
                     case '(':
+                        entity = ItemSpriteFactory.getFactory().CreateBombPwr(new Vector2(x, y));
+                        break;
+                    case ')':
                         entity = ItemSpriteFactory.getFactory().CreateHookshotPwr(new Vector2(x, y));
                         break;
 
