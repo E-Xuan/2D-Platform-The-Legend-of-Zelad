@@ -67,6 +67,10 @@ namespace SprintZeroSpriteDrawing.Sprites.EnemySprites
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Kill, 0)), Direction.BOTTOM, CType.COLARROW));
             CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Kill, 0)), Direction.SIDE, CType.COLARROW));
 
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Kill, 0)), Direction.TOP, CType.SHOHOOKSHOT));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Kill, 0)), Direction.BOTTOM, CType.SHOHOOKSHOT));
+            CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Kill, 0)), Direction.SIDE, CType.SHOHOOKSHOT));
+
             CollisionManager.getCM().RegMoving(this);
         }
         public override void Update()

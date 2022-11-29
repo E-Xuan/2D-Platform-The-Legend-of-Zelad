@@ -1,7 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using SprintZeroSpriteDrawing.Interfaces.EnemyState;
-using SprintZeroSpriteDrawing.Interfaces.ToolState;
 using SprintZeroSpriteDrawing.Sprites.MarioSprites;
 using System;
 using System.Collections.Generic;
@@ -15,7 +13,6 @@ namespace SprintZeroSpriteDrawing.Sprites.ToolSprites
     {
         public Hook_Shot(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos) : base(nSprite, nSheetSize, nPos)
         {
-            //AutoFrame= true;
         }
         public override void Update()
         {

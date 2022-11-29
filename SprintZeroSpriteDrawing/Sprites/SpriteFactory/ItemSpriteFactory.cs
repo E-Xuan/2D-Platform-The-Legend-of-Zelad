@@ -58,7 +58,7 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
             SwordPwr = content.Load<Texture2D>("Tools/sword");
             BowPwr = content.Load<Texture2D>("Tools/ArrowRe");
             BombPwr = content.Load<Texture2D>("Tools/Bomb");
-            HookshotPwr = content.Load<Texture2D>("Tools/Hookshot");
+            HookshotPwr = content.Load<Texture2D>("Tools/Bomb");
         }
 
         public ISprite createCoin(Vector2 nPos)

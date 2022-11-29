@@ -404,10 +404,10 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
         }
         public void ShootHookShot(int x)
         {
-            Hook_Shot hookShot = HookShotPool.GetHookShotPool().Get();
+            Hook_Shot hookShot = Hook_Shot_Pool.GetHook_ShotPool().Get();   
             if(hookShot != null)
             {
-                hookShot.State = new HookShotShooting(hookShot);
+                hookShot.State = new Hook_Shot_Shooting(hookShot);
             }
         }
 
