@@ -25,7 +25,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StatePowerup
             var soundEffectPlayer = SoundEffectPlayer.GetSoundEffectPlayer();
             soundEffectPlayer.PlaySoundEffect += new delEventHandler(onFlagChanged);
             soundEffectPlayer.Trigger = (int)SoundEffectPlayer.Sounds.POWERUP;
-            mario.CollideableType = CType.AVATAR_LARGE;
+            mario.CollideableType = CType.AVATAR_SMALL;
             prevPowerupState = currPowerupState;
             currPowerupState = PowerupState.SHIELD;
             mario.IsVis = true;

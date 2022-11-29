@@ -183,10 +183,10 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
         }
         public void ChangePowerup(int powerup)
         {
-            if (powerup != 4 && powerup < 5)
+            if (powerup != 4 && powerup < 7)
                 Score += 1000;
             if (powerup > (int)StatePowerup.currPowerupState)
-                StatePowerup.ChangePowerupState(powerup % 5);
+                StatePowerup.ChangePowerupState(powerup % 7);
             if (powerup == (int)PowerupState.DEAD)
                 Game1.level_update = true;
         }
@@ -217,7 +217,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
                     var soundEffectPlayer = SoundEffectPlayer.GetSoundEffectPlayer();
                     soundEffectPlayer.PlaySoundEffect += new delEventHandler(onFlagChanged);
                     soundEffectPlayer.Trigger = (int)SoundEffectPlayer.Sounds.PIPEPOWERDOWN;
-                    ChangePowerup((int)PowerupState.SMALL + 5);
+                    ChangePowerup((int)PowerupState.SMALL + 7);
                 }
                 else
                 {
