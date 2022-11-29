@@ -56,7 +56,7 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
             Pirana = content.Load<Texture2D>("Enemy/Piranha");
             Bomb = content.Load<Texture2D>("Tools/Bomb");
             Arrow = content.Load<Texture2D>("Tools/ArrowRe");
-            Hookshot = content.Load<Texture2D>("Tools/Hookshot_mec");
+            Hookshot = content.Load<Texture2D>("Tools/HookshotRe");
 
 
             SwordPwr = content.Load<Texture2D>("Tools/sword");
