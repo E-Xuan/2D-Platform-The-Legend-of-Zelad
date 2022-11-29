@@ -31,8 +31,11 @@ namespace SprintZeroSpriteDrawing.States.MarioState
         public static Texture2D HookshotHUDTexture { get; set; }
         public static List<ITile> Icons { get; set; }
         public HashSet<EquippableItems> PlayerInventory { get; set; }
+        protected Texture2D _texture;
         public MarioInventoryState(Mario nMario) : base(nMario)
         {
+            _texture = new Texture2D(Game1.Graphics.GraphicsDevice, 1, 1);
+            _texture.SetData(new Color[] { Color.White });
             if (Icons == null)
             {
                 Icons = new List<ITile>()
@@ -50,6 +53,8 @@ namespace SprintZeroSpriteDrawing.States.MarioState
         public MarioInventoryState(Mario nMario, HashSet<EquippableItems> inventoryItems) : base(nMario)
         {
             PlayerInventory = inventoryItems;
+            _texture = new Texture2D(Game1.Graphics.GraphicsDevice, 1, 1);
+            _texture.SetData(new Color[] { Color.White });
         }
         public virtual void ItemAction()
         {
@@ -59,12 +64,14 @@ namespace SprintZeroSpriteDrawing.States.MarioState
             PlayerInventory.Add((EquippableItems)item);
             Icons[item].tint = Color.White;
         }
-        public void Draw(SpriteBatch batch)
+        public virtual void Draw(SpriteBatch batch)
         {
-
+            int posoffset = -150;
             foreach (ITile icon in Icons)
             {
+                icon.Pos = new Vector2(Math.Max(mario.Pos.X, 950) + posoffset, 100);
                 icon.Draw(batch);
+                posoffset += 100;
             }
         }
         public void SwitchToItem(int item)
