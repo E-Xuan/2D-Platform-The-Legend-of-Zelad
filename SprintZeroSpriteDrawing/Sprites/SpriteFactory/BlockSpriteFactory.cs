@@ -89,6 +89,20 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
             }
             return block;
         }
+        public ISprite CreateSwitchBlock(Vector2 nPos)
+        {
+            ISprite block;
+            block = new SwitchBlock(BrickBlockSpriteSheet, new Vector2(1, 1), nPos);
+            ((ITile)block).tint = Color.Aquamarine;
+            return block;
+        }
+        public ISprite CreateSwitchedBlock(Vector2 nPos)
+        {
+            ISprite block;
+            block = new SwitchedBlock(BrickBlockSpriteSheet, new Vector2(1, 1), nPos);
+            ((ITile)block).tint = Color.Gray;
+            return block;
+        }
         public ISprite CreateGroundBlock(Vector2 nPos)
         {
             ISprite block;
