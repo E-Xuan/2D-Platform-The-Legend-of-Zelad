@@ -1034,6 +1034,18 @@
 /processorParam:TextureFormat=Color
 /build:Tools/Bow.png
 
+#begin Tools/Hookshot_mec.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Tools/Hookshot_mec.png
+
 #begin Tools/Hookshot.png
 /importer:TextureImporter
 /processor:TextureProcessor
