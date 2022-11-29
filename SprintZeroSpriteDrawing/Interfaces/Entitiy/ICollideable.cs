@@ -50,7 +50,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.Entitiy
         EXPBOMB,
         SHOARROW,
         COLARROW
-    }
+        }
 
     public class ICollideable : IRBody
     {

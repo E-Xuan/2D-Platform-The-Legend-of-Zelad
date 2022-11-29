@@ -41,6 +41,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.ToolState
         }
         public virtual void Collect(int collect)
         {
+            tool.CollideableType = CType.UNCOLLIDEABLE;
             Game1.SpriteList.Remove(tool);
             ArrowPool.GetArrowPool().Collect();
         }

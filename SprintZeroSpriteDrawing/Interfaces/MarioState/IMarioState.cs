@@ -42,7 +42,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState
         public ActionState previousActionState{ get; set; }
         public PowerupState currPowerupState { get; set; }
         public PowerupState prevPowerupState { get; set; }
-
+        private static IMarioState marioState;
         public IMarioState(Mario nMario)
         {
             mario = nMario;

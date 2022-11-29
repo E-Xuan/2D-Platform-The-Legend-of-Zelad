@@ -402,6 +402,14 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
                 bomb.State = new BombIdle((Tool)bomb);
             }
         }
+        public void ShootHookShot(int x)
+        {
+            Hook_Shot hookShot = HookShotPool.GetHookShotPool().Get();
+            if(hookShot != null)
+            {
+                hookShot.State = new HookShotShooting(hookShot);
+            }
+        }
 
         
         public void PipeEnterLevelChange(int x)

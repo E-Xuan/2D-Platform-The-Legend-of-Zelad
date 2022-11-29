@@ -101,6 +101,10 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         {
             return new Hookshot(HookshotPwr, new Vector2(2, 2), nPos);
         }
+        public ISprite CreateHookShot(Vector2 nPos)
+        {
+            return new Hook_Shot(HookshotPwr, new Vector2(2, 2), nPos);
+        }
         public ISprite CreateBomb(Vector2 nPos)
         {
             return new Bomb(Bomb, new Vector2(2, 2), nPos);
