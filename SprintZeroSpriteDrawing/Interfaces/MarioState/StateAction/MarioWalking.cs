@@ -37,7 +37,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
             mario.AutoFrame = true;
             mario.Frame = 3;
             mario.StartFrame = 3;
-            mario.LastFrame = 6;
+            mario.LastFrame = 5;
            
         }
         public override void ChangeActionState(int state)

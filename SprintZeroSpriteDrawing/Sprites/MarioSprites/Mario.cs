@@ -40,6 +40,9 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
         public static Texture2D bowLinkSpriteSheet;
         public static Texture2D normalLinkSpriteSheet;
         public static Texture2D swordLinkSpriteSheet;
+        public static Texture2D neutralBowLinkSpriteSheet;
+        public static Texture2D upBowLinkSpriteSheet;
+        public static Texture2D downBowLinkSpriteSheet;
         #endregion
 
         public int Score = 0;
@@ -181,6 +184,10 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             MarioInventoryState.BowHUDTexture = content.Load<Texture2D>("Tools/ArrowRe");
             MarioInventoryState.BombHUDTexture = content.Load<Texture2D>("Tools/Bomb");
             MarioInventoryState.HookshotHUDTexture = content.Load<Texture2D>("Tools/Hookshot");
+
+            upBowLinkSpriteSheet = content.Load<Texture2D>("Link/Bow/LinkBowUp");
+            downBowLinkSpriteSheet = content.Load<Texture2D>("Link/Bow/LinkBowDown");
+            neutralBowLinkSpriteSheet = content.Load<Texture2D>("Link/Bow/LinkBowNeutral");
         }
         public void Impact(int state)
         {
@@ -371,6 +378,22 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
                 }
             }
         }
+
+        public void ShieldPlayer(int Powerup)
+        {
+            if ((int)(Mario.GetMario().StatePowerup.currPowerupState) == Powerup)
+            {
+                ChangeAction((int)ActionState.SHIELDED);
+            }
+        }
+
+        public void Stabing(int Powerup)
+        {
+            if ((int)(Mario.GetMario().StatePowerup.currPowerupState) == Powerup)
+            {
+                ChangeAction((int)ActionState.STAB);
+            }
+        }
         public void UseItem(int x)
         {
             StateInventory.ItemAction();
@@ -392,16 +415,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             }
         }
 
-        public void Shield(int x)
-        {
-            ChangeAction(x);
-        }
-
-        public void Sword(int x)
-        {
-            ChangeAction(x);
-        }
-
+        
         public void PipeEnterLevelChange(int x)
         {
             if (StateAction.currActionState == ActionState.CROUCHING)

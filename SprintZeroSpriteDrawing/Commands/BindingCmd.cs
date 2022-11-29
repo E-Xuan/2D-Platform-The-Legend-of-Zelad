@@ -38,6 +38,9 @@ namespace SprintZeroSpriteDrawing.Commands
             keyboardController.UpdateBinding(Keys.Y, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().ChangePowerup, (int)PowerupState.SMALL + 5)), BindingType.PRESSED);
             keyboardController.UpdateBinding(Keys.U, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().ChangePowerup, (int)PowerupState.BIG + 5)), BindingType.PRESSED);
             keyboardController.UpdateBinding(Keys.I, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().ChangePowerup, (int)PowerupState.FIRE + 5)), BindingType.PRESSED);
+            keyboardController.UpdateBinding(Keys.T, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().ChangePowerup, (int)PowerupState.SHIELD + 5)), BindingType.PRESSED);
+            keyboardController.UpdateBinding(Keys.G, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().ChangePowerup, (int)PowerupState.SWORD + 5)), BindingType.PRESSED);
+
             keyboardController.UpdateBinding(Keys.O, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().TakeDamage, -1)), BindingType.PRESSED);
 
             keyboardController.UpdateBinding(Keys.W, new IntCmd(new KeyValuePair<Action<int>, int>(Mario.GetMario().IncreaseAction, (int)ActionState.JUMPING)), BindingType.PRESSED);

@@ -60,6 +60,10 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StatePowerup
                     Exit();
                     mario.StatePowerup = new BigMario(mario);
                     break;
+                case PowerupState.FIRE:
+                    Exit();
+                    mario.StatePowerup = new FireMario(mario);
+                    break;
                 case PowerupState.SWORD:
                     Exit();
                     mario.StatePowerup = new LinkSword(mario);

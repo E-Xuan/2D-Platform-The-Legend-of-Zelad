@@ -1,38 +1,51 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using SprintZeroSpriteDrawing.Collision.CollisionManager;
+using SprintZeroSpriteDrawing.Interfaces.Entitiy;
+using SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction;
+using SprintZeroSpriteDrawing.Music_SoundEffects;
+using SprintZeroSpriteDrawing.Sprites.MarioActionSprites;
+using SprintZeroSpriteDrawing.Sprites.MarioSprites;
 using System;
 using System.Collections.Generic;
-using Microsoft.Xna.Framework;
-using SprintZeroSpriteDrawing.Sprites.ObstacleSprites;
-using SprintZeroSpriteDrawing.Interfaces.Entitiy;
-using SprintZeroSpriteDrawing.Sprites.MarioSprites;
-using System.Runtime.CompilerServices;
-using SprintZeroSpriteDrawing.Collision.CollisionManager;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-
-namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
+namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StatePowerup
 {
-    public class MarioRunning: IMarioState
+    public class LinkShielded : IMarioState
     {
-        public MarioRunning(Mario nMario): base(nMario)
+        public LinkShielded(Mario nMario) : base(nMario)
         {
 
         }
-        public MarioRunning(Mario nMario, ActionState nState) : base(nMario, nState)
-        {
 
+        public LinkShielded(Mario nMario, ActionState nState) : base(nMario, nState)
+        {
         }
+
         public override void Enter()
         {
             CollisionManager.getCM().RegMoving(mario);
-            currActionState = ActionState.RUNNING;
+            currActionState = ActionState.SHIELDED;
             mario.IsVis = true;
             mario.Velocity = new Vector2(0, (float).1);
             mario.Acceleration = new Vector2(0, 0);
-            mario.StartFrame = 2;
-            mario.Frame = 2;
-            mario.LastFrame = 2;
             mario.AutoFrame = false;
+            mario.Frame = 5;
+            mario.StartFrame = 5;
+            mario.LastFrame = 6;
         }
+        public override void Update()
+        {
+
+        }
+
+        public static void onFlagChanged(int sound)
+        {
+            SoundEffectPlayer.GetSoundEffectPlayer().PlaySounds(sound);
+        }
+
 
         public override void ChangeActionState(int state)
         {
@@ -53,4 +66,6 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
             }
         }
     }
+
 }
+

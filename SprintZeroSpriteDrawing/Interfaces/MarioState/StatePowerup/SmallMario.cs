@@ -44,6 +44,14 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StatePowerup
                     Exit();
                     mario.StatePowerup = new DeadMario(mario);
                     break;
+                case PowerupState.SHIELD:
+                    Exit();
+                    mario.StatePowerup = new LinkShield(mario);
+                    break;
+                case PowerupState.SWORD:
+                    Exit();
+                    mario.StatePowerup = new LinkSword(mario);
+                    break;
             }
         }
     }

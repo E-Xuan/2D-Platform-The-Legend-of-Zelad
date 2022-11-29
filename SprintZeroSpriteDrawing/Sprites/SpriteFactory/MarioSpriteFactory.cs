@@ -30,6 +30,9 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioActionSprites
         #region Link Sprite Sheets
         public Texture2D bombLinkSpriteSheet;
         public Texture2D bowLinkSpriteSheet;
+        public Texture2D neutralBowLinkSpriteSheet;
+        public Texture2D upBowLinkSpriteSheet;
+        public Texture2D downBowLinkSpriteSheet;
         public Texture2D normalLinkSpriteSheet;
         public Texture2D swordLinkSpriteSheet;
         #endregion
@@ -83,6 +86,9 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioActionSprites
             bowLinkSpriteSheet = content.Load<Texture2D>("Link/LinkBow");
             bombLinkSpriteSheet = content.Load<Texture2D>("Link/LinkBomb");
             swordLinkSpriteSheet = content.Load<Texture2D>("Link/LinkSword");
+            upBowLinkSpriteSheet = content.Load<Texture2D>("Link/Bow/LinkBowUp");
+            downBowLinkSpriteSheet = content.Load<Texture2D>("Link/Bow/LinkBowDown");
+            neutralBowLinkSpriteSheet = content.Load<Texture2D>("Link/Bow/LinkBowNeutral");
 
         }
         public ISprite createMario(Vector2 nPos)

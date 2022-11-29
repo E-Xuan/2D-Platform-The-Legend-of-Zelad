@@ -27,8 +27,8 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StatePowerup
             prevPowerupState = currPowerupState;
             currPowerupState = PowerupState.BIG;
             mario.IsVis = true;
-            mario.SheetSize = new Vector2(2, 2);
-            mario.SetSprite(Mario.bowLinkSpriteSheet);
+            mario.SheetSize = new Vector2(2, 3);
+            mario.SetSprite(Mario.neutralBowLinkSpriteSheet);
             mario.UpdateBBox();
         }
         public static void onFlagChanged(int sound)
@@ -51,6 +51,14 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StatePowerup
                 case PowerupState.DEAD:
                     Exit();
                     mario.StatePowerup = new DeadMario(mario);
+                    break;
+                case PowerupState.SHIELD:
+                    Exit();
+                    mario.StatePowerup = new LinkShield(mario);
+                    break;
+                case PowerupState.SWORD:
+                    Exit();
+                    mario.StatePowerup = new LinkSword(mario);
                     break;
             }
         }

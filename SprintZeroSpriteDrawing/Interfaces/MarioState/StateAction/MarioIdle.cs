@@ -7,6 +7,7 @@ using SprintZeroSpriteDrawing.Interfaces.Entitiy;
 using SprintZeroSpriteDrawing.Sprites.MarioSprites;
 using System.Runtime.CompilerServices;
 using SprintZeroSpriteDrawing.Collision.CollisionManager;
+using SprintZeroSpriteDrawing.Interfaces.MarioState.StatePowerup;
 
 namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
 {
@@ -49,6 +50,12 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
                 case ActionState.CROUCHING:
                     Exit();
                     mario.StateAction = new MarioCrouching(mario, currActionState);
+                    break;
+                case ActionState.STAB:
+                    mario.StateAction = new LinkStab(mario, currActionState);
+                    break;
+                case ActionState.SHIELDED:
+                    mario.StateAction = new LinkShielded(mario, currActionState);
                     break;
             }
         }
