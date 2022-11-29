@@ -16,7 +16,9 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState
         BIG,
         FIRE,
         STAR,
-        DEAD
+        DEAD,
+        SHIELD,
+        SWORD
     }
 
     public enum ActionState
@@ -30,7 +32,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState
         IDLE,
         DAMMAGED,
         STAB,
-        SHEILD
+        SHIELDED
     }
     public class IMarioState
     {

@@ -380,6 +380,16 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             }
         }
 
+        public void Shield(int x)
+        {
+            ChangeAction(x);
+        }
+
+        public void Sword(int x)
+        {
+            ChangeAction(x);
+        }
+
         public void PipeEnterLevelChange(int x)
         {
             if (StateAction.currActionState == ActionState.CROUCHING)
