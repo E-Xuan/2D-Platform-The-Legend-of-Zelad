@@ -17,7 +17,8 @@ namespace SprintZeroSpriteDrawing.Interfaces.ToolState
         ARROWSHOOTING,
         ARRROWCOL,
         HOOKSHOTSHOOTING,
-        HOOKSHOTCOL
+        HOOKSHOTCOL,
+        HOOKSHOTRETRACT
     }
     public class IToolState
     {

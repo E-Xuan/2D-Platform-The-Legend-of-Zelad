@@ -40,6 +40,11 @@ namespace SprintZeroSpriteDrawing.Interfaces.ToolState
 
 
         }
+        public override void Update()
+        {
+
+            base.Update();
+        }
         public override void Enter()
         {
             Game1.SpriteList.Add(tool);

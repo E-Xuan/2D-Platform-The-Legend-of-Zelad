@@ -4,6 +4,7 @@ using SprintZeroSpriteDrawing.Commands;
 using SprintZeroSpriteDrawing.Interfaces.EnemyState;
 using SprintZeroSpriteDrawing.Interfaces.Entitiy;
 using SprintZeroSpriteDrawing.Sprites.EnemySprites;
+using SprintZeroSpriteDrawing.Sprites.MarioSprites;
 using SprintZeroSpriteDrawing.Sprites.ToolSprites;
 using System;
 using System.Collections.Generic;
