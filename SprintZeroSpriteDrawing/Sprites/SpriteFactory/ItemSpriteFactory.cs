@@ -28,6 +28,7 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         public Texture2D Pirana;
         public Texture2D Bomb;
         public Texture2D Arrow;
+        public Texture2D Hookshot;
 
         public Texture2D SwordPwr;
         public Texture2D BowPwr;
@@ -54,6 +55,8 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
             Pirana = content.Load<Texture2D>("Enemy/Piranha");
             Bomb = content.Load<Texture2D>("Tools/Bomb");
             Arrow = content.Load<Texture2D>("Tools/ArrowRe");
+            Hookshot = content.Load<Texture2D>("Tools/Hookshot_mec");
+
 
             SwordPwr = content.Load<Texture2D>("Tools/sword");
             BowPwr = content.Load<Texture2D>("Tools/ArrowRe");
@@ -103,7 +106,7 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         }
         public ISprite CreateHookShot(Vector2 nPos)
         {
-            return new Hook_Shot(HookshotPwr, new Vector2(2, 2), nPos);
+            return new Hook_Shot(Hookshot, new Vector2(2, 2), nPos);
         }
         public ISprite CreateBomb(Vector2 nPos)
         {

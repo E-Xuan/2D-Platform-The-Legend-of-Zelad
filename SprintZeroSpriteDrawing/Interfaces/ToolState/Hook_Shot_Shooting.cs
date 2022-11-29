@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using SprintZeroSpriteDrawing.Collision.CollisionManager;
 using SprintZeroSpriteDrawing.Commands;
 using SprintZeroSpriteDrawing.Interfaces.Entitiy;
@@ -14,6 +15,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.ToolState
 {
     public class Hook_Shot_Shooting : IToolState
     {
+        private int resetCount = 0;
         public Hook_Shot_Shooting(Tool nTool) : base(nTool)
         {
             tool = nTool;
@@ -43,6 +45,12 @@ namespace SprintZeroSpriteDrawing.Interfaces.ToolState
         public override void Update()
         {
 
+            resetCount++;
+            if (resetCount > 50)
+            {
+                tool.AutoFrame = true;
+                tool.State = new Hook_Shot_Retract(tool);
+            }
             base.Update();
         }
         public override void Enter()

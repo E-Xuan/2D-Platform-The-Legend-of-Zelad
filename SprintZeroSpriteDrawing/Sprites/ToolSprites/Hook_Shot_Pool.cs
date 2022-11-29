@@ -53,11 +53,11 @@ namespace SprintZeroSpriteDrawing.Sprites.ToolSprites
                 hook_Shot = hook_Shots.Dequeue();
                 if (Mario.GetMario().GetDirection() > 0)
                 {
-                    hook_Shot.Pos = new Vector2(Mario.GetMario().Pos.X + 100, Mario.GetMario().Pos.Y);
+                    hook_Shot.Pos = new Vector2(Mario.GetMario().Pos.X + 48, Mario.GetMario().Pos.Y - 24);
                 }
                 else
                 {
-                    hook_Shot.Pos = new Vector2(Mario.GetMario().Pos.X - 100, Mario.GetMario().Pos.Y);
+                    hook_Shot.Pos = new Vector2(Mario.GetMario().Pos.X - 48, Mario.GetMario().Pos.Y - 24);
                 }
                 return hook_Shot;
             }
