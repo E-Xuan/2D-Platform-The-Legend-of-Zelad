@@ -17,7 +17,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.ToolState
     public class Hook_Shot_Shooting : IToolState
     {
         private int resetCount = 0;
-        Camera camera;
+        Camera camera; 
         float relativeMouseX;
         float relativeMouseY;
         public Hook_Shot_Shooting(Tool nTool) : base(nTool)
