@@ -37,6 +37,9 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         public Texture2D UGBrick;
         public Texture2D UGBroken;
         public Texture2D UGGround;
+        public Texture2D MSBase;
+        public Texture2D MasterSword;
+
 
         private static BlockSpriteFactory sprite;
 
@@ -68,6 +71,8 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
             UGBrick = content.Load<Texture2D>("Obstacles/UG-BrickBlock");
             UGBroken = content.Load<Texture2D>("Obstacles/UG-BrokenBlock");
             UGGround = content.Load<Texture2D>("Obstacles/UG-GroundBlock");
+            MSBase = content.Load<Texture2D>("Obstacles/MasterSwordBase");
+            MasterSword = content.Load<Texture2D>("Obstacles/MasterSword");
 
         }
         
@@ -201,11 +206,11 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         }
         public ISprite CreatePoleTop(Vector2 nPos)
         {
-            return new Pole_Top(PoleTopSpriteSheet, new Vector2(1, 1), nPos);
+            return new Pole_Top(MasterSword, new Vector2(1, 1), nPos);
         }
         public ISprite CreatePoleBot(Vector2 nPos)
         {
-            return new Pole_Bot(PoleBottomSpriteSheet, new Vector2(1, 1), nPos);
+            return new Pole_Bot(MSBase, new Vector2(1, 1), nPos);
         }
         public ISprite CreateFlag(Vector2 nPos)
         {

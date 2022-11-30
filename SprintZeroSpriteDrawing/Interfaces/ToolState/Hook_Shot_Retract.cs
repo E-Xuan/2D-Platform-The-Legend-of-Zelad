@@ -29,7 +29,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.ToolState
         {
             if (Mouse.GetState().X + Game1._Camera2D.Position.X - Mario.GetMario().Pos.X > 0)
             {
-                tool.Velocity = new Vector2(10, 0);
+                tool.Velocity = new Vector2(10, 0); 
             }
             else if (Mouse.GetState().X + Game1._Camera2D.Position.X - Mario.GetMario().Pos.X < 0)
             {
