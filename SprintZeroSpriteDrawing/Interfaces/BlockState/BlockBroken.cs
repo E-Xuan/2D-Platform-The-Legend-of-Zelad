@@ -21,7 +21,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.BlockState
 
         public override void Enter()
         {
-            
+            SoundEffectPlayer.GetSoundEffectPlayer().PlaySounds((int)SoundEffectPlayer.Sounds.BREAKBLOCK);
             CurrState = State.BROKEN;
             Game1.SpriteList.Remove(block);
             CollisionManager.getCM().DeRegEntity(block);

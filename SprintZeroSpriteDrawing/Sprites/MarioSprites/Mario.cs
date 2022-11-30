@@ -322,9 +322,9 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
 
         public void CollectCoin(int coin)
         {
-            var soundEffectPlayer = SoundEffectPlayer.GetSoundEffectPlayer();
-            soundEffectPlayer.PlaySoundEffect += new delEventHandler(onFlagChanged);
-            soundEffectPlayer.Trigger = (int)SoundEffectPlayer.Sounds.COIN;
+            
+
+            SoundEffectPlayer.GetSoundEffectPlayer().PlaySounds((int)SoundEffectPlayer.Sounds.COIN);
             Score += 200;
             Coins += coin;
             if (Coins >= 100)
