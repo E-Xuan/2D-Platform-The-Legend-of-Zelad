@@ -27,7 +27,10 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StatePowerup
 
         public override void Enter()
         {
+            int framecount = 5;
             CollisionManager.getCM().RegMoving(mario);
+            mario.SetSprite(MarioSpriteFactory.getSpriteFactory().swordLinkSpriteSheet);
+            previousActionState = currActionState;
             currActionState = ActionState.STAB;
             mario.CollideableType = CType.PROJECTILE;
             mario.IsVis = true;
@@ -37,6 +40,14 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StatePowerup
             mario.Frame = 5;
             mario.StartFrame = 5;
             mario.LastFrame = 9;
+
+           
+
+        }
+
+        public override void Exit()
+        {
+            ChangeActionState((int)previousActionState);
         }
         public override void Update()
         {
