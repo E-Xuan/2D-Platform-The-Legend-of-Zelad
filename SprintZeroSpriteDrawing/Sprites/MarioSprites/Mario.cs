@@ -423,7 +423,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
                 else
                     Game1.underGround = false;
 
-                MusicPlayer.GetMusicPlayer().ChangeSong((int)MusicPlayer.Songs.UNDERWORLD);
+                
                 var soundEffectPlayer = SoundEffectPlayer.GetSoundEffectPlayer();
                 soundEffectPlayer.PlaySoundEffect += new delEventHandler(onFlagChanged);
                 soundEffectPlayer.Trigger = (int)SoundEffectPlayer.Sounds.PIPEPOWERDOWN;

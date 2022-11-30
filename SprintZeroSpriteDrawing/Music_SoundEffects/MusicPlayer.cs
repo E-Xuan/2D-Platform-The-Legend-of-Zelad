@@ -51,7 +51,7 @@ namespace SprintZeroSpriteDrawing.Music_SoundEffects
         {
             MediaPlayer.IsRepeating = true;
             MediaPlayer.IsMuted = false;
-            MediaPlayer.Play(dungeonMusic); 
+            MediaPlayer.Play(introMusic); 
         }
 
         public void StopSong()
@@ -73,6 +73,12 @@ namespace SprintZeroSpriteDrawing.Music_SoundEffects
                     break;
                 case (int)Songs.STARMAN:
                     MediaPlayer.Play(starmanMusic);
+                    break;
+                case (int)Songs.INTRO:
+                    MediaPlayer.Play(introMusic);
+                    break;
+                case (int)Songs.DUNGEON:
+                    MediaPlayer.Play(dungeonMusic);
                     break;
             }
         }

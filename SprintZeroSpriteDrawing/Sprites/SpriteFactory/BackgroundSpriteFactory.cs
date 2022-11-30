@@ -39,7 +39,7 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
 
         public void LoadContent(ContentManager content)
         {
-            StartScreen = content.Load<Texture2D>("Start");
+            StartScreen = content.Load<Texture2D>("ZeldaTitle");
             BackgroundSpriteSheet = content.Load<Texture2D>("Background/bg_Cloud_Mt");
             TitleImage = content.Load<Texture2D>("Background/TitleImage");
             GameOverScreen = content.Load<Texture2D>("Background/GameOverScreen");
