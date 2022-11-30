@@ -87,7 +87,7 @@ namespace SprintZeroSpriteDrawing
         {
             Random rand = new Random();
             int[] innerLevels = new int[5] { 2, 3, 4, 5, 6 };
-            //innerLevels = innerLevels.OrderBy(x => rand.Next()).ToArray();
+            innerLevels = innerLevels.OrderBy(x => rand.Next()).ToArray();
             LevelOrder = new int[7];
             LevelOrder[0] = 1;
             for (int i = 0; i < 5; i++)
