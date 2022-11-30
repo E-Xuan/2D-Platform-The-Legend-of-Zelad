@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Audio;
+using System.ComponentModel;
 
 namespace SprintZeroSpriteDrawing.Music_SoundEffects
 {
@@ -57,7 +58,8 @@ namespace SprintZeroSpriteDrawing.Music_SoundEffects
                 if(value != _trigger)
                 {
                     _trigger = value;
-                    PlaySoundEffect?.Invoke(_trigger);
+                   
+                        PlaySoundEffect?.Invoke(_trigger);
                     _trigger = -1;
                 }
             }
@@ -69,7 +71,7 @@ namespace SprintZeroSpriteDrawing.Music_SoundEffects
             soundEffects.Add(content.Load<SoundEffect>("SoundEffects/1-up"));
             soundEffects.Add(content.Load<SoundEffect>("SoundEffects/breakblock"));
             soundEffects.Add(content.Load<SoundEffect>("SoundEffects/bump"));
-            soundEffects.Add(content.Load<SoundEffect>("SoundEffects/coin"));
+            soundEffects.Add(content.Load<SoundEffect>("LOZSoundEffects/GetRupee"));
             soundEffects.Add(content.Load<SoundEffect>("SoundEffects/fireball"));
             soundEffects.Add(content.Load<SoundEffect>("SoundEffects/flagpole"));
             soundEffects.Add(content.Load<SoundEffect>("SoundEffects/gameover"));
@@ -102,21 +104,23 @@ namespace SprintZeroSpriteDrawing.Music_SoundEffects
         public void PlaySounds(int sound)
         {
             
-         /*   SoundEffect temp;
+              SoundEffect temp;
             temp = soundEffects[sound];
 
             try
-            {
-                
-                temp.Play();
-                
-                
+            { 
+                temp.Play();    
             }
             catch (Exception e)
             {
                
                 
-            }*/
+            }
+        }
+
+        public void AddSounds(int sound)
+        {
+
         }
     }
 }

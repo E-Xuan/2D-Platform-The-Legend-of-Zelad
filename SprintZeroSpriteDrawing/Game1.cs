@@ -145,8 +145,7 @@ namespace SprintZeroSpriteDrawing
         }
         public void Restart(String level)
         {
-            MusicPlayer.GetMusicPlayer().StopSong();
-            MusicPlayer.GetMusicPlayer().PlaySong();
+            MusicPlayer.GetMusicPlayer().ChangeSong((int)MusicPlayer.Songs.DUNGEON);
             SPLASH_BACK = true;
             switched = false;
             SpriteList = new List<ISprite>();
@@ -162,7 +161,7 @@ namespace SprintZeroSpriteDrawing
             SPLASH_BACK = true;
             switched = false;
             MusicPlayer.GetMusicPlayer().StopSong();
-            MusicPlayer.GetMusicPlayer().PlaySong();
+            MusicPlayer.GetMusicPlayer().ChangeSong((int)MusicPlayer.Songs.INTRO);
             SpriteList = new List<ISprite>();
             Mario.GetMario().StatePowerup = new SmallMario(Mario.GetMario());
             Mario.GetMario().Reset();
@@ -222,6 +221,7 @@ namespace SprintZeroSpriteDrawing
             }
             if(currState == GameModes.START)
             {
+              
                 isTimeCounting = false;
                 keyboardController.ClearBinding();
                 gamepadController.ClearBinding();
