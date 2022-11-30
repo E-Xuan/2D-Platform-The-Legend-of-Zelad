@@ -27,6 +27,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StatePowerup
 
         public override void Enter()
         {
+            SoundEffectPlayer.GetSoundEffectPlayer().PlaySounds((int)SoundEffectPlayer.Sounds.SWORD);
             int framecount = 5;
             CollisionManager.getCM().RegMoving(mario);
             if (mario.GetDirection() > 0)

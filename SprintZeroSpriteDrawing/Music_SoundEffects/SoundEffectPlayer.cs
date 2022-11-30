@@ -38,6 +38,8 @@ namespace SprintZeroSpriteDrawing.Music_SoundEffects
             ENEMYHIT,
             GETITEM,
             GETRUPEE,
+            SHIELD,
+            SWORD
 
         }
 

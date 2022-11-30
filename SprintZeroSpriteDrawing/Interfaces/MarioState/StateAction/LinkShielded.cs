@@ -22,10 +22,12 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StatePowerup
 
         public LinkShielded(Mario nMario, ActionState nState) : base(nMario, nState)
         {
+            
         }
 
         public override void Enter()
         {
+            SoundEffectPlayer.GetSoundEffectPlayer().PlaySounds((int)SoundEffectPlayer.Sounds.SHIELD);
             CollisionManager.getCM().RegMoving(mario);
             currActionState = ActionState.SHIELDED;
             mario.IsVis = true;
