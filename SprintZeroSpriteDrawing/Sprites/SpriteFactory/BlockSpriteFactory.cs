@@ -25,6 +25,7 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
         public Texture2D UsedBlockSpriteSheet;
         public Texture2D HiddenBlockSpriteSheet;
         public Texture2D GroundBlockSpriteSheet;
+        public Texture2D SwitchBlockSpriteSheet;
         public Texture2D StairBlockSpriteSheet;
         public Texture2D ExplodingBrickBlockSpriteSheet;
         public Texture2D PipeBottomSpriteSheet;
@@ -55,6 +56,7 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
             BrickBlockSpriteSheet = content.Load<Texture2D>("Obstacles/BrickBlock(Overworld)");
             QuestionBlockSpriteSheet = content.Load<Texture2D>("Obstacles/QuestionBlock(Overworld)");
             GroundBlockSpriteSheet = content.Load<Texture2D>("Obstacles/GroundBlock(Overworld)");
+            SwitchBlockSpriteSheet = content.Load<Texture2D>("Obstacles/Switch");
             StairBlockSpriteSheet = content.Load<Texture2D>("Obstacles/StairBlock");
             ExplodingBrickBlockSpriteSheet = content.Load<Texture2D>("ExplodingBlock");
             PipeBottomSpriteSheet = content.Load<Texture2D>("Obstacles/pipe_bot");
@@ -87,6 +89,20 @@ namespace SprintZeroSpriteDrawing.Sprites.ObstacleSprites
                 ((ICollideable)block).CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(((Block)block).ChangeState, (int)State.BUMPING)), Direction.BOTTOM, CType.AVATAR_SMALL));
 
             }
+            return block;
+        }
+        public ISprite CreateSwitchBlock(Vector2 nPos)
+        {
+            ISprite block;
+            block = new SwitchBlock(SwitchBlockSpriteSheet, new Vector2(2, 3), nPos);
+            ((ICollideable)block).LastFrame = 4;
+            return block;
+        }
+        public ISprite CreateSwitchedBlock(Vector2 nPos)
+        {
+            ISprite block;
+            block = new SwitchedBlock(BrickBlockSpriteSheet, new Vector2(1, 1), nPos);
+            ((ITile)block).tint = Color.Gray;
             return block;
         }
         public ISprite CreateGroundBlock(Vector2 nPos)
