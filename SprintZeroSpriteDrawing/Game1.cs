@@ -211,15 +211,8 @@ namespace SprintZeroSpriteDrawing
 
             if (level_update)
             {
-                if (!underGround)
-                {
-                    Restart("test.txt");
-                }
-                else
-                {
-                    piped = true;
-                    Restart("underground.txt");
-                }
+                Restart("oops");
+                piped = true;
                 level_update = false;
             }
             if(currState == GameModes.START)
