@@ -14,15 +14,11 @@ namespace SprintZeroSpriteDrawing.Sprites.ToolSprites
     public class ArrowPool
     {
         public Queue<Arrow> arrows = new Queue<Arrow>();
-        public static int ArrowsMax = 10;
+        public static int ArrowsMax = 5;
         public static Vector2 position;
         private static ArrowPool _arrowPool;
         public ArrowPool(Arrow arrow)
         {
-            arrows.Enqueue(arrow);
-            while (arrows.Count < ArrowsMax)
-                arrows.Enqueue((Arrow)ItemSpriteFactory.getFactory().CreateArrow(position));
-
         }
         public static ArrowPool GetArrowPool()
         {
@@ -32,20 +28,11 @@ namespace SprintZeroSpriteDrawing.Sprites.ToolSprites
             }
             return _arrowPool;
         }
-        public void Collect()
+        public void RefillPool()
         {
-            Arrow arrow;
-            if(arrows.Count > 0)
-            {
-                arrow = arrows.Peek();
-            }
-            else
-            {
-                arrow = (Arrow)ItemSpriteFactory.getFactory().CreateArrow(position);
-            }
-            arrows.Enqueue(arrow);
+            while (arrows.Count < ArrowsMax)
+                arrows.Enqueue((Arrow)ItemSpriteFactory.getFactory().CreateArrow(position));
         }
-
         public Arrow Get()
         {
             Arrow arrow;

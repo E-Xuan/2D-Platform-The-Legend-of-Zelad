@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SprintZeroSpriteDrawing.Interfaces.Entitiy;
+using Microsoft.Xna.Framework.Input;
 
 namespace SprintZeroSpriteDrawing.Interfaces.ToolState
 {
@@ -26,13 +27,14 @@ namespace SprintZeroSpriteDrawing.Interfaces.ToolState
         }
         public override void Update()
         {
-            if (Vector2.Subtract(Mario.GetMario().Pos, tool.Pos).Length() > 120)
-            {
-                tool.Velocity = new Microsoft.Xna.Framework.Vector2(
-                    (float)-0.075 * (tool.Pos.X - Mario.GetMario().Pos.X),
-                    (float)-0.075 * (tool.Pos.Y - Mario.GetMario().Pos.Y));
-                Mario.GetMario().Velocity = -tool.Velocity;
-            }
+            tool.Velocity = new Vector2((Mouse.GetState().X + Game1._Camera2D.Position.X - Mario.GetMario().Pos.X) / 100, (Mouse.GetState().Y + Game1._Camera2D.Position.Y - Mario.GetMario().Pos.Y) / 100);
+            //           if (Vector2.Subtract(Mario.GetMario().Pos, tool.Pos).Length() > 120)
+            //           {
+            //               tool.Velocity = new Microsoft.Xna.Framework.Vector2(
+            //                   (float)-0.075 * (tool.Pos.X - Mario.GetMario().Pos.X),
+            //                   (float)-0.075 * (tool.Pos.Y - Mario.GetMario().Pos.Y));
+            //               Mario.GetMario().Velocity = -tool.Velocity;
+            //           }
 
             base.Update();
         }

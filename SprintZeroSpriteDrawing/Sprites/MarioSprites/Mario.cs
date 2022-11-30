@@ -141,9 +141,9 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
         {
             base.Draw(batch, effects);
             //batch.DrawString(OverlayFont, "Coins: " + Coins.ToString("000"), new Vector2(100, 100), Color.Black);
-            batch.DrawString(OverlayFont, "Time: " + Time.ToString(), new Vector2(Math.Min(Math.Max(Pos.X + 700, 1660), Game1.LEVELSIZE.X - 220), 100), Color.White);
-            batch.DrawString(OverlayFont, "Rupees: " + Coins.ToString("000") + "    Score: " + Score.ToString("0000000") + "    Lives: " + Lives.ToString("00"), new Vector2(Math.Min(Math.Max(Pos.X - 860, 100), Game1.LEVELSIZE.X - 1820), 100), Color.White);
-            batch.DrawString(OverlayFont, "1:      2:        3:        4:        5:", new Vector2(Math.Min(Math.Max(Pos.X - 860, 100), Game1.LEVELSIZE.X - 1820), 148), Color.White);
+            batch.DrawString(OverlayFont, "Time: " + Time.ToString(), new Vector2(Math.Max(Pos.X + 700, 1660), 100), Color.White);
+            batch.DrawString(OverlayFont, "Rupees: " + Coins.ToString("000") + "    Score: " + Score.ToString("0000000") + "    Lives: " + Lives.ToString("00"), new Vector2(Math.Max(Pos.X - 860, 100), 100), Color.White);
+            batch.DrawString(OverlayFont, "1:       2:         3: x" + ArrowPool.GetArrowPool().arrows.Count.ToString("0") + "     4: x" + BombPool.GetBombPool().bombs.Count.ToString("0") + "        5:", new Vector2(Math.Max(Pos.X - 860, 100), 148), Color.White);
             StateInventory.Draw(batch);
         }
 

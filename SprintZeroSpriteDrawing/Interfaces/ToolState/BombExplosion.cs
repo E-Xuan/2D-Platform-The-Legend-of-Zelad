@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SprintZeroSpriteDrawing.Sprites.ItemSprites;
 
 namespace SprintZeroSpriteDrawing.Interfaces.ToolState
 {
@@ -35,6 +36,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.ToolState
             {
                 Game1.SpriteList.Remove(tool);
                 CollisionManager.getCM().DeRegEntity(tool);
+                //BombPool.GetBombPool().Release((Bomb)tool);
 
             }
         }
