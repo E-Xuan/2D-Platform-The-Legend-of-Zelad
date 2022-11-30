@@ -11,6 +11,7 @@ using SprintZeroSpriteDrawing.Interfaces.MarioState.StateInventory;
 using SprintZeroSpriteDrawing.Sprites.ItemSprites;
 using SprintZeroSpriteDrawing.Sprites.ItemSprites.EquippableItem;
 using SprintZeroSpriteDrawing.Sprites.MarioSprites;
+using SprintZeroSpriteDrawing.Sprites.ToolSprites;
 using Bomb = SprintZeroSpriteDrawing.Sprites.ItemSprites.EquippableItem.Bomb;
 
 namespace SprintZeroSpriteDrawing.States.MarioState
@@ -63,15 +64,24 @@ namespace SprintZeroSpriteDrawing.States.MarioState
         {
             PlayerInventory.Add((EquippableItems)item);
             Icons[item].tint = Color.White;
+            switch ((EquippableItems)item)
+            {
+                case EquippableItems.BOMB:
+                    BombPool.GetBombPool().RefillPool();
+                    break;
+                case EquippableItems.BOW:
+                    ArrowPool.GetArrowPool().RefillPool();
+                    break;
+            }
         }
         public virtual void Draw(SpriteBatch batch)
         {
-            int posoffset = -200;
+            int posoffset = -250;
             foreach (ITile icon in Icons)
             {
-                icon.Pos = new Vector2(Math.Max(mario.Pos.X - 960 + 348, 348) + posoffset, 200);
+                icon.Pos = new Vector2(Math.Max(mario.Pos.X - 960 + 398, 398) + posoffset, 200);
                 icon.Draw(batch);
-                posoffset += 100;
+                posoffset += 125;
             }
         }
         public void SwitchToItem(int item)

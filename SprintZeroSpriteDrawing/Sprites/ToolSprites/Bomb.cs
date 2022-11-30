@@ -16,13 +16,5 @@ namespace SprintZeroSpriteDrawing.Sprites.ItemSprites
         public Bomb(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos) : base(nSprite, nSheetSize, nPos)
         {
         }
-        public virtual void kill(int kill)
-        {
-            BombPool.GetBombPool().Release(this);
-        }
-        public override void Update()
-        {
-            base.Update();
-        }
     }
 }

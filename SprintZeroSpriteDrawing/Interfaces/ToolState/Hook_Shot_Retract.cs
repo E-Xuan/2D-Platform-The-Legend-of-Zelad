@@ -26,11 +26,11 @@ namespace SprintZeroSpriteDrawing.Interfaces.ToolState
         }
         public override void Update()
         {
-            if (Vector2.Subtract(Mario.GetMario().Pos, tool.Pos).Length() > 120)
+            if (Vector2.Subtract(Mario.GetMario().Pos, tool.Pos).Length() > 72)
             {
-                tool.Velocity = new Microsoft.Xna.Framework.Vector2(
-                    (float)-0.075 * (tool.Pos.X - Mario.GetMario().Pos.X),
-                    (float)-0.075 * (tool.Pos.Y - Mario.GetMario().Pos.Y));
+                tool.Velocity = new Vector2(
+                    (float)-0.1 * (tool.Pos.X - Mario.GetMario().Pos.X),
+                    (float)-0.1 * (tool.Pos.Y - Mario.GetMario().Pos.Y));
                 Mario.GetMario().Velocity = -tool.Velocity;
             }
 
