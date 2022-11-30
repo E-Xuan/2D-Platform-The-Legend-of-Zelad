@@ -8,6 +8,7 @@ using SprintZeroSpriteDrawing.Sprites.MarioSprites;
 using System.Runtime.CompilerServices;
 using SprintZeroSpriteDrawing.Collision.CollisionManager;
 using SprintZeroSpriteDrawing.Interfaces.MarioState.StatePowerup;
+using SprintZeroSpriteDrawing.Sprites.MarioActionSprites;
 
 namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
 {
@@ -25,6 +26,8 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateAction
         {
 
             //CollisionManager.getCM().DeRegMoving(mario);
+            mario.SheetSize = new Vector2(2, 3);
+            mario.SetSprite(MarioSpriteFactory.getSpriteFactory().normalLinkSpriteSheet);
             currActionState = ActionState.IDLE;
             mario.IsVis = true;
             mario.Velocity = new Vector2(0, mario.Velocity.Y);

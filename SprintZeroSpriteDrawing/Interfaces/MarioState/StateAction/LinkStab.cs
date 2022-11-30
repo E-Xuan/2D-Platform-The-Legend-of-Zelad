@@ -29,6 +29,9 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StatePowerup
         {
             int framecount = 5;
             CollisionManager.getCM().RegMoving(mario);
+            if (mario.GetDirection() > 0)
+                mario.Pos = new Vector2(mario.Pos.X + 48, mario.Pos.Y);
+            mario.SheetSize = new Vector2(2, 5);
             mario.SetSprite(MarioSpriteFactory.getSpriteFactory().swordLinkSpriteSheet);
             previousActionState = currActionState;
             currActionState = ActionState.STAB;
@@ -44,13 +47,10 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StatePowerup
            
 
         }
-
-        public override void Exit()
-        {
-            ChangeActionState((int)previousActionState);
-        }
         public override void Update()
         {
+            if(mario.Frame == 8)
+                ChangeActionState((int)ActionState.IDLE);
 
         }
 
@@ -66,15 +66,10 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StatePowerup
             {
                 case ActionState.IDLE:
                     Exit();
+                    if (mario.GetDirection() > 0)
+                        mario.Pos = new Vector2(mario.Pos.X - 48, mario.Pos.Y);
                     mario.StateAction = new MarioIdle(mario, currActionState);
-                    break;
-                case ActionState.WALKING:
-                    Exit();
-                    mario.StateAction = new MarioWalking(mario, currActionState);
-                    break;
-                case ActionState.JUMPING:
-                    Exit();
-                    mario.StateAction = new MarioJumping(mario, currActionState);
+                    mario.UpdateBBox();
                     break;
             }
         }

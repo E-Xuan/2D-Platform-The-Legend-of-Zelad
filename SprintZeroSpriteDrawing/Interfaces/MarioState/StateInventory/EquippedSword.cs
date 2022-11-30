@@ -34,8 +34,6 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateInventory
             prevPowerupState = currPowerupState;
             currPowerupState = PowerupState.SWORD;
             mario.IsVis = true;
-            mario.SheetSize = new Vector2(2, 5);
-            mario.SetSprite(MarioSpriteFactory.getSpriteFactory().swordLinkSpriteSheet);
             mario.UpdateBBox();
         }
         public override void Draw(SpriteBatch batch)

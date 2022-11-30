@@ -26,7 +26,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.ToolState
             tool.AutoFrame = true;
 
             tool.Velocity = new Vector2((Mouse.GetState().X + Game1._Camera2D.Position.X - Mario.GetMario().Pos.X) / 100, (Mouse.GetState().Y + Game1._Camera2D.Position.Y - Mario.GetMario().Pos.Y) / 100);
-            tool.Acceleration = new Vector2((float)-0.05, 0);
+            tool.Acceleration = new Vector2(0, (float)0.1);
 
             tool.IsVis = true;
             tool.CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Hooked, 0)), Direction.BOTTOM, CType.NEUTRAL));
@@ -39,7 +39,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.ToolState
         public override void Update()
         {
             resetCount++;
-            if (resetCount > 50)
+            if (resetCount > 75)
             {
                 tool.AutoFrame = true;
                 tool.State = new Hook_Shot_Retract(tool);
