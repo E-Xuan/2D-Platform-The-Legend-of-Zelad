@@ -43,7 +43,10 @@ namespace SprintZeroSpriteDrawing.Collision.CollisionManager
         private CollisionManager()
         {
             NonCollideables = new HashSet<CType>
-                {CType.FLOWER, CType.FRIENDLY, CType.STAR, CType.LEVELUP, CType.INVISIBLE, CType.CASTLE, CType.UNCOLLIDEABLE, CType.FLAG};
+            {
+                CType.FLOWER, CType.FRIENDLY, CType.STAR, CType.LEVELUP, CType.INVISIBLE, CType.CASTLE, CType.UNCOLLIDEABLE, CType.FLAG, CType.SHOARROW, CType.BOMB_PWR, CType.BOW_PWR, 
+                CType.HOOKSHOT_PWR, CType.SWORD_PWR, CType.SHIELD_PWR
+            };
             entityList = new List<ICollideable>[(int)(Game1.LEVELSIZE.X / 96) + 1, (int)(Game1.LEVELSIZE.Y / 96) + 2];
             movingEntities = new List<ICollideable>();
             for (int i = 0; i < entityList.Length; i++)
