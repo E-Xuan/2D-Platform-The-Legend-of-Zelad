@@ -49,7 +49,7 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
         public int Coins = 0;
         public int Lives = 5;
         public int Time = 400;
-        private int invunTimer = 0;
+        public int invunTimer = 0;
         public SpriteEffects effects;
         private static Mario _mario;
         bool left = false;

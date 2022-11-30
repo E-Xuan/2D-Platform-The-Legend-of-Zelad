@@ -49,6 +49,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StatePowerup
         }
         public override void Update()
         {
+            mario.invunTimer = 0;
             if(mario.Frame == 8)
                 ChangeActionState((int)ActionState.IDLE);
 
@@ -68,6 +69,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StatePowerup
                     Exit();
                     if (mario.GetDirection() > 0)
                         mario.Pos = new Vector2(mario.Pos.X - 48, mario.Pos.Y);
+                    mario.CollideableType = CType.AVATAR_SMALL;
                     mario.StateAction = new MarioIdle(mario, currActionState);
                     mario.UpdateBBox();
                     break;
