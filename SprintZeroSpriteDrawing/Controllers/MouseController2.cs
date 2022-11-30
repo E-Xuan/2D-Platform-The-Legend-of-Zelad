@@ -31,6 +31,7 @@ namespace SprintZeroSpriteDrawing.Controllers
         public void UpdateInput()
         {
             MouseState mouseState = Mouse.GetState();
+            
             foreach (ICommand command in LeftMouseCommands.ToImmutableList())
             {
               if (mouseState.LeftButton == ButtonState.Pressed && prevMouseState.LeftButton == ButtonState.Released)
