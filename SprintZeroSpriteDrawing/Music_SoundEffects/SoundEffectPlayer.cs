@@ -32,7 +32,13 @@ namespace SprintZeroSpriteDrawing.Music_SoundEffects
             ITEM,
             STAGECLEAR,
             STOMP,
-            WARNING
+            WARNING,
+            ARROWSHOOT,
+            BOMBBLOW,
+            ENEMYHIT,
+            GETITEM,
+            GETRUPEE,
+
         }
 
         public int _trigger;

@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SprintZeroSpriteDrawing.Interfaces.Entitiy;
+using SprintZeroSpriteDrawing.Music_SoundEffects;
 using SprintZeroSpriteDrawing.Sprites.ItemSprites;
 using SprintZeroSpriteDrawing.Sprites.MarioSprites;
 using SprintZeroSpriteDrawing.States.MarioState;
@@ -18,6 +20,17 @@ namespace SprintZeroSpriteDrawing.Interfaces.MarioState.StateInventory
         }
         public EquippedBow(Mario nMario, HashSet<EquippableItems> inventoryItems) : base(nMario, inventoryItems)
         {
+        }
+
+        public override void Enter()
+        {
+            mario.CollideableType = CType.AVATAR_SMALL;
+            prevPowerupState = currPowerupState;
+            currPowerupState = PowerupState.BIG;
+            mario.IsVis = true;
+            mario.SheetSize = new Vector2(2, 3);
+            mario.SetSprite(Mario.neutralBowLinkSpriteSheet);
+            mario.UpdateBBox();
         }
 
         public override void ItemAction()
