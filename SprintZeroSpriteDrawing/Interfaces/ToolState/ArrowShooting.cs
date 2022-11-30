@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using SprintZeroSpriteDrawing.Collision.CollisionManager;
 using SprintZeroSpriteDrawing.Commands;
 using SprintZeroSpriteDrawing.Interfaces.Entitiy;
@@ -22,16 +23,10 @@ namespace SprintZeroSpriteDrawing.Interfaces.ToolState
             tool.CollideableType = Entitiy.CType.SHOARROW;
             tool.CollideMaybe = false;
             tool.AutoFrame = false;
-            if (Mario.GetMario().GetDirection() > 0)
-            {
-                tool.Velocity = new Vector2(10, 0);
-                
-            }
-            else
-            {
-                tool.Velocity = new Vector2(-10, 0);
-            }
-            tool.Acceleration = new Vector2(0, (float).10);
+
+            tool.Velocity = new Vector2((Mouse.GetState().X + Game1._Camera2D.Position.X - Mario.GetMario().Pos.X) / 100, (Mouse.GetState().Y + Game1._Camera2D.Position.Y - Mario.GetMario().Pos.Y) / 100);
+            tool.Acceleration = new Vector2(0, (float)0.1);
+
             tool.IsVis = true;
             tool.CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Miss, 0)), Direction.SIDE, CType.NEUTRAL));
             tool.CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Miss, 0)), Direction.TOP, CType.NEUTRAL));
