@@ -70,7 +70,8 @@ namespace SprintZeroSpriteDrawing
         public static GameModes currState;
         public static bool underGround = false;
         public static int level_index = 0;
-        public static bool level_update = false; 
+        public static bool level_update = false;
+        public static bool switched = false;
 
         public Game1()
         {
@@ -147,6 +148,7 @@ namespace SprintZeroSpriteDrawing
             MusicPlayer.GetMusicPlayer().StopSong();
             MusicPlayer.GetMusicPlayer().PlaySong();
             SPLASH_BACK = true;
+            switched = false;
             SpriteList = new List<ISprite>();
             Mario.GetMario().StatePowerup = new SmallMario(Mario.GetMario());
             LevelLoader.LevelLoader.GetLevelLoader().LoadLevel("Level/level_" + LevelOrder[level_index] + ".txt");
@@ -158,6 +160,7 @@ namespace SprintZeroSpriteDrawing
         public void Restart()
         {
             SPLASH_BACK = true;
+            switched = false;
             MusicPlayer.GetMusicPlayer().StopSong();
             MusicPlayer.GetMusicPlayer().PlaySong();
             SpriteList = new List<ISprite>();

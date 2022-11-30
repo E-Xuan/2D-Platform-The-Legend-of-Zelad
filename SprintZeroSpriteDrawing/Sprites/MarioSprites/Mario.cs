@@ -418,7 +418,10 @@ namespace SprintZeroSpriteDrawing.Sprites.MarioSprites
             {
                 Game1.level_update = true;
                 Game1.level_index++;
-                Game1.underGround = !Game1.underGround;
+                if(Game1.level_index != 6)
+                    Game1.underGround = true;
+                else
+                    Game1.underGround = false;
 
                 MusicPlayer.GetMusicPlayer().ChangeSong((int)MusicPlayer.Songs.UNDERWORLD);
                 var soundEffectPlayer = SoundEffectPlayer.GetSoundEffectPlayer();

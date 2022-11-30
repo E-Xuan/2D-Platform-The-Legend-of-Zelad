@@ -167,6 +167,12 @@ namespace SprintZeroSpriteDrawing.LevelLoader
                     case 'u':
                         entity = BlockSpriteFactory.getFactory().CreateUsedBlock(new Vector2(x, y));
                         break;
+                    case 'x':
+                        entity = BlockSpriteFactory.getFactory().CreateSwitchBlock(new Vector2(x, y));
+                        break;
+                    case 'o':
+                        entity = BlockSpriteFactory.getFactory().CreateSwitchedBlock(new Vector2(x, y));
+                        break;
 
                     #endregion
 

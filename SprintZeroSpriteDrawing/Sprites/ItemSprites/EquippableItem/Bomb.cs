@@ -14,6 +14,7 @@ namespace SprintZeroSpriteDrawing.Sprites.ItemSprites.EquippableItem
         public Bomb(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos) : base(nSprite, nSheetSize, nPos)
         {
             CollideableType = CType.BOMB_PWR;
+            AutoFrame = false;
         }
     }
 }

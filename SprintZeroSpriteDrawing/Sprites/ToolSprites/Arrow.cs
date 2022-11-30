@@ -8,14 +8,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SprintZeroSpriteDrawing.Interfaces.Entitiy;
 
 namespace SprintZeroSpriteDrawing.Sprites.ToolSprites
 {
     public class Arrow : Tool
     {
+        private SpriteEffects effects;
         public Arrow(Texture2D nSprite, Vector2 nSheetSize, Vector2 nPos) : base(nSprite, nSheetSize, nPos)
         {
-
+            CollideableType = CType.SHOARROW;
+            effects = Mario.GetMario().GetDirection() < 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
         }
         public override void Update()
         {
@@ -23,10 +26,6 @@ namespace SprintZeroSpriteDrawing.Sprites.ToolSprites
         }
         public override void Draw(SpriteBatch batch)
         {
-            SpriteEffects effects = Mario.GetMario().GetDirection() < 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
-
-
-
             base.Draw(batch, effects);
         }
     }
