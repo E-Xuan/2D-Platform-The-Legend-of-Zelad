@@ -25,8 +25,8 @@ namespace SprintZeroSpriteDrawing.Interfaces.ToolState
             tool.CollideMaybe = false;
             tool.AutoFrame = true;
 
-            tool.Velocity = new Vector2(10, 0);
-            tool.Acceleration = new Vector2((float)-0.15, 0);
+            tool.Velocity = new Vector2((Mouse.GetState().X + Game1._Camera2D.Position.X - Mario.GetMario().Pos.X) / 100, (Mouse.GetState().Y + Game1._Camera2D.Position.Y - Mario.GetMario().Pos.Y) / 100);
+            tool.Acceleration = new Vector2((float)-0.05, 0);
 
             tool.IsVis = true;
             tool.CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Hooked, 0)), Direction.BOTTOM, CType.NEUTRAL));
@@ -38,22 +38,6 @@ namespace SprintZeroSpriteDrawing.Interfaces.ToolState
         }
         public override void Update()
         {
-            if (Mouse.GetState().X + Game1._Camera2D.Position.X - Mario.GetMario().Pos.X > 0)
-            {
-                tool.Velocity = new Vector2(20, 0);
-                tool.Acceleration = new Vector2((float)-0.05, 0);
-            }
-            else if (Mouse.GetState().X + Game1._Camera2D.Position.X - Mario.GetMario().Pos.X < 0)
-            {
-                tool.Velocity = new Vector2(-20, 0);
-                tool.Acceleration = new Vector2((float)0.05, 0);
-            }
-            else
-            {
-                tool.Velocity = new Vector2(0, 10);
-                tool.Acceleration = new Vector2(0, (float)0.15);
-            }
-
             resetCount++;
             if (resetCount > 50)
             {
