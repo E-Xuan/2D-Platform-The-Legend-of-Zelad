@@ -32,6 +32,8 @@ using SprintZeroSpriteDrawing.Interfaces.GameState;
 using Microsoft.Xna.Framework.Audio;
 using System.Reflection.Metadata;
 using Microsoft.Xna.Framework.Media;
+using SprintZeroSpriteDrawing.Sprites.ItemSprites.EquippableItem;
+using SprintZeroSpriteDrawing.Sprites.ToolSprites;
 
 namespace SprintZeroSpriteDrawing
 {
@@ -145,6 +147,7 @@ namespace SprintZeroSpriteDrawing
         }
         public void Restart(String level)
         {
+            Hook_Shot_Pool.GetHook_ShotPool().RefillPool();
             MusicPlayer.GetMusicPlayer().ChangeSong((int)MusicPlayer.Songs.DUNGEON);
             SPLASH_BACK = true;
             switched = false;

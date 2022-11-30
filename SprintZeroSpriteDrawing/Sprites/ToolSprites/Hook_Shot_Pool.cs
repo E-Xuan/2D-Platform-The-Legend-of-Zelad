@@ -22,6 +22,12 @@ namespace SprintZeroSpriteDrawing.Sprites.ToolSprites
                 hook_Shots.Enqueue((Hook_Shot)ItemSpriteFactory.getFactory().CreateHookShot(position));
 
         }
+        public void RefillPool()
+        {
+            while (hook_Shots.Count < hook_Shots_Max)
+                hook_Shots.Enqueue((Hook_Shot)ItemSpriteFactory.getFactory().CreateHookShot(position));
+
+        }
         public static Hook_Shot_Pool GetHook_ShotPool()
         {
             if (hook_Shot_Pool == null)
