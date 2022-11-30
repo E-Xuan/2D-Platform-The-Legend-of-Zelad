@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using SprintZeroSpriteDrawing.Collision.CollisionManager;
 using SprintZeroSpriteDrawing.Commands;
@@ -16,6 +17,9 @@ namespace SprintZeroSpriteDrawing.Interfaces.ToolState
     public class Hook_Shot_Shooting : IToolState
     {
         private int resetCount = 0;
+        Camera camera;
+        float relativeMouseX;
+        float relativeMouseY;
         public Hook_Shot_Shooting(Tool nTool) : base(nTool)
         {
             tool = nTool;
@@ -23,17 +27,10 @@ namespace SprintZeroSpriteDrawing.Interfaces.ToolState
             tool.CollideableType = Entitiy.CType.SHOHOOKSHOT;
             tool.CollideMaybe = false;
             tool.AutoFrame = true;
-            if (Mario.GetMario().GetDirection() > 0)
-            {
-                tool.Velocity = new Vector2(10, 0);
-                tool.Acceleration = new Vector2((float)-.15, 0);
-            }
-            else
-            {
-                tool.Velocity = new Vector2(-10, 0);
-                tool.Acceleration = new Vector2((float).15, 0);
 
-            }
+            tool.Velocity = new Vector2(relativeMouseX - Mario.GetMario().Pos.X, relativeMouseY - Mario.GetMario().Pos.Y);
+            tool.Acceleration = new Vector2((float)-0.15, 0);
+
             tool.IsVis = true;
             tool.CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Hooked, 0)), Direction.BOTTOM, CType.NEUTRAL));
             tool.CollisionResponse.Add(new Tuple<ICommand, Direction, CType>(new IntCmd(new KeyValuePair<Action<int>, int>(Hooked, 0)), Direction.SIDE, CType.NEUTRAL));
@@ -51,6 +48,9 @@ namespace SprintZeroSpriteDrawing.Interfaces.ToolState
                 tool.AutoFrame = true;
                 tool.State = new Hook_Shot_Retract(tool);
             }
+            float relativeMouseX = Mouse.GetState().X + camera.Position.X;
+            float relativeMouseY = Mouse.GetState().Y + camera.Position.Y;  
+
             base.Update();
         }
         public override void Enter()
