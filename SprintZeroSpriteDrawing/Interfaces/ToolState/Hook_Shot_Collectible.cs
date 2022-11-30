@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using SprintZeroSpriteDrawing.Collision.CollisionManager;
 using SprintZeroSpriteDrawing.Commands;
 using SprintZeroSpriteDrawing.Interfaces.EnemyState;

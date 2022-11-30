@@ -16,10 +16,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.ToolState
 {
     public class Hook_Shot_Shooting : IToolState
     {
-        private int resetCount = 0;
-        Camera camera; 
-        float relativeMouseX;
-        float relativeMouseY;
+        private int resetCount = 0; 
         public Hook_Shot_Shooting(Tool nTool) : base(nTool)
         {
             tool = nTool;
@@ -28,7 +25,7 @@ namespace SprintZeroSpriteDrawing.Interfaces.ToolState
             tool.CollideMaybe = false;
             tool.AutoFrame = true;
 
-            tool.Velocity = new Vector2(relativeMouseX - Mario.GetMario().Pos.X, relativeMouseY - Mario.GetMario().Pos.Y);
+            tool.Velocity = new Vector2(10, 0);
             tool.Acceleration = new Vector2((float)-0.15, 0);
 
             tool.IsVis = true;
@@ -41,6 +38,21 @@ namespace SprintZeroSpriteDrawing.Interfaces.ToolState
         }
         public override void Update()
         {
+            if (Mouse.GetState().X + Game1._Camera2D.Position.X - Mario.GetMario().Pos.X > 0)
+            {
+                tool.Velocity = new Vector2(20, 0);
+                tool.Acceleration = new Vector2((float)-0.05, 0);
+            }
+            else if (Mouse.GetState().X + Game1._Camera2D.Position.X - Mario.GetMario().Pos.X < 0)
+            {
+                tool.Velocity = new Vector2(-20, 0);
+                tool.Acceleration = new Vector2((float)0.05, 0);
+            }
+            else
+            {
+                tool.Velocity = new Vector2(0, 10);
+                tool.Acceleration = new Vector2(0, (float)0.15);
+            }
 
             resetCount++;
             if (resetCount > 50)
@@ -48,8 +60,6 @@ namespace SprintZeroSpriteDrawing.Interfaces.ToolState
                 tool.AutoFrame = true;
                 tool.State = new Hook_Shot_Retract(tool);
             }
-            float relativeMouseX = Mouse.GetState().X + camera.Position.X;
-            float relativeMouseY = Mouse.GetState().Y + camera.Position.Y;  
 
             base.Update();
         }
