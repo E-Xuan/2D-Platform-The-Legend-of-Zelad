@@ -2,7 +2,6 @@
 using SprintZeroSpriteDrawing.Collision.CollisionManager;
 using SprintZeroSpriteDrawing.Commands;
 using SprintZeroSpriteDrawing.Interfaces.EnemyState;
-using SprintZeroSpriteDrawing.Interfaces.Entitiy;
 using SprintZeroSpriteDrawing.Sprites.EnemySprites;
 using SprintZeroSpriteDrawing.Sprites.MarioSprites;
 using SprintZeroSpriteDrawing.Sprites.ToolSprites;
@@ -11,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SprintZeroSpriteDrawing.Interfaces.Entitiy;
 
 namespace SprintZeroSpriteDrawing.Interfaces.ToolState
 {
@@ -20,14 +20,19 @@ namespace SprintZeroSpriteDrawing.Interfaces.ToolState
         {
             tool = nTool;
             CurrState = State.HOOKSHOTRETRACT;
-            tool.CollideableType = Entitiy.CType.SHOHOOKSHOT;
-            tool.CollideMaybe = false;
+            tool.CollideableType = CType.SHOHOOKSHOT;
             tool.AutoFrame = true;
             //tool.Velocity = new Microsoft.Xna.Framework.Vector2((float)-0.03 * (tool.Pos.X - Mario.GetMario().Pos.X), (float)-0.03 * (tool.Pos.Y - Mario.GetMario().Pos.Y));
         }
         public override void Update()
         {
-            tool.Velocity = new Microsoft.Xna.Framework.Vector2((float)-0.05 * (tool.Pos.X - Mario.GetMario().Pos.X), (float)-0.05 * (tool.Pos.Y - Mario.GetMario().Pos.Y));
+            if (Vector2.Subtract(Mario.GetMario().Pos, tool.Pos).Length() > 120)
+            {
+                tool.Velocity = new Microsoft.Xna.Framework.Vector2(
+                    (float)-0.075 * (tool.Pos.X - Mario.GetMario().Pos.X),
+                    (float)-0.075 * (tool.Pos.Y - Mario.GetMario().Pos.Y));
+                Mario.GetMario().Velocity = -tool.Velocity;
+            }
 
             base.Update();
         }
